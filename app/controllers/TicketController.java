@@ -72,22 +72,22 @@ public class TicketController extends AbstractController {
         //prayers
         Set<Roommate> prayers = new HashSet<>();
 
-        for (RoommateDTO roommateDTO : dto.getPrayers()) {
+        for (Long prayerId: dto.getPrayersId()) {
 
-            Roommate roommate = roommateService.findByEmail(roommateDTO.getEmail());
+            Roommate roommate = roommateService.findById(prayerId);
             if (!roommate.getHome().equals(currentUser.getHome())) {
-                throw new MyRuntimeException(errorMessageService.getMessage(ErrorMessage.NOT_YOU_ROOMMATE, roommateDTO.getEmail()));
+                throw new MyRuntimeException(errorMessageService.getMessage(ErrorMessage.NOT_YOU_ROOMMATE, prayerId));
             }
             prayers.add(roommate);
         }
 
         //category
         Category category = null;
-        if (dto.getCategory() != null) {
-            category = categoryService.findById(dto.getCategory().getId());
+        if (dto.getCategoryId() != null) {
+            category = categoryService.findById(dto.getCategoryId());
 
             if (category == null) {
-                throw new MyRuntimeException(errorMessageService.getMessage(ErrorMessage.ENTITY_NOT_FOUND, Category.class.getName(), dto.getCategory().getId()));
+                throw new MyRuntimeException(errorMessageService.getMessage(ErrorMessage.ENTITY_NOT_FOUND, Category.class.getName(), dto.getCategoryId()));
             }
         }
 
@@ -134,21 +134,21 @@ public class TicketController extends AbstractController {
         //prayers
         Set<Roommate> prayers = new HashSet<>();
 
-        for (RoommateDTO roommateDTO : dto.getPrayers()) {
-            Roommate roommate = roommateService.findByEmail(roommateDTO.getEmail());
+        for (Long prayerId: dto.getPrayersId()) {
+            Roommate roommate = roommateService.findById(prayerId);
             if (!roommate.getHome().equals(currentUser.getHome())) {
-                throw new MyRuntimeException(errorMessageService.getMessage(ErrorMessage.NOT_YOU_ROOMMATE, roommateDTO.getEmail()));
+                throw new MyRuntimeException(errorMessageService.getMessage(ErrorMessage.NOT_YOU_ROOMMATE, prayerId));
             }
             prayers.add(roommate);
         }
 
         //category
         Category category = null;
-        if (dto.getCategory() != null) {
-            category = categoryService.findById(dto.getCategory().getId());
+        if (dto.getCategoryId() != null) {
+            category = categoryService.findById(dto.getCategoryId());
 
             if (category == null) {
-                throw new MyRuntimeException(errorMessageService.getMessage(ErrorMessage.ENTITY_NOT_FOUND, Category.class.getName(), dto.getCategory().getId()));
+                throw new MyRuntimeException(errorMessageService.getMessage(ErrorMessage.ENTITY_NOT_FOUND, Category.class.getName(), dto.getCategoryId()));
             }
         }
 

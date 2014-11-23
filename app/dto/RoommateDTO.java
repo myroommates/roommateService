@@ -2,6 +2,7 @@ package dto;
 
 import dto.technical.DTO;
 import org.hibernate.validator.constraints.Email;
+import play.Logger;
 
 import javax.validation.constraints.Pattern;
 
@@ -69,14 +70,6 @@ public class RoommateDTO extends DTO {
         this.email = email;
     }
 
-    @Override
-    public String toString() {
-        return "RoommateDTO{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                '}';
-    }
 
     public String getPassword() {
         return password;
@@ -84,5 +77,34 @@ public class RoommateDTO extends DTO {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+
+    @Override
+    public String toString() {
+        return "RoommateDTO{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", iconColor=" + iconColor +
+                '}';
+    }
+
+    @Override
+    public int hashCode() {
+        if(id == null){
+            return super.hashCode();
+        }
+        return id.intValue();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof RoommateDTO && ((RoommateDTO) obj).getId().equals(this.id)) {
+            return true;
+        }
+        return false;
     }
 }

@@ -20,9 +20,9 @@ public class TicketDTO extends DTO {
     private Double value;
     @NotNull
     private Date date;
-    private RoommateDTO creator;
-    private CategoryDTO category;
-    private List<RoommateDTO> prayers;
+    private Long creatorId;
+    private Long categoryId;
+    private List<Long> prayersId;
 
     public TicketDTO() {
     }
@@ -59,46 +59,47 @@ public class TicketDTO extends DTO {
         this.date = date;
     }
 
-    public RoommateDTO getCreator() {
-        return creator;
+    public Long getCreatorId() {
+        return creatorId;
     }
 
-    public void setCreator(RoommateDTO creator) {
-        this.creator = creator;
+    public void setCreatorId(Long creatorId) {
+        this.creatorId = creatorId;
     }
 
-    public CategoryDTO getCategory() {
-        return category;
+    public Long getCategoryId() {
+        return categoryId;
     }
 
-    public void setCategory(CategoryDTO category) {
-        this.category = category;
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
     }
 
-    public List<RoommateDTO> getPrayers() {
-        return prayers;
+    public List<Long> getPrayersId() {
+        return prayersId;
     }
 
-    public void setPrayers(List<RoommateDTO> prayers) {
-        this.prayers = prayers;
+    public void setPrayersId(List<Long> prayersId) {
+        this.prayersId = prayersId;
     }
 
     @Override
     public String toString() {
         return "TicketDTO{" +
-                "description='" + description + '\'' +
+                "id=" + id +
+                ", description='" + description + '\'' +
                 ", value=" + value +
                 ", date=" + date +
-                ", creator=" + creator +
-                ", category=" + category +
-                ", prayers=" + prayers +
+                ", creatorId=" + creatorId +
+                ", categoryId=" + categoryId +
+                ", prayersId=" + prayersId +
                 '}';
     }
 
-    public void addPrayer(RoommateDTO roommate) {
-        if (prayers == null) {
-            prayers = new ArrayList<>();
+    public void addPrayer(Long prayerId) {
+        if (prayersId == null) {
+            prayersId = new ArrayList<>();
         }
-        prayers.add(roommate);
+        prayersId.add(prayerId);
     }
 }

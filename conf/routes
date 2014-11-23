@@ -15,6 +15,7 @@ DELETE        /category/:id        @controllers.CategoryController.remove(id:Lon
 # account
 POST          /login               @controllers.LoginController.login()
 POST          /registration        @controllers.LoginController.registration()
+POST          /load_data           @controllers.LoginController.loadData()
 
 #ticket
 GET           /ticket              @controllers.TicketController.getAll()

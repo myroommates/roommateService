@@ -2,6 +2,7 @@ package controllers;
 
 import com.avaje.ebean.Ebean;
 import controllers.technical.AbstractController;
+import controllers.technical.SecurityController;
 import converter.RoommateToLoginSuccessConverter;
 import dto.LoginSuccessDTO;
 import dto.post.LoginDTO;
@@ -11,6 +12,7 @@ import entities.Home;
 import entities.Roommate;
 import play.Logger;
 import play.mvc.Result;
+import play.mvc.Security;
 import services.HomeService;
 import services.RoommateService;
 import util.ErrorMessage;
@@ -26,6 +28,7 @@ public class LoginController extends AbstractController {
 
     private RoommateService roommateService = new RoommateService();
     private HomeService homeService = new HomeService();
+
 
     public Result registration() {
 
@@ -93,7 +96,29 @@ public class LoginController extends AbstractController {
         //result
         RoommateToLoginSuccessConverter converter = new RoommateToLoginSuccessConverter();
 
-        return ok(converter.convert(roommate));
+        LoginSuccessDTO result = converter.convert(roommate);
+
+        Logger.info(result+"");
+
+        Logger.info(result.getRoommates().size()+"");
+
+        return ok(result);
+    }
+
+
+    @Security.Authenticated(SecurityController.class)
+    public Result loadData() {
+
+        //result
+        RoommateToLoginSuccessConverter converter = new RoommateToLoginSuccessConverter();
+
+        LoginSuccessDTO result = converter.convert(securityController.getCurrentUser());
+
+        Logger.info(result+"");
+
+        Logger.info(result.getRoommates().size()+"");
+
+        return ok(result);
     }
 
 

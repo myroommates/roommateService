@@ -16,19 +16,19 @@ public class TicketToTicketConverter {
 
         TicketDTO dto = new TicketDTO();
 
-dto.setId(ticket.getId());
+        dto.setId(ticket.getId());
         dto.setDescription(ticket.getDescription());
         dto.setDate(ticket.getDate());
         dto.setValue(ticket.getValue());
 
-        if (dto.getCategory() != null) {
-            dto.setCategory(categoryToCategoryDTOConverter.convert(ticket.getCategory()));
+        if (ticket.getCategory() != null) {
+            dto.setCategoryId(ticket.getCategory().getId());
         }
 
-        dto.setCreator(roommateToRoommateDTOConverter.converter(ticket.getCreator()));
+        dto.setCreatorId(ticket.getCreator().getId());
 
         for (Roommate roommate : ticket.getPrayerList()) {
-            dto.addPrayer(roommateToRoommateDTOConverter.converter(roommate));
+            dto.addPrayer(roommate.getId());
         }
 
         return dto;

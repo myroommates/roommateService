@@ -2,24 +2,24 @@ package dto;
 
 import dto.technical.DTO;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by florian on 11/11/14.
  */
 public class ListDTO<T extends DTO> extends DTO {
 
-    private List<T> list = new ArrayList<>();
+    private Set<T> list = new HashSet<>();
 
     public ListDTO() {
     }
 
-    public List<T> getList() {
+    public Set<T> getList() {
         return list;
     }
 
-    public void setList(List<T> list) {
+    public void setList(Set<T> list) {
         this.list = list;
     }
 

@@ -1,11 +1,9 @@
 package dto;
 
 import dto.technical.DTO;
+import util.EqualList;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by florian on 11/11/14.
@@ -14,7 +12,7 @@ public class LoginSuccessDTO extends DTO {
 
     private RoommateDTO currentRoommate;
     private HomeDTO home;
-    private Set<RoommateDTO> roommates;
+    private List<RoommateDTO> roommates;
     private List<TicketDTO> tickets;
     private List<CategoryDTO> categories;
     private String authenticationKey;
@@ -46,11 +44,11 @@ public class LoginSuccessDTO extends DTO {
         this.home = home;
     }
 
-    public Set<RoommateDTO> getRoommates() {
+    public List<RoommateDTO> getRoommates() {
         return roommates;
     }
 
-    public void setRoommates(Set<RoommateDTO> roommates) {
+    public void setRoommates(List<RoommateDTO> roommates) {
         this.roommates = roommates;
     }
 
@@ -70,23 +68,23 @@ public class LoginSuccessDTO extends DTO {
         this.categories = categories;
     }
 
-    public void addCategory(CategoryDTO category){
-        if(categories == null){
-            categories = new ArrayList<>();
+    public void addCategory(CategoryDTO category) {
+        if (categories == null) {
+            categories = new EqualList<>();
         }
         categories.add(category);
     }
 
     public void addTicket(TicketDTO ticket) {
         if (tickets == null) {
-            tickets = new ArrayList<>();
+            tickets = new EqualList<>();
         }
         tickets.add(ticket);
     }
 
     public void addRoommate(RoommateDTO roommate) {
         if (roommates == null) {
-            roommates = new HashSet<>();
+            roommates = new EqualList<>();
         }
         roommates.add(roommate);
     }
