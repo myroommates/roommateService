@@ -1,17 +1,13 @@
 package controllers.technical;
 
-import dto.technical.DTO;
 import dto.technical.ExceptionDTO;
-import dto.technical.PostedDTO;
 import entities.Roommate;
 import play.mvc.Http;
 import play.mvc.Result;
 import play.mvc.Security;
 import services.ErrorMessageService;
 import services.RoommateService;
-import util.ErrorMessage;
 import util.KeyGenerator;
-import util.exception.MyRuntimeException;
 
 import java.util.Date;
 
@@ -21,7 +17,7 @@ import java.util.Date;
 public class SecurityController extends Security.Authenticator {
 
     public static final String SESSION_IDENTIFIER_STORE = "email";
-    public static final long SESSION_TIME = 30L;
+    //public static final long SESSION_TIME = 30L;
     public final ErrorMessageService errorMessageService = new ErrorMessageService();
 
     private static final RoommateService roommateService = new RoommateService();
@@ -65,10 +61,12 @@ public class SecurityController extends Security.Authenticator {
         if (roommate == null) {
             return null;
         }
+        /*
         if (roommate.getAuthenticationTime().getTime() + (SESSION_TIME * 60L * 1000L) < new Date().getTime()) {
             //session expired
             return null;
         }
+        */
         return roommate;
     }
 

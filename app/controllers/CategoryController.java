@@ -8,14 +8,12 @@ import dto.ListDTO;
 import dto.technical.ResultDTO;
 import entities.Category;
 import entities.Roommate;
-import play.Logger;
 import play.mvc.Result;
 import play.mvc.Security;
 import services.CategoryService;
 import util.ErrorMessage;
 import util.exception.MyRuntimeException;
 
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -31,9 +29,6 @@ public class CategoryController extends AbstractController {
      * AuthenticationDTO
      * Return :
      * CategoryDTO or ExceptionDTO
-     *
-     * @param id
-     * @return
      */
     @Security.Authenticated(SecurityController.class)
     public Result getById(Long id){
@@ -88,8 +83,15 @@ public class CategoryController extends AbstractController {
 
         Roommate currentUser = securityController.getCurrentUser();
 
+        //control name
+        Category category = categoryService.findByHomeAndName(securityController.getCurrentUser().getHome(), dto.getName()  );
+
+        if(category!=null){
+            throw new MyRuntimeException(errorMessageService.getMessage(ErrorMessage.CATEGORY_WITH_SAME_NAME_ALREADY_EXISTS,dto.getName()));
+        }
+
         //build category
-        Category category = new Category();
+        category = new Category();
         category.setName(dto.getName());
         category.setHome(currentUser.getHome());
 
@@ -115,6 +117,12 @@ public class CategoryController extends AbstractController {
         if (!category.getHome().equals(currentUser.getHome())) {
             throw new MyRuntimeException(errorMessageService.getMessage(ErrorMessage.NOT_YOU_CATEGORY, id));
         }
+        //control name
+        Category categoryWithSameName = categoryService.findByHomeAndName(securityController.getCurrentUser().getHome(), dto.getName()  );
+
+        if(categoryWithSameName!=null && !categoryWithSameName.equals(category)){
+            throw new MyRuntimeException(errorMessageService.getMessage(ErrorMessage.CATEGORY_WITH_SAME_NAME_ALREADY_EXISTS,dto.getName()));
+        }
 
         //edit
         category.setName(dto.getName());
@@ -136,6 +144,11 @@ public class CategoryController extends AbstractController {
 
         if (category == null) {
             throw new MyRuntimeException(errorMessageService.getMessage(ErrorMessage.ENTITY_NOT_FOUND, Category.class.getName(), id));
+        }
+
+        //control usage
+        if(category.getTicketList()!=null && category.getTicketList().size()>0){
+            throw new MyRuntimeException(errorMessageService.getMessage(ErrorMessage.CATEGORY_USED,category.getName()));
         }
 
         //control

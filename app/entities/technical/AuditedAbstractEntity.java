@@ -47,5 +47,11 @@ public abstract class AuditedAbstractEntity extends Model {
                 "technicalSegment=" + technicalSegment +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        return o instanceof AuditedAbstractEntity &&
+                ((AuditedAbstractEntity) o).getId().equals(this.id);
+    }
 }
 

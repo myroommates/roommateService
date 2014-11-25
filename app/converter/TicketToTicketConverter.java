@@ -9,9 +9,6 @@ import entities.Ticket;
  */
 public class TicketToTicketConverter {
 
-    private CategoryToCategoryDTOConverter categoryToCategoryDTOConverter = new CategoryToCategoryDTOConverter();
-    private RoommateToRoommateDTOConverter roommateToRoommateDTOConverter = new RoommateToRoommateDTOConverter();
-
     public TicketDTO converter(Ticket ticket) {
 
         TicketDTO dto = new TicketDTO();

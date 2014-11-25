@@ -2,7 +2,6 @@ package dto;
 
 import dto.technical.DTO;
 import org.hibernate.validator.constraints.Email;
-import play.Logger;
 
 import javax.validation.constraints.Pattern;
 
@@ -14,10 +13,7 @@ public class RoommateDTO extends DTO {
     private Long id;
 
     @Pattern(regexp = ".{2,50}", message = "firstName must respect this pattern : .{2,50}")
-    private String firstName;
-
-    @Pattern(regexp = ".{2,50}", message = "lastName must respect this pattern : .{2,50}")
-    private String lastName;
+    private String name;
 
     @Email
     private String email;
@@ -46,20 +42,12 @@ public class RoommateDTO extends DTO {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {
@@ -79,13 +67,11 @@ public class RoommateDTO extends DTO {
         this.password = password;
     }
 
-
     @Override
     public String toString() {
         return "RoommateDTO{" +
                 "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
+                ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", iconColor=" + iconColor +
@@ -94,7 +80,7 @@ public class RoommateDTO extends DTO {
 
     @Override
     public int hashCode() {
-        if(id == null){
+        if (id == null) {
             return super.hashCode();
         }
         return id.intValue();

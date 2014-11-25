@@ -34,6 +34,13 @@ public class HomeController extends AbstractController {
             throw new MyRuntimeException(errorMessageService.getMessage(ErrorMessage.NOT_YOU_HOME, id));
         }
 
+        Home homeWithSameName = homeService.findByName(dto.getName());
+
+        //control roommate name
+        if (homeWithSameName != null && !homeWithSameName.equals(home)) {
+            throw new MyRuntimeException(errorMessageService.getMessage(ErrorMessage.HOME_NAME_ALREADY_USED));
+        }
+
         //edit
         home.setName(dto.getName());
 

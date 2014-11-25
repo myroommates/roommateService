@@ -4,7 +4,6 @@ import controllers.technical.AbstractController;
 import controllers.technical.SecurityController;
 import converter.TicketToTicketConverter;
 import dto.ListDTO;
-import dto.RoommateDTO;
 import dto.TicketDTO;
 import dto.technical.ResultDTO;
 import entities.Category;

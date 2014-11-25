@@ -12,7 +12,7 @@ public class ErrorMessageService {
         String message = errorMessage.getMessage();
 
         for (int i = 0; i < params.length; i++) {
-            message.replace("{" + i + "}", params[i].toString());
+            message = message.replace("{" + i + "}", params[i].toString());
         }
 
         return message;

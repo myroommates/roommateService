@@ -4,7 +4,6 @@ import com.avaje.ebean.Ebean;
 import entities.Home;
 import entities.Roommate;
 import entities.technical.AuditedAbstractEntity;
-import entities.technical.TechnicalSegment;
 
 import java.util.List;
 

@@ -17,7 +17,11 @@ public enum ErrorMessage {
     NOT_TICKET_CREATOR("You are not the creator of the ticket {0} and you cannot edit it"),
     CANNOT_REMOVE_YOURSELF("You cannot remove yourself"),
     NOT_YOU_HOME("this is not your home : {0}"),
-    WRONG_PASSWORD("The password must be composed of 6-18 letters or numbers");
+    WRONG_PASSWORD("The password must be composed of 6-18 letters or numbers"),
+    UNIQUE_CONSTRAIN_VIOLATION("a unique constraint was not respected on the table {0}, constraint {1}, ids {2}"),
+    CATEGORY_WITH_SAME_NAME_ALREADY_EXISTS("A category named {0} already exists. Please choose an other one."),
+    CATEGORY_USED("The category {0} is already used by a ticket and cannot be removed"),
+    ROOMMATE_USED("{0} is used by a ticket and cannot removed");
 
     private final String message;
 

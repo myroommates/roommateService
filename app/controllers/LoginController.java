@@ -1,13 +1,11 @@
 package controllers;
 
-import com.avaje.ebean.Ebean;
 import controllers.technical.AbstractController;
 import controllers.technical.SecurityController;
 import converter.RoommateToLoginSuccessConverter;
 import dto.LoginSuccessDTO;
 import dto.post.LoginDTO;
 import dto.post.RegistrationCDTO;
-import dto.technical.ResultDTO;
 import entities.Home;
 import entities.Roommate;
 import play.Logger;
@@ -18,8 +16,6 @@ import services.RoommateService;
 import util.ErrorMessage;
 import util.exception.MyRuntimeException;
 import util.tool.ColorGenerator;
-
-import javax.persistence.EntityManager;
 
 /**
  * Created by florian on 10/11/14.
@@ -51,8 +47,7 @@ public class LoginController extends AbstractController {
         //roommate
         Roommate roommate = new Roommate();
         roommate.setEmail(dto.getEmail());
-        roommate.setFirstName(dto.getFirstName());
-        roommate.setLastName(dto.getLastName());
+        roommate.setName(dto.getName());
         roommate.setPassword(dto.getPassword());
         roommate.setHome(home);
         roommate.setIconColor(ColorGenerator.getColorWeb(0));
@@ -67,11 +62,6 @@ public class LoginController extends AbstractController {
 
         //result
         RoommateToLoginSuccessConverter converter = new RoommateToLoginSuccessConverter();
-
-        Logger.info("roommate : "+roommate);
-        Logger.info("home : "+roommate.getHome());
-        Logger.info("roomm : "+roommate.getHome().getRoommateList());
-
 
         LoginSuccessDTO success = converter.convert(roommate);
 

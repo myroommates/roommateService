@@ -14,7 +14,6 @@ import util.ErrorMessage;
 import util.exception.MyRuntimeException;
 import util.tool.ColorGenerator;
 
-import java.util.List;
 import java.util.Set;
 import java.util.regex.Pattern;
 
@@ -70,16 +69,21 @@ public class RoommateController extends AbstractController {
         Roommate currentUser = securityController.getCurrentUser();
 
         //control password
-        if (!patternPassword.matcher(dto.getPassword()).find()){
+        if (!patternPassword.matcher(dto.getPassword()).find()) {
             throw new MyRuntimeException(errorMessageService.getMessage(ErrorMessage.WRONG_PASSWORD));
         }
 
-            //build entity
-            Roommate roommate = new Roommate();
+        //control email
+        Roommate roommateWithSameEmail = roommateService.findByEmail(dto.getEmail());
+        if(roommateWithSameEmail!=null){
+            throw new MyRuntimeException(errorMessageService.getMessage(ErrorMessage.EMAIL_ALREADY_USED));
+        }
+
+        //build entity
+        Roommate roommate = new Roommate();
         roommate.setHome(currentUser.getHome());
         roommate.setEmail(dto.getEmail());
-        roommate.setFirstName(dto.getFirstName());
-        roommate.setLastName(dto.getLastName());
+        roommate.setName(dto.getName());
         roommate.setPassword(dto.getPassword());
         roommate.setIconColor(ColorGenerator.getColorWeb(securityController.getCurrentUser().getHome().getRoommateList().size()));
 
@@ -109,10 +113,15 @@ public class RoommateController extends AbstractController {
             throw new MyRuntimeException(errorMessageService.getMessage(ErrorMessage.NOT_YOU_ROOMMATE, id));
         }
 
+        //control email
+        Roommate roommateWithSameEmail = roommateService.findByEmail(dto.getEmail());
+        if(roommateWithSameEmail!=null && !roommateWithSameEmail.equals(roommate)){
+            throw new MyRuntimeException(errorMessageService.getMessage(ErrorMessage.EMAIL_ALREADY_USED));
+        }
+
         //build entity
         roommate.setEmail(dto.getEmail());
-        roommate.setFirstName(dto.getFirstName());
-        roommate.setLastName(dto.getLastName());
+        roommate.setName(dto.getName());
 
         //operation
         roommateService.saveOrUpdate(roommate);
@@ -141,6 +150,11 @@ public class RoommateController extends AbstractController {
         //control roommate
         if (roommate.equals(currentUser)) {
             throw new MyRuntimeException(errorMessageService.getMessage(ErrorMessage.CANNOT_REMOVE_YOURSELF));
+        }
+
+        //control usage
+        if(roommate.getTicketList()!=null && roommate.getTicketList().size()>0){
+            throw new MyRuntimeException(errorMessageService.getMessage(ErrorMessage.ROOMMATE_USED,roommate.getName()));
         }
 
         roommateService.remove(roommate);

@@ -4,6 +4,7 @@ import entities.technical.AuditedAbstractEntity;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by florian on 10/11/14.
@@ -33,10 +34,7 @@ public class Roommate extends AuditedAbstractEntity {
 
 
     @Column(nullable = false)
-    private String firstName;
-
-    @Column(nullable = false)
-    private String lastName;
+    private String name;
 
     @Column(nullable = false, unique = true, name = COL_EMAIL)
     private String email;
@@ -56,7 +54,18 @@ public class Roommate extends AuditedAbstractEntity {
     @Column(nullable = false)
     private Float iconColor;
 
+    @OneToMany(mappedBy = "creator")
+    private List<Ticket> ticketList;
+
     public Roommate() {
+    }
+
+    public List<Ticket> getTicketList() {
+        return ticketList;
+    }
+
+    public void setTicketList(List<Ticket> ticketList) {
+        this.ticketList = ticketList;
     }
 
     public Float getIconColor() {
@@ -83,20 +92,12 @@ public class Roommate extends AuditedAbstractEntity {
         this.authenticationTime = authenticationTime;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {
@@ -126,11 +127,14 @@ public class Roommate extends AuditedAbstractEntity {
     @Override
     public String toString() {
         return "Roommate{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
+                "name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", home=" + home +
+                ", authenticationKey='" + authenticationKey + '\'' +
+                ", authenticationTime=" + authenticationTime +
+                ", iconColor=" + iconColor +
+                ", ticketList=" + ticketList +
                 '}';
     }
 }
