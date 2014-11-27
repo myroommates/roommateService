@@ -31,7 +31,7 @@ public class Ticket extends AuditedAbstractEntity {
     private Double value;
 
     @ManyToOne
-    private Category category;
+    private String category;
 
     @Column(nullable = false)
     private Date date;
@@ -75,11 +75,11 @@ public class Ticket extends AuditedAbstractEntity {
         this.value = value;
     }
 
-    public Category getCategory() {
+    public String getCategory() {
         return category;
     }
 
-    public void setCategory(Category category) {
+    public void setCategory(String category) {
         this.category = category;
     }
 

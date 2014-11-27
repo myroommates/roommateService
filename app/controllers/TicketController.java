@@ -6,12 +6,10 @@ import converter.TicketToTicketConverter;
 import dto.ListDTO;
 import dto.TicketDTO;
 import dto.technical.ResultDTO;
-import entities.Category;
 import entities.Roommate;
 import entities.Ticket;
 import play.mvc.Result;
 import play.mvc.Security;
-import services.CategoryService;
 import services.RoommateService;
 import services.TicketService;
 import util.ErrorMessage;
@@ -28,7 +26,6 @@ public class TicketController extends AbstractController {
     //service
     private TicketService ticketService = new TicketService();
     private RoommateService roommateService = new RoommateService();
-    private CategoryService categoryService = new CategoryService();
 
     //converter
     private TicketToTicketConverter ticketToTicketConverter = new TicketToTicketConverter();
@@ -80,21 +77,11 @@ public class TicketController extends AbstractController {
             prayers.add(roommate);
         }
 
-        //category
-        Category category = null;
-        if (dto.getCategoryId() != null) {
-            category = categoryService.findById(dto.getCategoryId());
-
-            if (category == null) {
-                throw new MyRuntimeException(errorMessageService.getMessage(ErrorMessage.ENTITY_NOT_FOUND, Category.class.getName(), dto.getCategoryId()));
-            }
-        }
-
         Ticket ticket = new Ticket();
         ticket.setDescription(dto.getDescription());
         ticket.setDate(dto.getDate());
         ticket.setValue(dto.getValue());
-        ticket.setCategory(category);
+        ticket.setCategory(dto.getCategory());
         ticket.setHome(currentUser.getHome());
         ticket.setCreator(currentUser);
         ticket.setPrayerList(prayers);
@@ -141,20 +128,10 @@ public class TicketController extends AbstractController {
             prayers.add(roommate);
         }
 
-        //category
-        Category category = null;
-        if (dto.getCategoryId() != null) {
-            category = categoryService.findById(dto.getCategoryId());
-
-            if (category == null) {
-                throw new MyRuntimeException(errorMessageService.getMessage(ErrorMessage.ENTITY_NOT_FOUND, Category.class.getName(), dto.getCategoryId()));
-            }
-        }
-
         ticket.setDescription(dto.getDescription());
         ticket.setDate(dto.getDate());
         ticket.setValue(dto.getValue());
-        ticket.setCategory(category);
+        ticket.setCategory(dto.getCategory());
         ticket.setPrayerList(prayers);
 
         //operation

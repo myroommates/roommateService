@@ -1,7 +1,6 @@
 package converter;
 
 import dto.LoginSuccessDTO;
-import entities.Category;
 import entities.Roommate;
 import entities.Ticket;
 
@@ -13,7 +12,6 @@ public class RoommateToLoginSuccessConverter {
     private RoommateToRoommateDTOConverter roommateToRoommateDTOConverter = new RoommateToRoommateDTOConverter();
     private HomeToHomeConverter homeToHomeConverter = new HomeToHomeConverter();
     private TicketToTicketConverter ticketToTicketConverter = new TicketToTicketConverter();
-    private CategoryToCategoryDTOConverter categoryToCategoryDTOConverter = new CategoryToCategoryDTOConverter();
 
     public LoginSuccessDTO convert(Roommate roommate) {
 
@@ -30,9 +28,6 @@ public class RoommateToLoginSuccessConverter {
 
         for (Ticket ticket : roommate.getHome().getTickets()) {
             dto.addTicket(ticketToTicketConverter.converter(ticket));
-        }
-        for (Category category : roommate.getHome().getCategories()) {
-            dto.addCategory(categoryToCategoryDTOConverter.convert(category));
         }
 
         return dto;

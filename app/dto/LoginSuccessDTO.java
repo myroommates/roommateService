@@ -14,7 +14,6 @@ public class LoginSuccessDTO extends DTO {
     private HomeDTO home;
     private List<RoommateDTO> roommates;
     private List<TicketDTO> tickets;
-    private List<CategoryDTO> categories;
     private String authenticationKey;
 
     public LoginSuccessDTO() {
@@ -58,21 +57,6 @@ public class LoginSuccessDTO extends DTO {
 
     public void setTickets(List<TicketDTO> tickets) {
         this.tickets = tickets;
-    }
-
-    public List<CategoryDTO> getCategories() {
-        return categories;
-    }
-
-    public void setCategories(List<CategoryDTO> categories) {
-        this.categories = categories;
-    }
-
-    public void addCategory(CategoryDTO category) {
-        if (categories == null) {
-            categories = new EqualList<>();
-        }
-        categories.add(category);
     }
 
     public void addTicket(TicketDTO ticket) {

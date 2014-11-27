@@ -12,7 +12,6 @@ import java.util.Set;
 @Entity
 @NamedQueries({
         @NamedQuery(name = Home.FIND_BY_NAME, query = "where " + Home.COL_NAME + " = :" + Home.COL_NAME),
-        @NamedQuery(name = Category.FIND_BY_HOME, query = "where " + Category.COL_HOME + " = :" + Category.COL_HOME),
 })
 public class Home extends AuditedAbstractEntity {
 
@@ -31,9 +30,6 @@ public class Home extends AuditedAbstractEntity {
     @OneToMany(mappedBy = "home")
     private Set<Ticket> tickets;
 
-    @OneToMany(mappedBy = "home")
-    private Set<Category> categories;
-
     public Home() {
         roommateList = new HashSet<>();
     }
@@ -41,10 +37,6 @@ public class Home extends AuditedAbstractEntity {
     public Home(String name) {
         this();
         this.name = name;
-    }
-
-    public void setCategories(Set<Category> categories) {
-        this.categories = categories;
     }
 
     public String getName() {
@@ -77,9 +69,5 @@ public class Home extends AuditedAbstractEntity {
                 "name='" + name + '\'' +
                 ", roommateList=" + roommateList +
                 '}';
-    }
-
-    public Set<Category> getCategories() {
-        return categories;
     }
 }

@@ -20,9 +20,9 @@ public class TicketDTO extends DTO {
     private Double value;
     @NotNull
     private Date date;
-    private Long creatorId;
-    private Long categoryId;
     private List<Long> prayersId;
+    private String category;
+    private Long creatorId;
 
     public TicketDTO() {
     }
@@ -59,28 +59,36 @@ public class TicketDTO extends DTO {
         this.date = date;
     }
 
-    public Long getCreatorId() {
-        return creatorId;
-    }
-
-    public void setCreatorId(Long creatorId) {
-        this.creatorId = creatorId;
-    }
-
-    public Long getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(Long categoryId) {
-        this.categoryId = categoryId;
-    }
-
     public List<Long> getPrayersId() {
         return prayersId;
     }
 
     public void setPrayersId(List<Long> prayersId) {
         this.prayersId = prayersId;
+    }
+
+    public void addPrayer(Long prayerId) {
+        if (prayersId == null) {
+            prayersId = new ArrayList<>();
+        }
+        prayersId.add(prayerId);
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+
+    public void setCreatorId(Long creatorId) {
+        this.creatorId = creatorId;
+    }
+
+    public Long getCreatorId() {
+        return creatorId;
     }
 
     @Override
@@ -90,16 +98,9 @@ public class TicketDTO extends DTO {
                 ", description='" + description + '\'' +
                 ", value=" + value +
                 ", date=" + date +
-                ", creatorId=" + creatorId +
-                ", categoryId=" + categoryId +
                 ", prayersId=" + prayersId +
+                ", category='" + category + '\'' +
+                ", creatorId=" + creatorId +
                 '}';
-    }
-
-    public void addPrayer(Long prayerId) {
-        if (prayersId == null) {
-            prayersId = new ArrayList<>();
-        }
-        prayersId.add(prayerId);
     }
 }

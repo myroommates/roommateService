@@ -18,9 +18,7 @@ public class TicketToTicketConverter {
         dto.setDate(ticket.getDate());
         dto.setValue(ticket.getValue());
 
-        if (ticket.getCategory() != null) {
-            dto.setCategoryId(ticket.getCategory().getId());
-        }
+        dto.setCategory(ticket.getCategory());
 
         dto.setCreatorId(ticket.getCreator().getId());
 
