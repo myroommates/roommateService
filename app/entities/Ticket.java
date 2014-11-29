@@ -42,7 +42,7 @@ public class Ticket extends AuditedAbstractEntity {
     @ManyToOne(optional = false)
     private Roommate creator;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "mm_ticket_prayers",
             joinColumns = @JoinColumn(name = "ticket_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "roommate_id", referencedColumnName = "id"))
