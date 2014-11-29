@@ -12,7 +12,6 @@ public class HomeToHomeConverter {
         HomeDTO dto = new HomeDTO();
 
         dto.setId(home.getId());
-        dto.setName(home.getName());
 
         return dto;
     }

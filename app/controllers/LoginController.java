@@ -30,11 +30,6 @@ public class LoginController extends AbstractController {
 
         RegistrationCDTO dto = extractDTOFromRequest(RegistrationCDTO.class);
 
-        //control roommate name
-        if (homeService.findByName(dto.getHomeName()) != null) {
-            throw new MyRuntimeException(errorMessageService.getMessage(ErrorMessage.HOME_NAME_ALREADY_USED));
-        }
-
         //Control email
         if (roommateService.findByEmail(dto.getEmail()) != null) {
             throw new MyRuntimeException(errorMessageService.getMessage(ErrorMessage.EMAIL_ALREADY_USED));
@@ -42,7 +37,6 @@ public class LoginController extends AbstractController {
 
         //home
         Home home = new Home();
-        home.setName(dto.getHomeName());
 
         //roommate
         Roommate roommate = new Roommate();

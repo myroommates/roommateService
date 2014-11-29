@@ -18,9 +18,6 @@ POST          /ticket              @controllers.TicketController.create()
 PUT           /ticket/;id          @controllers.TicketController.update(id:Long)
 DELETE        /ticket/:id          @controllers.TicketController.remove(id:Long)
 
-#home
-PUT           /home/:id            @controllers.HomeController.update(id:Long)
-
 #roommate
 GET           /roommate            @controllers.RoommateController.getAll()
 GET           /roommate/:id        @controllers.RoommateController.getById(id:Long)

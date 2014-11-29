@@ -8,12 +8,6 @@ import entities.Home;
  */
 public class HomeService {
 
-    public Home findByName(String name) {
-        return Ebean.createNamedQuery(Home.class, Home.FIND_BY_NAME)
-                .setParameter(Home.COL_NAME, name)
-                .findUnique();
-    }
-
     public void saveOrUpdate(Home home) {
         if(home.getId()!=null){
             home.update();

@@ -10,9 +10,6 @@ import javax.validation.constraints.Pattern;
 public class HomeDTO extends DTO {
 
     private Long id;
-    
-    @Pattern(regexp = ".{2,50}", message = "name must respect this pattern : .{2,50}")
-    private String name;
 
     public HomeDTO() {
     }
@@ -25,19 +22,4 @@ public class HomeDTO extends DTO {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @Override
-    public String toString() {
-        return "HomeDTO{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
-    }
 }

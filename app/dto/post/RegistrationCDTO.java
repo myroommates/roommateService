@@ -10,9 +10,6 @@ import javax.validation.constraints.Pattern;
  */
 public class RegistrationCDTO extends PostedDTO {
 
-    @Pattern(regexp = ".{6,50}", message = "homeName must respect this pattern : .{6,50}")
-    private String homeName;
-
     @Pattern(regexp = ".{2,50}", message = "firstName must respect this pattern : .{2,50}")
     private String name;
 
@@ -22,16 +19,7 @@ public class RegistrationCDTO extends PostedDTO {
     @Pattern(regexp = "[a-zA-Z0-9-_%]{6,18}", message = "homeName must respect this pattern : [a-zA-Z0-9-_%]{6,18}")
     private String password;
 
-    public RegistrationCDTO() {
-    }
-
-    public String getHomeName() {
-        return homeName;
-    }
-
-    public void setHomeName(String homeName) {
-        this.homeName = homeName;
-    }
+    public RegistrationCDTO() {}
 
     public String getName() {
         return name;
@@ -60,7 +48,6 @@ public class RegistrationCDTO extends PostedDTO {
     @Override
     public String toString() {
         return "RegistrationDTO{" +
-                "homeName='" + homeName + '\'' +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
