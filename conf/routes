@@ -15,7 +15,7 @@ POST          /load_data           @controllers.LoginController.loadData()
 GET           /ticket              @controllers.TicketController.getAll()
 GET           /ticket/:id          @controllers.TicketController.getById(id:Long)
 POST          /ticket              @controllers.TicketController.create()
-PUT           /ticket/;id          @controllers.TicketController.update(id:Long)
+PUT           /ticket/:id          @controllers.TicketController.update(id:Long)
 DELETE        /ticket/:id          @controllers.TicketController.remove(id:Long)
 
 #roommate
