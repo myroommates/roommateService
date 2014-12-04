@@ -30,6 +30,20 @@ public class TicketController extends AbstractController {
     //converter
     private TicketToTicketConverter ticketToTicketConverter = new TicketToTicketConverter();
 
+
+    @Security.Authenticated(SecurityController.class)
+    public Result getAll() {
+
+        ListDTO<TicketDTO> result = new ListDTO<>();
+
+        for (Ticket ticket : securityController.getCurrentUser().getHome().getTickets()) {
+            result.addElement(ticketToTicketConverter.convert(ticket));
+        }
+
+        return ok(result);
+    }
+
+
     @Security.Authenticated(SecurityController.class)
     public Result getById(Long id) {
 
@@ -42,19 +56,7 @@ public class TicketController extends AbstractController {
         }
 
         //convert and return
-        return ok(ticketToTicketConverter.converter(ticket));
-    }
-
-    @Security.Authenticated(SecurityController.class)
-    public Result getAll() {
-
-        ListDTO<TicketDTO> result = new ListDTO<>();
-
-        for (Ticket ticket : securityController.getCurrentUser().getHome().getTickets()) {
-            result.addElement(ticketToTicketConverter.converter(ticket));
-        }
-
-        return ok(result);
+        return ok(ticketToTicketConverter.convert(ticket));
     }
 
     @Security.Authenticated(SecurityController.class)
@@ -90,7 +92,7 @@ public class TicketController extends AbstractController {
         ticketService.saveOrUpdate(ticket);
 
         //result
-        return ok(ticketToTicketConverter.converter(ticket));
+        return ok(ticketToTicketConverter.convert(ticket));
     }
 
     @Security.Authenticated(SecurityController.class)
@@ -138,7 +140,7 @@ public class TicketController extends AbstractController {
         ticketService.saveOrUpdate(ticket);
 
         //result
-        return ok(ticketToTicketConverter.converter(ticket));
+        return ok(ticketToTicketConverter.convert(ticket));
     }
 
     @Security.Authenticated(SecurityController.class)

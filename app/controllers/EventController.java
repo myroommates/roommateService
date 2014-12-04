@@ -1,0 +1,132 @@
+package controllers;
+
+import controllers.technical.AbstractController;
+import controllers.technical.SecurityController;
+import converter.EventToEventDTOConverter;
+import dto.EventDTO;
+import dto.ListDTO;
+import dto.technical.ResultDTO;
+import entities.Event;
+import entities.EventRepeatableFrequencyEnum;
+import play.mvc.Result;
+import play.mvc.Security;
+import services.EventService;
+import util.ErrorMessage;
+import util.exception.MyRuntimeException;
+
+import java.util.List;
+
+/**
+ * Created by florian on 4/12/14.
+ */
+public class EventController extends AbstractController {
+
+    //service
+    private EventService eventService = new EventService();
+
+    //converter
+    private EventToEventDTOConverter eventToEventDTOConverter = new EventToEventDTOConverter();
+
+    @Security.Authenticated(SecurityController.class)
+    public Result getAll() {
+
+        ListDTO<EventDTO> result = new ListDTO<>();
+
+        //load
+        List<Event> events = eventService.findByHome(securityController.getCurrentUser().getHome());
+
+        for (Event event : events) {
+            result.addElement(eventToEventDTOConverter.convert(event));
+        }
+
+        return ok(result);
+    }
+
+    @Security.Authenticated(SecurityController.class)
+    public Result getById(Long id) {
+
+        //load
+        Event event = eventService.findById(id);
+
+        //control
+        if (event == null || !event.getHome().equals(securityController.getCurrentUser().getHome())) {
+            throw new MyRuntimeException(errorMessageService.getMessage(ErrorMessage.NOT_YOU_EVENT, id));
+        }
+
+        //convert and return
+        return ok(eventToEventDTOConverter.convert(event));
+    }
+
+    @Security.Authenticated(SecurityController.class)
+    public Result create() {
+
+        EventDTO dto = extractDTOFromRequest(EventDTO.class);
+
+        Event event = new Event();
+
+        event.setCreator(securityController.getCurrentUser());
+        event.setDescription(dto.getDescription());
+        event.setEndDate(dto.getEndDate());
+        event.setHome(securityController.getCurrentUser().getHome());
+        event.setStartDate(dto.getStartDate());
+        if (dto.getRepeatableFrequency() != null) {
+            event.setRepeatableFrequency(EventRepeatableFrequencyEnum.getByName(dto.getRepeatableFrequency()));
+        }
+
+        //operation
+        eventService.saveOrUpdate(event);
+
+        return ok(eventToEventDTOConverter.convert(event));
+    }
+
+    @Security.Authenticated(SecurityController.class)
+    public Result update(Long id) {
+
+        EventDTO dto = extractDTOFromRequest(EventDTO.class);
+
+        //load
+        Event event = eventService.findById(id);
+
+        //control
+        if (event == null || !event.getHome().equals(securityController.getCurrentUser().getHome())) {
+            throw new MyRuntimeException(errorMessageService.getMessage(ErrorMessage.NOT_YOU_EVENT, id));
+        }
+
+        //control creator
+        if (!event.getCreator().equals(securityController.getCurrentUser())) {
+            throw new MyRuntimeException(errorMessageService.getMessage(ErrorMessage.NOT_EVENT_CREATOR, id));
+        }
+
+        //update
+        event.setDescription(dto.getDescription());
+        event.setStartDate(dto.getStartDate());
+        event.setEndDate(dto.getEndDate());
+        if (dto.getRepeatableFrequency() != null) {
+            event.setRepeatableFrequency(EventRepeatableFrequencyEnum.getByName(dto.getRepeatableFrequency()));
+        }
+
+        //operation
+        eventService.saveOrUpdate(event);
+
+        return ok(eventToEventDTOConverter.convert(event));
+    }
+
+    @Security.Authenticated(SecurityController.class)
+    public Result remove(Long id) {
+
+        //load
+        Event event = eventService.findById(id);
+
+        if (event != null && event.getHome().equals(securityController.getCurrentUser().getHome())) {
+            throw new MyRuntimeException(errorMessageService.getMessage(ErrorMessage.NOT_YOU_EVENT, id));
+        }
+
+        if (event != null) {
+            eventService.remove(event);
+        }
+
+        return ok(new ResultDTO());
+    }
+
+
+}

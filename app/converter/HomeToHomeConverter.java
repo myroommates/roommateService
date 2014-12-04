@@ -6,9 +6,9 @@ import entities.Home;
 /**
  * Created by florian on 11/11/14.
  */
-public class HomeToHomeConverter {
+public class HomeToHomeConverter implements ConverterInterface<Home,HomeDTO>{
 
-    public HomeDTO converter(Home home) {
+    public HomeDTO convert(Home home) {
         HomeDTO dto = new HomeDTO();
 
         dto.setId(home.getId());

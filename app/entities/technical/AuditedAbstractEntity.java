@@ -15,6 +15,7 @@ public abstract class AuditedAbstractEntity extends Model {
 
 
     public static final String COL_ID = "id";
+    public static final String PARAM_ID = COL_ID;
     @Id
     @Column(name = COL_ID)
     private Long id;
@@ -50,8 +51,22 @@ public abstract class AuditedAbstractEntity extends Model {
 
     @Override
     public boolean equals(Object o) {
-        return o instanceof AuditedAbstractEntity &&
-                ((AuditedAbstractEntity) o).getId().equals(this.id);
+        if (this == o) return true;
+        if (!(o instanceof AuditedAbstractEntity)) return false;
+        if (!super.equals(o)) return false;
+
+        AuditedAbstractEntity that = (AuditedAbstractEntity) o;
+
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + (id != null ? id.hashCode() : 0);
+        return result;
     }
 }
 

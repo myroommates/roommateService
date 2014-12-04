@@ -15,15 +15,15 @@ public class RoommateService {
     public Roommate findByEmail(String email) {
 
         return Ebean.createNamedQuery(Roommate.class, Roommate.FIND_BY_EMAIL)
-                .setParameter(Roommate.COL_EMAIL, email)
+                .setParameter(Roommate.PARAM_EMAIL, email)
                 .findUnique();
     }
 
     public Roommate findByEmailAndPassword(String email, String password) {
 
         return Ebean.createNamedQuery(Roommate.class, Roommate.FIND_BY_EMAIL_AND_PASSWORD)
-                .setParameter(Roommate.COL_EMAIL, email)
-                .setParameter(Roommate.COL_PASSWORD, password)
+                .setParameter(Roommate.PARAM_EMAIL, email)
+                .setParameter(Roommate.PARAM_PASSWORD, password)
                 .findUnique();
     }
 
@@ -37,19 +37,19 @@ public class RoommateService {
 
     public List<Roommate> findByHome(Home home) {
         return Ebean.createNamedQuery(Roommate.class, Roommate.FIND_BY_HOME)
-                .setParameter(Roommate.COL_HOME, home)
+                .setParameter(Roommate.PARAM_HOME, home)
                 .findList();
     }
 
     public Roommate findById(Long id) {
         return Ebean.createNamedQuery(Roommate.class,Roommate.FIND_BY_ID)
-                .setParameter(AuditedAbstractEntity.COL_ID,id)
+                .setParameter(AuditedAbstractEntity.PARAM_ID,id)
                 .findUnique();
     }
 
     public Roommate findByAuthenticationKey(String authenticationKey) {
         return Ebean.createNamedQuery(Roommate.class,Roommate.FIND_BY_AUTHENTICATION_KEY)
-                .setParameter(Roommate.COL_AUTHENTICATION_KEY,authenticationKey)
+                .setParameter(Roommate.PARAM_AUTHENTICATION_KEY,authenticationKey)
                 .findUnique();
     }
 

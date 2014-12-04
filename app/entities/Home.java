@@ -18,6 +18,12 @@ public class Home extends AuditedAbstractEntity {
     @OneToMany(mappedBy = "home")
     private Set<Ticket> tickets;
 
+    @OneToMany(mappedBy = "home")
+    private Set<Event> events;
+
+    @OneToMany(mappedBy = "home")
+    private Set<ShoppingItem> shoppingItems;
+
     public Home() {
         roommateList = new HashSet<>();
     }
@@ -38,10 +44,28 @@ public class Home extends AuditedAbstractEntity {
         this.tickets = tickets;
     }
 
+    public Set<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(Set<Event> events) {
+        this.events = events;
+    }
+
+    public Set<ShoppingItem> getShoppingItems() {
+        return shoppingItems;
+    }
+
+    public void setShoppingItems(Set<ShoppingItem> shoppingItems) {
+        this.shoppingItems = shoppingItems;
+    }
+
     @Override
     public String toString() {
         return "Home{" +
                 ", roommateList=" + roommateList +
                 '}';
     }
+
+
 }

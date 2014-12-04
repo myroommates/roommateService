@@ -6,9 +6,9 @@ import entities.Roommate;
 /**
  * Created by florian on 11/11/14.
  */
-public class RoommateToRoommateDTOConverter {
+public class RoommateToRoommateDTOConverter implements ConverterInterface<Roommate,RoommateDTO>{
 
-    public RoommateDTO converter(Roommate roommate) {
+    public RoommateDTO convert(Roommate roommate) {
         RoommateDTO dto = new RoommateDTO();
 
         dto.setId(roommate.getId());

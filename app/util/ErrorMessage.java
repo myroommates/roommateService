@@ -21,7 +21,11 @@ public enum ErrorMessage {
     UNIQUE_CONSTRAIN_VIOLATION("a unique constraint was not respected on the table {0}, constraint {1}, ids {2}"),
     CATEGORY_WITH_SAME_NAME_ALREADY_EXISTS("A category named {0} already exists. Please choose an other one."),
     CATEGORY_USED("The category {0} is already used by a ticket and cannot be removed"),
-    ROOMMATE_USED("{0} is used by a ticket and cannot removed");
+    ROOMMATE_USED("{0} is used by a ticket and cannot removed"),
+    NOT_YOU_EVENT("this is not your event : {0}"),
+    NOT_EVENT_CREATOR("You are not the creator of the event {0} and you cannot edit it"),
+    NOT_YOU_SHOPPING_ITEM("this is not your shopping item : {0}"),
+    NOT_ITEM_CREATOR("You are not the creator of the shopping item {0} and you cannot edit it");
 
     private final String message;
 

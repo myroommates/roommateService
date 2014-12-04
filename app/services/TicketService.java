@@ -12,27 +12,27 @@ import java.util.List;
  */
 public class TicketService {
 
-    public void saveOrUpdate(Ticket Ticket) {
-        if (Ticket.getId() != null) {
-            Ticket.update();
+    public void saveOrUpdate(Ticket ticket) {
+        if (ticket.getId() != null) {
+            ticket.update();
         } else {
-            Ticket.save();
+            ticket.save();
         }
     }
 
     public List<Ticket> findByHome(Home home) {
         return Ebean.createNamedQuery(Ticket.class, Ticket.FIND_BY_HOME)
-                .setParameter(Ticket.COL_HOME, home)
+                .setParameter(Ticket.PARAM_HOME, home)
                 .findList();
     }
 
     public Ticket findById(Long id) {
         return Ebean.createNamedQuery(Ticket.class,Ticket.FIND_BY_ID)
-                .setParameter(AuditedAbstractEntity.COL_ID,id)
+                .setParameter(AuditedAbstractEntity.PARAM_ID,id)
                 .findUnique();
     }
 
-    public void remove(Ticket Ticket) {
-        Ticket.delete();
+    public void remove(Ticket ticket) {
+        ticket.delete();
     }
 }

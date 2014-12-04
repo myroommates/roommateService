@@ -12,8 +12,8 @@ import java.util.Set;
  */
 @Entity
 @NamedQueries({
-        @NamedQuery(name = Ticket.FIND_BY_ID, query = "where " + AuditedAbstractEntity.COL_ID + " = :" + AuditedAbstractEntity.COL_ID),
-        @NamedQuery(name = Ticket.FIND_BY_HOME, query = "where " + Ticket.COL_HOME + " = :" + Ticket.COL_HOME),
+        @NamedQuery(name = Ticket.FIND_BY_ID, query = "where " + AuditedAbstractEntity.COL_ID + " = :" + AuditedAbstractEntity.PARAM_ID),
+        @NamedQuery(name = Ticket.FIND_BY_HOME, query = "where " + Ticket.COL_HOME + " = :" + Ticket.PARAM_HOME),
 })
 public class Ticket extends AuditedAbstractEntity {
 
@@ -23,6 +23,7 @@ public class Ticket extends AuditedAbstractEntity {
 
     //column
     public static final String COL_HOME = "home";
+    public static final String PARAM_HOME = COL_HOME;
 
     @Column(nullable = false, columnDefinition = "Text")
     private String description;

@@ -41,7 +41,7 @@ public class RoommateController extends AbstractController {
         }
 
         //convert and return
-        return ok(roommateToRoommateDTOConverter.converter(roommate));
+        return ok(roommateToRoommateDTOConverter.convert(roommate));
     }
 
     @Security.Authenticated(SecurityController.class)
@@ -54,7 +54,7 @@ public class RoommateController extends AbstractController {
         ListDTO<RoommateDTO> result = new ListDTO<>();
 
         for (Roommate roommate : roommateList) {
-            result.addElement(roommateToRoommateDTOConverter.converter(roommate));
+            result.addElement(roommateToRoommateDTOConverter.convert(roommate));
         }
 
         //return
@@ -91,7 +91,7 @@ public class RoommateController extends AbstractController {
         roommateService.saveOrUpdate(roommate);
 
         //return
-        return ok(roommateToRoommateDTOConverter.converter(roommate));
+        return ok(roommateToRoommateDTOConverter.convert(roommate));
     }
 
     @Security.Authenticated(SecurityController.class)
@@ -127,7 +127,7 @@ public class RoommateController extends AbstractController {
         roommateService.saveOrUpdate(roommate);
 
         //return
-        return ok(roommateToRoommateDTOConverter.converter(roommate));
+        return ok(roommateToRoommateDTOConverter.convert(roommate));
     }
 
     @Security.Authenticated(SecurityController.class)

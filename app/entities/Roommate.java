@@ -11,11 +11,11 @@ import java.util.List;
  */
 @Entity
 @NamedQueries({
-        @NamedQuery(name = Roommate.FIND_BY_ID, query = "where " + AuditedAbstractEntity.COL_ID + " = :" + AuditedAbstractEntity.COL_ID),
-        @NamedQuery(name = Roommate.FIND_BY_AUTHENTICATION_KEY, query = "where " + Roommate.COL_AUTHENTICATION_KEY + " = :" + Roommate.COL_AUTHENTICATION_KEY),
-        @NamedQuery(name = Roommate.FIND_BY_HOME, query = "where " + Roommate.COL_HOME + " = :" + Roommate.COL_HOME),
-        @NamedQuery(name = Roommate.FIND_BY_EMAIL, query = "where " + Roommate.COL_EMAIL + " = :" + Roommate.COL_EMAIL),
-        @NamedQuery(name = Roommate.FIND_BY_EMAIL_AND_PASSWORD, query = "where " + Roommate.COL_EMAIL + " = :" + Roommate.COL_EMAIL + " and " + Roommate.COL_PASSWORD + " = :" + Roommate.COL_PASSWORD),
+        @NamedQuery(name = Roommate.FIND_BY_ID, query = "where " + AuditedAbstractEntity.COL_ID + " = :" + AuditedAbstractEntity.PARAM_ID),
+        @NamedQuery(name = Roommate.FIND_BY_AUTHENTICATION_KEY, query = "where " + Roommate.COL_AUTHENTICATION_KEY + " = :" + Roommate.PARAM_AUTHENTICATION_KEY),
+        @NamedQuery(name = Roommate.FIND_BY_HOME, query = "where " + Roommate.COL_HOME + " = :" + Roommate.PARAM_HOME),
+        @NamedQuery(name = Roommate.FIND_BY_EMAIL, query = "where " + Roommate.COL_EMAIL + " = :" + Roommate.PARAM_EMAIL),
+        @NamedQuery(name = Roommate.FIND_BY_EMAIL_AND_PASSWORD, query = "where " + Roommate.COL_EMAIL + " = :" + Roommate.PARAM_EMAIL + " and " + Roommate.COL_PASSWORD + " = :" + Roommate.PARAM_PASSWORD),
 })
 public class Roommate extends AuditedAbstractEntity {
 
@@ -28,9 +28,13 @@ public class Roommate extends AuditedAbstractEntity {
 
     //columns
     public static final String COL_EMAIL = "email";
+    public static final String PARAM_EMAIL = COL_EMAIL;
     public static final String COL_PASSWORD = "password";
+    public static final String PARAM_PASSWORD = COL_PASSWORD;
     public static final String COL_HOME = "home";
+    public static final String PARAM_HOME = COL_HOME;
     public static final String COL_AUTHENTICATION_KEY = "authenticationKey";
+    public static final String PARAM_AUTHENTICATION_KEY = COL_AUTHENTICATION_KEY;
 
 
     @Column(nullable = false)

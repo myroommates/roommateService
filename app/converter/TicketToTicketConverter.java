@@ -7,9 +7,9 @@ import entities.Ticket;
 /**
  * Created by florian on 11/11/14.
  */
-public class TicketToTicketConverter {
+public class TicketToTicketConverter implements ConverterInterface<Ticket, TicketDTO> {
 
-    public TicketDTO converter(Ticket ticket) {
+    public TicketDTO convert(Ticket ticket) {
 
         TicketDTO dto = new TicketDTO();
 
