@@ -1,9 +1,8 @@
-package entities;
+package model.entities;
 
-import entities.technical.AuditedAbstractEntity;
+import model.entities.technical.AuditedAbstractEntity;
 
 import javax.persistence.*;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -13,15 +12,15 @@ import java.util.List;
 @NamedQueries({
         @NamedQuery(name = Roommate.FIND_BY_ID, query = "where " + AuditedAbstractEntity.COL_ID + " = :" + AuditedAbstractEntity.PARAM_ID),
         @NamedQuery(name = Roommate.FIND_BY_AUTHENTICATION_KEY, query = "where " + Roommate.COL_AUTHENTICATION_KEY + " = :" + Roommate.PARAM_AUTHENTICATION_KEY),
+        @NamedQuery(name = Roommate.FIND_BY_REACTIVATION_KEY, query = "where " + Roommate.COL_REACTIVATION_KEY + " = :" + Roommate.PARAM_REACTIVATION_KEY),
         @NamedQuery(name = Roommate.FIND_BY_HOME, query = "where " + Roommate.COL_HOME + " = :" + Roommate.PARAM_HOME),
         @NamedQuery(name = Roommate.FIND_BY_EMAIL, query = "where " + Roommate.COL_EMAIL + " = :" + Roommate.PARAM_EMAIL),
-        @NamedQuery(name = Roommate.FIND_BY_EMAIL_AND_PASSWORD, query = "where " + Roommate.COL_EMAIL + " = :" + Roommate.PARAM_EMAIL + " and " + Roommate.COL_PASSWORD + " = :" + Roommate.PARAM_PASSWORD),
 })
 public class Roommate extends AuditedAbstractEntity {
 
     //request
     public static final String FIND_BY_EMAIL = "Roommate_FIND_BY_EMAIL";
-    public static final String FIND_BY_EMAIL_AND_PASSWORD = "Roommate_FIND_BY_EMAIL_AND_PASSWORD";
+    public static final String FIND_BY_REACTIVATION_KEY = "Roommate_FIND_BY_REACTIVATION_KEY";
     public static final String FIND_BY_HOME = "Roommate_FIND_BY_HOME";
     public static final String FIND_BY_ID = "Roommate_FIND_BY_ID";
     public static final String FIND_BY_AUTHENTICATION_KEY = "Roommate_FIND_BY_AUTHENTICATION_KEY";
@@ -29,8 +28,8 @@ public class Roommate extends AuditedAbstractEntity {
     //columns
     public static final String COL_EMAIL = "email";
     public static final String PARAM_EMAIL = COL_EMAIL;
-    public static final String COL_PASSWORD = "password";
-    public static final String PARAM_PASSWORD = COL_PASSWORD;
+    public static final String COL_REACTIVATION_KEY = "reactivation_key";
+    public static final String PARAM_REACTIVATION_KEY = COL_REACTIVATION_KEY;
     public static final String COL_HOME = "home";
     public static final String PARAM_HOME = COL_HOME;
     public static final String COL_AUTHENTICATION_KEY = "authenticationKey";
@@ -43,8 +42,8 @@ public class Roommate extends AuditedAbstractEntity {
     @Column(nullable = false, unique = true, name = COL_EMAIL)
     private String email;
 
-    @Column(nullable = false, name = COL_PASSWORD)
-    private String password;
+    @Column(nullable = false, name = COL_REACTIVATION_KEY)
+    private String reactivationKey;
 
     @ManyToOne(optional = false, cascade = CascadeType.PERSIST)
     private Home home;
@@ -52,13 +51,10 @@ public class Roommate extends AuditedAbstractEntity {
     @Column(name = COL_AUTHENTICATION_KEY)
     private String authenticationKey;
 
-    @Column()
-    private Date authenticationTime;
-
     @Column(nullable = false)
     private Float iconColor;
 
-    @OneToMany(mappedBy = "creator")
+    @OneToMany(mappedBy = "payer")
     private List<Ticket> ticketList;
 
     public Roommate() {
@@ -88,14 +84,6 @@ public class Roommate extends AuditedAbstractEntity {
         this.authenticationKey = authenticationKey;
     }
 
-    public Date getAuthenticationTime() {
-        return authenticationTime;
-    }
-
-    public void setAuthenticationTime(Date authenticationTime) {
-        this.authenticationTime = authenticationTime;
-    }
-
     public String getName() {
         return name;
     }
@@ -112,14 +100,6 @@ public class Roommate extends AuditedAbstractEntity {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public Home getHome() {
         return home;
     }
@@ -128,15 +108,22 @@ public class Roommate extends AuditedAbstractEntity {
         this.home = home;
     }
 
+    public String getReactivationKey() {
+        return reactivationKey;
+    }
+
+    public void setReactivationKey(String reactivationKey) {
+        this.reactivationKey = reactivationKey;
+    }
+
     @Override
     public String toString() {
         return "Roommate{" +
                 "name='" + name + '\'' +
                 ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
+                ", reactivationKey='" + reactivationKey + '\'' +
                 ", home=" + home +
                 ", authenticationKey='" + authenticationKey + '\'' +
-                ", authenticationTime=" + authenticationTime +
                 ", iconColor=" + iconColor +
                 ", ticketList=" + ticketList +
                 '}';

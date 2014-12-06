@@ -6,10 +6,11 @@ import converter.ShoppingItemToShoppingItemDTOConverter;
 import dto.ListDTO;
 import dto.ShoppingItemDTO;
 import dto.technical.ResultDTO;
-import entities.ShoppingItem;
+import model.entities.ShoppingItem;
 import play.mvc.Result;
 import play.mvc.Security;
 import services.ShoppingItemService;
+import services.impl.ShoppingItemServiceImpl;
 import util.ErrorMessage;
 import util.exception.MyRuntimeException;
 
@@ -21,7 +22,7 @@ import java.util.List;
 public class ShoppingController extends AbstractController {
 
     //service
-    private ShoppingItemService shoppingItemService = new ShoppingItemService();
+    private ShoppingItemService shoppingItemService = new ShoppingItemServiceImpl();
 
     //converter
     private ShoppingItemToShoppingItemDTOConverter shoppingItemToShoppingItemDTOConverter = new ShoppingItemToShoppingItemDTOConverter();
@@ -45,7 +46,7 @@ public class ShoppingController extends AbstractController {
         ShoppingItem shoppingItem = shoppingItemService.findById(id);
 
         if (shoppingItem == null || !shoppingItem.getHome().equals(securityController.getCurrentUser().getHome())) {
-            throw new MyRuntimeException(errorMessageService.getMessage(ErrorMessage.NOT_YOU_SHOPPING_ITEM, id));
+            throw new MyRuntimeException(ErrorMessage.NOT_YOU_SHOPPING_ITEM, id);
         }
 
         //convert
@@ -79,7 +80,7 @@ public class ShoppingController extends AbstractController {
 
         //control
         if (shoppingItem == null || !shoppingItem.getHome().equals(securityController.getCurrentUser().getHome())) {
-            throw new MyRuntimeException(errorMessageService.getMessage(ErrorMessage.NOT_YOU_SHOPPING_ITEM, id));
+            throw new MyRuntimeException(ErrorMessage.NOT_YOU_SHOPPING_ITEM, id);
         }
 
         shoppingItem.setDescription(dto.getDescription());
@@ -96,7 +97,7 @@ public class ShoppingController extends AbstractController {
         ShoppingItem shoppingItem = shoppingItemService.findById(id);
 
         if (shoppingItem != null && !shoppingItem.getHome().equals(securityController.getCurrentUser().getHome())) {
-            throw new MyRuntimeException(errorMessageService.getMessage(ErrorMessage.NOT_YOU_SHOPPING_ITEM, id));
+            throw new MyRuntimeException(ErrorMessage.NOT_YOU_SHOPPING_ITEM, id);
         }
 
         if (shoppingItem != null) {

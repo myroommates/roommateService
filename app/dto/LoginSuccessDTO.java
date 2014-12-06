@@ -13,7 +13,6 @@ public class LoginSuccessDTO extends DTO {
     private RoommateDTO currentRoommate;
     private HomeDTO home;
     private List<RoommateDTO> roommates;
-    private List<TicketDTO> tickets;
     private String authenticationKey;
 
     public LoginSuccessDTO() {
@@ -51,21 +50,6 @@ public class LoginSuccessDTO extends DTO {
         this.roommates = roommates;
     }
 
-    public List<TicketDTO> getTickets() {
-        return tickets;
-    }
-
-    public void setTickets(List<TicketDTO> tickets) {
-        this.tickets = tickets;
-    }
-
-    public void addTicket(TicketDTO ticket) {
-        if (tickets == null) {
-            tickets = new EqualList<>();
-        }
-        tickets.add(ticket);
-    }
-
     public void addRoommate(RoommateDTO roommate) {
         if (roommates == null) {
             roommates = new EqualList<>();
@@ -79,7 +63,6 @@ public class LoginSuccessDTO extends DTO {
                 "currentRoommate=" + currentRoommate +
                 ", home=" + home +
                 ", roommates=" + roommates +
-                ", tickets=" + tickets +
                 '}';
     }
 }

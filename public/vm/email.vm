@@ -1,0 +1,22 @@
+<!DOCTYPE html><!--\"Multipart/Alternative MIME\" format-->
+<header>
+
+</header>
+<body>
+
+<!-- header -->
+<div>
+</div>
+
+<!-- body -->
+<div style="min-height: 100px;padding:10px;">
+
+    $translationHelper.getMessage(${contentKey},${contentParams})
+
+</div>
+
+<!-- footer -->
+<div>
+</div>
+
+</body>

@@ -1,59 +1,25 @@
 package services;
 
-import com.avaje.ebean.Ebean;
-import entities.Home;
-import entities.Roommate;
-import entities.technical.AuditedAbstractEntity;
+import model.entities.Home;
+import model.entities.Roommate;
 
 import java.util.List;
 
 /**
- * Created by florian on 10/11/14.
+ * Created by florian on 6/12/14.
  */
-public class RoommateService {
+public interface RoommateService {
+    Roommate findByEmail(String email);
 
-    public Roommate findByEmail(String email) {
+    Roommate findByReactivationKey(String reactivationKey);
 
-        return Ebean.createNamedQuery(Roommate.class, Roommate.FIND_BY_EMAIL)
-                .setParameter(Roommate.PARAM_EMAIL, email)
-                .findUnique();
-    }
+    void saveOrUpdate(Roommate roommate);
 
-    public Roommate findByEmailAndPassword(String email, String password) {
+    List<Roommate> findByHome(Home home);
 
-        return Ebean.createNamedQuery(Roommate.class, Roommate.FIND_BY_EMAIL_AND_PASSWORD)
-                .setParameter(Roommate.PARAM_EMAIL, email)
-                .setParameter(Roommate.PARAM_PASSWORD, password)
-                .findUnique();
-    }
+    Roommate findById(Long id);
 
-    public void saveOrUpdate(Roommate roommate) {
-        if (roommate.getId() != null) {
-            roommate.update();
-        } else {
-            roommate.save();
-        }
-    }
+    Roommate findByAuthenticationKey(String authenticationKey);
 
-    public List<Roommate> findByHome(Home home) {
-        return Ebean.createNamedQuery(Roommate.class, Roommate.FIND_BY_HOME)
-                .setParameter(Roommate.PARAM_HOME, home)
-                .findList();
-    }
-
-    public Roommate findById(Long id) {
-        return Ebean.createNamedQuery(Roommate.class,Roommate.FIND_BY_ID)
-                .setParameter(AuditedAbstractEntity.PARAM_ID,id)
-                .findUnique();
-    }
-
-    public Roommate findByAuthenticationKey(String authenticationKey) {
-        return Ebean.createNamedQuery(Roommate.class,Roommate.FIND_BY_AUTHENTICATION_KEY)
-                .setParameter(Roommate.PARAM_AUTHENTICATION_KEY,authenticationKey)
-                .findUnique();
-    }
-
-    public void remove(Roommate roommate) {
-        roommate.delete();
-    }
+    void remove(Roommate roommate);
 }

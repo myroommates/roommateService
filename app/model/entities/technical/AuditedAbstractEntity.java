@@ -1,4 +1,4 @@
-package entities.technical;
+package model.entities.technical;
 
 import play.db.ebean.Model;
 

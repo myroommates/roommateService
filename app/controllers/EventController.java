@@ -6,11 +6,12 @@ import converter.EventToEventDTOConverter;
 import dto.EventDTO;
 import dto.ListDTO;
 import dto.technical.ResultDTO;
-import entities.Event;
-import entities.EventRepeatableFrequencyEnum;
+import model.entities.Event;
+import model.entities.EventRepeatableFrequencyEnum;
 import play.mvc.Result;
 import play.mvc.Security;
 import services.EventService;
+import services.impl.EventServiceImpl;
 import util.ErrorMessage;
 import util.exception.MyRuntimeException;
 
@@ -22,7 +23,7 @@ import java.util.List;
 public class EventController extends AbstractController {
 
     //service
-    private EventService eventService = new EventService();
+    private EventService eventService = new EventServiceImpl();
 
     //converter
     private EventToEventDTOConverter eventToEventDTOConverter = new EventToEventDTOConverter();
@@ -50,7 +51,7 @@ public class EventController extends AbstractController {
 
         //control
         if (event == null || !event.getHome().equals(securityController.getCurrentUser().getHome())) {
-            throw new MyRuntimeException(errorMessageService.getMessage(ErrorMessage.NOT_YOU_EVENT, id));
+            throw new MyRuntimeException(ErrorMessage.NOT_YOU_EVENT, id);
         }
 
         //convert and return
@@ -89,12 +90,12 @@ public class EventController extends AbstractController {
 
         //control
         if (event == null || !event.getHome().equals(securityController.getCurrentUser().getHome())) {
-            throw new MyRuntimeException(errorMessageService.getMessage(ErrorMessage.NOT_YOU_EVENT, id));
+            throw new MyRuntimeException(ErrorMessage.NOT_YOU_EVENT, id);
         }
 
         //control creator
         if (!event.getCreator().equals(securityController.getCurrentUser())) {
-            throw new MyRuntimeException(errorMessageService.getMessage(ErrorMessage.NOT_EVENT_CREATOR, id));
+            throw new MyRuntimeException(ErrorMessage.NOT_EVENT_CREATOR, id);
         }
 
         //update
@@ -118,7 +119,7 @@ public class EventController extends AbstractController {
         Event event = eventService.findById(id);
 
         if (event != null && event.getHome().equals(securityController.getCurrentUser().getHome())) {
-            throw new MyRuntimeException(errorMessageService.getMessage(ErrorMessage.NOT_YOU_EVENT, id));
+            throw new MyRuntimeException(ErrorMessage.NOT_YOU_EVENT, id);
         }
 
         if (event != null) {

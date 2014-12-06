@@ -14,15 +14,19 @@ import java.util.List;
 public class TicketDTO extends DTO {
 
     private Long id;
+
     @Pattern(regexp = ".{1,1000}", message = "homeName must respect this pattern : .{1,1000}")
     private String description;
-    @NotNull
-    private Double value;
+
     @NotNull
     private Date date;
-    private List<Long> prayersId;
+
+    private List<TicketDebtorDTO> debtorList;
+
     private String category;
-    private Long creatorId;
+
+    @NotNull
+    private Long prayerId;
 
     public TicketDTO() {
     }
@@ -43,14 +47,6 @@ public class TicketDTO extends DTO {
         this.description = description;
     }
 
-    public Double getValue() {
-        return value;
-    }
-
-    public void setValue(Double value) {
-        this.value = value;
-    }
-
     public Date getDate() {
         return date;
     }
@@ -59,19 +55,12 @@ public class TicketDTO extends DTO {
         this.date = date;
     }
 
-    public List<Long> getPrayersId() {
-        return prayersId;
+    public List<TicketDebtorDTO> getDebtorList() {
+        return debtorList;
     }
 
-    public void setPrayersId(List<Long> prayersId) {
-        this.prayersId = prayersId;
-    }
-
-    public void addPrayer(Long prayerId) {
-        if (prayersId == null) {
-            prayersId = new ArrayList<>();
-        }
-        prayersId.add(prayerId);
+    public void setDebtorList(List<TicketDebtorDTO> debtorList) {
+        this.debtorList = debtorList;
     }
 
     public String getCategory() {
@@ -82,13 +71,12 @@ public class TicketDTO extends DTO {
         this.category = category;
     }
 
-
-    public void setCreatorId(Long creatorId) {
-        this.creatorId = creatorId;
+    public Long getPrayerId() {
+        return prayerId;
     }
 
-    public Long getCreatorId() {
-        return creatorId;
+    public void setPrayerId(Long prayerId) {
+        this.prayerId = prayerId;
     }
 
     @Override
@@ -96,11 +84,17 @@ public class TicketDTO extends DTO {
         return "TicketDTO{" +
                 "id=" + id +
                 ", description='" + description + '\'' +
-                ", value=" + value +
                 ", date=" + date +
-                ", prayersId=" + prayersId +
+                ", debtorList=" + debtorList +
                 ", category='" + category + '\'' +
-                ", creatorId=" + creatorId +
+                ", prayerId=" + prayerId +
                 '}';
+    }
+
+    public void addTicketDebtor(TicketDebtorDTO ticketDebtorDTO) {
+        if(debtorList ==null){
+            debtorList = new ArrayList<>();
+        }
+        this.debtorList.add(ticketDebtorDTO);
     }
 }

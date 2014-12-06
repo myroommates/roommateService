@@ -1,31 +1,28 @@
 package controllers.technical;
 
-import dto.technical.ExceptionDTO;
-import entities.Roommate;
+import model.entities.Language;
+import model.entities.Roommate;
 import play.mvc.Http;
 import play.mvc.Result;
 import play.mvc.Security;
-import services.ErrorMessageService;
 import services.RoommateService;
+import services.impl.RoommateServiceImpl;
 import util.KeyGenerator;
-
-import java.util.Date;
 
 /**
  * Created by florian on 10/11/14.
  */
 public class SecurityController extends Security.Authenticator {
 
-    public static final String SESSION_IDENTIFIER_STORE = "email";
-    //public static final long SESSION_TIME = 30L;
-    public final ErrorMessageService errorMessageService = new ErrorMessageService();
+    public static final String REQUEST_HEADER_LANGUAGE = "language";
+    public static final String REQUEST_HEADER_AUTHENTICATION_KEY = "authenticationKey";
 
-    private static final RoommateService roommateService = new RoommateService();
+    private static final RoommateService ROOMMATE_SERVICE = new RoommateServiceImpl();
 
     @Override
     public String getUsername(Http.Context ctx) {
 
-        String authenticationKey = ctx.request().getHeader("authenticationKey");
+        String authenticationKey = ctx.request().getHeader(REQUEST_HEADER_AUTHENTICATION_KEY);
 
         if (authenticationKey == null) {
             return null;
@@ -41,7 +38,7 @@ public class SecurityController extends Security.Authenticator {
 
     @Override
     public Result onUnauthorized(Http.Context ctx) {
-        return unauthorized(new ExceptionDTO("You aren't connected"));
+        return unauthorized();
     }
 
     public Roommate getCurrentUser() {
@@ -53,29 +50,36 @@ public class SecurityController extends Security.Authenticator {
         final Roommate roommate;
 
         if (authenticationKey != null) {
-            roommate = roommateService.findByAuthenticationKey(authenticationKey);
+            roommate = ROOMMATE_SERVICE.findByAuthenticationKey(authenticationKey);
         } else {
-            roommate = roommateService.findByEmail(getUsername(Http.Context.current()));
+            roommate = ROOMMATE_SERVICE.findByEmail(getUsername(Http.Context.current()));
         }
 
         if (roommate == null) {
             return null;
         }
-        /*
-        if (roommate.getAuthenticationTime().getTime() + (SESSION_TIME * 60L * 1000L) < new Date().getTime()) {
-            //session expired
-            return null;
-        }
-        */
+
         return roommate;
     }
 
     public void storeIdentifier(Roommate roommate) {
 
         //create key
-        String key = KeyGenerator.generateRandomKey(60);
-        roommate.setAuthenticationKey(key);
-        roommate.setAuthenticationTime(new Date());
-        roommateService.saveOrUpdate(roommate);
+
+        while (roommate.getReactivationKey() == null) {
+            String key = KeyGenerator.generateRandomKey(60);
+            roommate.setAuthenticationKey(key);
+            if (ROOMMATE_SERVICE.findByAuthenticationKey(key) == null) {
+                roommate.setAuthenticationKey(key);
+            }
+        }
+        ROOMMATE_SERVICE.saveOrUpdate(roommate);
+    }
+
+    public Language getCurrentLanguage(Http.Context ctx) {
+        if (ctx.request().getHeader(REQUEST_HEADER_LANGUAGE) != null && Language.getByAbrv(ctx.request().getHeader(REQUEST_HEADER_LANGUAGE)) != null) {
+            return Language.getByAbrv(ctx.request().getHeader(REQUEST_HEADER_LANGUAGE));
+        }
+        return Language.getDefaultLanguage();
     }
 }

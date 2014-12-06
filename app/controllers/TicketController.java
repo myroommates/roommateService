@@ -5,13 +5,17 @@ import controllers.technical.SecurityController;
 import converter.TicketToTicketConverter;
 import dto.ListDTO;
 import dto.TicketDTO;
+import dto.TicketDebtorDTO;
 import dto.technical.ResultDTO;
-import entities.Roommate;
-import entities.Ticket;
+import model.entities.Roommate;
+import model.entities.Ticket;
+import model.entities.TicketDebtor;
 import play.mvc.Result;
 import play.mvc.Security;
 import services.RoommateService;
 import services.TicketService;
+import services.impl.RoommateServiceImpl;
+import services.impl.TicketServiceImpl;
 import util.ErrorMessage;
 import util.exception.MyRuntimeException;
 
@@ -24,8 +28,8 @@ import java.util.Set;
 public class TicketController extends AbstractController {
 
     //service
-    private TicketService ticketService = new TicketService();
-    private RoommateService roommateService = new RoommateService();
+    private TicketService ticketService = new TicketServiceImpl();
+    private RoommateService roommateService = new RoommateServiceImpl();
 
     //converter
     private TicketToTicketConverter ticketToTicketConverter = new TicketToTicketConverter();
@@ -52,7 +56,7 @@ public class TicketController extends AbstractController {
 
         //control
         if (ticket == null || !ticket.getHome().equals(securityController.getCurrentUser().getHome())) {
-            throw new MyRuntimeException(errorMessageService.getMessage(ErrorMessage.NOT_YOU_TICKET, id));
+            throw new MyRuntimeException(ErrorMessage.NOT_YOU_TICKET, id);
         }
 
         //convert and return
@@ -68,25 +72,24 @@ public class TicketController extends AbstractController {
 
         //control
         //prayers
-        Set<Roommate> prayers = new HashSet<>();
+        Set<TicketDebtor> prayers = new HashSet<>();
 
-        for (Long prayerId: dto.getPrayersId()) {
+        for (TicketDebtorDTO ticketDebtorDTO: dto.getDebtorList()) {
 
-            Roommate roommate = roommateService.findById(prayerId);
+            Roommate roommate = roommateService.findById(ticketDebtorDTO.getRoommateId());
             if (!roommate.getHome().equals(currentUser.getHome())) {
-                throw new MyRuntimeException(errorMessageService.getMessage(ErrorMessage.NOT_YOU_ROOMMATE, prayerId));
+                throw new MyRuntimeException(ErrorMessage.NOT_YOU_ROOMMATE, ticketDebtorDTO.getRoommateId());
             }
-            prayers.add(roommate);
+            prayers.add(new TicketDebtor(roommate,ticketDebtorDTO.getValue()));
         }
 
         Ticket ticket = new Ticket();
         ticket.setDescription(dto.getDescription());
         ticket.setDate(dto.getDate());
-        ticket.setValue(dto.getValue());
         ticket.setCategory(dto.getCategory());
         ticket.setHome(currentUser.getHome());
-        ticket.setCreator(currentUser);
-        ticket.setPrayerList(prayers);
+        ticket.setPayer(currentUser);
+        ticket.setDebtorList(prayers);
 
         //operation
         ticketService.saveOrUpdate(ticket);
@@ -107,34 +110,34 @@ public class TicketController extends AbstractController {
         Ticket ticket = ticketService.findById(id);
         //control
         if (ticket == null) {
-            throw new MyRuntimeException(errorMessageService.getMessage(ErrorMessage.ENTITY_NOT_FOUND, Ticket.class.getName(), id));
+            throw new MyRuntimeException(ErrorMessage.ENTITY_NOT_FOUND, Ticket.class.getName(), id);
         }
 
         if (!ticket.getHome().equals(currentUser.getHome())) {
-            throw new MyRuntimeException(errorMessageService.getMessage(ErrorMessage.NOT_YOU_TICKET, id));
+            throw new MyRuntimeException(ErrorMessage.NOT_YOU_TICKET, id);
         }
         //control creator
-        if (!ticket.getCreator().equals(currentUser)) {
-            throw new MyRuntimeException(errorMessageService.getMessage(ErrorMessage.NOT_TICKET_CREATOR, id));
+        if (!ticket.getPayer().equals(currentUser)) {
+            throw new MyRuntimeException(ErrorMessage.NOT_TICKET_CREATOR, id);
         }
 
 
         //prayers
-        Set<Roommate> prayers = new HashSet<>();
+        Set<TicketDebtor> prayers = new HashSet<>();
 
-        for (Long prayerId: dto.getPrayersId()) {
-            Roommate roommate = roommateService.findById(prayerId);
+        for (TicketDebtorDTO ticketDebtorDTO: dto.getDebtorList()) {
+
+            Roommate roommate = roommateService.findById(ticketDebtorDTO.getRoommateId());
             if (!roommate.getHome().equals(currentUser.getHome())) {
-                throw new MyRuntimeException(errorMessageService.getMessage(ErrorMessage.NOT_YOU_ROOMMATE, prayerId));
+                throw new MyRuntimeException(ErrorMessage.NOT_YOU_ROOMMATE, ticketDebtorDTO.getRoommateId());
             }
-            prayers.add(roommate);
+            prayers.add(new TicketDebtor(roommate,ticketDebtorDTO.getValue()));
         }
 
         ticket.setDescription(dto.getDescription());
         ticket.setDate(dto.getDate());
-        ticket.setValue(dto.getValue());
         ticket.setCategory(dto.getCategory());
-        ticket.setPrayerList(prayers);
+        ticket.setDebtorList(prayers);
 
         //operation
         ticketService.saveOrUpdate(ticket);
@@ -152,12 +155,12 @@ public class TicketController extends AbstractController {
         Ticket ticket = ticketService.findById(id);
 
         if (ticket == null) {
-            throw new MyRuntimeException(errorMessageService.getMessage(ErrorMessage.ENTITY_NOT_FOUND, Ticket.class.getName(), id));
+            throw new MyRuntimeException(ErrorMessage.ENTITY_NOT_FOUND, Ticket.class.getName(), id);
         }
 
         //control home
         if (!ticket.getHome().equals(currentUser.getHome())) {
-            throw new MyRuntimeException(errorMessageService.getMessage(ErrorMessage.NOT_YOU_TICKET, id));
+            throw new MyRuntimeException(ErrorMessage.NOT_YOU_TICKET, id);
         }
 
         ticketService.remove(ticket);

@@ -1,8 +1,8 @@
 package converter;
 
 import dto.LoginSuccessDTO;
-import entities.Roommate;
-import entities.Ticket;
+import model.entities.Roommate;
+import model.entities.Ticket;
 
 /**
  * Created by florian on 11/11/14.
@@ -25,10 +25,6 @@ public class RoommateToLoginSuccessConverter implements ConverterInterface<Roomm
             dto.addRoommate(roommateToRoommateDTOConverter.convert(otherRoommate));
         }
         dto.addRoommate(roommateToRoommateDTOConverter.convert(roommate));
-
-        for (Ticket ticket : roommate.getHome().getTickets()) {
-            dto.addTicket(ticketToTicketConverter.convert(ticket));
-        }
 
         return dto;
     }

@@ -1,7 +1,7 @@
 package converter;
 
 import dto.EventDTO;
-import entities.Event;
+import model.entities.Event;
 
 /**
  * Created by florian on 4/12/14.

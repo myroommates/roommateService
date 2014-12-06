@@ -1,6 +1,6 @@
 package dto.post;
 
-import dto.technical.PostedDTO;
+import dto.technical.DTO;
 import org.hibernate.validator.constraints.Email;
 
 import javax.validation.constraints.Pattern;
@@ -8,7 +8,7 @@ import javax.validation.constraints.Pattern;
 /**
  * Created by florian on 11/11/14.
  */
-public class RegistrationCDTO extends PostedDTO {
+public class RegistrationDTO extends DTO {
 
     @Pattern(regexp = ".{2,50}", message = "firstName must respect this pattern : .{2,50}")
     private String name;
@@ -16,10 +16,7 @@ public class RegistrationCDTO extends PostedDTO {
     @Email
     private String email;
 
-    @Pattern(regexp = "[a-zA-Z0-9-_%]{6,18}", message = "homeName must respect this pattern : [a-zA-Z0-9-_%]{6,18}")
-    private String password;
-
-    public RegistrationCDTO() {}
+    public RegistrationDTO() {}
 
     public String getName() {
         return name;
@@ -37,20 +34,11 @@ public class RegistrationCDTO extends PostedDTO {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     @Override
     public String toString() {
         return "RegistrationDTO{" +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
                 '}';
     }
 }

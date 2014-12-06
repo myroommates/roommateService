@@ -1,7 +1,7 @@
 package converter;
 
 import dto.HomeDTO;
-import entities.Home;
+import model.entities.Home;
 
 /**
  * Created by florian on 11/11/14.

@@ -6,6 +6,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import play.mvc.Content;
+import util.ErrorMessage;
 import util.exception.MyRuntimeException;
 
 import java.io.IOException;
@@ -27,17 +28,17 @@ public class DTO implements Content {
                 T dto = mapper.readValue(jp, type);
 
                 if (dto == null) {
-                    throw new MyRuntimeException("Validation of DTO : dto is null");
+                    throw new MyRuntimeException(ErrorMessage.JSON_CONVERSION_ERROR);
                 }
 
                 //dto.validate();
                 return dto;
 
             } catch (IOException e) {
-                throw new MyRuntimeException(e, "Validation of DTO failed");
+                throw new MyRuntimeException(ErrorMessage.JSON_CONVERSION_ERROR);
             }
         }
-        throw new MyRuntimeException("Validation of DTO : data is null");
+        throw new MyRuntimeException(ErrorMessage.JSON_CONVERSION_ERROR);
     }
 
     public String get__type() {
@@ -46,7 +47,7 @@ public class DTO implements Content {
 
     public void set__type(String __type) {
         if (!get__type().equals(__type)) {
-            throw new MyRuntimeException("Wrong type of DTO received. Expected : " + get__type() + ", receive : " + __type);
+            throw new MyRuntimeException(ErrorMessage.DTO_NOT_EXPECTED, get__type(),__type);
         }
     }
 
@@ -56,7 +57,7 @@ public class DTO implements Content {
         try {
             return mapper.writeValueAsString(this);
         } catch (JsonProcessingException e) {
-            throw new MyRuntimeException(e, e.getMessage());
+            throw new MyRuntimeException(ErrorMessage.FATAL_ERROR, e.getMessage());
         }
     }
 

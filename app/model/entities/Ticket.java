@@ -1,6 +1,6 @@
-package entities;
+package model.entities;
 
-import entities.technical.AuditedAbstractEntity;
+import model.entities.technical.AuditedAbstractEntity;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -28,9 +28,6 @@ public class Ticket extends AuditedAbstractEntity {
     @Column(nullable = false, columnDefinition = "Text")
     private String description;
 
-    @Column(nullable = false)
-    private Double value;
-
     @ManyToOne
     private String category;
 
@@ -41,23 +38,12 @@ public class Ticket extends AuditedAbstractEntity {
     private Home home;
 
     @ManyToOne(optional = false)
-    private Roommate creator;
+    private Roommate payer;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "mm_ticket_prayers",
-            joinColumns = @JoinColumn(name = "ticket_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "roommate_id", referencedColumnName = "id"))
-    private Set<Roommate> prayerList = new HashSet<>();
+    @OneToMany(cascade = CascadeType.ALL)
+    private Set<TicketDebtor> debtorList = new HashSet<>();
 
     public Ticket() {
-    }
-
-    public Home getHome() {
-        return home;
-    }
-
-    public void setHome(Home home) {
-        this.home = home;
     }
 
     public String getDescription() {
@@ -66,14 +52,6 @@ public class Ticket extends AuditedAbstractEntity {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Double getValue() {
-        return value;
-    }
-
-    public void setValue(Double value) {
-        this.value = value;
     }
 
     public String getCategory() {
@@ -92,32 +70,39 @@ public class Ticket extends AuditedAbstractEntity {
         this.date = date;
     }
 
-    public Roommate getCreator() {
-        return creator;
+    public Home getHome() {
+        return home;
     }
 
-    public void setCreator(Roommate creator) {
-        this.creator = creator;
+    public void setHome(Home home) {
+        this.home = home;
     }
 
-    public Set<Roommate> getPrayerList() {
-        return prayerList;
+    public Roommate getPayer() {
+        return payer;
     }
 
-    public void setPrayerList(Set<Roommate> prayerList) {
-        this.prayerList = prayerList;
+    public void setPayer(Roommate payer) {
+        this.payer = payer;
+    }
+
+    public Set<TicketDebtor> getDebtorList() {
+        return debtorList;
+    }
+
+    public void setDebtorList(Set<TicketDebtor> debtorList) {
+        this.debtorList = debtorList;
     }
 
     @Override
     public String toString() {
         return "Ticket{" +
                 "description='" + description + '\'' +
-                ", value=" + value +
-                ", category=" + category +
+                ", category='" + category + '\'' +
                 ", date=" + date +
-                ", creator=" + creator +
-                ", prayerList=" + prayerList +
+                ", home=" + home +
+                ", payer=" + payer +
+                ", debtorList=" + debtorList +
                 '}';
     }
-
 }

@@ -4,16 +4,19 @@ import controllers.technical.AbstractController;
 import controllers.technical.SecurityController;
 import converter.RoommateToLoginSuccessConverter;
 import dto.LoginSuccessDTO;
-import dto.post.LoginDTO;
-import dto.post.RegistrationCDTO;
-import entities.Home;
-import entities.Roommate;
-import play.Logger;
+import dto.post.ReactivationDTO;
+import dto.post.RegistrationDTO;
+import model.entities.Home;
+import model.entities.Roommate;
 import play.mvc.Result;
 import play.mvc.Security;
-import services.HomeService;
+import services.EmailService;
 import services.RoommateService;
+import services.impl.EmailServiceImpl;
+import services.impl.RoommateServiceImpl;
+import util.EmailMessage;
 import util.ErrorMessage;
+import util.KeyGenerator;
 import util.exception.MyRuntimeException;
 import util.tool.ColorGenerator;
 
@@ -22,17 +25,20 @@ import util.tool.ColorGenerator;
  */
 public class LoginController extends AbstractController {
 
-    private RoommateService roommateService = new RoommateService();
-    private HomeService homeService = new HomeService();
+    //service
+    private RoommateService roommateService = new RoommateServiceImpl();
+
+    //controller
+    private EmailController emailController = new EmailController();
 
 
     public Result registration() {
 
-        RegistrationCDTO dto = extractDTOFromRequest(RegistrationCDTO.class);
+        RegistrationDTO dto = extractDTOFromRequest(RegistrationDTO.class);
 
         //Control email
         if (roommateService.findByEmail(dto.getEmail()) != null) {
-            throw new MyRuntimeException(errorMessageService.getMessage(ErrorMessage.EMAIL_ALREADY_USED));
+            throw new MyRuntimeException(ErrorMessage.EMAIL_ALREADY_USED);
         }
 
         //home
@@ -42,49 +48,49 @@ public class LoginController extends AbstractController {
         Roommate roommate = new Roommate();
         roommate.setEmail(dto.getEmail());
         roommate.setName(dto.getName());
-        roommate.setPassword(dto.getPassword());
         roommate.setHome(home);
+        home.setAdmin(roommate);
         roommate.setIconColor(ColorGenerator.getColorWeb(0));
 
-        //operation
-        //roommateService.saveOrUpdate(roommate);
-        // => useless : saved during the storeIdentifier
+        //generate reactivationKey
+        while (roommate.getReactivationKey() == null) {
+            String generateRandomPassword = KeyGenerator.generateRandomPassword(12);
+            if (roommateService.findByReactivationKey(generateRandomPassword) == null) {
+                roommate.setReactivationKey(generateRandomPassword);
+            }
+        }
 
-        //connection
+        //send email
+        emailController.sendRegistrationEmail(roommate,securityController.getCurrentLanguage(ctx()));
+
+        //connection !! this operation save the roommate too
         securityController.storeIdentifier(roommate);
-
 
         //result
         RoommateToLoginSuccessConverter converter = new RoommateToLoginSuccessConverter();
 
         LoginSuccessDTO success = converter.convert(roommate);
 
-        Logger.info("DTO : "+success);
-
         return ok(success);
     }
 
 
-    public Result login() {
+    public Result reactivation() {
 
-        LoginDTO dto = extractDTOFromRequest(LoginDTO.class);
+        ReactivationDTO dto = extractDTOFromRequest(ReactivationDTO.class);
 
-        Roommate roommate = roommateService.findByEmailAndPassword(dto.getEmail(), dto.getPassword());
+        Roommate roommate = roommateService.findByReactivationKey(dto.getReactivationKey());
 
         if (roommate != null) {
             securityController.storeIdentifier(roommate);
         } else {
-            throw new MyRuntimeException(errorMessageService.getMessage(ErrorMessage.LOGIN_WRONG_PASSWORD_LOGIN));
+            throw new MyRuntimeException(ErrorMessage.ACTIVATION_KEY_NOT_FOUND, dto.getReactivationKey());
         }
 
         //result
         RoommateToLoginSuccessConverter converter = new RoommateToLoginSuccessConverter();
 
         LoginSuccessDTO result = converter.convert(roommate);
-
-        Logger.info(result+"");
-
-        Logger.info(result.getRoommates().size()+"");
 
         return ok(result);
     }
@@ -97,10 +103,6 @@ public class LoginController extends AbstractController {
         RoommateToLoginSuccessConverter converter = new RoommateToLoginSuccessConverter();
 
         LoginSuccessDTO result = converter.convert(securityController.getCurrentUser());
-
-        Logger.info(result+"");
-
-        Logger.info(result.getRoommates().size()+"");
 
         return ok(result);
     }

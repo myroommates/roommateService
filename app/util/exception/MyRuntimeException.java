@@ -1,27 +1,29 @@
 package util.exception;
 
+import util.ErrorMessage;
+
 /**
  * Created by florian on 10/11/14.
  */
 public class MyRuntimeException  extends RuntimeException{
 
     private static final long serialVersionUID = 1L;
+    private ErrorMessage errorMessage;
+    private Object[] params;
 
-    private final String toClientMessage;
+    public MyRuntimeException(ErrorMessage errorMessage, Object... params) {
+        super();
 
-    public MyRuntimeException(String message) {
-        super(message);
-        toClientMessage = message;
+        this.errorMessage = errorMessage;
+        this.params = params;
     }
 
-    public MyRuntimeException(Throwable cause, String toClientMessage) {
-        super(cause);
-        this.toClientMessage = toClientMessage;
+    public ErrorMessage getErrorMessage() {
+        return errorMessage;
     }
 
-    public String getToClientMessage() {
-        return toClientMessage;
+    public Object[] getParams() {
+        return params;
     }
-
 }
 

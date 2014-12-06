@@ -1,38 +1,19 @@
 package services;
 
-import com.avaje.ebean.Ebean;
-import entities.Home;
-import entities.Ticket;
-import entities.technical.AuditedAbstractEntity;
+import model.entities.Home;
+import model.entities.Ticket;
 
 import java.util.List;
 
 /**
- * Created by florian on 10/11/14.
+ * Created by florian on 6/12/14.
  */
-public class TicketService {
+public interface TicketService {
+    void saveOrUpdate(Ticket ticket);
 
-    public void saveOrUpdate(Ticket ticket) {
-        if (ticket.getId() != null) {
-            ticket.update();
-        } else {
-            ticket.save();
-        }
-    }
+    Ticket findById(Long id);
 
-    public List<Ticket> findByHome(Home home) {
-        return Ebean.createNamedQuery(Ticket.class, Ticket.FIND_BY_HOME)
-                .setParameter(Ticket.PARAM_HOME, home)
-                .findList();
-    }
+    List<Ticket> findByHome(Home home);
 
-    public Ticket findById(Long id) {
-        return Ebean.createNamedQuery(Ticket.class,Ticket.FIND_BY_ID)
-                .setParameter(AuditedAbstractEntity.PARAM_ID,id)
-                .findUnique();
-    }
-
-    public void remove(Ticket ticket) {
-        ticket.delete();
-    }
+    void remove(Ticket ticket);
 }

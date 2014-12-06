@@ -1,6 +1,6 @@
-package entities;
+package model.entities;
 
-import entities.technical.AuditedAbstractEntity;
+import model.entities.technical.AuditedAbstractEntity;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -23,6 +23,9 @@ public class Home extends AuditedAbstractEntity {
 
     @OneToMany(mappedBy = "home")
     private Set<ShoppingItem> shoppingItems;
+
+    @ManyToOne(optional = false)
+    private Roommate admin;
 
     public Home() {
         roommateList = new HashSet<>();
@@ -68,4 +71,11 @@ public class Home extends AuditedAbstractEntity {
     }
 
 
+    public void setAdmin(Roommate admin) {
+        this.admin = admin;
+    }
+
+    public Roommate getAdmin() {
+        return admin;
+    }
 }

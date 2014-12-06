@@ -1,6 +1,6 @@
-package entities;
+package model.entities;
 
-import entities.technical.AuditedAbstractEntity;
+import model.entities.technical.AuditedAbstractEntity;
 
 import javax.persistence.*;
 import java.util.Date;

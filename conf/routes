@@ -3,38 +3,38 @@
 # ~~~~
 
 # Map static resources from the /public folder to the /assets URL path
-GET           /assets/*file        controllers.Assets.at(path="/public", file)
+GET           /assets/*file            controllers.Assets.at(path="/public", file)
 
 
 # account
-POST          /login               @controllers.LoginController.login()
-POST          /registration        @controllers.LoginController.registration()
-POST          /load_data           @controllers.LoginController.loadData()
+POST          /reactivation            @controllers.LoginController.reactivation()
+POST          /registration            @controllers.LoginController.registration()
+POST          /load_data               @controllers.LoginController.loadData()
 
 #ticket
-GET           /ticket              @controllers.TicketController.getAll()
-GET           /ticket/:id          @controllers.TicketController.getById(id:Long)
-POST          /ticket              @controllers.TicketController.create()
-PUT           /ticket/:id          @controllers.TicketController.update(id:Long)
-DELETE        /ticket/:id          @controllers.TicketController.remove(id:Long)
+GET           /ticket                  @controllers.TicketController.getAll()
+GET           /ticket/:id              @controllers.TicketController.getById(id:Long)
+POST          /ticket                  @controllers.TicketController.create()
+PUT           /ticket/:id              @controllers.TicketController.update(id:Long)
+DELETE        /ticket/:id              @controllers.TicketController.remove(id:Long)
 
 #roommate
-GET           /roommate            @controllers.RoommateController.getAll()
-GET           /roommate/:id        @controllers.RoommateController.getById(id:Long)
-POST          /roommate            @controllers.RoommateController.create()
-PUT           /roommate/:id        @controllers.RoommateController.update(id:Long)
-DELETE        /roommate/:id        @controllers.RoommateController.delete(id:Long)
+GET           /roommate                @controllers.RoommateController.getAll()
+GET           /roommate/:id            @controllers.RoommateController.getById(id:Long)
+POST          /roommate                @controllers.RoommateController.create()
+PUT           /roommate/:id            @controllers.RoommateController.update(id:Long)
+DELETE        /roommate/:id            @controllers.RoommateController.delete(id:Long)
 
 #event
-GET           /event              @controllers.EventController.getAll()
-GET           /event/:id          @controllers.EventController.getById(id:Long)
-POST          /event              @controllers.EventController.create()
-PUT           /event/:id          @controllers.EventController.update(id:Long)
-DELETE        /event/:id          @controllers.EventController.remove(id:Long)
+GET           /event                   @controllers.EventController.getAll()
+GET           /event/:id               @controllers.EventController.getById(id:Long)
+POST          /event                   @controllers.EventController.create()
+PUT           /event/:id               @controllers.EventController.update(id:Long)
+DELETE        /event/:id               @controllers.EventController.remove(id:Long)
 
 #shopping item
-GET           /shoppingItem              @controllers.ShoppingController.getAll()
-GET           /shoppingItem/:id          @controllers.ShoppingController.getById(id:Long)
-POST          /shoppingItem              @controllers.ShoppingController.create()
-PUT           /shoppingItem/:id          @controllers.ShoppingController.update(id:Long)
-DELETE        /shoppingItem/:id          @controllers.ShoppingController.remove(id:Long)
+GET           /shoppingItem            @controllers.ShoppingController.getAll()
+GET           /shoppingItem/:id        @controllers.ShoppingController.getById(id:Long)
+POST          /shoppingItem            @controllers.ShoppingController.create()
+PUT           /shoppingItem/:id        @controllers.ShoppingController.update(id:Long)
+DELETE        /shoppingItem/:id        @controllers.ShoppingController.remove(id:Long)

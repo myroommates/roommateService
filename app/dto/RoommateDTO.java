@@ -22,9 +22,18 @@ public class RoommateDTO extends DTO {
 
     private Float iconColor;
 
+    private boolean isAdmin;
+
     public RoommateDTO() {
     }
 
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean isAdmin) {
+        this.isAdmin = isAdmin;
+    }
 
     public Float getIconColor() {
         return iconColor;
@@ -75,6 +84,7 @@ public class RoommateDTO extends DTO {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", iconColor=" + iconColor +
+                ", isAdmin=" + isAdmin +
                 '}';
     }
 
