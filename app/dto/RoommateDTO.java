@@ -18,8 +18,6 @@ public class RoommateDTO extends DTO {
     @Email
     private String email;
 
-    private String password;
-
     private Float iconColor;
 
     private boolean isAdmin;
@@ -67,22 +65,12 @@ public class RoommateDTO extends DTO {
         this.email = email;
     }
 
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     @Override
     public String toString() {
         return "RoommateDTO{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
                 ", iconColor=" + iconColor +
                 ", isAdmin=" + isAdmin +
                 '}';

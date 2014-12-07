@@ -27,6 +27,12 @@ public enum ErrorMessage {
     NOT_YOU_SHOPPING_ITEM,
     NOT_ITEM_CREATOR,
     ACTIVATION_KEY_NOT_FOUND,
-    DTO_NULL, DTO_NOT_EXPECTED, FATAL_ERROR, JSON_CONVERSION_ERROR
+    DTO_NULL, DTO_NOT_EXPECTED, FATAL_ERROR,
+    JSON_CONVERSION_ERROR,
+    //not translate yet
+    VALIDATION_SIZE,
+    VALIDATION_NOT_NULL,
+    DTO_VERIFICATION_PATTERN_STRING_EXPECTED, //a strign flied is expected for the pattern annotation, but th field {0} is a {1}
+    VALIDATION_PATTERN
 
 }

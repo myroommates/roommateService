@@ -28,7 +28,7 @@ public class Ticket extends AuditedAbstractEntity {
     @Column(nullable = false, columnDefinition = "Text")
     private String description;
 
-    @ManyToOne
+    @Column
     private String category;
 
     @Column(nullable = false)

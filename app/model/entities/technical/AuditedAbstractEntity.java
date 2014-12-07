@@ -1,11 +1,14 @@
 package model.entities.technical;
 
+import com.avaje.ebean.annotation.CreatedTimestamp;
+import com.avaje.ebean.annotation.UpdatedTimestamp;
 import play.db.ebean.Model;
 
 import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Version;
+import java.util.Date;
 
 /**
  * Created by florian on 10/11/14.
@@ -16,16 +19,34 @@ public abstract class AuditedAbstractEntity extends Model {
 
     public static final String COL_ID = "id";
     public static final String PARAM_ID = COL_ID;
+
     @Id
     @Column(name = COL_ID)
-    private Long id;
+    protected Long id;
+/*
+    @CreatedTimestamp
+    protected Date creationDate;
 
-    @Embedded
-    protected TechnicalSegment technicalSegment;
+    @UpdatedTimestamp
+    @Version
+    protected Date lastUpdate;
 
-    protected AuditedAbstractEntity() {
+    public Date getCreationDate() {
+        return creationDate;
     }
 
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public Date getLastUpdate() {
+        return lastUpdate;
+    }
+
+    public void setLastUpdate(Date lastUpdate) {
+        this.lastUpdate = lastUpdate;
+    }
+*/
     public Long getId() {
         return id;
     }
@@ -33,40 +54,15 @@ public abstract class AuditedAbstractEntity extends Model {
     public void setId(Long id) {
         this.id = id;
     }
-
-    public TechnicalSegment getTechnicalSegment() {
-        return technicalSegment;
-    }
-
-    public void setTechnicalSegment(TechnicalSegment technicalSegment) {
-        this.technicalSegment = technicalSegment;
-    }
-
+/*
     @Override
     public String toString() {
         return "AuditedAbstractEntity{" +
-                "technicalSegment=" + technicalSegment +
+                "id=" + id +
+                ", creationDate=" + creationDate +
+                ", lastUpdate=" + lastUpdate +
                 '}';
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof AuditedAbstractEntity)) return false;
-        if (!super.equals(o)) return false;
-
-        AuditedAbstractEntity that = (AuditedAbstractEntity) o;
-
-        if (id != null ? !id.equals(that.id) : that.id != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = super.hashCode();
-        result = 31 * result + (id != null ? id.hashCode() : 0);
-        return result;
-    }
+*/
 }
 

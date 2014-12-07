@@ -22,4 +22,9 @@ public interface RoommateService {
     Roommate findByAuthenticationKey(String authenticationKey);
 
     void remove(Roommate roommate);
+/*
+    boolean controlAuthenticationKey(String password, Roommate roommate);
+
+    boolean controlReactivationKey(String password, Roommate roommate);
+*/
 }

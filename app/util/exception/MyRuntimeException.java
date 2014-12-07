@@ -8,7 +8,8 @@ import util.ErrorMessage;
 public class MyRuntimeException  extends RuntimeException{
 
     private static final long serialVersionUID = 1L;
-    private ErrorMessage errorMessage;
+    private String translatedMessage=null;
+    private ErrorMessage errorMessage=null;
     private Object[] params;
 
     public MyRuntimeException(ErrorMessage errorMessage, Object... params) {
@@ -18,12 +19,21 @@ public class MyRuntimeException  extends RuntimeException{
         this.params = params;
     }
 
+    public MyRuntimeException(String translatedMessage) {
+        super();
+        this.translatedMessage = translatedMessage;
+    }
+
     public ErrorMessage getErrorMessage() {
         return errorMessage;
     }
 
     public Object[] getParams() {
         return params;
+    }
+
+    public String getTranslatedMessage() {
+        return translatedMessage;
     }
 }
 

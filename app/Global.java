@@ -37,7 +37,12 @@ public class Global extends GlobalSettings {
 
         if (t.getCause() instanceof MyRuntimeException) {
             MyRuntimeException exception = ((MyRuntimeException) t.getCause());
-            String message = translationService.getTranslation(exception.getErrorMessage(),language,exception.getParams() );
+            String message;
+            if (exception.getTranslatedMessage() != null) {
+                message = exception.getTranslatedMessage();
+            } else {
+                message = translationService.getTranslation(exception.getErrorMessage(), language, exception.getParams());
+            }
             exceptionsDTO = new ExceptionDTO(message);
         } else {
             exceptionsDTO = new ExceptionDTO(t.getCause().getMessage());

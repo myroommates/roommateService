@@ -4,6 +4,7 @@ import com.avaje.ebean.Ebean;
 import model.entities.Home;
 import model.entities.Roommate;
 import model.entities.technical.AuditedAbstractEntity;
+import org.jasypt.util.password.StrongPasswordEncryptor;
 import services.RoommateService;
 
 import java.util.List;
@@ -31,11 +32,7 @@ public class RoommateServiceImpl implements RoommateService {
 
     @Override
     public void saveOrUpdate(Roommate roommate) {
-/*
-        if (roommate.getAuthenticationKey().length() ) {
-            roommate.setPassword(generateEncryptingPassword(account.getPassword()));
-        }
-*/
+
         if (roommate.getId() != null) {
             roommate.update();
         } else {
@@ -68,14 +65,14 @@ public class RoommateServiceImpl implements RoommateService {
     public void remove(Roommate roommate) {
         roommate.delete();
     }
-
+/*
     @Override
     public boolean controlAuthenticationKey(String password, Roommate roommate) {
 
         return new StrongPasswordEncryptor().checkPassword(password,
                 roommate.getAuthenticationKey());
     }
-/*
+
     @Override
     public boolean controlReactivationKey(String password, Roommate roommate) {
 

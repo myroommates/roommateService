@@ -9,16 +9,13 @@ import dto.technical.ResultDTO;
 import model.entities.Roommate;
 import play.mvc.Result;
 import play.mvc.Security;
-import services.EmailService;
 import services.RoommateService;
-import services.impl.EmailServiceImpl;
 import services.impl.RoommateServiceImpl;
 import util.ErrorMessage;
 import util.exception.MyRuntimeException;
 import util.tool.ColorGenerator;
 
 import java.util.Set;
-import java.util.regex.Pattern;
 
 /**
  * Created by florian on 11/11/14.
@@ -28,9 +25,6 @@ public class RoommateController extends AbstractController {
     //services
     private RoommateService roommateService = new RoommateServiceImpl();
     private EmailController emailController = new EmailController();
-
-    //field
-    private Pattern patternPassword = Pattern.compile("^[a-zA-Z0-9]{6,18}$");
 
     //converter
     private RoommateToRoommateDTOConverter roommateToRoommateDTOConverter = new RoommateToRoommateDTOConverter();
@@ -50,7 +44,7 @@ public class RoommateController extends AbstractController {
         return ok(roommateToRoommateDTOConverter.convert(roommate));
     }
 
-    @Security.Authenticated(SecurityController.class)
+    //@Security.Authenticated(SecurityController.class)
     public Result getAll() {
 
         //load
@@ -73,11 +67,6 @@ public class RoommateController extends AbstractController {
         RoommateDTO dto = extractDTOFromRequest(RoommateDTO.class);
 
         Roommate currentUser = securityController.getCurrentUser();
-
-        //control password
-        if (!patternPassword.matcher(dto.getPassword()).find()) {
-            throw new MyRuntimeException(ErrorMessage.WRONG_PASSWORD);
-        }
 
         //control email
         Roommate roommateWithSameEmail = roommateService.findByEmail(dto.getEmail());
