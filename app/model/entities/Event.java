@@ -29,10 +29,10 @@ public class Event extends AuditedAbstractEntity {
     @Column(nullable = false, columnDefinition = "Text")
     private String description;
 
-    @Column(nullable = false, columnDefinition = "DATETIME")
+    @Column(nullable = false)
     private Date startDate;
 
-    @Column(nullable = false, columnDefinition = "DATETIME")
+    @Column(nullable = false)
     private Date endDate;
 
     @Column

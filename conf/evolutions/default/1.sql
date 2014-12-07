@@ -6,8 +6,8 @@
 create table event (
   id                        bigint not null,
   description               Text not null,
-  start_date                DATETIME not null,
-  end_date                  DATETIME not null,
+  start_date                timestamp not null,
+  end_date                  timestamp not null,
   repeatable_frequency      integer,
   home_id                   bigint not null,
   creator_id                bigint not null,
@@ -54,17 +54,11 @@ create table ticket (
 ;
 
 create table ticket_debtor (
-  description               Text not null,
-  category                  varchar(255),
-  date                      timestamp not null,
-  name                      varchar(255) not null,
-  email                     varchar(255) not null,
-  reactivation_key          varchar(255) not null,
-  authenticationKey         varchar(255),
-  icon_color                float not null,
-  ticket_id                 bigint not null,
+  id                        bigint not null,
+  ticket_id                 bigint,
+  roommate_id               bigint,
   value                     float not null,
-  constraint uq_roommate_email unique (email))
+  constraint pk_ticket_debtor primary key (id))
 ;
 
 create sequence event_seq;
@@ -97,6 +91,8 @@ alter table ticket add constraint fk_ticket_payer_8 foreign key (payer_id) refer
 create index ix_ticket_payer_8 on ticket (payer_id);
 alter table ticket_debtor add constraint fk_ticket_debtor_ticket_9 foreign key (ticket_id) references ticket (id);
 create index ix_ticket_debtor_ticket_9 on ticket_debtor (ticket_id);
+alter table ticket_debtor add constraint fk_ticket_debtor_roommate_10 foreign key (roommate_id) references roommate (id);
+create index ix_ticket_debtor_roommate_10 on ticket_debtor (roommate_id);
 
 
 

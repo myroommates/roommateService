@@ -1,5 +1,6 @@
 package model.entities;
 
+import model.entities.technical.AuditedAbstractEntity;
 import play.db.ebean.Model;
 
 import javax.persistence.Column;
@@ -11,13 +12,11 @@ import javax.persistence.ManyToOne;
  * Created by florian on 6/12/14.
  */
 @Entity
-public class TicketDebtor extends Model{
+public class TicketDebtor extends AuditedAbstractEntity{
 
-    @Id
     @ManyToOne
     private Ticket ticket;
 
-    @Id
     @ManyToOne
     private Roommate roommate;
 
