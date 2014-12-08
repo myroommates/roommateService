@@ -44,7 +44,7 @@ public class RoommateController extends AbstractController {
         return ok(roommateToRoommateDTOConverter.convert(roommate));
     }
 
-    //@Security.Authenticated(SecurityController.class)
+    @Security.Authenticated(SecurityController.class)
     public Result getAll() {
 
         //load

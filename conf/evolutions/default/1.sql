@@ -39,7 +39,7 @@ create table shopping_item (
   creation_date             timestamp not null,
   home_id                   bigint not null,
   creator_id                bigint not null,
-  was_bought                 boolean default = false not null,
+  was_bought                 boolean default false not null,
   constraint pk_shopping_item primary key (id))
 ;
 

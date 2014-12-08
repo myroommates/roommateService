@@ -2,8 +2,6 @@ package dto;
 
 import dto.technical.DTO;
 
-import javax.validation.constraints.Pattern;
-
 /**
  * Created by florian on 11/11/14.
  */

@@ -38,7 +38,7 @@ public class ShoppingItem extends AuditedAbstractEntity {
     @ManyToOne(optional = false)
     private Roommate creator;
 
-    @Column(columnDefinition = " boolean default = false", nullable = false)
+    @Column(columnDefinition = " boolean default false", nullable = false)
     private boolean wasBought = false;
 
     public ShoppingItem() {

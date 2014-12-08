@@ -1,14 +1,10 @@
 package model.entities.technical;
 
-import com.avaje.ebean.annotation.CreatedTimestamp;
-import com.avaje.ebean.annotation.UpdatedTimestamp;
 import play.db.ebean.Model;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.Version;
-import java.util.Date;
 
 /**
  * Created by florian on 10/11/14.

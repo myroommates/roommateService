@@ -86,9 +86,6 @@ public class RoommateDTO extends DTO {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof RoommateDTO && ((RoommateDTO) obj).getId().equals(this.id)) {
-            return true;
-        }
-        return false;
+        return obj instanceof RoommateDTO && ((RoommateDTO) obj).getId().equals(this.id);
     }
 }

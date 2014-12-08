@@ -11,6 +11,9 @@ POST          /reactivation            @controllers.LoginController.reactivation
 POST          /registration            @controllers.LoginController.registration()
 POST          /load_data               @controllers.LoginController.loadData()
 
+#home
+GET           /home                    @controllers.HomeController.getAll()
+
 #ticket
 GET           /ticket                  @controllers.TicketController.getAll()
 GET           /ticket/:id              @controllers.TicketController.getById(id:Long)
