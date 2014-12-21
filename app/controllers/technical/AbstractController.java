@@ -61,7 +61,7 @@ public class AbstractController extends Controller {
                     }
                 } else if (annotation instanceof Pattern) {
                     if (!field.getType().equals(String.class)) {
-                        throw new MyRuntimeException(ErrorMessage.DTO_VERIFICATION_PATTERN_STRING_EXPECTED, field.getName(), field.getType());
+                        throw new MyRuntimeException(ErrorMessage.DTO_VERIFICATION_PATTERN_STRING_EXPECTED, field.getName(), field.getType().getName());
                     }
                     String string;
 
@@ -85,7 +85,7 @@ public class AbstractController extends Controller {
                     int max = ((Size) annotation).max();
 
                     if (!field.getType().equals(String.class)) {
-                        throw new MyRuntimeException(ErrorMessage.DTO_VERIFICATION_PATTERN_STRING_EXPECTED, field.getName(), field.getType());
+                        throw new MyRuntimeException(ErrorMessage.DTO_VERIFICATION_PATTERN_STRING_EXPECTED, field.getName(), field.getType().getName());
                     }
                     String string;
 

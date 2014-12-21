@@ -1,4 +1,4 @@
-package controllers;
+package controllers.impl;
 
 import controllers.technical.AbstractController;
 import controllers.technical.SecurityController;

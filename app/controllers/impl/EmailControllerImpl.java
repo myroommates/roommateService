@@ -1,4 +1,4 @@
-package controllers;
+package controllers.impl;
 
 import controllers.technical.AbstractController;
 import model.entities.Language;
@@ -12,7 +12,7 @@ import util.EmailMessage;
 /**
  * Created by florian on 6/12/14.
  */
-public class EmailController extends AbstractController{
+public class EmailControllerImpl extends AbstractController{
 
     //service
     private EmailService emailService = new EmailServiceImpl();
