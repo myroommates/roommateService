@@ -24,7 +24,7 @@ public class RoommateController extends AbstractController {
 
     //services
     private RoommateService roommateService = new RoommateServiceImpl();
-    private EmailController emailController = new EmailController();
+    private EmailControllerImpl emailController = new EmailControllerImpl();
 
     //converter
     private RoommateToRoommateDTOConverter roommateToRoommateDTOConverter = new RoommateToRoommateDTOConverter();

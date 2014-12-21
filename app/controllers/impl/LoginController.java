@@ -26,7 +26,7 @@ public class LoginController extends AbstractController {
     private RoommateService roommateService = new RoommateServiceImpl();
 
     //controller
-    private EmailController emailController = new EmailController();
+    private EmailControllerImpl emailController = new EmailControllerImpl();
 
 
     public Result registration() {

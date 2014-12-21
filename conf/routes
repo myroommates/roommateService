@@ -29,11 +29,11 @@ PUT           /roommate/:id            @controllers.impl.RoommateController.upda
 DELETE        /roommate/:id            @controllers.impl.RoommateController.delete(id:Long)
 
 #event
-GET           /event                   @controllers.impl.EventController.getAll()
-GET           /event/:id               @controllers.impl.EventController.getById(id:Long)
-POST          /event                   @controllers.impl.EventController.create()
-PUT           /event/:id               @controllers.impl.EventController.update(id:Long)
-DELETE        /event/:id               @controllers.impl.EventController.remove(id:Long)
+GET           /event                   @controllers.impl.EventControllerImpl.getAll()
+GET           /event/:id               @controllers.impl.EventControllerImpl.getById(id:Long)
+POST          /event                   @controllers.impl.EventControllerImpl.create()
+PUT           /event/:id               @controllers.impl.EventControllerImpl.update(id:Long)
+DELETE        /event/:id               @controllers.impl.EventControllerImpl.remove(id:Long)
 
 #shopping item
 GET           /shoppingItem            @controllers.impl.ShoppingController.getAll()
