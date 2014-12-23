@@ -2,11 +2,13 @@
 
 @home_pattern("title", account) {
 
-    <div class="roommate_manager_container">
+    <div class="roommate_manager_container" ng-controller="RoommateManagementCtrl">
+
         <div class="row">
             <div class="col-lg-4 col-md-2 hidden-xs"></div>
             <a class="btn btn-primary col-lg-4 col-md-8 col-xs-12" href="/roommate/create">Invite new roommate</a>
         </div>
+
         <li class="roommate_list">
         @for(roommate <- roommatesList.getList) {
             <ul class="row">
