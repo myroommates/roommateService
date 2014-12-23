@@ -1,0 +1,21 @@
+@(loginForm: Form[LoginForm])
+
+@welcome_pattern {
+
+    <div class="container content-block">
+
+            <!-- registration -->
+        <div class="row separation">
+            <div class="col-md-3 col-sm-3 hidden-xs action"></div>
+            <div class="col-md-6 col-sm-6 col-xs-12 action">
+                <a type="button" class="btn btn-success btn-block" href="/registration">@Messages("welcome.title.registration")</a>
+            </div>
+        </div>
+
+            <!-- login -->
+        @authentication.login(loginForm)
+
+    </div>
+
+
+}

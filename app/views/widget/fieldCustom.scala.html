@@ -1,0 +1,12 @@
+@(elements: helper.FieldElements)
+<div class="row form-group has-feedback @if(elements.hasErrors) {error}">
+    <div class="row">
+        <label class="control-label col-md-3" for="@elements.id">@elements.label</label>
+        <div class="col-md-6">
+        @elements.input
+        </div>
+        <div class="col-md-3 errors">@elements.errors.mkString(", ")</div>
+    </div>
+    <div class="col-md-3 hidden-sm hidden-xs"></div>
+    <div class="col-md-6 help @if(elements.infos.length == 0) {hidden}">@elements.infos.mkString(", ")</div>
+</div>

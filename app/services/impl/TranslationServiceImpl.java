@@ -1,7 +1,7 @@
 package services.impl;
 
-import model.entities.Language;
-import model.storage.TranslationStorage;
+import models.entities.Language;
+import models.storage.TranslationStorage;
 import services.TranslationService;
 import util.EmailMessage;
 import util.ErrorMessage;
@@ -29,6 +29,10 @@ public class TranslationServiceImpl implements TranslationService {
     @Override
     public String getTranslation(EmailMessage emailMessage, Language language, Object... params) {
         String translateMessage = TranslationStorage.getTranslation(emailMessage.name(), language.getAbrv());
+
+        if(translateMessage==null){
+            return null;
+        }
 
         //replace
         if (params != null && params.length > 0) {

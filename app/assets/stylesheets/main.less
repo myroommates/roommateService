@@ -1,0 +1,65 @@
+@import 'widget/_form';
+@import 'widget/_menu';
+@import 'widget/_content';
+@import 'widget/_user_icon';
+@import 'widget/_roommate_manager';
+//
+// color
+//
+// main
+@color-body-bg: #eee;
+@color-body-text: #555555;
+@color-body-content-bg: #ffffff;
+
+//lat menu
+@color-lat-menu-bg: rgba(47, 47, 47, 0.98);
+@color-lat-menu-item-bg:rgba(97, 97, 97, 0.98);
+@color-lat-menu-text: #E2E2E2;
+@color-lat-menu-secondary: #e3e3e3;
+@color-lat-menu-hover: #525252;
+
+//classic menu
+@color-menu-bg: rgba(47, 47, 47, 0.98);
+@color-menu-text: #f4f4f4;
+@color-menu-secondary: #e3e3e3;
+
+//header
+@color-header-bg: @color-lat-menu-bg;
+@color-header-title: @color-lat-menu-text;
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  color: @color-body-text;
+  background-color: @color-body-bg;
+}
+
+.main-container {
+  overflow: auto;
+  padding-bottom: 20px;
+}
+
+.my-page-header {
+  height: 80px;
+  text-align: center;
+  margin-bottom: 20px;
+  background-color: white;
+}
+
+.error_icon {
+  display: none;
+}
+
+header {
+  height: 50px;
+  background-color: @color-header-bg;
+
+  h1 {
+    color: @color-header-title;
+    margin: 0 25px;
+  }
+}
+

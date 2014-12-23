@@ -1,13 +1,13 @@
 package controllers.technical;
 
-import model.entities.Language;
-import model.entities.Roommate;
+import controllers.AccountController;
+import models.entities.Language;
+import models.entities.Roommate;
 import play.mvc.Http;
 import play.mvc.Result;
 import play.mvc.Security;
 import services.RoommateService;
 import services.impl.RoommateServiceImpl;
-import util.KeyGenerator;
 
 /**
  * Created by florian on 10/11/14.
@@ -15,69 +15,73 @@ import util.KeyGenerator;
 public class SecurityController extends Security.Authenticator {
 
     public static final String REQUEST_HEADER_LANGUAGE = "language";
-    public static final String REQUEST_HEADER_AUTHENTICATION_KEY = "authenticationKey";
+    public static final String SESSION_IDENTIFIER_STORE = "email";
+    public static final String COOKIE_KEEP_SESSION_OPEN = "session_key";
 
-    private static final RoommateService ROOMMATE_SERVICE = new RoommateServiceImpl();
+    //service
+    private static final RoommateService accountService = new RoommateServiceImpl();
+    //controller
+    private static AccountController accountController = new AccountController();
+
 
     @Override
     public String getUsername(Http.Context ctx) {
-
-        String authenticationKey = ctx.request().getHeader(REQUEST_HEADER_AUTHENTICATION_KEY);
-
-        if (authenticationKey == null) {
-            return null;
-        }
-
-        //control authentication
-        Roommate currentUser = getCurrentUser(authenticationKey);
-        if (currentUser == null) {
-            return null;
-        }
-        return currentUser.getEmail();
+        return ctx.session().get(SESSION_IDENTIFIER_STORE);
     }
 
     @Override
     public Result onUnauthorized(Http.Context ctx) {
-        return unauthorized();
+        return accountController.loginPage();
+    }
+
+    public boolean isAuthenticated(Http.Context ctx) {
+        if (ctx.session().get(SESSION_IDENTIFIER_STORE) != null) {
+            return true;
+        }
+
+        if (ctx.request().cookie(SecurityController.COOKIE_KEEP_SESSION_OPEN) != null) {
+
+            String key = ctx.request().cookie(SecurityController.COOKIE_KEEP_SESSION_OPEN).value();
+
+            String keyElements[] = key.split(":");
+
+            Roommate account = accountService.findById(Long.parseLong(keyElements[0]));
+
+            if (account!=null && accountService.controlCookieKey(keyElements[1], account)) {
+                //connection
+                storeAccount(account);
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public void logout(Http.Context ctx) {
+        if(getCurrentUser()!=null && getCurrentUser().isKeepSessionOpen()){
+            getCurrentUser().setKeepSessionOpen(false);
+            getCurrentUser().setCookieValue(null);
+
+            accountService.saveOrUpdate(getCurrentUser());
+        }
+        ctx.session().clear();
     }
 
     public Roommate getCurrentUser() {
-        return getCurrentUser(null);
+        return accountService.findByEmail(Http.Context.current().session().get(SESSION_IDENTIFIER_STORE));
     }
 
-    public Roommate getCurrentUser(String authenticationKey) {
+    public void storeAccount(Roommate roommate) {
 
-        final Roommate roommate;
-
-        if (authenticationKey != null) {
-            roommate = ROOMMATE_SERVICE.findByAuthenticationKey(authenticationKey);
-        } else {
-            roommate = ROOMMATE_SERVICE.findByEmail(getUsername(Http.Context.current()));
-        }
-
-        if (roommate == null) {
-            return null;
-        }
-
-        return roommate;
-    }
-
-    public void storeIdentifier(Roommate roommate) {
-
-        //create key
-
-        while (roommate.getReactivationKey() == null) {
-            String key = KeyGenerator.generateRandomKey(40);
-            roommate.setAuthenticationKey(key);
-            if (ROOMMATE_SERVICE.findByAuthenticationKey(key) == null) {
-                roommate.setAuthenticationKey(key);
-            }
-        }
-        ROOMMATE_SERVICE.saveOrUpdate(roommate);
+        //if the login and the password are ok, refresh the session
+        Http.Context.current().session().clear();
+        Http.Context.current().session().put(SESSION_IDENTIFIER_STORE, roommate.getEmail());
     }
 
     public Language getCurrentLanguage(Http.Context ctx) {
-        if (ctx.request().getHeader(REQUEST_HEADER_LANGUAGE) != null && Language.getByAbrv(ctx.request().getHeader(REQUEST_HEADER_LANGUAGE)) != null) {
+        if (getCurrentUser() != null) {
+            return getCurrentUser().getLanguage();
+        } else if (ctx.request().getHeader(REQUEST_HEADER_LANGUAGE) != null && Language.getByAbrv(ctx.request().getHeader(REQUEST_HEADER_LANGUAGE)) != null) {
             return Language.getByAbrv(ctx.request().getHeader(REQUEST_HEADER_LANGUAGE));
         }
         return Language.getDefaultLanguage();

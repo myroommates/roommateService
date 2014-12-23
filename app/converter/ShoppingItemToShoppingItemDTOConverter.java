@@ -1,7 +1,7 @@
 package converter;
 
 import dto.ShoppingItemDTO;
-import model.entities.ShoppingItem;
+import models.entities.ShoppingItem;
 
 /**
  * Created by florian on 4/12/14.

@@ -1,8 +1,6 @@
 package services;
 
-import model.entities.Language;
-import model.entities.Roommate;
-import util.EmailMessage;
+import models.entities.Roommate;
 
 /**
  * Created by florian on 6/12/14.

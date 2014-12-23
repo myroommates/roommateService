@@ -1,0 +1,52 @@
+@(account: dto.RoommateDTO, roommatesList: dto.ListDTO[dto.RoommateDTO])
+
+@home_pattern("title", account) {
+
+    <div class="roommate_manager_container">
+        <div class="row">
+            <div class="col-lg-4 col-md-2 hidden-xs"></div>
+            <a class="btn btn-primary col-lg-4 col-md-8 col-xs-12" href="/roommate/create">Invite new roommate</a>
+        </div>
+        <li class="roommate_list">
+        @for(roommate <- roommatesList.getList) {
+            <ul class="row">
+                <div class="col-md-1 col-xs-2">
+                @widget.profile_icon(roommate)
+                </div>
+                <div class="col-md-9  col-xs-8">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <input class="form-control" type="text" disabled="true" value="@roommate.getName"/>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <input class="form-control" type="text" disabled="false" value="@roommate.getEmail"/>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2  col-xs-2">
+                    <a class="btn btn-primary glyphicon glyphicon-pencil" href="#" onclick="edit(@roommate.getId,this)"></a>
+                    <a class="btn btn-primary glyphicon glyphicon-remove" href="/roommate/remove/@roommate.getId"></a>
+                </div>
+            </ul>
+        }
+        </li>
+    </div>
+
+    <script>
+
+        var editMode = [];
+
+        function edit(id,button){
+
+            if(editMode[id]===true){
+                $(button).parent().parent().find('input').attr("disabled","");
+                editMode[id]=false;
+            }
+            else{
+                $(button).parent().parent().find('input' ).removeAttr("disabled");
+                editMode[id]=true;
+            }
+        }
+    </script>
+}

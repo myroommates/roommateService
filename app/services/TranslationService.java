@@ -2,7 +2,7 @@ package services;
 
 import util.EmailMessage;
 import util.ErrorMessage;
-import model.entities.Language;
+import models.entities.Language;
 /**
  * Created by florian on 6/12/14.
  */

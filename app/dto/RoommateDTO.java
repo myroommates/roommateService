@@ -22,7 +22,17 @@ public class RoommateDTO extends DTO {
 
     private boolean isAdmin;
 
+    private String nameAbrv;
+
     public RoommateDTO() {
+    }
+
+    public String getNameAbrv() {
+        return nameAbrv;
+    }
+
+    public void setNameAbrv(String nameAbrv) {
+        this.nameAbrv = nameAbrv;
     }
 
     public boolean isAdmin() {

@@ -1,0 +1,44 @@
+
+#generic
+generic.lastName=Last name
+generic.firstName=First name
+generic.name=Name
+generic.submit=Submit
+generic.back=Back
+
+#
+# welcome
+#
+welcome.title.registration=Not registered yet ?
+welcome.button.registration=Register now!
+
+#registration
+registration.form.title=Registration
+registration.form.yourEmail=Your email address
+registration.form.password=Your password
+registration.form.password.help=Between 6 and 18 letters, numbers or -_
+registration.form.repeatPassword=Repeat your password
+registration.form.validation.repeatPassword=Passwords are different
+registration.form.email.alreadyExists=This email address is already used
+registration.form.keepSessionOpen=Keep my session open
+
+#login
+login.form.title=Login you
+login.form.submit=Login
+login.form.button.forgotPassword=Forgot your password ?
+login.form.wrongCredential=Wrong email and / or password
+
+#form
+error.required=This field is required
+error.minLength=Minimum %s characters
+error.maxLength=Maximum %s characters
+
+#menu
+menu.roommate_manager=Roommate
+menu.account=Account
+menu.events=Events
+menu.shopping=Shopping
+menu.preferences=Preferences
+menu.logout=Log out
+menu.informations=Informations
+menu.about=About

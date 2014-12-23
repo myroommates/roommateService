@@ -1,11 +1,8 @@
 package services.impl;
 
-import model.entities.Language;
-import model.entities.Roommate;
+import models.entities.Roommate;
 import play.Logger;
 import services.EmailService;
-import services.TranslationService;
-import util.EmailMessage;
 
 /**
  * Created by florian on 6/12/14.

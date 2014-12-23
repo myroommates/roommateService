@@ -1,0 +1,26 @@
+.roommate_manager_container {
+
+    .roommate_list {
+        ul {
+            border-bottom: 1px solid #cccccc;
+            padding:0px;
+            & > *{
+                overflow: hidden;
+            }
+            & > *:first-child {
+                & > * {
+                    & > * {
+                        display: inline-block;
+                    }
+                }
+            }
+            & > *:last-child {
+                float: right;
+            }
+        }
+
+        .name{
+            font-weight: bold;
+        }
+    }
+}

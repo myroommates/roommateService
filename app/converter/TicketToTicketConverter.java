@@ -2,8 +2,8 @@ package converter;
 
 import dto.TicketDTO;
 import dto.TicketDebtorDTO;
-import model.entities.Ticket;
-import model.entities.TicketDebtor;
+import models.entities.Ticket;
+import models.entities.TicketDebtor;
 
 /**
  * Created by florian on 11/11/14.

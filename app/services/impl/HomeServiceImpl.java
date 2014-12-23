@@ -1,7 +1,7 @@
 package services.impl;
 
 import com.avaje.ebean.Ebean;
-import model.entities.Home;
+import models.entities.Home;
 import services.HomeService;
 
 import java.util.List;
@@ -9,20 +9,11 @@ import java.util.List;
 /**
  * Created by florian on 11/11/14.
  */
-public class HomeServiceImpl implements HomeService {
-
-    @Override
-    public void saveOrUpdate(Home home) {
-        if(home.getId()!=null){
-            home.update();
-        }
-        else{
-            home.save();
-        }
-    }
+public class HomeServiceImpl extends CrudServiceImpl<Home>  implements HomeService {
 
     @Override
     public List<Home> findAll() {
         return Ebean.find(Home.class).findList();
     }
+
 }

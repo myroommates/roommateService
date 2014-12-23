@@ -1,0 +1,34 @@
+
+#generic
+generic.lastName=Nom
+generic.firstName=Prénom
+generic.name=Nom
+generic.submit=Soumettre
+generic.back=Retour
+
+#
+# welcome
+#
+welcome.title.registration=Pas encore inscrit ?
+welcome.button.registration=Insrivez-vous !
+
+#registration
+registration.form.title=Enregistrement
+registration.form.yourEmail=Votre adresse e-mail
+registration.form.password=Votre mot de passe
+registration.form.password.help=Entre 6 et 18 lettres, chiffres ou -_
+registration.form.repeatPassword=Répétez votre mot de passe
+registration.form.validation.repeatPassword=Les mots de passe sont différents
+registration.form.email.alreadyExists=Cette adresse e-mail est déjà utilisée
+registration.form.keepSessionOpen=Garder ma session ouverte
+
+#login
+login.form.title=Connectez-vous
+login.form.submit=Connection
+login.form.button.forgotPassword=Mot de passe perdu ?
+login.form.wrongCredential=Mauvais email et / ou mot de passe
+
+#form
+error.required=Ce champs est nécessaire
+error.minLength=Minimum %s caractères
+error.maxLength=Maximum %s caractères

@@ -1,0 +1,105 @@
+@(title: String,account: dto.RoommateDTO)(content: Html)
+
+<!DOCTYPE html>
+
+<html>
+    @pageElement.header()
+<body>
+
+    <div class="global-container">
+
+        <!-- menu for little screen : display only when the screen is smaller then 760px -->
+        <div id="sidebar" class="visible-sm-block visible-xs-block">
+            <ul>
+                <!-- access link -->
+                <li><span>Navigation</span></li>
+                @if(account.isAdmin()) {
+                    <li><a href="/roommate_management">@Messages("menu.roommate_manager")<span class="glyphicon glyphicon-chevron-right"></span></a></li>
+                }
+                <li><a href="/account">@Messages("menu.account")<span class="glyphicon glyphicon-chevron-right"></span></a></li>
+                <li><a href="/shopping">@Messages("menu.shopping")<span class="glyphicon glyphicon-chevron-right"></span></a></li>
+                <li><a href="/events">@Messages("menu.events")<span class="glyphicon glyphicon-chevron-right"></span></a></li>
+                <!-- my profile -->
+                <li class="my_profile">
+                    <div style="padding: 0">
+                        @widget.profile_icon(account)
+                        <span>@account.getName()</span>
+                    </div>
+                </li>
+                <li><a href="/preferences">@Messages("menu.preferences")<span class="glyphicon glyphicon-chevron-right"></span></a></li>
+                <li><a href="/logout">@Messages("menu.logout")</a></li>
+                <li><span>@Messages("menu.informations")</span></li>
+                <li><a href="/about">@Messages("menu.about")<span class="glyphicon glyphicon-chevron-right"></span></a></li>
+            </ul>
+        </div>
+
+        <!-- swipe area : used to display the menu with a swipe -->
+        <div class="swipe-area hidden-md hidden-lg"></div>
+        <div id="main-header-container"class="hidden-md hidden-lg">
+
+                <!-- header -->
+            <header>
+
+                    <!-- little screen menu button -->
+                <div class="sidebar-button">
+                    <button type="button" class="btn btn-default btn-s" data-toggle=".global-container" id="sidebar-toggle">
+                        <span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>
+                    </button>
+                </div>
+
+                    <!-- title -->
+                <h1>@title</h1>
+            </header>
+        </div>
+
+        <!-- main content -->
+        <div class="main-body">
+            <div id="main-header-container" class="hidden-sm hidden-xs">
+
+                <!-- header -->
+                <header>
+
+                    <!-- title -->
+                    <h1>@title</h1>
+                </header>
+            </div>
+
+            <div class="container main-container">
+
+                <!-- big menu -->
+                <div class="row hidden-sm hidden-xs">
+
+                    <nav class="navbar navbar-default large-menu" role="navigation">
+                        <div class="container-fluid">
+
+                            <div class="navbar-header">
+                                <a class="navbar-brand" href="#">
+                                    <img alt="Brand" src="...">
+                                </a>
+                            </div>
+
+                            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                                <ul class="nav navbar-nav">
+                                    <li><a href="#">Home</a></li>
+                                    <li><a href="#">Explore</a></li>
+                                    <li><a href="#">Users</a></li>
+                                    <li><a href="/logout">Sign Out</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+
+                <!-- content -->
+                <div class="col-xs-12 content-block">
+                    @content
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

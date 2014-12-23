@@ -1,0 +1,94 @@
+#sidebar {
+
+    position: absolute;
+    left: -240px;
+    width: 240px;
+    height: 100%;
+    box-sizing: border-box;
+    z-index: 1000;
+    background: @color-lat-menu-bg;
+    color: @color-lat-menu-text;
+    border-right: 1px solid @color-lat-menu-secondary;
+    overflow: auto;
+
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        font-size: 16px;
+        font-weight: 100;
+
+        li {
+            & > * {
+                padding: 15px 20px;
+                display: block;
+            }
+            margin: 0;
+            border-bottom: 1px solid @color-lat-menu-secondary;
+
+            a {
+                background-color: @color-lat-menu-item-bg;
+            }
+
+            &:hover a {
+                background: @color-lat-menu-hover;
+            }
+
+            &.divider {
+
+            }
+
+            a {
+                color: @color-lat-menu-text;
+                text-decoration: none;
+                -webkit-transition: background 0.3s ease-in-out;
+                -moz-transition: background 0.3s ease-in-out;
+                -ms-transition: background 0.3s ease-in-out;
+                -o-transition: background 0.3s ease-in-out;
+                transition: background 0.3s ease-in-out;
+
+                span {
+                    color: @color-lat-menu-secondary;
+                    float: right;
+                }
+            }
+        }
+    }
+
+    h3 {
+        padding: 15px 20px;
+        margin: 0;
+    }
+
+    .my_profile {
+        div {
+            display: inline-block;
+        }
+        span {
+            font-size: 20px;
+            font-weight: bold;
+        }
+    }
+
+}
+
+.large-menu {
+    height: 50px;
+    z-index: 10;
+    margin-left: 15px;
+    margin-right: 15px;
+
+    ul {
+        display: inline;
+
+        li {
+            display: inline;
+        }
+    }
+    & > button {
+        float: right;
+    }
+}
+
+
+

@@ -1,14 +1,14 @@
 package services;
 
-import model.entities.Home;
-import model.entities.ShoppingItem;
+import models.entities.Home;
+import models.entities.ShoppingItem;
 
 import java.util.List;
 
 /**
  * Created by florian on 6/12/14.
  */
-public interface ShoppingItemService {
+public interface ShoppingItemService extends CrudService<ShoppingItem>{
     ShoppingItem findById(Long id);
 
     void saveOrUpdate(ShoppingItem shoppingItem);

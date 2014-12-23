@@ -1,0 +1,35 @@
+@(loginForm: Form[LoginForm])
+
+@import helper._
+
+@implicitField = @{ FieldConstructor(widget.fieldCustom.f) }
+
+@helper.form(action = routes.AccountController.login()) {
+    <h3>@Messages("login.form.title")</h3>
+
+    @input(loginForm("email"),
+        '_label -> Messages("registration.form.yourEmail"),
+        '_showConstraints -> false,
+        '_error -> loginForm.globalError){ (id, name, value, args) =>
+        <input value="@value" type="text" name="@name" class="form-control" id="@id" @toHtmlArgs(args)>
+    }
+
+    @input(loginForm("password"),
+        '_label ->  Messages("registration.form.password"),
+        '_showConstraints -> false,
+        '_error -> loginForm.globalError){ (id, name, value, args) =>
+        <input value="@value" type="password" name="@name" class="form-control" id="@id" @toHtmlArgs(args)>
+    }
+
+    @checkbox(loginForm("keepSessionOpen"),
+        '_label ->  Messages("registration.form.keepSessionOpen"),
+        '_showConstraints -> false,
+        '_error -> loginForm.globalError)
+
+    <div class="col-md-3 hidden-sm hidden-xs"></div>
+    <div class="actions col-md-9">
+        <input type="submit" class="btn btn-primary" value="@Messages("login.form.submit")">
+
+        <input type="button" class="btn btn-primary" value="@Messages("login.form.button.forgotPassword")">
+    </div>
+}

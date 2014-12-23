@@ -1,7 +1,7 @@
 package converter;
 
 import dto.RoommateDTO;
-import model.entities.Roommate;
+import models.entities.Roommate;
 
 /**
  * Created by florian on 11/11/14.
@@ -15,7 +15,7 @@ public class RoommateToRoommateDTOConverter implements ConverterInterface<Roomma
         dto.setEmail(roommate.getEmail());
         dto.setName(roommate.getName());
         dto.setIconColor(roommate.getIconColor());
-        dto.setAdmin(roommate.getHome().getAdmin().equals(roommate));
+        dto.setNameAbrv(roommate.getNameAbrv());
 
         return dto;
     }

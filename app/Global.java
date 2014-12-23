@@ -1,6 +1,6 @@
-import controllers.technical.SecurityController;
+import controllers.rest.technical.SecurityRestController;
 import dto.technical.ExceptionDTO;
-import model.entities.Language;
+import models.entities.Language;
 import play.Application;
 import play.GlobalSettings;
 import play.libs.F;
@@ -28,8 +28,8 @@ public class Global extends GlobalSettings {
 
         //load language expected
         Language language = null;
-        if (request.getHeader(SecurityController.REQUEST_HEADER_LANGUAGE) != null) {
-            language = Language.getByAbrv(request.getHeader(SecurityController.REQUEST_HEADER_LANGUAGE));
+        if (request.getHeader(SecurityRestController.REQUEST_HEADER_LANGUAGE) != null) {
+            language = Language.getByAbrv(request.getHeader(SecurityRestController.REQUEST_HEADER_LANGUAGE));
         }
         language = Language.ENGLISH;
 
