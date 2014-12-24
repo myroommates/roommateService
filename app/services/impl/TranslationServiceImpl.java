@@ -1,7 +1,8 @@
 package services.impl;
 
 import models.entities.Language;
-import models.storage.TranslationStorage;
+import play.Logger;
+import play.i18n.Messages;
 import services.TranslationService;
 import util.EmailMessage;
 import util.ErrorMessage;
@@ -13,35 +14,16 @@ public class TranslationServiceImpl implements TranslationService {
 
     @Override
     public String getTranslation(ErrorMessage errorMessage, Language language, Object... params) {
-        String translateMessage = TranslationStorage.getTranslation(errorMessage.name(), language.getAbrv());
 
-        //replace
-        if (params != null && params.length > 0) {
-            for (int i = 0; i < params.length; i++) {
-                Object param = params[i];
-                translateMessage = translateMessage.replace("{" + i + "}", param.toString());
-            }
+        Logger.warn(language.getAbrv()+" "+errorMessage.name());
+        String a=Messages.get(errorMessage.name(),language.getAbrv(),params);
+        Logger.warn("=>"+a);
+        return a;
 
-        }
-        return translateMessage;
     }
 
     @Override
     public String getTranslation(EmailMessage emailMessage, Language language, Object... params) {
-        String translateMessage = TranslationStorage.getTranslation(emailMessage.name(), language.getAbrv());
-
-        if(translateMessage==null){
-            return null;
-        }
-
-        //replace
-        if (params != null && params.length > 0) {
-            for (int i = 0; i < params.length; i++) {
-                Object param = params[i];
-                translateMessage = translateMessage.replace("{" + i + "}", param.toString());
-            }
-
-        }
-        return translateMessage;
+        return Messages.get(emailMessage.name(),language.getAbrv(),params);
     }
 }

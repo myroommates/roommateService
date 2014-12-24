@@ -17,7 +17,9 @@ object ApplicationBuild extends Build {
     cache,
     javaEbean,
     "org.postgresql" % "postgresql" % "9.3-1101-jdbc41",
-    "org.jasypt" % "jasypt" % "1.9.2"
+    "org.jasypt" % "jasypt" % "1.9.2",
+    "commons-beanutils" % "commons-beanutils" % "1.9.2"
+
   )
 
   val main = play.Project(name, version, appDependencies)

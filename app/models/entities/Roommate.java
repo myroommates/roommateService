@@ -48,7 +48,7 @@ public class Roommate extends AuditedAbstractEntity {
     @Column(name = COL_REACTIVATION_KEY)
     private String reactivationKey;
 
-    @ManyToOne(optional = false, cascade = CascadeType.ALL)
+    @ManyToOne(optional = false)
     private Home home;
 
     @Column(name = COL_AUTHENTICATION_KEY)

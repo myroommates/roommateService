@@ -1,9 +1,9 @@
 package dto;
 
 import dto.technical.DTO;
-import org.hibernate.validator.constraints.Email;
+import play.data.validation.Constraints;
 
-import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 /**
  * Created by florian on 11/11/14.
@@ -12,10 +12,13 @@ public class RoommateDTO extends DTO {
 
     private Long id;
 
-    @Pattern(regexp = ".{2,50}", message = "firstName must respect this pattern : .{2,50}")
+    @Constraints.Required
+    @Constraints.MinLength(2)
+    @Constraints.MaxLength(50)
     private String name;
 
-    @Email
+    @Constraints.Required
+    @Constraints.Email
     private String email;
 
     private Float iconColor;
@@ -36,6 +39,10 @@ public class RoommateDTO extends DTO {
     }
 
     public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public boolean getIsAdmin(){
         return isAdmin;
     }
 
@@ -96,6 +103,6 @@ public class RoommateDTO extends DTO {
 
     @Override
     public boolean equals(Object obj) {
-        return obj instanceof RoommateDTO && ((RoommateDTO) obj).getId().equals(this.id);
+        return obj instanceof RoommateDTO && ((RoommateDTO) obj).getId()!=null && ((RoommateDTO) obj).getId().equals(this.id);
     }
 }

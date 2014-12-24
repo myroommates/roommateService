@@ -1,7 +1,9 @@
 package controllers.rest.technical;
 
+import controllers.technical.SecurityController;
 import models.entities.Language;
 import models.entities.Roommate;
+import play.Logger;
 import play.mvc.Http;
 import play.mvc.Result;
 import play.mvc.Security;
@@ -22,18 +24,23 @@ public class SecurityRestController extends Security.Authenticator {
     @Override
     public String getUsername(Http.Context ctx) {
 
-        String authenticationKey = ctx.request().getHeader(REQUEST_HEADER_AUTHENTICATION_KEY);
+        if (ctx.session().get(SecurityController.SESSION_IDENTIFIER_STORE) == null) {
 
-        if (authenticationKey == null) {
-            return null;
-        }
+            String authenticationKey = ctx.request().getHeader(REQUEST_HEADER_AUTHENTICATION_KEY);
 
-        //control authentication
-        Roommate currentUser = getCurrentUser(authenticationKey);
-        if (currentUser == null) {
-            return null;
+            if (authenticationKey == null) {
+                return null;
+            }
+
+            //control authentication
+            Roommate currentUser = getCurrentUser(authenticationKey);
+            if (currentUser == null) {
+                return null;
+            }
+            return currentUser.getEmail();
+        } else {
+            return ctx.session().get(SecurityController.SESSION_IDENTIFIER_STORE);
         }
-        return currentUser.getEmail();
     }
 
     @Override
@@ -42,6 +49,9 @@ public class SecurityRestController extends Security.Authenticator {
     }
 
     public Roommate getCurrentUser() {
+        if (Http.Context.current().session().get(SecurityController.SESSION_IDENTIFIER_STORE) != null) {
+            return ROOMMATE_SERVICE.findByEmail(Http.Context.current().session().get(SecurityController.SESSION_IDENTIFIER_STORE));
+        }
         return getCurrentUser(null);
     }
 

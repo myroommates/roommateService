@@ -12,6 +12,7 @@ import play.mvc.Security;
 import services.RoommateService;
 import services.impl.RoommateServiceImpl;
 import util.ErrorMessage;
+import util.KeyGenerator;
 import util.exception.MyRuntimeException;
 import util.tool.ColorGenerator;
 
@@ -80,6 +81,10 @@ public class RoommateRestRestController extends AbstractRestController {
         roommate.setEmail(dto.getEmail());
         roommate.setName(dto.getName());
         roommate.setIconColor(ColorGenerator.getColorWeb(securityRestController.getCurrentUser().getHome().getRoommateList().size()));
+        roommate.setLanguage(securityRestController.getCurrentLanguage(ctx()));
+
+        //create password
+        roommate.setPassword(KeyGenerator.generateRandomPassword(12));
 
         //send email
         emailController.sendInvitationEmail(roommate, securityRestController.getCurrentUser(), securityRestController.getCurrentLanguage(ctx()));

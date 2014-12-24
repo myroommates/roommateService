@@ -3,6 +3,7 @@ import dto.technical.ExceptionDTO;
 import models.entities.Language;
 import play.Application;
 import play.GlobalSettings;
+import play.Logger;
 import play.libs.F;
 import play.mvc.Http;
 import play.mvc.Results;
@@ -38,11 +39,14 @@ public class Global extends GlobalSettings {
         if (t.getCause() instanceof MyRuntimeException) {
             MyRuntimeException exception = ((MyRuntimeException) t.getCause());
             String message;
-            if (exception.getTranslatedMessage() != null) {
-                message = exception.getTranslatedMessage();
+            Logger.error("exception:"+exception+"");
+
+            if (exception.getMessage() != null) {
+                message = exception.getMessage();
             } else {
                 message = translationService.getTranslation(exception.getErrorMessage(), language, exception.getParams());
             }
+            Logger.error("exceptionMessage:"+message);
             exceptionsDTO = new ExceptionDTO(message);
         } else {
             exceptionsDTO = new ExceptionDTO(t.getCause().getMessage());

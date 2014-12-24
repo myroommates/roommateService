@@ -5,6 +5,8 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import dto.ListDTO;
+import dto.RoommateDTO;
 import play.mvc.Content;
 import util.ErrorMessage;
 import util.exception.MyRuntimeException;
@@ -17,10 +19,12 @@ import java.io.IOException;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class DTO implements Content {
 
+
     private String __type;
     private String __class;
 
     public static <T extends DTO> T getDTO(JsonNode data, Class<T> type) {
+
         if (data != null) {
             ObjectMapper mapper = new ObjectMapper();
             JsonParser jp = data.traverse();
@@ -47,7 +51,7 @@ public class DTO implements Content {
 
     public void set__type(String __type) {
         if (!get__type().equals(__type)) {
-            throw new MyRuntimeException(ErrorMessage.DTO_NOT_EXPECTED, get__type(),__type);
+            throw new MyRuntimeException(ErrorMessage.DTO_NOT_EXPECTED, get__type(), __type);
         }
     }
 

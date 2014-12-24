@@ -2,6 +2,7 @@ package controllers;
 
 import controllers.technical.AbstractController;
 import controllers.technical.SecurityController;
+import play.Logger;
 import play.mvc.Result;
 import play.mvc.Security;
 

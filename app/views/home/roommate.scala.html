@@ -1,54 +1,59 @@
 @(account: dto.RoommateDTO, roommatesList: dto.ListDTO[dto.RoommateDTO])
 
+@import com.fasterxml.jackson.databind.ObjectMapper
+
 @home_pattern("title", account) {
 
     <div class="roommate_manager_container" ng-controller="RoommateManagementCtrl">
 
-        <div class="row">
-            <div class="col-lg-4 col-md-2 hidden-xs"></div>
-            <a class="btn btn-primary col-lg-4 col-md-8 col-xs-12" href="/roommate/create">Invite new roommate</a>
-        </div>
+            <!-- load data -->
+        <script>
+            var initialData = @Html(new ObjectMapper().writeValueAsString(roommatesList.getList));
+        </script>
 
-        <li class="roommate_list">
-        @for(roommate <- roommatesList.getList) {
-            <ul class="row">
+        <ul class="roommate_list">
+            <li class="row" ng-repeat="roommate in roommateList" ng-click="display(roommate)">
+
                 <div class="col-md-1 col-xs-2">
-                @widget.profile_icon(roommate)
+                    <div class="user_icon" ng-show="!!roommate.nameAbrv" style="
+                        background: hsl({{roommate.iconColor}},80%, 60%); /* Old browsers */
+                        background: -moz-linear-gradient(top,  hsl({{roommate.iconColor}},80%, 60%) 0%, hsl({{roommate.iconColor}},80%, 30%) 100%); /* FF3.6+ */
+                        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,hsl({{roommate.iconColor}},80%, 60%)), color-stop(100%,hsl({{roommate.iconColor}},80%, 30%))); /* Chrome,Safari4+ */
+                        background: -webkit-linear-gradient(top,  hsl({{roommate.iconColor}},80%, 60%) 0%,hsl({{roommate.iconColor}},80%, 30%) 100%); /* Chrome10+,Safari5.1+ */
+                        background: -o-linear-gradient(top,  hsl({{roommate.iconColor}},80%, 60%) 0%,hsl({{roommate.iconColor}},80%, 30%) 100%); /* Opera 11.10+ */
+                        background: -ms-linear-gradient(top,  hsl({{roommate.iconColor}},80%, 60%) 0%,hsl({{roommate.iconColor}},80%, 30%) 100%); /* IE10+ */
+                        background: linear-gradient(to bottom,  hsl({{roommate.iconColor}},80%, 60%) 0%,hsl({{roommate.iconColor}},80%, 30%) 100%); /* W3C */
+                        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='hsl({{roommate.iconColor}},80%, 60%)', endColorstr='hsl({{roommate.iconColor}},80%, 30%)',GradientType=0 ); /* IE6-9 */">
+                        {{roommate.nameAbrv}}
+                    </div>
                 </div>
                 <div class="col-md-9  col-xs-8">
                     <div class="row">
                         <div class="col-md-6 col-sm-12">
-                            <input class="form-control" type="text" disabled="true" value="@roommate.getName"/>
+                            <input class="form-control" type="text" ng-disabled="roommate.edit != true" ng-model="roommate.name"/>
                         </div>
                         <div class="col-md-6 col-sm-12">
-                            <input class="form-control" type="text" disabled="false" value="@roommate.getEmail"/>
+                            <input class="form-control" type="text" ng-disabled="roommate.edit != true" ng-model="roommate.email"/>
 
                         </div>
                     </div>
                 </div>
                 <div class="col-md-2  col-xs-2">
-                    <a class="btn btn-primary glyphicon glyphicon-pencil" href="#" onclick="edit(@roommate.getId,this)"></a>
-                    <a class="btn btn-primary glyphicon glyphicon-remove" href="/roommate/remove/@roommate.getId"></a>
+                    <a class="btn btn-primary glyphicon glyphicon-save" ng-show="roommate.edit == true" href="#" ng-click='save(roommate)'></a>
+                    <a class="btn btn-primary glyphicon glyphicon-pencil" ng-show="roommate.edit != true" href="#" ng-click='edit(roommate)'></a>
+                    <a class="btn btn-primary glyphicon glyphicon-remove" href="#" ng-click='remove(roommate)'></a>
                 </div>
-            </ul>
-        }
-        </li>
+                <div class="loading-mask" ng-show="roommate.isLoading === true">
+                    <img src="@routes.Assets.at("images/loading.gif")"/>
+
+                </div>
+            </li>
+        </ul>
+
+        <div class="row">
+            <div class="col-lg-4 col-md-2 hidden-xs"></div>
+            <a class="btn btn-primary col-lg-4 col-md-8 col-xs-12" href="#" ng-click="add()">Invite new roommate</a>
+        </div>
+
     </div>
-
-    <script>
-
-        var editMode = [];
-
-        function edit(id,button){
-
-            if(editMode[id]===true){
-                $(button).parent().parent().find('input').attr("disabled","");
-                editMode[id]=false;
-            }
-            else{
-                $(button).parent().parent().find('input' ).removeAttr("disabled");
-                editMode[id]=true;
-            }
-        }
-    </script>
 }

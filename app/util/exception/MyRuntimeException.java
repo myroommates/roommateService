@@ -2,13 +2,14 @@ package util.exception;
 
 import util.ErrorMessage;
 
+import java.util.Arrays;
+
 /**
  * Created by florian on 10/11/14.
  */
 public class MyRuntimeException  extends RuntimeException{
 
     private static final long serialVersionUID = 1L;
-    private String translatedMessage=null;
     private ErrorMessage errorMessage=null;
     private Object[] params;
 
@@ -19,9 +20,8 @@ public class MyRuntimeException  extends RuntimeException{
         this.params = params;
     }
 
-    public MyRuntimeException(String translatedMessage) {
-        super();
-        this.translatedMessage = translatedMessage;
+    public MyRuntimeException(String message) {
+        super(message);
     }
 
     public ErrorMessage getErrorMessage() {
@@ -32,8 +32,12 @@ public class MyRuntimeException  extends RuntimeException{
         return params;
     }
 
-    public String getTranslatedMessage() {
-        return translatedMessage;
+    @Override
+    public String toString() {
+        return "MyRuntimeException{" +super.toString()+","+
+                "errorMessage=" + errorMessage +
+                ", params=" + Arrays.toString(params) +
+                '}';
     }
 }
 

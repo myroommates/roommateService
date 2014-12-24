@@ -30,7 +30,7 @@ public class RoommateManagementController extends AbstractController{
         ListDTO<RoommateDTO> roommateDTOListDTO  = new ListDTO<>();
 
         for (Roommate roommate : roommateService.findByHome(securityController.getCurrentUser().getHome())) {
-            roommateDTOListDTO.addElement(roommateDTO);
+            roommateDTOListDTO.addElement(roommateToRoommateDTOConverter.convert(roommate));
         }
 
         return ok(views.html.home.roommate.render(roommateDTO,roommateDTOListDTO ));
