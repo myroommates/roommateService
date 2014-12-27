@@ -4,6 +4,7 @@ import models.entities.Language;
 import play.Application;
 import play.GlobalSettings;
 import play.Logger;
+import play.i18n.Lang;
 import play.libs.F;
 import play.mvc.Http;
 import play.mvc.Results;
@@ -12,6 +13,9 @@ import services.TranslationService;
 import services.impl.TranslationServiceImpl;
 import util.exception.MyRuntimeException;
 
+import java.io.UnsupportedEncodingException;
+import java.util.*;
+
 /**
  * Created by florian on 10/11/14.
  */
@@ -19,6 +23,58 @@ public class Global extends GlobalSettings {
 
     //services
     private TranslationService translationService = new TranslationServiceImpl();
+
+    public static final String[] BUNDLES = {"interfaces",};
+
+    //first key : language
+    //second key : message key
+    //value : translatable message
+    public static final Map<Lang, Map<String, String>> TRANSLATIONS = new HashMap<>();
+
+
+    @Override
+    public void beforeStart(Application app) {
+        Logger.info("Global.beforeStart - START");
+
+        // Put all translations in memory
+        int languageCounter = 0;
+        for (Lang lang : Lang.availables()) {
+
+            //first language = reference language
+            HashMap<String, String> translationCache = new HashMap<>();
+            TRANSLATIONS.put(lang, translationCache);
+            for (String bundleName : BUNDLES) {
+                ResourceBundle bundle = ResourceBundle.getBundle( bundleName, Locale.forLanguageTag(lang.code()));
+                Enumeration<String> bundleKeys = bundle.getKeys();
+                while (bundleKeys.hasMoreElements()) {
+                    String key = bundleKeys.nextElement();
+                    String value = bundle.getString(key);
+                    try {
+                        value = new String(value.getBytes("ISO-8859-1"), "UTF-8");
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+                    translationCache.put(key, value);
+                }
+            }
+
+            if (languageCounter > 0) {
+
+                //complete hole by comparison with reference language
+                for (Map.Entry<String, String> reference : TRANSLATIONS.get(Lang.availables().get(0)).entrySet()) {
+                    if (!translationCache.containsKey(reference.getKey())) {
+                        translationCache.put(reference.getKey(), reference.getValue());
+                    }
+
+                }
+
+            }
+
+            languageCounter++;
+        }
+        Logger.info("TRANSLATIONS"+TRANSLATIONS);
+        Logger.info("Global.beforeStart - END");
+    }
 
     @Override
     public void onStart(Application application) {

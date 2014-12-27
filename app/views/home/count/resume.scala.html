@@ -3,10 +3,12 @@
 @import com.fasterxml.jackson.databind.ObjectMapper
 
 @home_pattern("title", account) {
-<div ng-controller="CountResumeCtrl">
+<div ng-controller="CountResumeCtrl" class="count-resume">
     <div class="col-xs-12 content-block">
 
-        <div class="count-resume" >
+        <h3>Résumé</h3>
+
+        <div>
 
                 <!-- load data -->
             <script>
@@ -15,12 +17,12 @@
             </script>
 
             <div class="row table-header">
-                <div class="col-md-2 hidden-sm hidden-xs" style="height: 40px"></div>
+                <div class="col-md-2 hidden-sm hidden-xs" style="height: 20px"></div>
                 <div class="col-md-2 col-xs-3 value"></div>
                 <div class="col-md-2 col-xs-3 value">Dépensé</div>
                 <div class="col-md-2 col-xs-3 value">Dû</div>
                 <div class="col-md-2 col-xs-3 value">Balance</div>
-                <div class="col-md-2 hidden-sm hidden-xs" style="height: 40px"></div>
+                <div class="col-md-2 hidden-sm hidden-xs" style="height: 20px"></div>
             </div>
 
             <div class="row" ng-repeat="countResume in countResumeList">
@@ -58,17 +60,35 @@
     <div class="col-xs-12 content-block">
         <h3>Comment résoudre ?</h3>
 
-        <div ng-repeat="balance in balanceList">
-            <div>
-                <dir-user-icon ng-user="balance.from"></dir-user-icon>
+        <div ng-repeat="balance in balanceList" class="row resolution-box">
+            <div class="hidden-xs hidden-sm  col-md-2 col-lg-3">
             </div>
-            <div>
-                <dir-user-icon ng-user="balance.to"></dir-user-icon>
+            <div class="col-xs-2 col-lg-1 col-md-2">
+                <span>
+                    <dir-user-icon ng-user="balance.from"></dir-user-icon>
+                </span>
             </div>
-            <div ng-class="{'red':balance.value<0,'green':balance.value>0}">
-                {{balance.value | number:2}}€
-            </div>
+            <div class="col-xs-2 col-lg-1  col-md-1 icon-box">
+                    <span class="glyphicon glyphicon-circle-arrow-right">
+                </span>
 
+            </div>
+            <div  class="col-xs-2 col-lg-1  col-md-2 icon-box value" >
+                <span>
+                    {{balance.value | number:2}}€
+                </span>
+            </div>
+            <div class="col-xs-2 col-lg-1  col-md-1 icon-box">
+                    <span class="glyphicon glyphicon-circle-arrow-right">
+                </span>
+            </div>
+            <div  class="col-xs-2 col-lg-1 col-md-2">
+                <span>
+                    <dir-user-icon ng-user="balance.to"></dir-user-icon>
+                </span>
+            </div>
+            <div  class="col-xs-2 col-lg-4  col-md-2">
+            </div>
         </div>
     </div>
 </div>

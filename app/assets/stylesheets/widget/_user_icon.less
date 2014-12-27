@@ -1,16 +1,22 @@
-.user_icon{
-  text-align: center;
-  width: 40px;
-  height: 40px;
-  line-height: 40px;
-  font-size: 24px;
-  color: #ffffff;
-  margin: 5px;
-    &.user_icon_little{
+.user_icon {
+    text-align: center;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    color: #ffffff;
+    margin: 5px;
+    font-size: 12px;
+    &.user_icon_little {
         width: 20px;
         height: 20px;
         line-height: 20px;
-        font-size: 12px;
+        font-size: 8px;
 
+        &::first-letter {
+            font-size: 12px;
+        }
+    }
+    &::first-letter {
+        font-size: 24px;
     }
 }

@@ -19,6 +19,10 @@ public class RoommateForm{
     private String name;
 
     @Constraints.Required
+    @Constraints.MaxLength(3)
+    private String nameAbrv;
+
+    @Constraints.Required
     @Constraints.Email
     private String email;
 
@@ -37,6 +41,14 @@ public class RoommateForm{
             errors.add(new ValidationError("repeatPassword", Messages.get("registration.form.validation.repeatPassword")));
         }
         return errors.isEmpty() ? null : errors;
+    }
+
+    public String getNameAbrv() {
+        return nameAbrv;
+    }
+
+    public void setNameAbrv(String nameAbrv) {
+        this.nameAbrv = nameAbrv;
     }
 
     public String getRepeatPassword() {
@@ -69,5 +81,16 @@ public class RoommateForm{
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "RoommateForm{" +
+                "name='" + name + '\'' +
+                ", nameAbrv='" + nameAbrv + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", repeatPassword='" + repeatPassword + '\'' +
+                '}';
     }
 }

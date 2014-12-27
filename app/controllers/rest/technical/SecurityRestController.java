@@ -78,7 +78,6 @@ public class SecurityRestController extends Security.Authenticator {
 
         while (roommate.getReactivationKey() == null) {
             String key = KeyGenerator.generateRandomKey(40);
-            roommate.setAuthenticationKey(key);
             if (ROOMMATE_SERVICE.findByAuthenticationKey(key) == null) {
                 roommate.setAuthenticationKey(key);
             }

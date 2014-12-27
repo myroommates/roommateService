@@ -1,67 +1,63 @@
-form {
 
+.form-group {
+    margin-bottom: 7px;
+    padding-right: 8px;
+    padding-bottom: 5px;
 
+    label {
+        text-align: right;
+    }
 
-    .form-group {
-        margin-bottom: 7px;
-        padding-right: 8px;
-        padding-bottom: 5px;
+    @media (min-width: 992px) {
+        padding-top: 7px;
+    }
+}
 
-        label {
-            text-align: right;
-        }
+.control-label {
+    margin-top: 5px;
+}
 
-        @media (min-width: 992px) {
-            padding-top: 7px;
+.help {
+    color: #999999;
+    margin-left: 15px;
+}
+
+.hidden {
+    display: none;
+}
+
+.error {
+    background-color: #FFE6CC;
+
+    input:focus {
+        border: 2px solid red;
+    }
+
+    @media (max-width: 991px) {
+        .errors {
+            color: #ffffff;
+            padding-top: 1px;
+            padding-bottom: 1px;
+            margin-left: 16px;
+            margin-right: 16px;
+            margin-top: 3px;
+            background-color: red;
+            border-radius: 4px;
         }
     }
 
-    .control-label {
-        margin-top: 5px;
-    }
-
-    .help {
-        color: #999999;
-        margin-left: 15px;
-    }
-
-    .hidden {
-        display: none;
-    }
-
-    .error {
-        background-color: #FFE6CC;
-
-        input:focus {
-            border: 2px solid red;
-        }
-
-        @media (max-width: 991px) {
-            .errors {
-                color: #ffffff;
-                padding-top: 1px;
-                padding-bottom: 1px;
-                margin-left: 16px;
-                margin-right: 16px;
-                margin-top: 3px;
-                background-color: red;
-                border-radius: 4px;
-            }
-        }
-
-        @media (min-width: 992px) {
-            .errors {
-                min-height: 20px;
-                background: red;
-                padding: 5px;
-                -webkit-box-shadow: 3px 3px 2px rgba(0, 0, 0, 0.5);
-                -moz-box-shadow: 3px 3px 2px rgba(0, 0, 0, 0.5);
-                box-shadow: 3px 3px 2px rgba(0, 0, 0, 0.5);
-                color: #ffffff;
-                margin-left: -30px;
-                top: 10px;
-                position: relative;
-            }
+    @media (min-width: 992px) {
+        .errors {
+            min-height: 20px;
+            background: red;
+            padding: 5px;
+            -webkit-box-shadow: 3px 3px 2px rgba(0, 0, 0, 0.5);
+            -moz-box-shadow: 3px 3px 2px rgba(0, 0, 0, 0.5);
+            box-shadow: 3px 3px 2px rgba(0, 0, 0, 0.5);
+            color: #ffffff;
+            margin-left: -30px;
+            top: 10px;
+            position: relative;
         }
     }
 }

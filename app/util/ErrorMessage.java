@@ -33,6 +33,7 @@ public enum ErrorMessage {
     VALIDATION_SIZE,
     VALIDATION_NOT_NULL,
     DTO_VERIFICATION_PATTERN_STRING_EXPECTED, //a strign flied is expected for the pattern annotation, but th field {0} is a {1}
-    VALIDATION_PATTERN
+    VALIDATION_PATTERN,
+    NOT_YOURSELF, NOT_YOUR_OLD_PASSWORD;
 
 }

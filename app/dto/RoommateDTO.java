@@ -3,8 +3,6 @@ package dto;
 import dto.technical.DTO;
 import play.data.validation.Constraints;
 
-import javax.validation.constraints.Size;
-
 /**
  * Created by florian on 11/11/14.
  */
@@ -18,6 +16,10 @@ public class RoommateDTO extends DTO {
     private String name;
 
     @Constraints.Required
+    @Constraints.MaxLength(3)
+    private String nameAbrv;
+
+    @Constraints.Required
     @Constraints.Email
     private String email;
 
@@ -25,7 +27,7 @@ public class RoommateDTO extends DTO {
 
     private boolean isAdmin;
 
-    private String nameAbrv;
+    private boolean keepSessionOpen;
 
     public RoommateDTO() {
     }
@@ -104,5 +106,13 @@ public class RoommateDTO extends DTO {
     @Override
     public boolean equals(Object obj) {
         return obj instanceof RoommateDTO && ((RoommateDTO) obj).getId()!=null && ((RoommateDTO) obj).getId().equals(this.id);
+    }
+
+    public boolean getKeepSessionOpen() {
+        return keepSessionOpen;
+    }
+
+    public void setKeepSessionOpen(boolean keepSessionOpen) {
+        this.keepSessionOpen = keepSessionOpen;
     }
 }

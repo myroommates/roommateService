@@ -25,6 +25,13 @@
                 <input value="@value" type="text" name="@name" class="form-control" id="@id" @toHtmlArgs(args)>
             }
 
+            @input(registrationForm("nameAbrv"),
+                '_label -> Messages("generic.nameAbrv"),
+                '_help -> Messages("registration.form.nameAbrv.help"),
+                '_error -> registrationForm.globalError){ (id, name, value, args) =>
+                <input value="@value" type="text" name="@name" class="form-control" id="@id" @toHtmlArgs(args)>
+            }
+
             @input(registrationForm("email"),
                 '_label -> Messages("registration.form.yourEmail"),
                 '_showConstraints -> false,

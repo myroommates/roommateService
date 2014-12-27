@@ -1,14 +1,15 @@
-<div class="field_text row form-group has-feedback" ng-class="{'error' : displayError()===true}"  ng-click="logField()">
+<div class="field_text row form-group has-feedback" ng-class="{'error' : displayError()===true}">
     <div>
-        <label class="control-label col-md-3" ng-show="getInfo().fieldTitle">{{getInfo().fieldTitle}}</label>
+        <label class="control-label col-md-3" ng-show="getInfo().fieldTitle">{{getInfo().fieldTitle | translateText}}</label>
         <div class="col-md-6">
             <input type="{{fieldType}}"
+                   name="{{getInfo().name}}"
                    ng-disabled="getInfo().disabled"
                    ng-model="getInfo().field"
                    numbers-only="{{getInfo().numbersOnly}}"
                    ng-class="{input_number: getInfo().numbersOnly === 'integer' || getInfo().numbersOnly === 'double'}"
                    placeholder="{{getInfo().placeholder}}"
-                   focus-me="getInfo().focus()"
+                   dir-focus-me="getInfo().focus()"
                     class="form-control"
                     typeahead="c as c for c in getInfo().autoCompleteValue | filter:$viewValue | limitTo:10"
                     typeahead-min-length='1'>

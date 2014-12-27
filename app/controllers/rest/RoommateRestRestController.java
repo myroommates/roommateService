@@ -3,7 +3,10 @@ package controllers.rest;
 import com.avaje.ebean.annotation.Transactional;
 import controllers.rest.technical.AbstractRestController;
 import controllers.rest.technical.SecurityRestController;
+import controllers.technical.SecurityController;
 import converter.RoommateToRoommateDTOConverter;
+import dto.ChangeEmailDTO;
+import dto.ChangePasswordDTO;
 import dto.ListDTO;
 import dto.RoommateDTO;
 import dto.technical.ResultDTO;
@@ -27,9 +30,63 @@ public class RoommateRestRestController extends AbstractRestController {
     //services
     private RoommateService roommateService = new RoommateServiceImpl();
     private EmailRestController emailController = new EmailRestController();
+    private SecurityController securityController = new SecurityController();
+
 
     //converter
     private RoommateToRoommateDTOConverter roommateToRoommateDTOConverter = new RoommateToRoommateDTOConverter();
+
+    @Security.Authenticated(SecurityRestController.class)
+    @Transactional
+    public Result changeEmail(long id) {
+
+        if(!securityRestController.getCurrentUser().getId().equals(id)){
+            throw new MyRuntimeException(ErrorMessage.NOT_YOURSELF, id);
+        }
+
+        ChangeEmailDTO changeEmailDTO = extractDTOFromRequest(ChangeEmailDTO.class);
+
+        //control last password
+        if(!roommateService.controlPassword(changeEmailDTO.getOldPassword(),securityRestController.getCurrentUser())){
+            throw new MyRuntimeException(ErrorMessage.NOT_YOUR_OLD_PASSWORD);
+        }
+
+        Roommate currentUser = securityRestController.getCurrentUser();
+
+        currentUser.setEmail(changeEmailDTO.getNewEmail());
+
+        //operation
+        roommateService.saveOrUpdate(currentUser);
+
+        //store
+        securityController.storeAccount(currentUser);
+
+
+        return ok(roommateToRoommateDTOConverter.convert(currentUser));
+    }
+
+    public Result changePassword(long id) {
+
+        if(!securityRestController.getCurrentUser().getId().equals(id)){
+            throw new MyRuntimeException(ErrorMessage.NOT_YOURSELF, id);
+        }
+
+        ChangePasswordDTO changePasswordDTO = extractDTOFromRequest(ChangePasswordDTO.class);
+
+        Roommate currentUser = securityRestController.getCurrentUser();
+
+        //control last password
+        if(!roommateService.controlPassword(changePasswordDTO.getOldPassword(),currentUser)){
+            throw new MyRuntimeException(ErrorMessage.WRONG_PASSWORD);
+        }
+
+        currentUser.setPassword(changePasswordDTO.getNewPassword());
+
+        //operation
+        roommateService.saveOrUpdate(currentUser);
+
+        return ok(roommateToRoommateDTOConverter.convert(currentUser));
+    }
 
     @Security.Authenticated(SecurityRestController.class)
     @Transactional
@@ -127,8 +184,9 @@ public class RoommateRestRestController extends AbstractRestController {
         }
 
         //build entity
-        roommate.setEmail(dto.getEmail());
         roommate.setName(dto.getName());
+        roommate.setNameAbrv(dto.getNameAbrv());
+        roommate.setKeepSessionOpen(dto.getKeepSessionOpen());
 
         //operation
         roommateService.saveOrUpdate(roommate);

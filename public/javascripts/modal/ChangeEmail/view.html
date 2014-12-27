@@ -1,0 +1,15 @@
+<div class="modal-header">
+    <button class="btn glyphicon glyphicon-remove" style="float:right" ng-click="close()"></button>
+    <h4 class="modal-title">Modal title</h4>
+</div>
+<div class="modal-body" dir-enter="save()">
+
+    <dir-field-text ng-info="fields.oldPassword"></dir-field-text>
+
+    <dir-field-text ng-info="fields.newEmail"></dir-field-text>
+
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" ng-click="close()">@Messages("generic.close")</button>
+    <button type="button" class="btn btn-primary" ng-click="save()">@Messages("generic.submit")</button>
+</div>

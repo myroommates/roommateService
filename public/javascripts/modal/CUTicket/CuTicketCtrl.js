@@ -1,4 +1,4 @@
-myApp.controller('CuTicketCtrl', function ($scope, $http, $flash, $modalInstance, roommateList, ticket,addItem,categoryList) {
+myApp.controller('CuTicketCtrl', function ($scope, $http, $flash, $modalInstance, roommateList, ticket, addItem, categoryList) {
 
     $scope.roommateList = roommateList;
     $scope.balanced = true;
@@ -8,7 +8,10 @@ myApp.controller('CuTicketCtrl', function ($scope, $http, $flash, $modalInstance
         description: {
             fieldTitle: "USER_IDENTIFIER",
             validationRegex: "[a-zA-Z0-9-]{1,255}",
-            validationMessage: "IDENTIFIER_CHECK_WRONG"
+            validationMessage: "IDENTIFIER_CHECK_WRONG",
+            focus: function () {
+                return true;
+            }
         },
         date: {
             fieldTitle: "USER_IDENTIFIER",
@@ -21,9 +24,9 @@ myApp.controller('CuTicketCtrl', function ($scope, $http, $flash, $modalInstance
             validationMessage: "IDENTIFIER_CHECK_WRONG",
             numbersOnly: "double"
         },
-        category:{
+        category: {
             fieldTitle: "USER_IDENTIFIER",
-            autoCompleteValue:categoryList
+            autoCompleteValue: categoryList
         }
     };
 
@@ -80,12 +83,12 @@ myApp.controller('CuTicketCtrl', function ($scope, $http, $flash, $modalInstance
                         totalValue += debtor.value;
                         $scope.fields[debtor.roommateId].field = debtor.value;
 
-                        founded=true;
+                        founded = true;
 
                         break;
                     }
                 }
-                if(founded == false){
+                if (founded == false) {
                     $scope.fields[roommateList[key].id].isPayer = false;
                 }
             }
@@ -167,14 +170,14 @@ myApp.controller('CuTicketCtrl', function ($scope, $http, $flash, $modalInstance
                 description: $scope.fields.description.field,
                 debtorList: listTicketDebtor,
                 payerId: mySelf.id,
-                category:$scope.fields.category.field
+                category: $scope.fields.category.field
             }
 
-            var request="POST";
+            var request = "POST";
             var url = '/rest/ticket';
-            if(!!ticket){
+            if (!!ticket) {
                 request = 'PUT';
-                url+="/"+ticket.id;
+                url += "/" + ticket.id;
             }
 
             $http({

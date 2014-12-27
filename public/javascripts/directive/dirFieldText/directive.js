@@ -13,12 +13,13 @@ myApp.directive("dirFieldText", function (directiveService, $timeout) {
                     return directiveService.autoScopeImpl(scope);
                 },
                 post: function (scope) {
+                    directiveService.autoScopeImpl(scope);
 
-
-                    scope.countries = ['aa','asdfds','azdzadz','asxwc','asda'];
+                    if(scope.getInfo().autoCompleteValue==undefined){
+                        scope.getInfo().autoCompleteValue=[];
+                    }
 
                     scope.errorMessage = "";
-                    directiveService.autoScopeImpl(scope);
                     scope.isValidationDefined = (scope.getInfo().validationRegex != null) || (scope.getInfo().validationFct != null);
                     scope.hideIsValidIcon = !!scope.getInfo().hideIsValidIcon;
                     scope.fieldType = (scope.getInfo().fieldType != null) ? scope.getInfo().fieldType : "text";
@@ -47,10 +48,6 @@ myApp.directive("dirFieldText", function (directiveService, $timeout) {
                             scope.getInfo().field = "";
                         }
 
-                        /*
-                         scope.getInfo().isValid = false
-                         return
-                         */
                         isValid = true;
                         if (typeof scope.getInfo().field !== 'string') {
                             scope.getInfo().field += "";
@@ -63,6 +60,7 @@ myApp.directive("dirFieldText", function (directiveService, $timeout) {
                         }
                         scope.getInfo().isValid = isValid;
                     };
+
                     scope.isValid();
                     scope.logField = function () {
                         return console.log(scope.getInfo());

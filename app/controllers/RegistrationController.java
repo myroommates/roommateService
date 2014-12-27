@@ -70,8 +70,10 @@ public class RegistrationController extends AbstractController {
         //roommate
         roommate = new Roommate();
         roommate.setName(registrationForm.field("name").value());
+        roommate.setNameAbrv(registrationForm.field("nameAbrv").value());
         roommate.setEmail(registrationForm.field("email").value());
         roommate.setPassword(registrationForm.field("password").value());
+        roommate.setKeepSessionOpen(Boolean.parseBoolean(registrationForm.field("keepSessionOpen").value()));
         roommate.setLanguage(securityController.getCurrentLanguage(ctx()));
         roommate.setHome(home);
         roommate.setIsAdmin(true);

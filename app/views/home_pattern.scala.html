@@ -29,14 +29,23 @@
                 <li><a href="/shopping">@Messages("menu.shopping")</a></li>
                 <li><a href="/events">@Messages("menu.events")</a></li>
                     <!-- my profile -->
-                <li class="my_profile">
-                    <div style="padding : 0">
+                <li class="menu-item-lv-1" ng-class="{'menu-item-close':menuItemOpen(2)==false}">
+                    <a href="#" ng-click="switchVisibility(2)" class="li-profile">
                         @widget.profile_icon(account)
-                        <span>@account.getName()</span>
-                    </div>
+                        @account.getName()
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                    </a>
                 </li>
-                <li><a href="/preferences">@Messages("menu.preferences")</a></li>
-                <li><a href="/logout">@Messages("menu.logout")</a></li>
+
+                <li class="menu-item-lv-2" ng-class="{'menu-item-close':menuItemOpen(2)==false}">
+                    <a href="/profile/myProfile">@Messages("menu.myProfile")</a>
+                </li>
+                <li class="menu-item-lv-2" ng-class="{'menu-item-close':menuItemOpen(2)==false}">
+                    <a href="/preferences">@Messages("menu.preferences")</a>
+                </li>
+                <li class="menu-item-lv-2" ng-class="{'menu-item-close':menuItemOpen(2)==false}">
+                    <a href="/logout">@Messages("menu.logout")</a>
+                </li>
                 <li><span>@Messages("menu.informations")</span></li>
                 <li><a href="/about">@Messages("menu.about")</a></li>
             </ul>
@@ -109,6 +118,7 @@
                                             <span class="caret"></span>
                                         </a>
                                         <ul class="dropdown-menu" role="menu">
+                                            <li><a href="/profile/myProfile">@Messages("menu.myProfile")</a></li>
                                             <li><a href="/preferences">@Messages("menu.preferences")</a></li>
                                             <li><a href="/logout">@Messages("menu.logout")</a></li>
                                         </ul>
