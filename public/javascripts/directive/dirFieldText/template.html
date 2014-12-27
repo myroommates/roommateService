@@ -1,0 +1,21 @@
+<div class="field_text row form-group has-feedback" ng-class="{'error' : displayError()===true}"  ng-click="logField()">
+    <div>
+        <label class="control-label col-md-3" ng-show="getInfo().fieldTitle">{{getInfo().fieldTitle}}</label>
+        <div class="col-md-6">
+            <input type="{{fieldType}}"
+                   ng-disabled="getInfo().disabled"
+                   ng-model="getInfo().field"
+                   numbers-only="{{getInfo().numbersOnly}}"
+                   ng-class="{input_number: getInfo().numbersOnly === 'integer' || getInfo().numbersOnly === 'double'}"
+                   placeholder="{{getInfo().placeholder}}"
+                   focus-me="getInfo().focus()"
+                    class="form-control"
+                    typeahead="c as c for c in getInfo().autoCompleteValue | filter:$viewValue | limitTo:10"
+                    typeahead-min-length='1'>
+
+        </div>
+        <div class="col-md-3 errors" ng-show="displayError()===true">{{getInfo().validationMessage}}</div>
+    </div>
+    <div class="col-md-3 hidden-sm hidden-xs"></div>
+    <div class="col-md-6 help" ng-show="getInfo().details!=null">getInfo().details</div>
+</div>

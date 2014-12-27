@@ -3,7 +3,7 @@
 @import com.fasterxml.jackson.databind.ObjectMapper
 
 @home_pattern("title", account) {
-
+<div class="col-xs-12 content-block">
     <div class="roommate_manager_container" ng-controller="RoommateManagementCtrl">
 
             <!-- load data -->
@@ -11,7 +11,7 @@
             var initialData = @Html(new ObjectMapper().writeValueAsString(roommatesList.getList));
         </script>
 
-        <ul class="roommate_list">
+        <ul class="element_list">
             <li class="row" ng-repeat="roommate in roommateList" ng-click="display(roommate)">
 
                 <div class="col-md-1 col-xs-2">
@@ -56,4 +56,5 @@
         </div>
 
     </div>
+</div>
 }

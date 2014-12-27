@@ -61,3 +61,8 @@ GET           /roommate_management          @controllers.RoommateManagementContr
 #registration
 GET           /registration                 @controllers.RegistrationController.registrationPage()
 POST          /registration                 @controllers.RegistrationController.registration()
+
+#Account
+GET           /account/resume               @controllers.CountController.resume()
+GET           /account/tickets              @controllers.CountController.tickets()
+GET           /account/details              @controllers.CountController.details()

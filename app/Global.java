@@ -39,7 +39,6 @@ public class Global extends GlobalSettings {
         if (t.getCause() instanceof MyRuntimeException) {
             MyRuntimeException exception = ((MyRuntimeException) t.getCause());
             String message;
-            Logger.error("exception:"+exception+"");
 
             if (exception.getMessage() != null) {
                 message = exception.getMessage();

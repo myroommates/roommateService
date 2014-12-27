@@ -1,12 +1,12 @@
 package controllers;
 
+import com.avaje.ebean.annotation.Transactional;
 import controllers.rest.EmailRestController;
 import controllers.rest.RoommateRestRestController;
 import controllers.technical.AbstractController;
 import models.RegistrationForm;
 import models.entities.Home;
 import models.entities.Roommate;
-import play.Logger;
 import play.data.Form;
 import play.data.validation.ValidationError;
 import play.i18n.Messages;
@@ -37,6 +37,7 @@ public class RegistrationController extends AbstractController {
      *
      * @return
      */
+    @Transactional
     public Result registrationPage() {
         if (securityController.isAuthenticated(ctx())) {
             return homeController.index();
@@ -44,6 +45,7 @@ public class RegistrationController extends AbstractController {
         return ok(views.html.authentication.registration.render(registrationForm));
     }
 
+    @Transactional
     public Result registration() {
 
         Form<RegistrationForm> registrationForm = this.registrationForm.bindFromRequest();

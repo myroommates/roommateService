@@ -1,0 +1,19 @@
+<div class="row form-group has-feedback" ng-class="{'error' : displayError()===true}" ng-click="logField()">
+    <div>
+        <label class="control-label col-md-3" ng-show="getInfo().fieldTitle">{{getInfo().fieldTitle}}</label>
+        <div class="col-md-6">
+            <div class="dropdown"></div>
+            <a id="{{id}}" role="button" data-toggle="dropdown" data-target="#" href="" class="dropdown-toggle">
+            <div class="input-group">
+                <input type="text" ng-model="resultFormated" class="form-control"/><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+            </div>
+            <ul role="menu" aria-labelledby="dLabel" class="dropdown-menu date_input">
+                <datetimepicker data-ng-model="result" data-datetimepicker-config="{ dropdownSelector: '{{idHtag}}',minView:'day' }"></datetimepicker>
+            </ul></a>
+        </div>
+        <div ng-transclude></div>
+        <div class="col-md-3 errors" ng-show="displayError()===true">{{getInfo().validationMessage}}</div>
+    </div>
+    <div class="col-md-3 hidden-sm hidden-xs"></div>
+    <div class="col-md-6 help" ng-show="getInfo().details!=null">getInfo().details</div>
+</div>

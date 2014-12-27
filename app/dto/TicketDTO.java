@@ -26,7 +26,7 @@ public class TicketDTO extends DTO {
     private String category;
 
     @NotNull
-    private Long prayerId;
+    private Long payerId;
 
     public TicketDTO() {
     }
@@ -71,12 +71,12 @@ public class TicketDTO extends DTO {
         this.category = category;
     }
 
-    public Long getPrayerId() {
-        return prayerId;
+    public Long getPayerId() {
+        return payerId;
     }
 
-    public void setPrayerId(Long prayerId) {
-        this.prayerId = prayerId;
+    public void setPayerId(Long payerId) {
+        this.payerId = payerId;
     }
 
     @Override
@@ -87,7 +87,7 @@ public class TicketDTO extends DTO {
                 ", date=" + date +
                 ", debtorList=" + debtorList +
                 ", category='" + category + '\'' +
-                ", prayerId=" + prayerId +
+                ", payerId=" + payerId +
                 '}';
     }
 

@@ -20,7 +20,7 @@ public class TicketToTicketConverter implements ConverterInterface<Ticket, Ticke
 
         dto.setCategory(ticket.getCategory());
 
-        dto.setPrayerId(ticket.getPayer().getId());
+        dto.setPayerId(ticket.getPayer().getId());
 
         for (TicketDebtor ticketDebtor : ticket.getDebtorList()) {
             dto.addTicketDebtor(new TicketDebtorDTO(ticketDebtor.getRoommate().getId(),ticketDebtor.getValue()));

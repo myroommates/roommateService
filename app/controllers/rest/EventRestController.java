@@ -1,5 +1,6 @@
 package controllers.rest;
 
+import com.avaje.ebean.annotation.Transactional;
 import controllers.rest.technical.AbstractRestController;
 import controllers.rest.technical.SecurityRestController;
 import converter.EventToEventDTOConverter;
@@ -29,6 +30,7 @@ public class EventRestController extends AbstractRestController {
     private EventToEventDTOConverter eventToEventDTOConverter = new EventToEventDTOConverter();
 
     @Security.Authenticated(SecurityRestController.class)
+    @Transactional
     public Result getAll() {
 
         ListDTO<EventDTO> result = new ListDTO<>();
@@ -44,6 +46,7 @@ public class EventRestController extends AbstractRestController {
     }
 
     @Security.Authenticated(SecurityRestController.class)
+    @Transactional
     public Result getById(Long id) {
 
         //load
@@ -59,6 +62,7 @@ public class EventRestController extends AbstractRestController {
     }
 
     @Security.Authenticated(SecurityRestController.class)
+    @Transactional
     public Result update(Long id) {
 
         EventDTO dto = extractDTOFromRequest(EventDTO.class);
@@ -91,6 +95,7 @@ public class EventRestController extends AbstractRestController {
     }
 
     @Security.Authenticated(SecurityRestController.class)
+    @Transactional
     public Result create() {
 
         EventDTO dto = extractDTOFromRequest(EventDTO.class);
@@ -113,6 +118,7 @@ public class EventRestController extends AbstractRestController {
     }
 
     @Security.Authenticated(SecurityRestController.class)
+    @Transactional
     public Result remove(Long id) {
 
         //load

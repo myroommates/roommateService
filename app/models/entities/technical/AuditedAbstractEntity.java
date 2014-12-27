@@ -1,10 +1,15 @@
 package models.entities.technical;
 
+import com.avaje.ebean.annotation.CreatedTimestamp;
+import com.avaje.ebean.annotation.UpdatedTimestamp;
+import play.Logger;
 import play.db.ebean.Model;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Version;
+import java.util.Date;
 
 /**
  * Created by florian on 10/11/14.
@@ -19,7 +24,7 @@ public abstract class AuditedAbstractEntity extends Model {
     @Id
     @Column(name = COL_ID)
     protected Long id;
-/*
+
     @CreatedTimestamp
     protected Date creationDate;
 
@@ -42,7 +47,7 @@ public abstract class AuditedAbstractEntity extends Model {
     public void setLastUpdate(Date lastUpdate) {
         this.lastUpdate = lastUpdate;
     }
-*/
+
     public Long getId() {
         return id;
     }
@@ -50,7 +55,7 @@ public abstract class AuditedAbstractEntity extends Model {
     public void setId(Long id) {
         this.id = id;
     }
-/*
+
     @Override
     public String toString() {
         return "AuditedAbstractEntity{" +
@@ -59,6 +64,18 @@ public abstract class AuditedAbstractEntity extends Model {
                 ", lastUpdate=" + lastUpdate +
                 '}';
     }
-*/
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o.getClass().equals(this.getClass()))) return false;
+        if (!super.equals(o)) return false;
+
+        AuditedAbstractEntity that = (AuditedAbstractEntity) o;
+
+        if (!id.equals(that.id)) return false;
+
+        return true;
+    }
 }
 

@@ -10,5 +10,7 @@ public interface TranslationService {
 
     String getTranslation(ErrorMessage errorMessage, Language language, Object... params);
 
+    String getTranslation(String messageRef, Language language, Object... params);
+
     String getTranslation(EmailMessage emailMessage, Language language, Object... params);
 }

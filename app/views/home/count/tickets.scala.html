@@ -1,0 +1,65 @@
+@(account: dto.RoommateDTO, roommateList: dto.ListDTO[dto.RoommateDTO], ticketList: dto.ListDTO[dto.TicketDTO])
+
+@import com.fasterxml.jackson.databind.ObjectMapper
+
+@home_pattern("title", account) {
+
+<div class="col-xs-12 content-block">
+
+    <div ng-controller="CountTicketCtrl" class="ticket-list">
+
+        <!-- load data -->
+        <script>
+            var ticketList = @Html(new ObjectMapper().writeValueAsString(ticketList));
+            var roommateList = @Html(new ObjectMapper().writeValueAsString(roommateList.getList));
+            var mySelf = @Html(new ObjectMapper().writeValueAsString(account));
+        </script>
+
+        <select ng-options="choice.ref as choice.label for choice in sortSelection" ng-model="sortOption"></select>
+
+
+        <ul class="element_list">
+            <li class="row" ng-repeat="ticket in ticketList">
+
+                <div class="col-md-1 col-xs-2 payer-box">
+                    <p>
+                        <dir-user-icon ng-user="getRoommate(ticket.payerId)"></dir-user-icon>
+                    </p>
+                    <p>{{getGlobalValue(ticket)}}€</p>
+                </div>
+                <div class="col-md-10  col-xs-8">
+                    <div class="row info-box">
+
+                        <div class="col-md-2 col-xs-12">{{ticket.category}}</div>
+                        <div class="col-md-8 col-xs-7">{{ticket.description}}</div>
+                        <div class="col-md-2 col-xs-5" style=";font-size: 12px">{{ticket.date | date:'mediumDate'}}</div>
+                    </div>
+
+                    <div class="row">
+                        <div ng-repeat="debtor in ticket.debtorList" class="col-md-3 col-sm-4 col-xs-6 value-box">
+                            <div>
+                                <dir-user-icon ng-user="getRoommate(debtor.roommateId)" ng-little="true"></dir-user-icon>
+                                <div>{{debtor.value}}€</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-1  col-xs-2">
+                    <a style="margin-bottom: 5px" class="btn-sm btn btn-primary glyphicon glyphicon-pencil" href="#" ng-click='createOrEditTicket(ticket)'></a>
+                    <br/>
+                    <a class="btn-sm btn btn-primary glyphicon glyphicon-remove" href="#" ng-click='remove(ticket)'></a>
+                </div>
+                <div class="loading-mask" ng-show="ticket.isLoading === true">
+                    <img src="@routes.Assets.at("images/loading.gif")"/>
+
+                </div>
+            </li>
+        </ul>
+
+        <div class="row">
+            <div class="col-lg-4 col-md-2 hidden-xs"></div>
+            <a class="btn btn-primary col-lg-4 col-md-8 col-xs-12"  ng-click="createOrEditTicket()" href="#" >Create new ticket</a>
+        </div>
+    </div>
+</div>
+}

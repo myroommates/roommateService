@@ -1,5 +1,6 @@
 package controllers.rest;
 
+import com.avaje.ebean.annotation.Transactional;
 import controllers.rest.technical.AbstractRestController;
 import controllers.rest.technical.SecurityRestController;
 import converter.ShoppingItemToShoppingItemDTOConverter;
@@ -28,6 +29,7 @@ public class ShoppingRestRestController extends AbstractRestController {
     private ShoppingItemToShoppingItemDTOConverter shoppingItemToShoppingItemDTOConverter = new ShoppingItemToShoppingItemDTOConverter();
 
     @Security.Authenticated(SecurityRestController.class)
+    @Transactional
     public Result getAll() {
         List<ShoppingItem> shoppingItemList = shoppingItemService.findByHome(securityRestController.getCurrentUser().getHome());
 
@@ -40,6 +42,7 @@ public class ShoppingRestRestController extends AbstractRestController {
     }
 
     @Security.Authenticated(SecurityRestController.class)
+    @Transactional
     public Result getById(Long id) {
 
         //load
@@ -54,6 +57,7 @@ public class ShoppingRestRestController extends AbstractRestController {
     }
 
     @Security.Authenticated(SecurityRestController.class)
+    @Transactional
     public Result create() {
 
         ShoppingItemDTO dto = extractDTOFromRequest(ShoppingItemDTO.class);
@@ -71,6 +75,7 @@ public class ShoppingRestRestController extends AbstractRestController {
     }
 
     @Security.Authenticated(SecurityRestController.class)
+    @Transactional
     public Result update(Long id) {
 
         ShoppingItemDTO dto = extractDTOFromRequest(ShoppingItemDTO.class);
@@ -92,6 +97,7 @@ public class ShoppingRestRestController extends AbstractRestController {
     }
 
     @Security.Authenticated(SecurityRestController.class)
+    @Transactional
     public Result remove(Long id) {
 
         ShoppingItem shoppingItem = shoppingItemService.findById(id);

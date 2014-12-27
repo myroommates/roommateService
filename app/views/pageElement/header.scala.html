@@ -1,30 +1,64 @@
 <head>
     <title>Je suis un titre</title>
     <meta charset="utf-8"/>
-    <!-- change scale for mobile -->
+        <!-- change scale for mobile -->
     <meta name="viewport" content="width=device-width, initial-scale=0.6">
 
         <!-- icon-->
     <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
 
-    <!-- javascript -->
+        <!-- javascript -->
     <script src="@routes.Assets.at("components/jquery/dist/jquery.min.js")" type="text/javascript"></script>
     <script src="@routes.Assets.at("components/bootstrap/dist/js/bootstrap.min.js")" type="text/javascript"></script>
     <script src="@routes.Assets.at("components/angular/angular.min.js")" type="text/javascript"></script>
     <script src="@routes.Assets.at("components/messenger/build/js/messenger.min.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("components/moment/moment.js")" type="text/javascript"></script>
+    <script src='@routes.Assets.at("components/angular-bootstrap/ui-bootstrap.js")' type="text/javascript"></script>
+    <script src='@routes.Assets.at("components/angular-bootstrap/ui-bootstrap-tpls.js")' type="text/javascript"></script>
+    <script src='@routes.Assets.at("components/angucomplete/angucomplete.js")' type="text/javascript"></script>
     <script src="@routes.Assets.at("javascripts/jquery-touchswipe.js")" type="text/javascript"></script>
     <script src="@routes.Assets.at("javascripts/menu-animation.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("components/underscore/underscore-min.js")" type="text/javascript"></script>
 
-    <script src="@routes.Assets.at("javascripts/RoommateManagementCtrl.js")" type="text/javascript"></script>
-    <script src="@routes.Assets.at("javascripts/TicketCtrl.js")" type="text/javascript"></script>
+        <!-- je for angular -->
+    <script src="@routes.Assets.at("components/angular-bootstrap-datetimepicker/src/js/datetimepicker.js")" type="text/javascript"></script>
+
+        <!-- js for bootstrap -->
+    <script src="@routes.Assets.at("components/bootstrap/js/transition.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("components/bootstrap/js/transition.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("components/bootstrap/js/collapse.js")" type="text/javascript"></script>
+
+        <!-- controllers -->
+    <script src="@routes.Assets.at("javascripts/controller/RoommateManagementCtrl.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("javascripts/controller/LateralMenuCtrl.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("javascripts/controller/CountResumeCtrl.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("javascripts/controller/CountTicketCtrl.js")" type="text/javascript"></script>
+
+    <!-- modal -->
+    <script src="@routes.Assets.at("javascripts/modal/CUTicket/CuTicketCtrl.js")" type="text/javascript"></script>
+
+        <!-- directive -->
+    <script src="@routes.Assets.at("javascripts/directive/dirFieldDate/directive.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("javascripts/directive/dirFieldText/directive.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("javascripts/directive/dirInputNumber/directive.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("javascripts/directive/dirUserIcon/directive.js")" type="text/javascript"></script>
+
+        <!-- service -->
     <script src="@routes.Assets.at("javascripts/service/FlashService.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("javascripts/service/DirectiveService.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("javascripts/service/GenerateIdService.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("javascripts/service/TranslationService.js")" type="text/javascript"></script>
 
-
+        <!-- filter -->
+    <script src="@routes.Assets.at("javascripts/filter/TranslateTextFilter.js")" type="text/javascript"></script>
 
         <!-- css -->
+    <link rel="stylesheet" media="screen" href='@routes.Assets.at("components/angucomplete/angucomplete.css")'/>
     <link rel="stylesheet" media="screen" href='@routes.Assets.at("components/bootstrap/dist/css/bootstrap.min.css")'/>
     <link rel="stylesheet" media="screen" href="@routes.Assets.at("components/bootstrap/dist/css/bootstrap-theme.min.css")">
     <link rel="stylesheet" media="screen" href="@routes.Assets.at("components/messenger/build/css/messenger.css")">
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("components/angular-bootstrap-datetimepicker/src/css/datetimepicker.css")">
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css")">
     <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
 
 </head>

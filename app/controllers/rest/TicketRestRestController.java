@@ -1,5 +1,6 @@
 package controllers.rest;
 
+import com.avaje.ebean.annotation.Transactional;
 import controllers.rest.technical.AbstractRestController;
 import controllers.rest.technical.SecurityRestController;
 import converter.TicketToTicketConverter;
@@ -10,11 +11,14 @@ import dto.technical.ResultDTO;
 import models.entities.Roommate;
 import models.entities.Ticket;
 import models.entities.TicketDebtor;
+import play.Logger;
 import play.mvc.Result;
 import play.mvc.Security;
 import services.RoommateService;
+import services.TicketDebtorService;
 import services.TicketService;
 import services.impl.RoommateServiceImpl;
+import services.impl.TicketDebtorServiceImpl;
 import services.impl.TicketServiceImpl;
 import util.ErrorMessage;
 import util.exception.MyRuntimeException;
@@ -29,6 +33,7 @@ public class TicketRestRestController extends AbstractRestController {
 
     //service
     private TicketService ticketService = new TicketServiceImpl();
+    private TicketDebtorService ticketDebtorService = new TicketDebtorServiceImpl();
     private RoommateService roommateService = new RoommateServiceImpl();
 
     //converter
@@ -36,6 +41,7 @@ public class TicketRestRestController extends AbstractRestController {
 
 
     @Security.Authenticated(SecurityRestController.class)
+    @Transactional
     public Result getAll() {
 
         ListDTO<TicketDTO> result = new ListDTO<>();
@@ -49,6 +55,7 @@ public class TicketRestRestController extends AbstractRestController {
 
 
     @Security.Authenticated(SecurityRestController.class)
+    @Transactional
     public Result getById(Long id) {
 
         //load
@@ -64,6 +71,7 @@ public class TicketRestRestController extends AbstractRestController {
     }
 
     @Security.Authenticated(SecurityRestController.class)
+    @Transactional
     public Result create() {
 
         TicketDTO dto = extractDTOFromRequest(TicketDTO.class);
@@ -82,6 +90,7 @@ public class TicketRestRestController extends AbstractRestController {
             }
             prayers.add(new TicketDebtor(roommate,ticketDebtorDTO.getValue()));
         }
+        //operation
 
         Ticket ticket = new Ticket();
         ticket.setDescription(dto.getDescription());
@@ -99,6 +108,7 @@ public class TicketRestRestController extends AbstractRestController {
     }
 
     @Security.Authenticated(SecurityRestController.class)
+    @Transactional
     public Result update(Long id) {
 
         TicketDTO dto = extractDTOFromRequest(TicketDTO.class);
@@ -121,6 +131,8 @@ public class TicketRestRestController extends AbstractRestController {
             throw new MyRuntimeException(ErrorMessage.NOT_TICKET_CREATOR, id);
         }
 
+        //remove old debtor
+        ticketDebtorService.removeByTicket(ticket);
 
         //prayers
         Set<TicketDebtor> prayers = new HashSet<>();
@@ -147,6 +159,7 @@ public class TicketRestRestController extends AbstractRestController {
     }
 
     @Security.Authenticated(SecurityRestController.class)
+    @Transactional
     public Result remove(Long id) {
 
         Roommate currentUser = securityRestController.getCurrentUser();

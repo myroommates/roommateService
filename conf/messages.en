@@ -5,6 +5,9 @@ generic.firstName=First name
 generic.name=Name
 generic.submit=Submit
 generic.back=Back
+generic.description=Description
+generic.date=Date
+generic.close=Close
 
 #
 # welcome
@@ -35,7 +38,10 @@ error.maxLength=Maximum %s characters
 
 #menu
 menu.roommate_manager=Roommate
-menu.account=Account
+menu.count=Count
+menu.count.resume=Resume
+menu.count.tickets=Tickets
+menu.count.details=Details
 menu.events=Events
 menu.shopping=Shopping
 menu.preferences=Preferences

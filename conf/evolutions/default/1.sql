@@ -11,12 +11,16 @@ create table event (
   repeatable_frequency      integer,
   home_id                   bigint not null,
   creator_id                bigint not null,
+  creation_date             timestamp not null,
+  last_update               timestamp not null,
   constraint ck_event_repeatable_frequency check (repeatable_frequency in (0,1,2,3)),
   constraint pk_event primary key (id))
 ;
 
 create table home (
   id                        bigint not null,
+  creation_date             timestamp not null,
+  last_update               timestamp not null,
   constraint pk_home primary key (id))
 ;
 
@@ -34,6 +38,8 @@ create table roommate (
   cookie_value              varchar(255),
   password                  varchar(255) not null,
   is_admin                  boolean default false not null,
+  creation_date             timestamp not null,
+  last_update               timestamp not null,
   constraint ck_roommate_language check (language in (0,1)),
   constraint uq_roommate_email unique (email),
   constraint pk_roommate primary key (id))
@@ -42,10 +48,11 @@ create table roommate (
 create table shopping_item (
   id                        bigint not null,
   description               Text not null,
-  creation_date             timestamp not null,
   home_id                   bigint not null,
   creator_id                bigint not null,
   was_bought                 boolean default false not null,
+  creation_date             timestamp not null,
+  last_update               timestamp not null,
   constraint pk_shopping_item primary key (id))
 ;
 
@@ -56,6 +63,8 @@ create table ticket (
   date                      timestamp not null,
   home_id                   bigint not null,
   payer_id                  bigint not null,
+  creation_date             timestamp not null,
+  last_update               timestamp not null,
   constraint pk_ticket primary key (id))
 ;
 
@@ -64,6 +73,8 @@ create table ticket_debtor (
   ticket_id                 bigint,
   roommate_id               bigint,
   value                     float not null,
+  creation_date             timestamp not null,
+  last_update               timestamp not null,
   constraint pk_ticket_debtor primary key (id))
 ;
 

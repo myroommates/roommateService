@@ -1,5 +1,6 @@
 package controllers.rest;
 
+import com.avaje.ebean.annotation.Transactional;
 import controllers.rest.technical.AbstractRestController;
 import controllers.rest.technical.SecurityRestController;
 import converter.RoommateToRoommateDTOConverter;
@@ -31,6 +32,7 @@ public class RoommateRestRestController extends AbstractRestController {
     private RoommateToRoommateDTOConverter roommateToRoommateDTOConverter = new RoommateToRoommateDTOConverter();
 
     @Security.Authenticated(SecurityRestController.class)
+    @Transactional
     public Result getById(Long id) {
 
         //load
@@ -46,6 +48,7 @@ public class RoommateRestRestController extends AbstractRestController {
     }
 
     @Security.Authenticated(SecurityRestController.class)
+    @Transactional
     public Result getAll() {
 
         //load
@@ -63,6 +66,7 @@ public class RoommateRestRestController extends AbstractRestController {
     }
 
     @Security.Authenticated(SecurityRestController.class)
+    @Transactional
     public Result create() {
 
         RoommateDTO dto = extractDTOFromRequest(RoommateDTO.class);
@@ -97,6 +101,7 @@ public class RoommateRestRestController extends AbstractRestController {
     }
 
     @Security.Authenticated(SecurityRestController.class)
+    @Transactional
     public Result update(long id) {
 
         RoommateDTO dto = extractDTOFromRequest(RoommateDTO.class);
@@ -133,6 +138,7 @@ public class RoommateRestRestController extends AbstractRestController {
     }
 
     @Security.Authenticated(SecurityRestController.class)
+    @Transactional
     public Result delete(Long id) {
 
         Roommate currentUser = securityRestController.getCurrentUser();

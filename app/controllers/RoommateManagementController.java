@@ -1,5 +1,6 @@
 package controllers;
 
+import com.avaje.ebean.annotation.Transactional;
 import controllers.technical.AbstractController;
 import controllers.technical.SecurityController;
 import converter.RoommateToRoommateDTOConverter;
@@ -23,6 +24,7 @@ public class RoommateManagementController extends AbstractController{
 
 
     @Security.Authenticated(SecurityController.class)
+    @Transactional
     public Result index() {
 
         RoommateDTO roommateDTO = roommateToRoommateDTOConverter.convert(securityController.getCurrentUser());

@@ -1,0 +1,75 @@
+@(account: dto.RoommateDTO, countResumeList: dto.ListDTO[dto.count.CountResumeDTO],ticketList: dto.ListDTO[dto.TicketDTO])
+
+@import com.fasterxml.jackson.databind.ObjectMapper
+
+@home_pattern("title", account) {
+<div ng-controller="CountResumeCtrl">
+    <div class="col-xs-12 content-block">
+
+        <div class="count-resume" >
+
+                <!-- load data -->
+            <script>
+            var countResumeList = @Html(new ObjectMapper().writeValueAsString(countResumeList));
+            var ticketList = @Html(new ObjectMapper().writeValueAsString(ticketList));
+            </script>
+
+            <div class="row table-header">
+                <div class="col-md-2 hidden-sm hidden-xs" style="height: 40px"></div>
+                <div class="col-md-2 col-xs-3 value"></div>
+                <div class="col-md-2 col-xs-3 value">Dépensé</div>
+                <div class="col-md-2 col-xs-3 value">Dû</div>
+                <div class="col-md-2 col-xs-3 value">Balance</div>
+                <div class="col-md-2 hidden-sm hidden-xs" style="height: 40px"></div>
+            </div>
+
+            <div class="row" ng-repeat="countResume in countResumeList">
+
+                <div class="col-md-2 hidden-sm hidden-xs" style="height: 40px"></div>
+                <div class="col-md-2 col-xs-3 user-box">
+                    <dir-user-icon ng-user="countResume.roommate"></dir-user-icon>
+                    <span class="hidden-xs">{{countResume.roommate.name}}</span>
+                </div>
+                <div class="col-md-2 col-xs-3 value">
+                    {{countResume.spend | number:2}}€
+                </div>
+                <div class="col-md-2 col-xs-3 value">
+                    {{countResume.dept | number:2}}€
+                </div>
+                <div class="col-md-2 col-xs-3 value" ng-class="{'red':sub(countResume.spend,countResume.dept)<0,'green':sub(countResume.spend,countResume.dept)>0}">
+                    {{sub(countResume.spend,countResume.dept) | number:2}}€
+                </div>
+                <div class="col-md-2 hidden-sm hidden-xs" style="height: 40px"></div>
+
+            </div>
+
+            <div class="row table-footer">
+                <div class="col-md-2 hidden-sm hidden-xs" style="height: 40px"></div>
+                <div class="col-md-2 col-xs-3" style="padding-left: 30px">Total</div>
+                <div class="col-md-2 col-xs-3 value">{{totalSpend()}}€</div>
+                <div class="col-md-2 col-xs-3 value">{{totalDept()}}€</div>
+                <div class="col-md-2 col-xs-3 value"></div>
+                <div class="col-md-2 hidden-sm hidden-xs" style="height: 40px"></div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="col-xs-12 content-block">
+        <h3>Comment résoudre ?</h3>
+
+        <div ng-repeat="balance in balanceList">
+            <div>
+                <dir-user-icon ng-user="balance.from"></dir-user-icon>
+            </div>
+            <div>
+                <dir-user-icon ng-user="balance.to"></dir-user-icon>
+            </div>
+            <div ng-class="{'red':balance.value<0,'green':balance.value>0}">
+                {{balance.value | number:2}}€
+            </div>
+
+        </div>
+    </div>
+</div>
+}

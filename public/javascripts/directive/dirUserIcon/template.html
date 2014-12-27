@@ -1,0 +1,11 @@
+<div class="user_icon" ng-class="{'user_icon_little' : getLittle() === true}" style="
+                    background: hsl({{getColor()}},80%, 60%); /* Old browsers */
+                    background: -moz-linear-gradient(top,  hsl({{getColor()}},80%, 60%) 0%, hsl({{getColor()}},80%, 30%) 100%); /* FF3.6+ */
+                    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,hsl({{getColor()}},80%, 60%)), color-stop(100%,hsl({{getColor()}},80%, 30%))); /* Chrome,Safari4+ */
+                    background: -webkit-linear-gradient(top,  hsl({{getColor()}},80%, 60%) 0%,hsl({{getColor()}},80%, 30%) 100%); /* Chrome10+,Safari5.1+ */
+                    background: -o-linear-gradient(top,  hsl({{getColor()}},80%, 60%) 0%,hsl({{getColor()}},80%, 30%) 100%); /* Opera 11.10+ */
+                    background: -ms-linear-gradient(top,  hsl({{getColor()}},80%, 60%) 0%,hsl({{getColor()}},80%, 30%) 100%); /* IE10+ */
+                    background: linear-gradient(to bottom,  hsl({{getColor()}},80%, 60%) 0%,hsl({{getColor()}},80%, 30%) 100%); /* W3C */
+                    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='hsl({{getColor()}},80%, 60%)', endColorstr='hsl({{getColor()}},80%, 30%)',GradientType=0 ); /* IE6-9 */">
+    {{getName()}}
+</div>

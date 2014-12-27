@@ -1,5 +1,6 @@
 package controllers;
 
+import com.avaje.ebean.annotation.Transactional;
 import controllers.technical.AbstractController;
 import controllers.technical.SecurityController;
 import play.Logger;
@@ -12,6 +13,7 @@ import play.mvc.Security;
 public class HomeController extends AbstractController{
 
     @Security.Authenticated(SecurityController.class)
+    @Transactional
     public Result index(){
         return redirect("/roommate_management");
     }

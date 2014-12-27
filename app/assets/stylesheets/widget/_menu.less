@@ -28,10 +28,9 @@
 
             a {
                 background-color: @color-lat-menu-item-bg;
-            }
-
-            &:hover a {
-                background: @color-lat-menu-hover;
+                &:hover {
+                    background: @color-lat-menu-hover;
+                }
             }
 
             &.divider {
@@ -50,6 +49,48 @@
                 span {
                     color: @color-lat-menu-secondary;
                     float: right;
+                }
+            }
+
+            &.menu-item-lv-1 {
+                &.menu-item-close {
+                    & > a {
+                        & > span {
+                            -webkit-transform: rotate(-90deg);
+                            -moz-transform: rotate(-90deg);
+                            -ms-transform: rotate(-90deg);
+                            -o-transform: rotate(-90deg);
+                            transform: rotate(-90deg);
+                        }
+
+                    }
+                }
+                & > a {
+                    & > span {
+                        transition: transform 0.3s ease-out;
+
+                    }
+                }
+            }
+
+            &.menu-item-lv-2 {
+                &.menu-item-close {
+                    border: 0;
+                    max-height: 0;
+                }
+                overflow: hidden;
+                -webkit-transition: max-height 0.3s ease-in-out;
+                -moz-transition: max-height 0.3s ease-in-out;
+                -ms-transition: max-height 0.3s ease-in-out;
+                -o-transition: max-height 0.3s ease-in-out;
+                transition: max-height 0.3s ease-out;
+                max-height: 80px;
+                & > a {
+                    background-color: rgba(66, 66, 66, 0.98);
+                    padding-left: 40px;
+                    &:hover {
+                        background-color: rgba(52, 52, 52, 0.98);
+                    }
                 }
             }
         }
@@ -78,16 +119,22 @@
     margin-left: 15px;
     margin-right: 15px;
 
-    ul {
-        display: inline;
+    .navbar-lev-1{
+        width: 100%;
+    }
 
-        li {
-            display: inline;
+    .menu-right-element{
+     float: right;
+    }
+
+    .menu-profile-icon{
+        padding-top:0;
+        padding-bottom: 0;
+        & > *{
+            display: inline-block;
         }
     }
-    & > button {
-        float: right;
-    }
+
 }
 
 

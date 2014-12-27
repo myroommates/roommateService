@@ -2,6 +2,7 @@ package converter;
 
 import dto.RoommateDTO;
 import models.entities.Roommate;
+import play.Logger;
 
 /**
  * Created by florian on 11/11/14.
@@ -16,6 +17,7 @@ public class RoommateToRoommateDTOConverter implements ConverterInterface<Roomma
         dto.setName(roommate.getName());
         dto.setIconColor(roommate.getIconColor());
         dto.setNameAbrv(roommate.getNameAbrv());
+        dto.setAdmin(roommate.getIsAdmin());
 
         return dto;
     }

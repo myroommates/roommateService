@@ -1129,7 +1129,7 @@ angular.module('ui.bootstrap.datepicker', ['ui.bootstrap.dateparser', 'ui.bootst
   };
 
   // Key event mapper
-  $scope.keys = { 13:'enter', 32:'space', 33:'pageup', 34:'pagedown', 35:'end', 36:'home_pattern', 37:'left', 38:'up', 39:'right', 40:'down' };
+  $scope.keys = { 13:'enter', 32:'space', 33:'pageup', 34:'pagedown', 35:'end', 36:'home', 37:'left', 38:'up', 39:'right', 40:'down' };
 
   var focusElement = function() {
     $timeout(function() {
@@ -1282,7 +1282,7 @@ angular.module('ui.bootstrap.datepicker', ['ui.bootstrap.dateparser', 'ui.bootst
           var month = ctrl.activeDate.getMonth() + (key === 'pageup' ? - 1 : 1);
           ctrl.activeDate.setMonth(month, 1);
           date = Math.min(getDaysInMonth(ctrl.activeDate.getFullYear(), ctrl.activeDate.getMonth()), date);
-        } else if (key === 'home_pattern') {
+        } else if (key === 'home') {
           date = 1;
         } else if (key === 'end') {
           date = getDaysInMonth(ctrl.activeDate.getFullYear(), ctrl.activeDate.getMonth());
@@ -1337,7 +1337,7 @@ angular.module('ui.bootstrap.datepicker', ['ui.bootstrap.dateparser', 'ui.bootst
         } else if (key === 'pageup' || key === 'pagedown') {
           var year = ctrl.activeDate.getFullYear() + (key === 'pageup' ? - 1 : 1);
           ctrl.activeDate.setFullYear(year);
-        } else if (key === 'home_pattern') {
+        } else if (key === 'home') {
           date = 0;
         } else if (key === 'end') {
           date = 11;
@@ -1396,7 +1396,7 @@ angular.module('ui.bootstrap.datepicker', ['ui.bootstrap.dateparser', 'ui.bootst
           date = date + 5;
         } else if (key === 'pageup' || key === 'pagedown') {
           date += (key === 'pageup' ? - 1 : 1) * ctrl.step.years;
-        } else if (key === 'home_pattern') {
+        } else if (key === 'home') {
           date = getStartingYear( ctrl.activeDate.getFullYear() );
         } else if (key === 'end') {
           date = getStartingYear( ctrl.activeDate.getFullYear() ) + range - 1;

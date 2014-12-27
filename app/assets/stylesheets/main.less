@@ -4,6 +4,10 @@
 @import 'widget/_user_icon';
 @import 'widget/_roommate_manager';
 @import 'widget/_cr-messenger';
+@import 'widget/_field_date';
+@import 'widget/_field_text';
+@import 'widget/_count';
+@import 'widget/_ticket';
 //
 // color
 //
@@ -62,5 +66,11 @@ header {
     color: @color-header-title;
     margin: 0 25px;
   }
+}
+
+@media (min-width: 768px) and (max-width:992px) {
+    .modal-lg{
+        width: 750px;
+    }
 }
 

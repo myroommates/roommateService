@@ -15,10 +15,14 @@ public class TranslationServiceImpl implements TranslationService {
     @Override
     public String getTranslation(ErrorMessage errorMessage, Language language, Object... params) {
 
-        Logger.warn(language.getAbrv()+" "+errorMessage.name());
-        String a=Messages.get(errorMessage.name(),language.getAbrv(),params);
-        Logger.warn("=>"+a);
-        return a;
+        return Messages.get(errorMessage.name(),language.getAbrv(),params);
+
+    }
+
+    @Override
+    public String getTranslation(String messageRef, Language language, Object... params) {
+
+        return Messages.get(messageRef,language.getAbrv(),params);
 
     }
 

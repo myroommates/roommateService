@@ -1,5 +1,6 @@
 package controllers.rest;
 
+import com.avaje.ebean.annotation.Transactional;
 import controllers.rest.technical.AbstractRestController;
 import controllers.rest.technical.SecurityRestController;
 import converter.RoommateToLoginSuccessConverter;
@@ -28,7 +29,7 @@ public class LoginRestRestController extends AbstractRestController {
     //controller
     private EmailRestController emailController = new EmailRestController();
 
-
+    @Transactional
     public Result registration() {
 
         RegistrationDTO dto = extractDTOFromRequest(RegistrationDTO.class);
@@ -70,7 +71,7 @@ public class LoginRestRestController extends AbstractRestController {
         return ok(success);
     }
 
-
+    @Transactional
     public Result reactivation() {
 
         ReactivationDTO dto = extractDTOFromRequest(ReactivationDTO.class);
@@ -93,6 +94,7 @@ public class LoginRestRestController extends AbstractRestController {
 
 
     @Security.Authenticated(SecurityRestController.class)
+    @Transactional
     public Result loadData() {
 
         //result

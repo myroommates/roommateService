@@ -1,5 +1,6 @@
 package controllers;
 
+import com.avaje.ebean.annotation.Transactional;
 import controllers.technical.AbstractController;
 import controllers.technical.SecurityController;
 import models.LoginForm;
@@ -28,7 +29,7 @@ public class AccountController extends AbstractController {
         securityController.logout(ctx());
         return redirect("/");
     }
-
+    @Transactional
     public Result loginPage() {
 
         // authenticated
@@ -56,7 +57,7 @@ public class AccountController extends AbstractController {
         }
         return ok(views.html.welcome.render(formLogin));
     }
-
+    @Transactional
     public Result login() {
 
         Form<LoginForm> loginFormForm = formLogin.bindFromRequest();

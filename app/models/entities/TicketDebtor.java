@@ -2,15 +2,20 @@ package models.entities;
 
 import models.entities.technical.AuditedAbstractEntity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 /**
  * Created by florian on 6/12/14.
  */
 @Entity
+@NamedQueries({
+        @NamedQuery(name = TicketDebtor.FIND_BY_ROOMMATE, query = "where " + TicketDebtor.COL_ROOMMATE+ " = :" + TicketDebtor.PARAM_ROOMMATE),
+})
 public class TicketDebtor extends AuditedAbstractEntity{
+
+    public static final String FIND_BY_ROOMMATE = "TicketDebtor_FIND_BY_ROOMMATE";
+    public static final String COL_ROOMMATE = "roommate_id";
+    public static final String PARAM_ROOMMATE = "roommate";
 
     @ManyToOne
     private Ticket ticket;
