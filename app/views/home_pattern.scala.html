@@ -4,137 +4,137 @@
 
 <html>
     @pageElement.header()
-<body ng-app="app">
-    <div class="global-container">
+        <body ng-app="app">
+            <div class="global-container">
 
-            <!-- menu for little screen : display only when the screen is smaller then 760px -->
-        <div id="sidebar" class="visible-sm-block visible-xs-block">
-            <ul ng-controller="LateralMenuCtrl">
-                    <!-- access link -->
-                <li><span>@Messages("generic.navigation")</span></li>
-                @if(account.isAdmin()) {
-                    <li><a href="/roommate_management">@Messages("menu.roommate_manager")</a></li>
-                }
-                <li class="menu-item-lv-1" ng-class="{'menu-item-close':menuItemOpen(1)==false}">
-                    <a href="#" ng-click="switchVisibility(1)">@Messages("menu.count")
-                        <span class="glyphicon glyphicon-chevron-down"></span>
-                    </a>
-                </li>
-                <li class="menu-item-lv-2" ng-class="{'menu-item-close':menuItemOpen(1)==false}">
-                    <a href="/account/resume">@Messages("menu.count.resume")</a>
-                </li>
-                <li class="menu-item-lv-2" ng-class="{'menu-item-close':menuItemOpen(1)==false}">
-                    <a href="/account/tickets">@Messages("menu.count.tickets")</a>
-                </li>
-                <li><a href="/shopping">@Messages("menu.shopping")</a></li>
-                <li><a href="/events">@Messages("menu.events")</a></li>
-                    <!-- my profile -->
-                <li class="menu-item-lv-1" ng-class="{'menu-item-close':menuItemOpen(2)==false}">
-                    <a href="#" ng-click="switchVisibility(2)" class="li-profile">
-                        @widget.profile_icon(account)
-                        @account.getName()
-                    <span class="glyphicon glyphicon-chevron-down"></span>
-                    </a>
-                </li>
+                    <!-- menu for little screen : display only when the screen is smaller then 760px -->
+                <div id="sidebar" class="visible-sm-block visible-xs-block">
+                    <ul ng-controller="LateralMenuCtrl">
+                            <!-- access link -->
+                        <li><span>@Messages("generic.navigation")</span></li>
+                        @if(account.isAdmin()) {
+                            <li><a href="/roommate_management">@Messages("menu.roommate_manager")</a></li>
+                        }
+                        <li class="menu-item-lv-1" ng-class="{'menu-item-close':menuItemOpen(1)==false}">
+                            <a href="#" ng-click="switchVisibility(1)">@Messages("menu.count")
+                                <span class="glyphicon glyphicon-chevron-down"></span>
+                            </a>
+                        </li>
+                        <li class="menu-item-lv-2" ng-class="{'menu-item-close':menuItemOpen(1)==false}">
+                            <a href="/account/resume">@Messages("menu.count.resume")</a>
+                        </li>
+                        <li class="menu-item-lv-2" ng-class="{'menu-item-close':menuItemOpen(1)==false}">
+                            <a href="/account/tickets">@Messages("menu.count.tickets")</a>
+                        </li>
+                        <li><a href="/shopping">@Messages("menu.shopping")</a></li>
+                        <li><a href="/events">@Messages("menu.events")</a></li>
+                            <!-- my profile -->
+                        <li class="menu-item-lv-1" ng-class="{'menu-item-close':menuItemOpen(2)==false}">
+                            <a href="#" ng-click="switchVisibility(2)" class="li-profile">
+                                @widget.profile_icon(account)
+                                @account.getName()
+                                <span class="glyphicon glyphicon-chevron-down"></span>
+                            </a>
+                        </li>
 
-                <li class="menu-item-lv-2" ng-class="{'menu-item-close':menuItemOpen(2)==false}">
-                    <a href="/profile/myProfile">@Messages("menu.myProfile")</a>
-                </li>
-                <li class="menu-item-lv-2" ng-class="{'menu-item-close':menuItemOpen(2)==false}">
-                    <a href="/preferences">@Messages("menu.preferences")</a>
-                </li>
-                <li class="menu-item-lv-2" ng-class="{'menu-item-close':menuItemOpen(2)==false}">
-                    <a href="/logout">@Messages("menu.logout")</a>
-                </li>
-                <li><span>@Messages("menu.informations")</span></li>
-                <li><a href="/about">@Messages("menu.about")</a></li>
-            </ul>
-        </div>
-
-            <!-- swipe area : used to display the menu with a swipe -->
-        <div class="swipe-area hidden-md hidden-lg"></div>
-        <div id="main-header-container" class="hidden-md hidden-lg">
-
-                <!-- header -->
-            <header>
-
-                    <!-- little screen menu button -->
-                <div class="sidebar-button">
-                    <button type="button" class="btn btn-default btn-s" data-toggle=".global-container" id="sidebar-toggle">
-                        <span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>
-                    </button>
+                        <li class="menu-item-lv-2" ng-class="{'menu-item-close':menuItemOpen(2)==false}">
+                            <a href="/profile/myProfile">@Messages("menu.myProfile")</a>
+                        </li>
+                        <li class="menu-item-lv-2" ng-class="{'menu-item-close':menuItemOpen(2)==false}">
+                            <a href="/preferences">@Messages("menu.preferences")</a>
+                        </li>
+                        <li class="menu-item-lv-2" ng-class="{'menu-item-close':menuItemOpen(2)==false}">
+                            <a href="/logout">@Messages("menu.logout")</a>
+                        </li>
+                        <li><span>@Messages("menu.informations")</span></li>
+                        <li><a href="/about">@Messages("menu.about")</a></li>
+                    </ul>
                 </div>
 
-                    <!-- title -->
-                <h1>@Messages(title)</h1>
-            </header>
-        </div>
+                    <!-- swipe area : used to display the menu with a swipe -->
+                <div class="swipe-area hidden-md hidden-lg"></div>
+                <div id="main-header-container" class="hidden-md hidden-lg">
 
-            <!-- main content -->
-        <div class="main-body">
-            <div id="main-header-container" class="hidden-sm hidden-xs">
+                        <!-- header -->
+                    <header>
 
-                    <!-- header -->
-                <header>
-
-                        <!-- title -->
-                    <h1>@Messages(title)</h1>
-                </header>
-            </div>
-
-            <div class="main-container">
-
-                    <!-- big menu -->
-                <div class="row hidden-sm hidden-xs">
-
-
-                    <nav class="navbar navbar-default large-menu">
-                        <div class="container-fluid">
-
-                            <div class="collapse navbar-collapse">
-                                <ul class="nav navbar-nav navbar-lev-1">
-                                    @if(account.isAdmin()) {
-                                        <li><a href="/roommate_management">@Messages("menu.roommate_manager")</a></li>
-                                    }
-
-                                    <li class="dropdown">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">@Messages("menu.count") <span class="caret"></span></a>
-                                        <ul class="dropdown-menu" role="menu">
-                                            <li><a href="/account/resume">@Messages("menu.count.resume")</a></li>
-                                            <li><a href="/account/tickets">@Messages("menu.count.tickets")</a></li>
-                                        </ul>
-                                    </li>
-
-
-                                        <!-- about -->
-                                    <li class="menu-right-element">
-                                        <a href="/about">@Messages("menu.about")</a>
-                                    </li>
-
-                                        <!-- profile icon -->
-                                    <li class="dropdown menu-right-element">
-                                        <a href="#" class="dropdown-toggle menu-profile-icon" data-toggle="dropdown" role="button" aria-expanded="false">
-                                            @widget.profile_icon(account)
-                                            <span class="caret"></span>
-                                        </a>
-                                        <ul class="dropdown-menu" role="menu">
-                                            <li><a href="/profile/myProfile">@Messages("menu.myProfile")</a></li>
-                                            <li><a href="/preferences">@Messages("menu.preferences")</a></li>
-                                            <li><a href="/logout">@Messages("menu.logout")</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </div>
+                            <!-- little screen menu button -->
+                        <div class="sidebar-button">
+                            <button type="button" class="btn btn-default btn-s" data-toggle=".global-container" id="sidebar-toggle">
+                                <span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>
+                            </button>
                         </div>
-                    </nav>
+
+                            <!-- title -->
+                        <h1>@Messages(title)</h1>
+                    </header>
                 </div>
 
-                    <!-- content -->
+                    <!-- main content -->
+                <div class="main-body">
+                    <div id="main-header-container" class="hidden-sm hidden-xs">
 
-                @content
+                            <!-- header -->
+                        <header>
 
-            </div>
-        </div>
-    </div>
+                                <!-- title -->
+                            <h1>@Messages(title)</h1>
+                        </header>
+                    </div>
+
+            <div class="container main-container">
+
+                            <!-- big menu -->
+                        <div class="row hidden-sm hidden-xs">
+
+
+                            <nav class="navbar navbar-default large-menu">
+                                <div class="container-fluid">
+
+                                    <div class="collapse navbar-collapse">
+                                        <ul class="nav navbar-nav navbar-lev-1">
+                                            @if(account.isAdmin()) {
+                                                <li><a href="/roommate_management">@Messages("menu.roommate_manager")</a></li>
+                                            }
+
+                                            <li class="dropdown">
+                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">@Messages("menu.count") <span class="caret"></span></a>
+                                                <ul class="dropdown-menu" role="menu">
+                                                    <li><a href="/account/resume">@Messages("menu.count.resume")</a></li>
+                                                    <li><a href="/account/tickets">@Messages("menu.count.tickets")</a></li>
+                                                </ul>
+                                            </li>
+
+
+                                                <!-- about -->
+                                            <li class="menu-right-element">
+                                                <a href="/about">@Messages("menu.about")</a>
+                                            </li>
+
+                                                <!-- profile icon -->
+                                            <li class="dropdown menu-right-element">
+                                                <a href="#" class="dropdown-toggle menu-profile-icon" data-toggle="dropdown" role="button" aria-expanded="false">
+                                                    @widget.profile_icon(account)
+                                                    <span class="caret"></span>
+                                                </a>
+                                                <ul class="dropdown-menu" role="menu">
+                                                    <li><a href="/profile/myProfile">@Messages("menu.myProfile")</a></li>
+                                                    <li><a href="/preferences">@Messages("menu.preferences")</a></li>
+                                                    <li><a href="/logout">@Messages("menu.logout")</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </nav>
+                        </div>
+
+                            <!-- content -->
+
+                        @content
+
+</div>
+</div>
+</div>
 </body>
 </html>
