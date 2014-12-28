@@ -40,6 +40,15 @@ public class RoommateServiceImpl extends CrudServiceImpl<Roommate> implements Ro
             roommate.setCookieValue(generateEncryptingPassword(roommate.getCookieValue()));
         }
 
+        //compute abrv
+        if (roommate.getId() == null) {
+            List<Roommate> roommateList = new ArrayList<>();
+            if (roommate.getHome().getId() != null) {
+                roommateList = findByHome(roommate.getHome());
+            }
+
+            roommate.setNameAbrv(computeAcronym(roommate, roommateList));
+        }
         super.saveOrUpdate(roommate);
     }
 
@@ -72,5 +81,35 @@ public class RoommateServiceImpl extends CrudServiceImpl<Roommate> implements Ro
     private String generateEncryptingPassword(final String password) {
 
         return new StrongPasswordEncryptor().encryptPassword(password);
+    }
+
+    private String computeAcronym(Roommate roommate, List<Roommate> roommateList) {
+        //start by the first letter of the first name
+        String acronym = "";
+        acronym += roommate.getName().toCharArray()[0];
+        //and test
+        if (roommateList.size() > 0) {
+            //continue to add letters
+            int counter = 1;
+            while (findByAcronym(acronym, roommate, roommateList) && counter < roommate.getName().length()) {
+                acronym += roommate.getName().toCharArray()[counter];
+                counter++;
+            }
+        }
+        acronym = acronym.toUpperCase();
+        return acronym;
+    }
+
+    private boolean findByAcronym(String acronym, Roommate expected, List<Roommate> roommateList) {
+        for (Roommate roommateDTO : roommateList) {
+            if (!roommateDTO.equals(expected)) {
+
+                //compare other letters for the last name
+                for (int i = 1; i < acronym.toCharArray().length; i++) {
+                    return acronym.toCharArray()[i] == roommateDTO.getName().toCharArray()[i];
+                }
+            }
+        }
+        return false;
     }
 }
