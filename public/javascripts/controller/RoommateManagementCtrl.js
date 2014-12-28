@@ -1,7 +1,8 @@
 var myApp = angular.module('app', ['ui.bootstrap.datetimepicker','ui.bootstrap',"angucomplete"]);
 
-myApp.controller('RoommateManagementCtrl',  function ($scope, $http, $flash) {
+myApp.controller('RoommateManagementCtrl',  function ($scope, $http, $flash,translationService) {
 
+    translationService.set(translations);
     $scope.roommateList = initialData;
 
     $scope.edit = function (roommate) {

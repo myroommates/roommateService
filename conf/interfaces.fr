@@ -1,6 +1,0 @@
-#
-# MODAL
-#
-
-# change password modal
-OLD_PASSWORD=Ancien mot de passe

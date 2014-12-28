@@ -1,11 +1,13 @@
-myApp.controller('CountTicketCtrl', function ($scope, $http, $flash, $modal) {
+myApp.controller('CountTicketCtrl', function ($scope, $http, $flash, $modal,translationService) {
+
+    translationService.set(translations);
 
     $scope.ticketList = ticketList.list;
 
     $scope.sortSelection = [
-        {ref: 'date', label: 'Adate'},
-        {ref: 'category', label: 'Acategory'},
-        {ref: 'payer', label: 'Apayer'}
+        {ref: 'date', label: 'count.ticket.sort.date'},
+        {ref: 'category', label: 'count.ticket.sort.category'},
+        {ref: 'payer', label: 'count.ticket.sort.payer'}
     ];
 
     $scope.sortOption = 'date';

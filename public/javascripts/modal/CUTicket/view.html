@@ -1,6 +1,7 @@
 <div class="modal-header" >
     <button class="btn glyphicon glyphicon-remove" style="float:right" ng-click="close()"></button>
-    <h4 class="modal-title">Modal title</h4>
+    <h4 class="modal-title" ng-show="edit">{{'cuTicket.title.edit' | translateText}}</h4>
+    <h4 class="modal-title" ng-hide="edit">{{'cuTicket.title.create' | translateText}}</h4>
 </div>
 <div class="modal-body" dir-enter="submit()">
 
@@ -14,25 +15,14 @@
     <dir-field-text ng-info="fields.category" ng-show="balanced"></dir-field-text>
 
     <div class="row form-group">
-        <label class="col-md-3">Répartition équitable</label>
+        <label class="col-md-3">{{'cuTicket.balancedRepartition'  | translateText}}</label>
         <input class="col-md-6" type="checkbox" ng-model="balanced" value="true"/>
     </div>
 
     <div class="row">
         <div class="col-md-2 col-xs-3 payer-list" ng-repeat="roommate in roommateList">
             <input type="checkbox" ng-model="fields[roommate.id].isDebtor"/>
-
-            <div class="user_icon" ng-show="!!roommate.nameAbrv" style="
-                        background: hsl({{roommate.iconColor}},80%, 60%); /* Old browsers */
-                        background: -moz-linear-gradient(top,  hsl({{roommate.iconColor}},80%, 60%) 0%, hsl({{roommate.iconColor}},80%, 30%) 100%); /* FF3.6+ */
-                        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,hsl({{roommate.iconColor}},80%, 60%)), color-stop(100%,hsl({{roommate.iconColor}},80%, 30%))); /* Chrome,Safari4+ */
-                        background: -webkit-linear-gradient(top,  hsl({{roommate.iconColor}},80%, 60%) 0%,hsl({{roommate.iconColor}},80%, 30%) 100%); /* Chrome10+,Safari5.1+ */
-                        background: -o-linear-gradient(top,  hsl({{roommate.iconColor}},80%, 60%) 0%,hsl({{roommate.iconColor}},80%, 30%) 100%); /* Opera 11.10+ */
-                        background: -ms-linear-gradient(top,  hsl({{roommate.iconColor}},80%, 60%) 0%,hsl({{roommate.iconColor}},80%, 30%) 100%); /* IE10+ */
-                        background: linear-gradient(to bottom,  hsl({{roommate.iconColor}},80%, 60%) 0%,hsl({{roommate.iconColor}},80%, 30%) 100%); /* W3C */
-                        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='hsl({{roommate.iconColor}},80%, 60%)', endColorstr='hsl({{roommate.iconColor}},80%, 30%)',GradientType=0 ); /* IE6-9 */">
-                {{roommate.nameAbrv}}
-            </div>
+            <dir-user-icon ng-user="roommate"></dir-user-icon>
             <input
                     type="text"
                     ng-show="fields[roommate.id].isDebtor"
@@ -45,6 +35,6 @@
     </div>
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-default" ng-click="close()">@Messages("generic.close")</button>
-    <button type="button" class="btn btn-primary" ng-click="save()">@Messages("generic.submit")</button>
+    <button type="button" class="btn btn-default" ng-click="close()">{{'generic.close' | translateText}}</button>
+    <button type="button" class="btn btn-primary" ng-click="save()">{{'generic.save' | translateText}}</button>
 </div>

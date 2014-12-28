@@ -102,7 +102,7 @@ public class CountController extends AbstractController {
         for (Ticket ticket : ticketService.findByHome(securityController.getCurrentUser().getHome())) {
             ticketDTOList.addElement(ticketToTicketConverter.convert(ticket));
         }
-        return ok(views.html.home.count.resume.render(roommateDTO, listDTO,ticketDTOList));
+        return ok(views.html.home.count.resume.render(translationService.getTranslations(lang()),roommateDTO, listDTO,ticketDTOList));
     }
 
     @Security.Authenticated(SecurityController.class)
@@ -129,12 +129,6 @@ public class CountController extends AbstractController {
         }
 
 
-        return ok(views.html.home.count.tickets.render(roommateDTO,roommateDTOListDTO,ticketDTOList));
-    }
-
-    @Security.Authenticated(SecurityController.class)
-    @Transactional
-    public Result details() {
-        return play.mvc.Results.TODO;
+        return ok(views.html.home.count.tickets.render(translationService.getTranslations(lang()),roommateDTO,roommateDTOListDTO,ticketDTOList));
     }
 }

@@ -6,26 +6,26 @@ myApp.controller('CuTicketCtrl', function ($scope, $http, $flash, $modalInstance
 
     $scope.fields = {
         description: {
-            fieldTitle: "USER_IDENTIFIER",
+            fieldTitle: "generic.description",
             validationRegex: "[a-zA-Z0-9-]{1,255}",
-            validationMessage: "IDENTIFIER_CHECK_WRONG",
+            validationMessage: ['generic.validation.size','1','255'],
             focus: function () {
                 return true;
             }
         },
         date: {
-            fieldTitle: "USER_IDENTIFIER",
-            validationMessage: "IDENTIFIER_CHECK_WRONG",
+            fieldTitle: "generic.date",
+            validationMessage: "generic.validation.date",
             field: new Date()
         },
         value: {
-            fieldTitle: "USER_IDENTIFIER",
+            fieldTitle: "generic.price",
             validationRegex: ".+",
-            validationMessage: "IDENTIFIER_CHECK_WRONG",
+            validationMessage: "generic.validation.notNull",
             numbersOnly: "double"
         },
         category: {
-            fieldTitle: "USER_IDENTIFIER",
+            fieldTitle: "generic.category",
             autoCompleteValue: categoryList
         }
     };
@@ -67,6 +67,7 @@ myApp.controller('CuTicketCtrl', function ($scope, $http, $flash, $modalInstance
 
         //load old data
         if (!!ticket) {
+            $scope.edit=true;
             $scope.fields.description.field = angular.copy(ticket.description);
             $scope.fields.date.field = angular.copy(ticket.date);
             $scope.fields.category.field = angular.copy(ticket.category);

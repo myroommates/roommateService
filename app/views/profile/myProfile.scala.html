@@ -1,4 +1,4 @@
-@(registrationForm:Form[RegistrationForm],account:dto.RoommateDTO)
+@(translations:dto.TranslationsDTO,registrationForm:Form[RegistrationForm],account:dto.RoommateDTO)
 
 @import helper._
 @import com.fasterxml.jackson.databind.ObjectMapper
@@ -12,6 +12,7 @@
 
         <!-- load data -->
     <script>
+        var translations = @Html(new ObjectMapper().writeValueAsString(translations));
         var mySelf = @Html(new ObjectMapper().writeValueAsString(account));
     </script>
 

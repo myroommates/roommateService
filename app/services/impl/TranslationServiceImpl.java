@@ -1,7 +1,10 @@
 package services.impl;
 
+import dto.TranslationsDTO;
 import models.entities.Language;
+import models.storage.TranslationStore;
 import play.Logger;
+import play.i18n.Lang;
 import play.i18n.Messages;
 import services.TranslationService;
 import util.EmailMessage;
@@ -11,6 +14,11 @@ import util.ErrorMessage;
  * Created by florian on 11/11/14.
  */
 public class TranslationServiceImpl implements TranslationService {
+
+    @Override
+    public TranslationsDTO getTranslations(Lang lang){
+        return new TranslationsDTO(TranslationStore.TRANSLATIONS.get(lang));
+    }
 
 
     @Override

@@ -1,4 +1,6 @@
-myApp.controller('CountResumeCtrl', function ($scope, $http, $flash, $modal) {
+myApp.controller('CountResumeCtrl', function ($scope, $http, $flash, $modal,translationService) {
+
+    translationService.set(translations);
 
     $scope.ticketList=ticketList.list;
 

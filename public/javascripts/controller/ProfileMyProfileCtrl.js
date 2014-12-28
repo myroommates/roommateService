@@ -1,21 +1,22 @@
-myApp.controller('ProfileMyProfileCtrl', function ($scope, $http, $flash, $modal) {
+myApp.controller('ProfileMyProfileCtrl', function ($scope, $http, $flash, $modal,translationService) {
 
+    translationService.set(translations);
     $scope.roommate = mySelf;
 
     $scope.fields = {
         name: {
-            fieldTitle: "USER_IDENTIFIER",
+            fieldTitle: "generic.yourName",
             validationRegex: "^[a-zA-Z0-9-_%]{1,50}$",
-            validationMessage: "IDENTIFIER_CHECK_WRONG",
+            validationMessage: ["generic.validation.size",'1','50'],
             field:$scope.roommate.name,
             focus: function () {
                 return true;
             }
         },
         nameAbrv: {
-            fieldTitle: "USER_IDENTIFIER",
+            fieldTitle: "generic.yourNameAbrv",
             validationRegex: "^[a-zA-Z0-9-_%]{1,3}$",
-            validationMessage: "IDENTIFIER_CHECK_WRONG",
+            validationMessage: ["generic.validation.size",'1','3'],
             field:$scope.roommate.nameAbrv
         }
     };

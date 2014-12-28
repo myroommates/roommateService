@@ -1,17 +1,18 @@
-@(account: dto.RoommateDTO, countResumeList: dto.ListDTO[dto.count.CountResumeDTO],ticketList: dto.ListDTO[dto.TicketDTO])
+@(translations:dto.TranslationsDTO,account: dto.RoommateDTO, countResumeList: dto.ListDTO[dto.count.CountResumeDTO],ticketList: dto.ListDTO[dto.TicketDTO])
 
 @import com.fasterxml.jackson.databind.ObjectMapper
 
-@home_pattern("title", account) {
+@home_pattern("count.resume.title", account) {
 <div ng-controller="CountResumeCtrl" class="count-resume">
     <div class="container content-block">
 
-        <h3>Résumé</h3>
+        <h3>@Messages("count.resume.title")</h3>
 
         <div>
 
                 <!-- load data -->
             <script>
+            var translations = @Html(new ObjectMapper().writeValueAsString(translations));
             var countResumeList = @Html(new ObjectMapper().writeValueAsString(countResumeList));
             var ticketList = @Html(new ObjectMapper().writeValueAsString(ticketList));
             </script>
@@ -19,9 +20,9 @@
             <div class="row table-header">
                 <div class="col-md-2 hidden-sm hidden-xs" style="height: 20px"></div>
                 <div class="col-md-2 col-xs-3 value"></div>
-                <div class="col-md-2 col-xs-3 value">Dépensé</div>
-                <div class="col-md-2 col-xs-3 value">Dû</div>
-                <div class="col-md-2 col-xs-3 value">Balance</div>
+                <div class="col-md-2 col-xs-3 value">@Messages("count.resume.spend")</div>
+                <div class="col-md-2 col-xs-3 value">@Messages("count.resume.due")</div>
+                <div class="col-md-2 col-xs-3 value">@Messages("count.resume.balance")</div>
                 <div class="col-md-2 hidden-sm hidden-xs" style="height: 20px"></div>
             </div>
 
@@ -47,7 +48,7 @@
 
             <div class="row table-footer">
                 <div class="col-md-2 hidden-sm hidden-xs" style="height: 40px"></div>
-                <div class="col-md-2 col-xs-3" style="padding-left: 30px">Total</div>
+                <div class="col-md-2 col-xs-3" style="padding-left: 30px">@Messages("generic.total")</div>
                 <div class="col-md-2 col-xs-3 value">{{totalSpend()}}€</div>
                 <div class="col-md-2 col-xs-3 value">{{totalDept()}}€</div>
                 <div class="col-md-2 col-xs-3 value"></div>
@@ -58,7 +59,7 @@
     </div>
 
     <div class="container content-block">
-        <h3>Comment résoudre ?</h3>
+        <h3>@Messages("count.resume.howToResolve")</h3>
 
         <div ng-repeat="balance in balanceList" class="row resolution-box">
             <div class="hidden-xs hidden-sm  col-md-2 col-lg-3">

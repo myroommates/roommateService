@@ -1,5 +1,7 @@
 package services;
 
+import dto.TranslationsDTO;
+import play.i18n.Lang;
 import util.EmailMessage;
 import util.ErrorMessage;
 import models.entities.Language;
@@ -7,6 +9,8 @@ import models.entities.Language;
  * Created by florian on 6/12/14.
  */
 public interface TranslationService {
+
+    TranslationsDTO getTranslations(Lang lang);
 
     String getTranslation(ErrorMessage errorMessage, Language language, Object... params);
 

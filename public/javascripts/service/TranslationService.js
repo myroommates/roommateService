@@ -4,22 +4,14 @@ myApp.service("translationService", function ($rootScope, $filter, $http,$locale
     svc.elements = null;
 
     svc.set = function(elements){
-        svc.elements = elements;
+        svc.elements = elements.translations;
     };
 
     svc.get = function (code) {
-        var lang = $locale.id.split('-')[0];
 
-        var txt, v;
-        if (svc.elements == null) {
-            return "";
-        }
-        v = svc.elements[code];
-        if (v == null) {
-            return null;
-        }
-        txt = v.fallback || '';
-        return txt;
+        var v = svc.elements[code];
+
+        return v;
     };
 
     svc.translateExceptionsDTO = function (exception) {

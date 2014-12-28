@@ -1,4 +1,4 @@
-
+site.name=Roommate
 #generic
 generic.lastName=Last name
 generic.firstName=First name
@@ -10,6 +10,8 @@ generic.date=Date
 generic.close=Close
 generic.nameAbrv=Acronym
 generic.save=Save
+generic.total=Total
+generic.navigation=Navigation
 
 #
 # welcome
@@ -52,6 +54,20 @@ menu.logout=Log out
 menu.informations=Informations
 menu.about=About
 menu.myProfile=My profile
+
+# count resume
+count.resume.title=Resume
+count.resume.spend=Spend
+count.resume.due=Due
+count.resume.balance=Balance
+count.resume.howToResolve=How to resolve ?
+
+# count ticket
+count.tickets.title=Tickets list
+count.ticket.sort.date=Date
+count.ticket.sort.category=Category
+count.ticket.sort.payer=Payer
+
 
 #
 # Email

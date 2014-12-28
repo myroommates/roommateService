@@ -1,8 +1,8 @@
-@(account: dto.RoommateDTO, roommateList: dto.ListDTO[dto.RoommateDTO], ticketList: dto.ListDTO[dto.TicketDTO])
+@(translations:dto.TranslationsDTO,account: dto.RoommateDTO, roommateList: dto.ListDTO[dto.RoommateDTO], ticketList: dto.ListDTO[dto.TicketDTO])
 
 @import com.fasterxml.jackson.databind.ObjectMapper
 
-@home_pattern("title", account) {
+@home_pattern("count.tickets.title", account) {
 
 <div class="container content-block">
 
@@ -10,12 +10,13 @@
 
         <!-- load data -->
         <script>
+            var translations = @Html(new ObjectMapper().writeValueAsString(translations));
             var ticketList = @Html(new ObjectMapper().writeValueAsString(ticketList));
             var roommateList = @Html(new ObjectMapper().writeValueAsString(roommateList.getList));
             var mySelf = @Html(new ObjectMapper().writeValueAsString(account));
         </script>
 
-        <select ng-options="choice.ref as choice.label for choice in sortSelection" ng-model="sortOption"></select>
+        <select ng-options="choice.ref as choice.label | translateText for choice in sortSelection" ng-model="sortOption"></select>
 
 
         <ul class="element_list">

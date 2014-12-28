@@ -35,6 +35,6 @@ public class RoommateManagementController extends AbstractController{
             roommateDTOListDTO.addElement(roommateToRoommateDTOConverter.convert(roommate));
         }
 
-        return ok(views.html.home.roommate.render(roommateDTO,roommateDTOListDTO ));
+        return ok(views.html.home.roommate.render(translationService.getTranslations(lang()),roommateDTO,roommateDTOListDTO ));
     }
 }

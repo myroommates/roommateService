@@ -1,34 +1,114 @@
-
+site.name=Roommate
 #generic
-generic.lastName=Nom
-generic.firstName=Prénom
-generic.name=Nom
-generic.submit=Soumettre
-generic.back=Retour
+generic.lastName=Last name
+generic.firstName=First name
+generic.name=Name
+generic.submit=Submit
+generic.back=Back
+generic.description=Description
+generic.date=Date
+generic.close=Close
+generic.nameAbrv=Acronym
+generic.save=Save
+generic.total=Total
+generic.navigation=Navigation
 
 #
 # welcome
 #
-welcome.title.registration=Pas encore inscrit ?
-welcome.button.registration=Insrivez-vous !
+welcome.title.registration=Not registered yet ?
+welcome.button.registration=Register now!
 
 #registration
-registration.form.title=Enregistrement
-registration.form.yourEmail=Votre adresse e-mail
-registration.form.password=Votre mot de passe
-registration.form.password.help=Entre 6 et 18 lettres, chiffres ou -_
-registration.form.repeatPassword=Répétez votre mot de passe
-registration.form.validation.repeatPassword=Les mots de passe sont différents
-registration.form.email.alreadyExists=Cette adresse e-mail est déjà utilisée
-registration.form.keepSessionOpen=Garder ma session ouverte
+registration.form.title=Registration
+registration.form.yourEmail=Your email address
+registration.form.password=Your password
+registration.form.password.help=Between 6 and 18 letters, numbers or -_
+registration.form.repeatPassword=Repeat your password
+registration.form.validation.repeatPassword=Passwords are different
+registration.form.email.alreadyExists=This email address is already used
+registration.form.keepSessionOpen=Keep my session open
+registration.form.nameAbrv.help=Choose a acronym for your name (maximum 3 letters)
 
 #login
-login.form.title=Connectez-vous
-login.form.submit=Connection
-login.form.button.forgotPassword=Mot de passe perdu ?
-login.form.wrongCredential=Mauvais email et / ou mot de passe
+login.form.title=Login you
+login.form.submit=Login
+login.form.button.forgotPassword=Forgot your password ?
+login.form.wrongCredential=Wrong email and / or password
 
 #form
-error.required=Ce champs est nécessaire
-error.minLength=Minimum %s caractères
-error.maxLength=Maximum %s caractères
+error.required=This field is required
+error.minLength=Minimum %s characters
+error.maxLength=Maximum %s characters
+
+#menu
+menu.roommate_manager=Roommate
+menu.count=Count
+menu.count.resume=Resume
+menu.count.tickets=Tickets
+menu.count.details=Details
+menu.events=Events
+menu.shopping=Shopping
+menu.preferences=Preferences
+menu.logout=Log out
+menu.informations=Informations
+menu.about=About
+menu.myProfile=My profile
+
+# count resume
+count.resume.title=Resume
+count.resume.spend=Spend
+count.resume.due=Due
+count.resume.balance=Balance
+count.resume.howToResolve=How to resolve ?
+
+# count ticket
+count.tickets.title=Tickets list
+count.ticket.sort.date=Date
+count.ticket.sort.category=Category
+count.ticket.sort.payer=Payer
+
+
+#
+# Email
+#
+REGISTRATION_EMAIL_TITLE=Welcome to RoommateApp !
+REGISTRATION_EMAIL_BODY=Welcome {0}!<br/><br/>Your smartphone is now logged to your roommateApp ! If your smartphone is logout, you can login you to your account with the follow code : {1}<br/><br/>Follow 'Reactivation' instruction to login you<br/><br/>
+INVITATION_EMAIL_TITLE=Your are invited to RoommateApp !
+INVITATION_EMAIL_BODY=Hello {0},<br/><br/>{1} has invite you to his RoommateApp account !<br/><br/>Use the following code to login you  : {2}<br/><br/>Follow the 'Reactivation' instruction to login you<br/><br/>
+
+#
+# ERROR
+#
+JSON_CONVERSION_ERROR=The request content cannot be converted to a {0}.
+WRONG_AUTHORIZATION=You have not the authorization
+LOGIN_WRONG_PASSWORD_LOGIN=wrong password / login
+NOT_CONNECTED=You are not connected
+HOME_NAME_ALREADY_USED=This home name is already used. Please choose an other
+EMAIL_ALREADY_USED=This email is already used. Please choose an other
+NOT_YOU_ROOMMATE=this is not your roommate : {O}
+ENTITY_NOT_FOUND=this entity {0} was not found : {1}
+NOT_YOU_CATEGORY=this is not your category : {O}
+NOT_YOU_TICKET=this is not your ticket : {O}
+NOT_TICKET_CREATOR=You are not the payer of the ticket {0} and you cannot edit it
+CANNOT_REMOVE_YOURSELF=You cannot remove yourself
+NOT_YOU_HOME=this is not your home : {0}
+WRONG_PASSWORD=The password must be composed of 6-18 letters or numbers
+UNIQUE_CONSTRAIN_VIOLATION=a unique constraint was not respected on the table {0}, constraint {1}, ids {2}
+CATEGORY_WITH_SAME_NAME_ALREADY_EXISTS=A category named {0} already exists. Please choose an other one.
+CATEGORY_USED=The category {0} is already used by a ticket and cannot be removed
+ROOMMATE_USED={0} is used by a ticket and cannot removed
+NOT_YOU_EVENT=this is not your event : {0}
+NOT_EVENT_CREATOR=You are not the payer of the event {0} and you cannot edit it
+NOT_YOU_SHOPPING_ITEM=this is not your shopping item : {0}
+NOT_ITEM_CREATOR=You are not the payer of the shopping item {0} and you cannot edit it
+ACTIVATION_KEY_NOT_FOUND=The activation {0} key was not found
+DTO_NULL=DTO is null
+DTO_NOT_EXPECTED=Wrong type of DTO received. Expected : {0}, receive : {1}
+FATAL_ERROR=A fatal error was throwed : {0}
+VALIDATION_SIZE=The field {0} must be have between {1} and {2} characters
+VALIDATION_NOT_NULL=The field {0} cannot be null
+DTO_VERIFICATION_PATTERN_STRING_EXPECTED=A type string is expected for the pattern annotation, but th field {0} is a {1}
+VALIDATION_PATTERN=The field {0} expects the pattern {1}
+NOT_YOURSELF=The id {0} is not your
+NOT_YOUR_OLD_PASSWORD=This is not your old password

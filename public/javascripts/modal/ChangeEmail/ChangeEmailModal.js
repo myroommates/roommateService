@@ -4,9 +4,9 @@ myApp.controller('ChangeEmailModalCtrl', function ($scope, $http, $flash, $modal
     $scope.fields = {
         oldPassword: {
             name:'password',
-            fieldTitle: "USER_IDENTIFIER",
+            fieldTitle: "generic.oldPassword",
             validationRegex: "^[a-zA-Z0-9-_%]{6,18}$",
-            validationMessage: "IDENTIFIER_CHECK_WRONG",
+            validationMessage: "generic.validation.password",
             fieldType:'password',
             focus: function(){
                 return true;
@@ -14,9 +14,9 @@ myApp.controller('ChangeEmailModalCtrl', function ($scope, $http, $flash, $modal
         },
         newEmail: {
             name:'email',
-            fieldTitle: "USER_IDENTIFIER",
+            fieldTitle: "changeEmailModal.email",
             validationRegex: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-            validationMessage: "IDENTIFIER_CHECK_WRONG"
+            validationMessage: "generic.validation.email"
         }
     };
 

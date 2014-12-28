@@ -1,4 +1,4 @@
-@(account: dto.RoommateDTO, roommatesList: dto.ListDTO[dto.RoommateDTO])
+@(translations:dto.TranslationsDTO,account: dto.RoommateDTO, roommatesList: dto.ListDTO[dto.RoommateDTO])
 
 @import com.fasterxml.jackson.databind.ObjectMapper
 
@@ -8,6 +8,7 @@
 
             <!-- load data -->
         <script>
+            var translations = @Html(new ObjectMapper().writeValueAsString(translations));
             var initialData = @Html(new ObjectMapper().writeValueAsString(roommatesList.getList));
         </script>
 

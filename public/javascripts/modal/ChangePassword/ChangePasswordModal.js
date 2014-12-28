@@ -3,24 +3,24 @@ myApp.controller('ChangePasswordModalCtrl', function ($scope, $http, $flash, $mo
     $scope.fields = {
         oldPassword: {
             name:'password',
-            fieldTitle: "OLD_PASSWORD",
+            fieldTitle: "generic.oldPassword",
             validationRegex: "^[a-zA-Z0-9-_%]{6,18}$",
-            validationMessage: "IDENTIFIER_CHECK_WRONG",
+            validationMessage: "generic.validation.password",
             fieldType: 'password',
             focus: function () {
                 return true;
             }
         },
         newPassword: {
-            fieldTitle: "USER_IDENTIFIER",
+            fieldTitle: "changePasswordModal.newPassword",
             validationRegex: "^[a-zA-Z0-9-_%]{6,18}$",
-            validationMessage: "IDENTIFIER_CHECK_WRONG",
+            validationMessage: "generic.validation.password",
             fieldType: 'password'
         },
         repeatPassword: {
-            fieldTitle: "USER_IDENTIFIER",
+            fieldTitle: "generic.repeatPassword",
             fieldType: 'password',
-            validationMessage: "IDENTIFIER_CHECK_WRONG",
+            validationMessage: "generic.validation.repeatPassword",
             validation: function () {
                 return $scope.o.newPassword === $scope.o.repeatPassword;
             }

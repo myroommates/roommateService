@@ -15,8 +15,8 @@
                     typeahead-min-length='1'>
 
         </div>
-        <div class="col-md-3 errors" ng-show="displayError()===true">{{getInfo().validationMessage}}</div>
+        <div class="col-md-3 errors" ng-show="displayError()===true">{{getInfo().validationMessage | translateText}}</div>
     </div>
     <div class="col-md-3 hidden-sm hidden-xs"></div>
-    <div class="col-md-6 help" ng-show="getInfo().details!=null">getInfo().details</div>
+    <div class="col-md-6 help" ng-show="getInfo().details!=null">{{getInfo().details | translateText}}</div>
 </div>

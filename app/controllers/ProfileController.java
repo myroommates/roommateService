@@ -57,6 +57,6 @@ public class ProfileController extends AbstractController{
 
 
 
-        return ok(views.html.profile.myProfile.render(registrationForm,account));
+        return ok(views.html.profile.myProfile.render(translationService.getTranslations(lang()),registrationForm,account));
     }
 }
