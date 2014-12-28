@@ -34,6 +34,7 @@ public class Global extends GlobalSettings {
 
     @Override
     public void beforeStart(Application app) {
+        /*
         Logger.info("Global.beforeStart - START");
 
         // Put all translations in memory
@@ -74,6 +75,7 @@ public class Global extends GlobalSettings {
         }
         Logger.info("TRANSLATIONS"+TRANSLATIONS);
         Logger.info("Global.beforeStart - END");
+        */
     }
 
     @Override
