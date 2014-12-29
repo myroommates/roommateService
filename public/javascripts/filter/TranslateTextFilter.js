@@ -4,10 +4,8 @@ myApp.filter("translateText", function ($sce, translationService) {
 
         if (typeof input === 'object') {
             text = translationService.get(input[0]);
-            console.log("je suis un array : " + input+"//"+text);
             for (var key in input) {
                 if (key != 0) {
-                    console.log('{' + (parseFloat(key) -1) + '}'+input[key]);
                     text = text.replace('{' + (parseFloat(key) -1) + '}', input[key]);
                 }
             }

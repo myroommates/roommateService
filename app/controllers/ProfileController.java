@@ -49,14 +49,7 @@ public class ProfileController extends AbstractController{
         registrationForm1.setNameAbrv(securityController.getCurrentUser().getNameAbrv());
 
         Form<RegistrationForm> registrationForm = Form.form(RegistrationForm.class).fill(registrationForm1);
-        /*
-        if(registrationForm.hasErrors()) {
-            return badRequest(views.html.profile.myProfile.render(registrationForm,account));
-        }
-        */
 
-
-
-        return ok(views.html.profile.myProfile.render(translationService.getTranslations(lang()),registrationForm,account));
+        return ok(views.html.home.profile.myProfile.render(translationService.getTranslations(lang()),registrationForm,account));
     }
 }

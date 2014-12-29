@@ -2,7 +2,7 @@
 @import 'widget/_menu';
 @import 'widget/_content';
 @import 'widget/_user_icon';
-@import 'widget/_roommate_manager';
+@import 'widget/_element_list';
 @import 'widget/_cr-messenger';
 @import 'widget/_field_date';
 @import 'widget/_field_text';
@@ -63,9 +63,32 @@ header {
     height: 50px;
     background-color: @color-header-bg;
 
+    .sidebar-button {
+        float: left;
+        margin-right: 30px;
+        margin-left: 15px;
+    }
+
+    & > *{
+        line-height: 50px;
+    }
+
     h1 {
         color: @color-header-title;
         margin: 0 25px;
+        font-size: 30px;
+    }
+
+    @media (max-width: 768px) {
+        h1 {
+            font-size: 24px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        h1 {
+            font-size: 18px;
+        }
     }
 }
 

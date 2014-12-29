@@ -1,17 +1,31 @@
 site.name=Roommate
+
 #generic
-generic.lastName=Last name
-generic.firstName=First name
-generic.name=Name
-generic.submit=Submit
 generic.back=Back
-generic.description=Description
-generic.date=Date
+generic.category=Category
 generic.close=Close
+generic.date=Date
+generic.description=Description
+generic.firstName=First name
+generic.lastName=Last name
+generic.name=Name
 generic.nameAbrv=Acronym
-generic.save=Save
-generic.total=Total
 generic.navigation=Navigation
+generic.oldPassword=Old password
+generic.price=Price
+generic.repeatPassword=Repeat your password
+generic.save=Save
+generic.submit=Submit
+generic.total=Total
+generic.value=Value
+generic.validation.size=Between {0} and {1} characters
+generic.validation.date=Select a date
+generic.validation.notNull=This field is required
+generic.validation.password=Between 6 and 18 letters or number or _-%
+generic.validation.repeatPassword=The both password are not the same
+generic.validation.email=Please get a correct email
+generic.yourName=Your name
+generic.yourNameAbrv=Your acronym
 
 #
 # welcome
@@ -42,7 +56,9 @@ error.minLength=Minimum %s characters
 error.maxLength=Maximum %s characters
 
 #menu
-menu.roommate_manager=Roommate
+menu.admin=Admin
+menu.admin.roommate_list=Roommate list
+menu.admin.preferences=Preferenes
 menu.count=Count
 menu.count.resume=Resume
 menu.count.tickets=Tickets
@@ -56,17 +72,55 @@ menu.about=About
 menu.myProfile=My profile
 
 # count resume
-count.resume.title=Resume
+count.resume.title=Count > Resume
 count.resume.spend=Spend
 count.resume.due=Due
 count.resume.balance=Balance
 count.resume.howToResolve=How to resolve ?
 
 # count ticket
-count.tickets.title=Tickets list
+count.tickets.title=Count > Tickets list
 count.ticket.sort.date=Date
 count.ticket.sort.category=Category
 count.ticket.sort.payer=Payer
+count.tickets.sortBy=Sort by
+
+#
+# profile
+#
+
+# my profile
+profile.myProfile.title=My profile
+
+#
+# admin
+#
+
+#roommate list
+admin.roommateList.title=Admin > Roommate list
+
+#preferences
+admin.preferences.title=Admin > Preferences
+
+#about
+about.title=About
+
+#
+# Modal
+#
+
+# cu ticket modal
+cuTicket.title.edit=Edit a ticket
+cuTicket.title.create=Create a ticket
+cuTicket.balancedRepartition=Balanced repartition
+
+# changePasswordModal
+changePasswordModal.newPassword=New password
+changePasswordModal.title=Change your password
+
+# changeEmailModal
+changeEmailModal.title=Change your password
+changeEmailModal.email=Your new email
 
 
 #

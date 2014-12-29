@@ -5,7 +5,7 @@
             <div class="dropdown"></div>
             <a id="{{id}}" role="button" data-toggle="dropdown" data-target="#" href="" class="dropdown-toggle">
             <div class="input-group">
-                <input type="text" ng-model="resultFormated" class="form-control"/><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                <input ng-disabled="getInfo().disabled()" type="text" ng-model="resultFormated" class="form-control"/><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
             </div>
             <ul role="menu" aria-labelledby="dLabel" class="dropdown-menu date_input">
                 <datetimepicker data-ng-model="result" data-datetimepicker-config="{ dropdownSelector: '{{idHtag}}',minView:'day' }"></datetimepicker>

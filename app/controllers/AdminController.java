@@ -15,7 +15,7 @@ import services.impl.RoommateServiceImpl;
 /**
  * Created by florian on 22/12/14.
  */
-public class RoommateManagementController extends AbstractController{
+public class AdminController extends AbstractController{
 
     //converter
     private RoommateToRoommateDTOConverter roommateToRoommateDTOConverter = new RoommateToRoommateDTOConverter();
@@ -25,7 +25,7 @@ public class RoommateManagementController extends AbstractController{
 
     @Security.Authenticated(SecurityController.class)
     @Transactional
-    public Result index() {
+    public Result roommateList() {
 
         RoommateDTO roommateDTO = roommateToRoommateDTOConverter.convert(securityController.getCurrentUser());
 
@@ -35,6 +35,15 @@ public class RoommateManagementController extends AbstractController{
             roommateDTOListDTO.addElement(roommateToRoommateDTOConverter.convert(roommate));
         }
 
-        return ok(views.html.home.roommate.render(translationService.getTranslations(lang()),roommateDTO,roommateDTOListDTO ));
+        return ok(views.html.home.admin.roommate_list.render(translationService.getTranslations(lang()),roommateDTO,roommateDTOListDTO ));
+    }
+
+    @Security.Authenticated(SecurityController.class)
+    @Transactional
+    public Result preferences(){
+
+        RoommateDTO roommateDTO = roommateToRoommateDTOConverter.convert(securityController.getCurrentUser());
+
+        return ok(views.html.home.admin.preferences.render(translationService.getTranslations(lang()),roommateDTO));
     }
 }

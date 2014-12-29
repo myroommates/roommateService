@@ -1,77 +1,128 @@
 site.name=Roommate
+
 #generic
-generic.lastName=Last name
-generic.firstName=First name
-generic.name=Name
-generic.submit=Submit
-generic.back=Back
-generic.description=Description
+generic.back=Retour
+generic.category=Categorie
+generic.close=Fermer
 generic.date=Date
-generic.close=Close
-generic.nameAbrv=Acronym
-generic.save=Save
-generic.total=Total
+generic.description=Description
+generic.firstName=Prénom
+generic.lastName=Nom de famille
+generic.name=Name
+generic.nameAbrv=Acronyme
 generic.navigation=Navigation
+generic.oldPassword=Ancien mot de passe
+generic.price=Prix
+generic.repeatPassword=Répéter le mot de passe
+generic.save=Sauver
+generic.submit=Soumettre
+generic.total=Total
+generic.value=Valeur
+generic.validation.size=Entre {0} et {1} caractères
+generic.validation.date=Sélectionner une date
+generic.validation.notNull=Ce champs est obligatoire
+generic.validation.password=Entre 6 et 18 lettres ou nombre ou _-%
+generic.validation.repeatPassword=Les deux mots de passe ne correspondent pas
+generic.validation.email=Merci de donner une adresse e-mail correcte
+generic.yourName=Votre nom
+generic.yourNameAbrv=Votre acronyme
 
 #
 # welcome
 #
-welcome.title.registration=Not registered yet ?
-welcome.button.registration=Register now!
+welcome.title.registration=Pas encre enregisté ?
+welcome.button.registration=Enregistrez-vous maintenant!
 
 #registration
-registration.form.title=Registration
-registration.form.yourEmail=Your email address
-registration.form.password=Your password
-registration.form.password.help=Between 6 and 18 letters, numbers or -_
-registration.form.repeatPassword=Repeat your password
-registration.form.validation.repeatPassword=Passwords are different
-registration.form.email.alreadyExists=This email address is already used
-registration.form.keepSessionOpen=Keep my session open
-registration.form.nameAbrv.help=Choose a acronym for your name (maximum 3 letters)
+registration.form.title=Enregistrement
+registration.form.yourEmail=Votre adresse email
+registration.form.password=Votre mot de passe
+registration.form.email.alreadyExists=Cette adresse email est déjà utilisée
+registration.form.keepSessionOpen=Garder ma session ouverte
+registration.form.nameAbrv.help=Choisissez un acronyme (maximum 3 lettres)
 
 #login
-login.form.title=Login you
+login.form.title=Connectez-vous
 login.form.submit=Login
-login.form.button.forgotPassword=Forgot your password ?
-login.form.wrongCredential=Wrong email and / or password
+login.form.button.forgotPassword=Mot de passe oublié ?
+login.form.wrongCredential=Mauvais login et / ou mot de passe
 
 #form
-error.required=This field is required
-error.minLength=Minimum %s characters
-error.maxLength=Maximum %s characters
+error.required=Ce champs est nécessaure
+error.minLength=Minimum %s caractères
+error.maxLength=Maximum %s caractères
 
 #menu
-menu.roommate_manager=Roommate
-menu.count=Count
-menu.count.resume=Resume
+menu.admin=Administration
+menu.admin.roommate_list=Liste des collocataires
+menu.admin.preferences=Préférences
+menu.count=Compte
+menu.count.resume=Résumé
 menu.count.tickets=Tickets
-menu.count.details=Details
-menu.events=Events
-menu.shopping=Shopping
-menu.preferences=Preferences
-menu.logout=Log out
+menu.count.details=Détails
+menu.events=Evènements
+menu.shopping=Courses
+menu.preferences=Préférénces
+menu.logout=Déconnection
 menu.informations=Informations
-menu.about=About
-menu.myProfile=My profile
+menu.about=A propos
+menu.myProfile=Mon profile
 
 # count resume
-count.resume.title=Resume
-count.resume.spend=Spend
-count.resume.due=Due
+count.resume.title=Compte > Résumé
+count.resume.spend=Dépense
+count.resume.due=dette
 count.resume.balance=Balance
-count.resume.howToResolve=How to resolve ?
+count.resume.howToResolve=Comment résoudre ?
 
 # count ticket
-count.tickets.title=Tickets list
+count.tickets.title=Compte > Liste des tickets
 count.ticket.sort.date=Date
-count.ticket.sort.category=Category
-count.ticket.sort.payer=Payer
+count.ticket.sort.category=Catégorie
+count.ticket.sort.payer=Payeur
+count.tickets.sortBy=Trier par
+
+#
+# profile
+#
+
+# my profile
+profile.myProfile.title=Mon profile
+
+#
+# admin
+#
+
+#roommate list
+admin.roommateList.title=Administration > Liste des collocataires
+
+#preferences
+admin.preferences.title=Administration > Préférences
+
+#about
+about.title=A propos
+
+#
+# Modal
+#
+
+# cu ticket modal
+cuTicket.title.edit=Editer un ticket
+cuTicket.title.create=Créer a ticket
+cuTicket.balancedRepartition=Répartition équilibrée
+
+# changePasswordModal
+changePasswordModal.newPassword=Nouveau mot de passe
+changePasswordModal.title=Changer votre mot de passe
+
+# changeEmailModal
+changeEmailModal.title=Changer votre adresse email
+changeEmailModal.email=Votre nouvelle adresse email
 
 
 #
 # Email
-#
+# TODO
 REGISTRATION_EMAIL_TITLE=Welcome to RoommateApp !
 REGISTRATION_EMAIL_BODY=Welcome {0}!<br/><br/>Your smartphone is now logged to your roommateApp ! If your smartphone is logout, you can login you to your account with the follow code : {1}<br/><br/>Follow 'Reactivation' instruction to login you<br/><br/>
 INVITATION_EMAIL_TITLE=Your are invited to RoommateApp !
@@ -80,25 +131,21 @@ INVITATION_EMAIL_BODY=Hello {0},<br/><br/>{1} has invite you to his RoommateApp 
 #
 # ERROR
 #
-JSON_CONVERSION_ERROR=The request content cannot be converted to a {0}.
-WRONG_AUTHORIZATION=You have not the authorization
-LOGIN_WRONG_PASSWORD_LOGIN=wrong password / login
-NOT_CONNECTED=You are not connected
-HOME_NAME_ALREADY_USED=This home name is already used. Please choose an other
-EMAIL_ALREADY_USED=This email is already used. Please choose an other
-NOT_YOU_ROOMMATE=this is not your roommate : {O}
-ENTITY_NOT_FOUND=this entity {0} was not found : {1}
-NOT_YOU_CATEGORY=this is not your category : {O}
-NOT_YOU_TICKET=this is not your ticket : {O}
-NOT_TICKET_CREATOR=You are not the payer of the ticket {0} and you cannot edit it
-CANNOT_REMOVE_YOURSELF=You cannot remove yourself
+JSON_CONVERSION_ERROR=La requête ne peut être convertie en {0}.
+WRONG_AUTHORIZATION=Vous n'avez pas l'autorisation
+LOGIN_WRONG_PASSWORD_LOGIN=Mauvais mot de passe / email
+NOT_CONNECTED=Vous n'êtes pas connecté
+EMAIL_ALREADY_USED=Cette adresse email est déjà utilisée.
+NOT_YOU_ROOMMATE=Ce n'est pas votre collocataire: {O}
+ENTITY_NOT_FOUND=Cette entité {0} n'a pas été trouvée : {1}
+NOT_YOU_TICKET=Ce n'est pas votre ticket : {O}
+NOT_TICKET_CREATOR=Vous n'êtes pas le créateur du ticket {0} et ne pouvez l'éditer
+CANNOT_REMOVE_YOURSELF=Vous ne pouvez vous supprimer vous-même
 NOT_YOU_HOME=this is not your home : {0}
-WRONG_PASSWORD=The password must be composed of 6-18 letters or numbers
+WRONG_PASSWORD=Le mot de passe doit être composé entre 6 et 18 lettres ou nombre ou _-%
 UNIQUE_CONSTRAIN_VIOLATION=a unique constraint was not respected on the table {0}, constraint {1}, ids {2}
-CATEGORY_WITH_SAME_NAME_ALREADY_EXISTS=A category named {0} already exists. Please choose an other one.
-CATEGORY_USED=The category {0} is already used by a ticket and cannot be removed
 ROOMMATE_USED={0} is used by a ticket and cannot removed
-NOT_YOU_EVENT=this is not your event : {0}
+NOT_YOU_EVENT=Ce n'est pas votre évènement : {0}
 NOT_EVENT_CREATOR=You are not the payer of the event {0} and you cannot edit it
 NOT_YOU_SHOPPING_ITEM=this is not your shopping item : {0}
 NOT_ITEM_CREATOR=You are not the payer of the shopping item {0} and you cannot edit it

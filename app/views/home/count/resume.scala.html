@@ -49,8 +49,8 @@
             <div class="row table-footer">
                 <div class="col-md-2 hidden-sm hidden-xs" style="height: 40px"></div>
                 <div class="col-md-2 col-xs-3" style="padding-left: 30px">@Messages("generic.total")</div>
-                <div class="col-md-2 col-xs-3 value">{{totalSpend()}}€</div>
-                <div class="col-md-2 col-xs-3 value">{{totalDept()}}€</div>
+                <div class="col-md-2 col-xs-3 value">{{totalSpend()  | number:2}}€</div>
+                <div class="col-md-2 col-xs-3 value">{{totalDept()  | number:2}}€</div>
                 <div class="col-md-2 col-xs-3 value"></div>
                 <div class="col-md-2 hidden-sm hidden-xs" style="height: 40px"></div>
             </div>

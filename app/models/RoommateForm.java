@@ -38,7 +38,7 @@ public class RoommateForm{
     public List<ValidationError> validate() {
         List<ValidationError> errors = new ArrayList<>();
         if (!password.equals(repeatPassword)) {
-            errors.add(new ValidationError("repeatPassword", Messages.get("registration.form.validation.repeatPassword")));
+            errors.add(new ValidationError("repeatPassword", Messages.get("generic.validation.repeatPassword")));
         }
         return errors.isEmpty() ? null : errors;
     }

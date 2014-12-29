@@ -2,6 +2,7 @@ myApp.controller('ProfileMyProfileCtrl', function ($scope, $http, $flash, $modal
 
     translationService.set(translations);
     $scope.roommate = mySelf;
+    $scope.loading=false;
 
     $scope.fields = {
         name: {
@@ -11,13 +12,19 @@ myApp.controller('ProfileMyProfileCtrl', function ($scope, $http, $flash, $modal
             field:$scope.roommate.name,
             focus: function () {
                 return true;
+            },
+            disabled:function(){
+                return $scope.loading;
             }
         },
         nameAbrv: {
             fieldTitle: "generic.yourNameAbrv",
             validationRegex: "^[a-zA-Z0-9-_%]{1,3}$",
             validationMessage: ["generic.validation.size",'1','3'],
-            field:$scope.roommate.nameAbrv
+            field:$scope.roommate.nameAbrv,
+            disabled:function(){
+                return $scope.loading;
+            }
         }
     };
 
@@ -77,15 +84,19 @@ myApp.controller('ProfileMyProfileCtrl', function ($scope, $http, $flash, $modal
                 nameAbrv: $scope.fields.nameAbrv.field
             };
 
+            $scope.loading=true;
+
             $http({
                 'method': "PUT",
                 'url': "/rest/roommate/"+$scope.roommate.id,
                 'headers': "Content-Type:application/json",
                 'data': dto
             }).success(function (data, status) {
+                $scope.loading=false;
                 $scope.close();
             })
             .error(function (data, status) {
+                    $scope.loading=false;
                 $flash.error(data.message);
             });
         }

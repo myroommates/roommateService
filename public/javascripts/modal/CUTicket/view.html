@@ -10,20 +10,22 @@
 
     <dir-field-text ng-info="fields.description"></dir-field-text>
 
-    <dir-field-text ng-info="fields.value" ng-show="balanced"></dir-field-text>
-
-    <dir-field-text ng-info="fields.category" ng-show="balanced"></dir-field-text>
+    <dir-field-text ng-info="fields.category"></dir-field-text>
 
     <div class="row form-group">
         <label class="col-md-3">{{'cuTicket.balancedRepartition'  | translateText}}</label>
-        <input class="col-md-6" type="checkbox" ng-model="balanced" value="true"/>
+        <input ng-disabled="loading" class="col-md-6" type="checkbox" ng-model="balanced" value="true"/>
     </div>
+
+    <dir-field-text ng-info="fields.value"></dir-field-text>
+
 
     <div class="row">
         <div class="col-md-2 col-xs-3 payer-list" ng-repeat="roommate in roommateList">
-            <input type="checkbox" ng-model="fields[roommate.id].isDebtor"/>
+            <input ng-disabled="loading" type="checkbox" ng-model="fields[roommate.id].isDebtor"/>
             <dir-user-icon ng-user="roommate"></dir-user-icon>
             <input
+                    ng-disabled="loading || !fields[roommate.id].isDebtor || balanced"
                     type="text"
                     ng-show="fields[roommate.id].isDebtor"
                     class="form-control ng-pristine ng-valid"
@@ -35,6 +37,7 @@
     </div>
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-default" ng-click="close()">{{'generic.close' | translateText}}</button>
-    <button type="button" class="btn btn-primary" ng-click="save()">{{'generic.save' | translateText}}</button>
+    <button ng-disabled="loading" type="button" class="btn btn-default" ng-click="close()">{{'generic.close' | translateText}}</button>
+    <button ng-disabled="loading" type="button" class="btn btn-primary" ng-click="save()">{{'generic.save' | translateText}}</button>
+    <img src="/assets/images/modal-loading.gif" ng-show="loading" />
 </div>

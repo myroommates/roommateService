@@ -15,6 +15,6 @@ public class HomeController extends AbstractController{
     @Security.Authenticated(SecurityController.class)
     @Transactional
     public Result index(){
-        return redirect("/roommate_management");
+        return redirect("/admin/roommate_list");
     }
 }

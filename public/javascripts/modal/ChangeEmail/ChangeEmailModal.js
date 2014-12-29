@@ -1,5 +1,6 @@
 myApp.controller('ChangeEmailModalCtrl', function ($scope, $http, $flash, $modalInstance,roommate,setEmail) {
 
+    $scope.loading=false;
 
     $scope.fields = {
         oldPassword: {
@@ -10,13 +11,19 @@ myApp.controller('ChangeEmailModalCtrl', function ($scope, $http, $flash, $modal
             fieldType:'password',
             focus: function(){
                 return true;
+            },
+            disabled:function(){
+                return $scope.loading;
             }
         },
         newEmail: {
             name:'email',
             fieldTitle: "changeEmailModal.email",
             validationRegex: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-            validationMessage: "generic.validation.email"
+            validationMessage: "generic.validation.email",
+            disabled:function(){
+                return $scope.loading;
+            }
         }
     };
 
@@ -51,16 +58,20 @@ myApp.controller('ChangeEmailModalCtrl', function ($scope, $http, $flash, $modal
                 newEmail: $scope.fields.newEmail.field
             };
 
+            $scope.loading=true;
+
             $http({
                 'method': "PUT",
                 'url': "/rest/roommate/email/"+roommate.id,
                 'headers': "Content-Type:application/json",
                 'data': dto
             }).success(function (data, status) {
+                $scope.loading=false;
                 $scope.close();
                 setEmail(data.email);
             })
             .error(function (data, status) {
+                $scope.loading=false;
                 $flash.error(data.message);
             });
         }

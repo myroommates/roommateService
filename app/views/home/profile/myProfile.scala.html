@@ -6,7 +6,7 @@
 @implicitField = @{ FieldConstructor(widget.fieldCustom.f) }
 
 
-@home_pattern("title", account) {
+@home_pattern("profile.myProfile.title", account) {
 <div class="content-block" ng-controller="ProfileMyProfileCtrl">
 
 
@@ -50,7 +50,7 @@
                 <div class="row">
                     <label class="col-md-3">@Messages("registration.form.keepSessionOpen")</label>
                     <div class="col-md-6">
-                        <input type="checkbox" ng-model="roommate.keepSessionOpen">
+                        <input ng-disabled="loading" type="checkbox" ng-model="roommate.keepSessionOpen">
                     </div>
                     <div class="col-md-3"></div>
                 </div>
@@ -58,7 +58,8 @@
 
             <div class="col-md-3 hidden-sm hidden-xs"></div>
             <div class="actions">
-                <input type="button" ng-click="save()" class="btn btn-primary" value="@Messages("generic.save")">
+                <input ng-disabled="loading" type="button" ng-click="save()" class="btn btn-primary" value="@Messages("generic.save")">
+                <img src="/assets/images/modal-loading.gif" ng-show="loading" />
             </div>
 </div>
 }

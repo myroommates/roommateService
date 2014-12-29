@@ -5,14 +5,19 @@ import models.storage.TranslationStore;
 import play.Application;
 import play.GlobalSettings;
 import play.Logger;
+import play.api.i18n.MessagesPlugin;
 import play.i18n.Lang;
 import play.libs.F;
 import play.mvc.Http;
 import play.mvc.Results;
 import play.mvc.SimpleResult;
+import scala.collection.immutable.*;
+import scala.collection.immutable.Map;
 import services.TranslationService;
 import services.impl.TranslationServiceImpl;
 import util.exception.MyRuntimeException;
+
+import play.api.Play;
 
 import java.io.UnsupportedEncodingException;
 import java.util.*;
@@ -25,13 +30,15 @@ public class Global extends GlobalSettings {
     //services
     private TranslationService translationService = new TranslationServiceImpl();
 
-    public static final String[] BUNDLES = {"interfaces",};
+   // public static final String[] BUNDLES = {"messages"};
 
 
 
 
     @Override
     public void beforeStart(Application app) {
+
+/*
 
         Logger.info("Global.beforeStart - START");
 
@@ -72,6 +79,7 @@ public class Global extends GlobalSettings {
             }
             languageCounter++;
         }
+        */
         Logger.info("Global.beforeStart - END");
     }
 

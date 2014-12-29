@@ -58,7 +58,10 @@ GET           /logout                            @controllers.AccountController.
 
 #home
 GET           /home                              @controllers.HomeController.index()
-GET           /roommate_management               @controllers.RoommateManagementController.index()
+
+#admin
+GET           /admin/roommate_list               @controllers.AdminController.roommateList()
+GET           /admin/preferences                 @controllers.AdminController.preferences()
 
 #registration
 GET           /registration                      @controllers.RegistrationController.registrationPage()
@@ -70,3 +73,6 @@ GET           /account/tickets                   @controllers.CountController.ti
 
 #profile
 GET           /profile/myProfile                 @controllers.ProfileController.myProfile()
+
+#about
+GET           /about                             @controllers.AboutController.index()

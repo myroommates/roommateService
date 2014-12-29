@@ -1,5 +1,7 @@
 myApp.controller('ChangePasswordModalCtrl', function ($scope, $http, $flash, $modalInstance, roommate) {
 
+    $scope.loading=false;
+
     $scope.fields = {
         oldPassword: {
             name:'password',
@@ -9,13 +11,19 @@ myApp.controller('ChangePasswordModalCtrl', function ($scope, $http, $flash, $mo
             fieldType: 'password',
             focus: function () {
                 return true;
+            },
+            disabled:function(){
+                return $scope.loading;
             }
         },
         newPassword: {
             fieldTitle: "changePasswordModal.newPassword",
             validationRegex: "^[a-zA-Z0-9-_%]{6,18}$",
             validationMessage: "generic.validation.password",
-            fieldType: 'password'
+            fieldType: 'password',
+            disabled:function(){
+                return $scope.loading;
+            }
         },
         repeatPassword: {
             fieldTitle: "generic.repeatPassword",
@@ -23,6 +31,9 @@ myApp.controller('ChangePasswordModalCtrl', function ($scope, $http, $flash, $mo
             validationMessage: "generic.validation.repeatPassword",
             validation: function () {
                 return $scope.o.newPassword === $scope.o.repeatPassword;
+            },
+            disabled:function(){
+                return $scope.loading;
             }
         }
     };
@@ -59,18 +70,21 @@ myApp.controller('ChangePasswordModalCtrl', function ($scope, $http, $flash, $mo
                 newPassword: $scope.fields.newPassword.field
             };
 
+            $scope.loading=true;
+
             $http({
                 'method': "PUT",
                 'url': "/rest/roommate/password/" + roommate.id,
                 'headers': "Content-Type:application/json",
                 'data': dto
             }).success(function (data, status) {
+                $scope.loading=false;
                 $scope.close();
             })
-                .error(function (data, status) {
-                    console.log(data);
-                    $flash.error(data.message);
-                });
+            .error(function (data, status) {
+                $scope.loading=false;
+                $flash.error(data.message);
+            });
         }
     }
 

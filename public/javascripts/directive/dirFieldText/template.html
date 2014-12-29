@@ -4,7 +4,7 @@
         <div class="col-md-6">
             <input type="{{fieldType}}"
                    name="{{getInfo().name}}"
-                   ng-disabled="getInfo().disabled"
+                   ng-disabled="getInfo().disabled()"
                    ng-model="getInfo().field"
                    numbers-only="{{getInfo().numbersOnly}}"
                    ng-class="{input_number: getInfo().numbersOnly === 'integer' || getInfo().numbersOnly === 'double'}"

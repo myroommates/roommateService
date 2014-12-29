@@ -2,6 +2,8 @@ myApp.controller('CountTicketCtrl', function ($scope, $http, $flash, $modal,tran
 
     translationService.set(translations);
 
+    $scope.myself = mySelf;
+
     $scope.ticketList = ticketList.list;
 
     $scope.sortSelection = [

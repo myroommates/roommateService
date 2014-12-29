@@ -41,13 +41,13 @@
 
             @input(registrationForm("password"),
                 '_label -> Messages("registration.form.password"),
-                '_help -> Messages("registration.form.password.help"),
+                '_help -> Messages("generic.validation.password"),
                 '_error -> registrationForm.globalError){ (id, name, value, args) =>
                 <input value="@value" type="password" name="@name" class="form-control" id="@id" @toHtmlArgs(args)>
             }
 
             @input(registrationForm("repeatPassword"),
-                '_label -> Messages("registration.form.repeatPassword"),
+                '_label -> Messages("generic.repeatPassword"),
                 '_showConstraints -> false,
                 '_error -> registrationForm.globalError){ (id, name, value, args) =>
                 <input value="@value" type="password" name="@name" class="form-control" id="@id" @toHtmlArgs(args)>

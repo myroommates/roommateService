@@ -3,30 +3,43 @@ myApp.controller('CuTicketCtrl', function ($scope, $http, $flash, $modalInstance
     $scope.roommateList = roommateList;
     $scope.balanced = true;
     $scope.categoryList = categoryList;
+    $scope.loading=false;
 
     $scope.fields = {
         description: {
             fieldTitle: "generic.description",
             validationRegex: "[a-zA-Z0-9-]{1,255}",
-            validationMessage: ['generic.validation.size','1','255'],
+            validationMessage: ['generic.validation.size', '1', '255'],
             focus: function () {
                 return true;
+            },
+            disabled:function(){
+                return $scope.loading;
             }
         },
         date: {
             fieldTitle: "generic.date",
             validationMessage: "generic.validation.date",
-            field: new Date()
+            field: new Date(),
+            disabled:function(){
+                return $scope.loading;
+            }
         },
         value: {
-            fieldTitle: "generic.price",
+            fieldTitle: "generic.total",
             validationRegex: ".+",
             validationMessage: "generic.validation.notNull",
-            numbersOnly: "double"
+            numbersOnly: "double",
+            disabled:function(){
+                return $scope.loading || !$scope.balanced;
+            }
         },
         category: {
             fieldTitle: "generic.category",
-            autoCompleteValue: categoryList
+            autoCompleteValue: categoryList,
+            disabled:function(){
+                return $scope.loading;
+            }
         }
     };
 
@@ -67,12 +80,12 @@ myApp.controller('CuTicketCtrl', function ($scope, $http, $flash, $modalInstance
 
         //load old data
         if (!!ticket) {
-            $scope.edit=true;
+            $scope.edit = true;
             $scope.fields.description.field = angular.copy(ticket.description);
             $scope.fields.date.field = angular.copy(ticket.date);
             $scope.fields.category.field = angular.copy(ticket.category);
             var totalValue = 0;
-
+            var ref = ticket.debtorList[0].value;
             for (var key in roommateList) {
                 for (var key2 in ticket.debtorList) {
 
@@ -81,8 +94,15 @@ myApp.controller('CuTicketCtrl', function ($scope, $http, $flash, $modalInstance
                     if (ticket.debtorList[key2].roommateId == roommateList[key].id) {
 
                         var debtor = ticket.debtorList[key2];
+                        if (debtor.value != ref) {
+                            $scope.balanced = false;
+                        }
                         totalValue += debtor.value;
                         $scope.fields[debtor.roommateId].field = debtor.value;
+
+                        $scope.fields[debtor.roommateId].disabled = function(){
+                            return !$scope.fields[id].isDebtor;
+                        };
 
                         founded = true;
 
@@ -90,21 +110,28 @@ myApp.controller('CuTicketCtrl', function ($scope, $http, $flash, $modalInstance
                     }
                 }
                 if (founded == false) {
-                    $scope.fields[roommateList[key].id].isPayer = false;
+                    $scope.fields[roommateList[key].id].isDebtor = false;
                 }
             }
 
             $scope.fields.value.field = totalValue;
+
         }
     };
 
     $scope.addWatch = function (id) {
 
         $scope.$watch('fields[' + id + '].isDebtor', function (n, o) {
-            $scope.fields[id].disabled = !$scope.fields[id].isDebtor;
+            computeValues();
+        });
+        $scope.$watch('fields[' + id + '].field', function (n, o) {
             computeValues();
         });
     };
+
+    $scope.$watch('isLoading', function(){
+
+    });
 
     $scope.initialize();
 
@@ -115,28 +142,45 @@ myApp.controller('CuTicketCtrl', function ($scope, $http, $flash, $modalInstance
 
     var computeValues = function () {
 
-        //compute debtors number
-        var debtorNumber = 0;
-        for (var key in $scope.roommateList) {
-            var roommate = $scope.roommateList[key];
-            if ($scope.fields[roommate.id].isDebtor) {
-                debtorNumber++;
+        if ($scope.balanced) {
+
+            //compute debtors number
+            var debtorNumber = 0;
+            for (var key in $scope.roommateList) {
+                var roommate = $scope.roommateList[key];
+                if ($scope.fields[roommate.id].isDebtor) {
+                    debtorNumber++;
+                }
+            }
+
+            var value = "";
+            if (!!$scope.fields.value.field) {
+                var value = ($scope.fields.value.field / debtorNumber) + "";
+            }
+
+            for (var key in $scope.roommateList) {
+                var roommate = $scope.roommateList[key];
+                if ($scope.fields[roommate.id].isDebtor) {
+                    $scope.fields[roommate.id].field = value;
+                }
+                else {
+                    $scope.fields[roommate.id].field = "";
+                }
             }
         }
+        else{
+            var total = 0;
+            for (var key in $scope.roommateList) {
+                var roommate = $scope.roommateList[key];
+                if ($scope.fields[roommate.id].isDebtor) {
 
-        var value = "";
-        if (!!$scope.fields.value.field) {
-            var value = ($scope.fields.value.field / debtorNumber) + "";
-        }
-
-        for (var key in $scope.roommateList) {
-            var roommate = $scope.roommateList[key];
-            if ($scope.fields[roommate.id].isDebtor) {
-                $scope.fields[roommate.id].field = value;
+                    var val = parseFloat($scope.fields[roommate.id].field);
+                    if(isNaN(val)==false){
+                        total += val;
+                    }
+                }
             }
-            else {
-                $scope.fields[roommate.id].field = "";
-            }
+            $scope.fields.value.field = total+"";
         }
 
     };
@@ -155,7 +199,7 @@ myApp.controller('CuTicketCtrl', function ($scope, $http, $flash, $modalInstance
 
             for (var key in $scope.roommateList) {
                 var roommate = $scope.roommateList[key];
-                if ($scope.fields[roommate.id].isDebtor) {
+                if ($scope.fields[roommate.id].isDebtor && !!$scope.fields[roommate.id].field) {
                     var debtor = {
                         roommateId: roommate.id,
                         value: $scope.fields[roommate.id].field
@@ -180,6 +224,7 @@ myApp.controller('CuTicketCtrl', function ($scope, $http, $flash, $modalInstance
                 request = 'PUT';
                 url += "/" + ticket.id;
             }
+            $scope.loading=true;
 
             $http({
                 'method': request,
@@ -187,14 +232,14 @@ myApp.controller('CuTicketCtrl', function ($scope, $http, $flash, $modalInstance
                 'headers': "Content-Type:application/json",
                 'data': dto
             }).success(function (data, status) {
+                $scope.loading=false;
                 addItem(data);
                 $scope.close();
             })
-                .error(function (data, status) {
-                    $flash.error(data.message);
-                });
+            .error(function (data, status) {
+                $scope.loading=false;
+                $flash.error(data.message);
+            });
         }
     }
-
-
 });

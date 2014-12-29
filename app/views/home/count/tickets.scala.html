@@ -16,7 +16,17 @@
             var mySelf = @Html(new ObjectMapper().writeValueAsString(account));
         </script>
 
-        <select ng-options="choice.ref as choice.label | translateText for choice in sortSelection" ng-model="sortOption"></select>
+        <div class="row">
+            <div class="col-lg-4 col-md-2 hidden-xs"></div>
+            <a class="btn btn-primary col-lg-4 col-md-8 col-xs-12"  ng-click="createOrEditTicket()" href="#" >Create new ticket</a>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <label>@Messages("count.tickets.sortBy")</label>
+                <select ng-options="choice.ref as choice.label | translateText for choice in sortSelection" ng-model="sortOption"></select>
+            </div>
+        </div>
 
 
         <ul class="element_list">
@@ -26,7 +36,7 @@
                     <p>
                         <dir-user-icon ng-user="getRoommate(ticket.payerId)"></dir-user-icon>
                     </p>
-                    <p>{{getGlobalValue(ticket)}}€</p>
+                    <p>{{getGlobalValue(ticket)  | number:2}}€</p>
                 </div>
                 <div class="col-md-10  col-xs-8">
                     <div class="row info-box">
@@ -40,15 +50,16 @@
                         <div ng-repeat="debtor in ticket.debtorList" class="col-md-3 col-sm-4 col-xs-6 value-box">
                             <div>
                                 <dir-user-icon ng-user="getRoommate(debtor.roommateId)" ng-little="true"></dir-user-icon>
-                                <div>{{debtor.value}}€</div>
+                                <div>{{debtor.value  | number:2 }}€</div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-1  col-xs-2">
-                    <a style="margin-bottom: 5px" class="btn-sm btn btn-primary glyphicon glyphicon-pencil" href="#" ng-click='createOrEditTicket(ticket)'></a>
-                    <br/>
-                    <a class="btn-sm btn btn-primary glyphicon glyphicon-remove" href="#" ng-click='remove(ticket)'></a>
+                    <div ng-show="myself.id == ticket.payerId">
+                        <button style="margin-bottom: 5px" class="btn-sm btn btn-primary glyphicon glyphicon-pencil" href="#" ng-click='createOrEditTicket(ticket)'></button>
+                        <button class="btn-sm btn btn-primary glyphicon glyphicon-remove" href="#" ng-click='remove(ticket)'></button>
+                    </div>
                 </div>
                 <div class="loading-mask" ng-show="ticket.isLoading === true">
                     <img src="@routes.Assets.at("images/loading.gif")"/>
@@ -56,11 +67,6 @@
                 </div>
             </li>
         </ul>
-
-        <div class="row">
-            <div class="col-lg-4 col-md-2 hidden-xs"></div>
-            <a class="btn btn-primary col-lg-4 col-md-8 col-xs-12"  ng-click="createOrEditTicket()" href="#" >Create new ticket</a>
-        </div>
     </div>
 </div>
 }
