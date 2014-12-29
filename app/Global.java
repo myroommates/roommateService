@@ -1,26 +1,16 @@
 import controllers.rest.technical.SecurityRestController;
 import dto.technical.ExceptionDTO;
 import models.entities.Language;
-import models.storage.TranslationStore;
 import play.Application;
 import play.GlobalSettings;
 import play.Logger;
-import play.api.i18n.MessagesPlugin;
-import play.i18n.Lang;
 import play.libs.F;
 import play.mvc.Http;
 import play.mvc.Results;
 import play.mvc.SimpleResult;
-import scala.collection.immutable.*;
-import scala.collection.immutable.Map;
 import services.TranslationService;
 import services.impl.TranslationServiceImpl;
 import util.exception.MyRuntimeException;
-
-import play.api.Play;
-
-import java.io.UnsupportedEncodingException;
-import java.util.*;
 
 /**
  * Created by florian on 10/11/14.
@@ -29,59 +19,6 @@ public class Global extends GlobalSettings {
 
     //services
     private TranslationService translationService = new TranslationServiceImpl();
-
-   // public static final String[] BUNDLES = {"messages"};
-
-
-
-
-    @Override
-    public void beforeStart(Application app) {
-
-/*
-
-        Logger.info("Global.beforeStart - START");
-
-        // Put all translations in memory
-        int languageCounter = 0;
-        for (Lang lang : Lang.availables()) {
-
-            Logger.warn("lang:"+Lang.availables());
-
-            //first language = reference language
-            HashMap<String, String> translationCache = new HashMap<>();
-            TranslationStore.TRANSLATIONS.put(lang, translationCache);
-            for (String bundleName : BUNDLES) {
-                ResourceBundle bundle = ResourceBundle.getBundle( bundleName, Locale.forLanguageTag(lang.code()));
-                Enumeration<String> bundleKeys = bundle.getKeys();
-                while (bundleKeys.hasMoreElements()) {
-                    String key = bundleKeys.nextElement();
-                    String value = bundle.getString(key);
-                    try {
-                        value = new String(value.getBytes("ISO-8859-1"), "UTF-8");
-                    } catch (UnsupportedEncodingException e) {
-                        e.printStackTrace();
-                    }
-                    translationCache.put(key, value);
-                }
-            }
-
-            if (languageCounter > 0) {
-
-                //complete hole by comparison with reference language
-                for (Map.Entry<String, String> reference : TranslationStore.TRANSLATIONS.get(Lang.availables().get(0)).entrySet()) {
-                    if (!translationCache.containsKey(reference.getKey())) {
-                        translationCache.put(reference.getKey(), reference.getValue());
-                    }
-
-                }
-
-            }
-            languageCounter++;
-        }
-        */
-        Logger.info("Global.beforeStart - END");
-    }
 
     @Override
     public void onStart(Application application) {
