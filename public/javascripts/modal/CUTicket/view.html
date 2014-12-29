@@ -24,15 +24,24 @@
         <div class="col-md-2 col-xs-3 payer-list" ng-repeat="roommate in roommateList">
             <input ng-disabled="loading" type="checkbox" ng-model="fields[roommate.id].isDebtor"/>
             <dir-user-icon ng-user="roommate"></dir-user-icon>
-            <input
-                    ng-disabled="loading || !fields[roommate.id].isDebtor || balanced"
-                    type="text"
-                    ng-show="fields[roommate.id].isDebtor"
-                    class="form-control ng-pristine ng-valid"
-                    ng-disabled="balanced"
-                    ng-model="fields[roommate.id].field"
-                    numbers-only="double"
-                    >
+
+            <div class="form-group">
+                <div class="input-group">
+
+                    <input
+                            ng-disabled="loading || !fields[roommate.id].isDebtor || balanced"
+                            type="text"
+                            ng-show="fields[roommate.id].isDebtor"
+                            class="form-control ng-pristine ng-valid money"
+                            ng-disabled="balanced"
+                            ng-model="fields[roommate.id].field"
+                            numbers-only="double"
+                            >
+                    <span class="input-group-addon">{{money}}</span>
+                </div>
+            </div>
+
+
         </div>
     </div>
 </div>

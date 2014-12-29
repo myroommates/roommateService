@@ -4,6 +4,8 @@ myApp.controller('CuTicketCtrl', function ($scope, $http, $flash, $modalInstance
     $scope.balanced = true;
     $scope.categoryList = categoryList;
     $scope.loading=false;
+    //TODO
+    $scope.money="€";
 
     $scope.fields = {
         description: {
@@ -32,7 +34,8 @@ myApp.controller('CuTicketCtrl', function ($scope, $http, $flash, $modalInstance
             numbersOnly: "double",
             disabled:function(){
                 return $scope.loading || !$scope.balanced;
-            }
+            },
+            money:$scope.money
         },
         category: {
             fieldTitle: "generic.category",
