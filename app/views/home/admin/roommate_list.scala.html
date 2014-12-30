@@ -8,7 +8,7 @@
 
             <!-- load data -->
         <script>
-            var translations = @Html(new ObjectMapper().writeValueAsString(data.getTranslations));
+            var data = @Html(new ObjectMapper().writeValueAsString(data));
             var initialData = @Html(new ObjectMapper().writeValueAsString(roommatesList.getList));
         </script>
 
@@ -50,7 +50,7 @@
                     <button class="btn btn-primary glyphicon glyphicon-remove" ng-click='remove(roommate)'></button>
                 </div>
                 <div class="loading-mask" ng-show="roommate.isLoading === true">
-                    <img src="@routes.Assets.at("../../../../public/images/loading.gif")"/>
+                    <img src="@routes.Assets.at("/images/loading.gif")"/>
 
                 </div>
             </li>

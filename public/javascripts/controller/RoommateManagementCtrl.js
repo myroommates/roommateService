@@ -91,8 +91,4 @@ myApp.controller('RoommateManagementCtrl',  function ($scope, $http, $flash,tran
         });
     };
 
-    $scope.display = function (roommate) {
-        console.log(roommate);
-    }
-
 });
