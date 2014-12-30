@@ -1,6 +1,6 @@
 myApp.controller('ProfileMyProfileCtrl', function ($scope, $http, $flash, $modal,translationService) {
 
-    $scope.roommate = mySelf;
+    $scope.roommate = data.mySelf;
     $scope.moneySymbol= data.home.moneySymbol;
     $scope.loading=false;
 

@@ -12,8 +12,7 @@
 
         <!-- load data -->
     <script>
-        var translations = @Html(new ObjectMapper().writeValueAsString(data.getTranslations));
-        var mySelf = @Html(new ObjectMapper().writeValueAsString(data.getMySelf));
+        var data = @Html(new ObjectMapper().writeValueAsString(data));
     </script>
 
             <h3>@Messages("registration.form.title")</h3>
