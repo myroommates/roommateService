@@ -36,7 +36,7 @@
                 '_label -> Messages("registration.form.yourEmail"),
                 '_showConstraints -> false,
                 '_error -> registrationForm.globalError){ (id, name, value, args) =>
-                <input value="@value" type="text" name="@name" class="form-control" id="@id" @toHtmlArgs(args)>
+                <input value="@value" type="email" name="@name" class="form-control" id="@id" @toHtmlArgs(args)>
             }
 
             @input(registrationForm("password"),
