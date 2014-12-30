@@ -68,8 +68,8 @@ GET           /registration                      @controllers.RegistrationContro
 POST          /registration                      @controllers.RegistrationController.registration()
 
 #Account
-GET           /account/resume                    @controllers.CountController.resume()
-GET           /account/tickets                   @controllers.CountController.tickets()
+GET           /count/resume                    @controllers.CountController.resume()
+GET           /count/tickets                   @controllers.CountController.tickets()
 
 #profile
 GET           /profile/myProfile                 @controllers.ProfileController.myProfile()

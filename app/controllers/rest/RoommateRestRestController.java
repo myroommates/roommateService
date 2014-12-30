@@ -142,13 +142,13 @@ public class RoommateRestRestController extends AbstractRestController {
         roommate.setEmail(dto.getEmail());
         roommate.setName(dto.getName());
         roommate.setIconColor(ColorGenerator.getColorWeb(securityRestController.getCurrentUser().getHome().getRoommateList().size()));
-        roommate.setLanguage(securityRestController.getCurrentLanguage(ctx()));
+        roommate.setLanguage(lang());
 
         //create password
         roommate.setPassword(KeyGenerator.generateRandomPassword(12));
 
         //send email
-        emailController.sendInvitationEmail(roommate, securityRestController.getCurrentUser(), securityRestController.getCurrentLanguage(ctx()));
+        emailController.sendInvitationEmail(roommate, securityRestController.getCurrentUser(), lang());
 
         //operation
         roommateService.saveOrUpdate(roommate);

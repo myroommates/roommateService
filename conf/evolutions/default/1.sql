@@ -19,6 +19,7 @@ create table event (
 
 create table home (
   id                        bigint not null,
+  money_symbol              varchar(255),
   creation_date             timestamp not null,
   last_update               timestamp not null,
   constraint pk_home primary key (id))
@@ -32,7 +33,7 @@ create table roommate (
   reactivation_key          varchar(255),
   home_id                   bigint not null,
   authenticationKey         varchar(255),
-  language                  integer not null,
+  language                  varchar(255) not null,
   icon_color                float not null,
   keep_session_open         boolean,
   cookie_value              varchar(255),
@@ -40,7 +41,6 @@ create table roommate (
   is_admin                  boolean default false not null,
   creation_date             timestamp not null,
   last_update               timestamp not null,
-  constraint ck_roommate_language check (language in (0,1)),
   constraint uq_roommate_email unique (email),
   constraint pk_roommate primary key (id))
 ;

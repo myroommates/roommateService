@@ -1,4 +1,4 @@
-@(translations:dto.TranslationsDTO,registrationForm:Form[RegistrationForm],account:dto.RoommateDTO)
+@(data:dto.InterfaceDataDTO,registrationForm:Form[RegistrationForm])
 
 @import helper._
 @import com.fasterxml.jackson.databind.ObjectMapper
@@ -6,14 +6,14 @@
 @implicitField = @{ FieldConstructor(widget.fieldCustom.f) }
 
 
-@home_pattern("profile.myProfile.title", account) {
+@home_pattern("profile.myProfile.title", data.getMySelf) {
 <div class="content-block" ng-controller="ProfileMyProfileCtrl">
 
 
         <!-- load data -->
     <script>
-        var translations = @Html(new ObjectMapper().writeValueAsString(translations));
-        var mySelf = @Html(new ObjectMapper().writeValueAsString(account));
+        var translations = @Html(new ObjectMapper().writeValueAsString(data.getTranslations));
+        var mySelf = @Html(new ObjectMapper().writeValueAsString(data.getMySelf));
     </script>
 
             <h3>@Messages("registration.form.title")</h3>

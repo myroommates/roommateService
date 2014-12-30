@@ -1,8 +1,8 @@
-@(translations:dto.TranslationsDTO,account: dto.RoommateDTO, roommateList: dto.ListDTO[dto.RoommateDTO], ticketList: dto.ListDTO[dto.TicketDTO])
+@(data:dto.InterfaceDataDTO, roommateList: dto.ListDTO[dto.RoommateDTO], ticketList: dto.ListDTO[dto.TicketDTO])
 
 @import com.fasterxml.jackson.databind.ObjectMapper
 
-@home_pattern("count.tickets.title", account) {
+@home_pattern("count.tickets.title", data.getMySelf) {
 
 <div class="content-block">
 
@@ -10,10 +10,9 @@
 
         <!-- load data -->
         <script>
-            var translations = @Html(new ObjectMapper().writeValueAsString(translations));
+            var data = @Html(new ObjectMapper().writeValueAsString(data));
             var ticketList = @Html(new ObjectMapper().writeValueAsString(ticketList));
             var roommateList = @Html(new ObjectMapper().writeValueAsString(roommateList.getList));
-            var mySelf = @Html(new ObjectMapper().writeValueAsString(account));
         </script>
 
         <div class="row">

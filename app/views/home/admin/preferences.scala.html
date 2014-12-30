@@ -1,8 +1,8 @@
-@(translations:dto.TranslationsDTO,account: dto.RoommateDTO)
+@(data:dto.InterfaceDataDTO)
 
 @import com.fasterxml.jackson.databind.ObjectMapper
 
-@home_pattern("admin.preferences.title", account) {
+@home_pattern("admin.preferences.title", data.getMySelf) {
     <div class="content-block">
     </div>
 }

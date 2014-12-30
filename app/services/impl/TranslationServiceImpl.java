@@ -1,7 +1,6 @@
 package services.impl;
 
 import dto.TranslationsDTO;
-import models.entities.Language;
 import play.Logger;
 import play.api.Play;
 import play.api.i18n.MessagesPlugin;
@@ -13,9 +12,6 @@ import scala.collection.immutable.Map;
 import services.TranslationService;
 import util.EmailMessage;
 import util.ErrorMessage;
-
-import java.util.Collections;
-import java.util.TreeMap;
 
 /**
  * Created by florian on 11/11/14.
@@ -35,21 +31,21 @@ public class TranslationServiceImpl implements TranslationService {
 
 
     @Override
-    public String getTranslation(ErrorMessage errorMessage, Language language, Object... params) {
+    public String getTranslation(ErrorMessage errorMessage, Lang language, Object... params) {
 
-        return Messages.get(errorMessage.name(),language.getAbrv(),params);
-
-    }
-
-    @Override
-    public String getTranslation(String messageRef, Language language, Object... params) {
-
-        return Messages.get(messageRef,language.getAbrv(),params);
+        return Messages.get(language,errorMessage.name(),params);
 
     }
 
     @Override
-    public String getTranslation(EmailMessage emailMessage, Language language, Object... params) {
-        return Messages.get(emailMessage.name(),language.getAbrv(),params);
+    public String getTranslation(String messageRef, Lang language, Object... params) {
+
+        return Messages.get(language,messageRef,params);
+
+    }
+
+    @Override
+    public String getTranslation(EmailMessage emailMessage, Lang language, Object... params) {
+        return Messages.get(language,emailMessage.name(),params);
     }
 }

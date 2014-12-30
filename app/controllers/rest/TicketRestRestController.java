@@ -11,7 +11,6 @@ import dto.technical.ResultDTO;
 import models.entities.Roommate;
 import models.entities.Ticket;
 import models.entities.TicketDebtor;
-import play.Logger;
 import play.mvc.Result;
 import play.mvc.Security;
 import services.RoommateService;

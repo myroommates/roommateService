@@ -1,9 +1,7 @@
 package controllers.rest.technical;
 
 import controllers.technical.SecurityController;
-import models.entities.Language;
 import models.entities.Roommate;
-import play.Logger;
 import play.mvc.Http;
 import play.mvc.Result;
 import play.mvc.Security;
@@ -83,12 +81,5 @@ public class SecurityRestController extends Security.Authenticator {
             }
         }
         ROOMMATE_SERVICE.saveOrUpdate(roommate);
-    }
-
-    public Language getCurrentLanguage(Http.Context ctx) {
-        if (ctx.request().getHeader(REQUEST_HEADER_LANGUAGE) != null && Language.getByAbrv(ctx.request().getHeader(REQUEST_HEADER_LANGUAGE)) != null) {
-            return Language.getByAbrv(ctx.request().getHeader(REQUEST_HEADER_LANGUAGE));
-        }
-        return Language.getDefaultLanguage();
     }
 }

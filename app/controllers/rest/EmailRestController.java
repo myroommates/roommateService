@@ -1,8 +1,8 @@
 package controllers.rest;
 
 import controllers.rest.technical.AbstractRestController;
-import models.entities.Language;
 import models.entities.Roommate;
+import play.i18n.Lang;
 import services.EmailService;
 import services.TranslationService;
 import services.impl.EmailServiceImpl;
@@ -18,7 +18,7 @@ public class EmailRestController extends AbstractRestController {
     private EmailService emailService = new EmailServiceImpl();
     private TranslationService translationService = new TranslationServiceImpl();
 
-    public void sendRegistrationEmail(Roommate  roommate,Language language){
+    public void sendRegistrationEmail(Roommate  roommate,Lang language){
 
         String title = translationService.getTranslation(EmailMessage.REGISTRATION_EMAIL_TITLE,language);
 
@@ -31,7 +31,7 @@ public class EmailRestController extends AbstractRestController {
         emailService.sendEmail(roommate,title,body);
     }
 
-    public void sendInvitationEmail(Roommate  roommate,Roommate  inviter,Language language){
+    public void sendInvitationEmail(Roommate  roommate,Roommate  inviter,Lang language){
 
         String title = translationService.getTranslation(EmailMessage.REGISTRATION_EMAIL_TITLE,language);
 

@@ -4,6 +4,7 @@ import controllers.rest.EmailRestController;
 import controllers.rest.RoommateRestRestController;
 import controllers.technical.AbstractController;
 import controllers.technical.SecurityController;
+import converter.RoommateToInterfaceDataDTOConverter;
 import converter.RoommateToRoommateDTOConverter;
 import dto.RoommateDTO;
 import models.RegistrationForm;
@@ -24,7 +25,9 @@ public class ProfileController extends AbstractController{
     //service
     private RoommateService accountService = new RoommateServiceImpl();
     private HomeService homeService = new HomeServiceImpl();
-    //form
+
+    //converter
+    private RoommateToInterfaceDataDTOConverter roommateToInterfaceDataDTOConverter = new RoommateToInterfaceDataDTOConverter();
 
     //controller
     private HomeController homeController = new HomeController();
@@ -50,6 +53,6 @@ public class ProfileController extends AbstractController{
 
         Form<RegistrationForm> registrationForm = Form.form(RegistrationForm.class).fill(registrationForm1);
 
-        return ok(views.html.home.profile.myProfile.render(translationService.getTranslations(lang()),registrationForm,account));
+        return ok(views.html.home.profile.myProfile.render(roommateToInterfaceDataDTOConverter.convert(securityController.getCurrentUser()),registrationForm));
     }
 }

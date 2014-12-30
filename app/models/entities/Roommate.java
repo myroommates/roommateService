@@ -1,8 +1,10 @@
 package models.entities;
 
 import models.entities.technical.AuditedAbstractEntity;
+import play.i18n.Lang;
 
 import javax.persistence.*;
+
 import java.util.List;
 
 /**
@@ -55,7 +57,7 @@ public class Roommate extends AuditedAbstractEntity {
     private String authenticationKey;
 
     @Column(nullable = false)
-    private Language language;
+    private String language;
 
     @Column(nullable = false)
     private Float iconColor;
@@ -94,12 +96,12 @@ public class Roommate extends AuditedAbstractEntity {
         this.nameAbrv = nameAbrv;
     }
 
-    public Language getLanguage() {
-        return language;
+    public Lang getLanguage() {
+        return Lang.forCode(language);
     }
 
-    public void setLanguage(Language language) {
-        this.language = language;
+    public void setLanguage(Lang language) {
+        this.language = language.code();
     }
 
     public boolean isKeepSessionOpen() {

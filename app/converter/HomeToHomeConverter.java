@@ -11,6 +11,7 @@ public class HomeToHomeConverter implements ConverterInterface<Home,HomeDTO>{
     public HomeDTO convert(Home home) {
         HomeDTO dto = new HomeDTO();
 
+        dto.setMoneySymbol(home.getMoneySymbol());
         dto.setId(home.getId());
 
         return dto;

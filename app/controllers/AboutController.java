@@ -3,6 +3,7 @@ package controllers;
 import com.avaje.ebean.annotation.Transactional;
 import controllers.technical.AbstractController;
 import controllers.technical.SecurityController;
+import converter.RoommateToInterfaceDataDTOConverter;
 import converter.RoommateToRoommateDTOConverter;
 import dto.RoommateDTO;
 import play.mvc.Result;
@@ -15,13 +16,12 @@ public class AboutController extends AbstractController {
 
     //converter
     private RoommateToRoommateDTOConverter roommateToRoommateDTOConverter = new RoommateToRoommateDTOConverter();
+    private RoommateToInterfaceDataDTOConverter roommateToInterfaceDataDTOConverter = new RoommateToInterfaceDataDTOConverter();
 
     @Security.Authenticated(SecurityController.class)
     @Transactional
     public Result index(){
 
-        RoommateDTO roommateDTO = roommateToRoommateDTOConverter.convert(securityController.getCurrentUser());
-
-        return ok(views.html.home.about.render(translationService.getTranslations(lang()),roommateDTO));
+        return ok(views.html.home.about.render(roommateToInterfaceDataDTOConverter.convert(securityController.getCurrentUser())));
     }
 }

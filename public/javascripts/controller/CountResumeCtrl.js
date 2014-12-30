@@ -1,6 +1,8 @@
-myApp.controller('CountResumeCtrl', function ($scope, $http, $flash, $modal,translationService) {
-
-    translationService.set(translations);
+myApp.controller('CountResumeCtrl', function ($scope, $http, $flash, $modal,translationService,$locale) {
+    console.log($locale.id);
+    $locale.id=data.langId;
+    console.log($locale.id);
+    translationService.set(data.translations);
 
     $scope.ticketList=ticketList.list;
 
@@ -8,8 +10,6 @@ myApp.controller('CountResumeCtrl', function ($scope, $http, $flash, $modal,tran
     $scope.countResumeList = _.sortBy(countResumeList.list,function(element){
        return element.roommate.id;
     });
-
-    console.log($scope.countResumeList);
 
     $scope.sub = function(a,b){
         return a - b;
@@ -98,8 +98,6 @@ myApp.controller('CountResumeCtrl', function ($scope, $http, $flash, $modal,tran
             }
 
         }
-        console.log(resultDetailList);
-        console.log($scope.balanceList);
     };
 
     $scope.computeResult();

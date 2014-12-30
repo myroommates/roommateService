@@ -9,7 +9,17 @@ public class HomeDTO extends DTO {
 
     private Long id;
 
+    private String moneySymbol;
+
     public HomeDTO() {
+    }
+
+    public String getMoneySymbol() {
+        return moneySymbol;
+    }
+
+    public void setMoneySymbol(String moneySymbol) {
+        this.moneySymbol = moneySymbol;
     }
 
     public Long getId() {

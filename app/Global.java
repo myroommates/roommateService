@@ -1,9 +1,9 @@
 import controllers.rest.technical.SecurityRestController;
 import dto.technical.ExceptionDTO;
-import models.entities.Language;
 import play.Application;
 import play.GlobalSettings;
 import play.Logger;
+import play.i18n.Lang;
 import play.libs.F;
 import play.mvc.Http;
 import play.mvc.Results;
@@ -28,11 +28,13 @@ public class Global extends GlobalSettings {
     public F.Promise<SimpleResult> onError(Http.RequestHeader request, Throwable t) {
 
         //load language expected
-        Language language = null;
+        Lang language;
         if (request.getHeader(SecurityRestController.REQUEST_HEADER_LANGUAGE) != null) {
-            language = Language.getByAbrv(request.getHeader(SecurityRestController.REQUEST_HEADER_LANGUAGE));
+            language = Lang.forCode(request.getHeader(SecurityRestController.REQUEST_HEADER_LANGUAGE));
         }
-        language = Language.ENGLISH;
+        else {
+            language = request.acceptLanguages().get(0);
+        }
 
         final ExceptionDTO exceptionsDTO;
 

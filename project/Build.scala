@@ -18,8 +18,8 @@ object ApplicationBuild extends Build {
     javaEbean,
     "org.postgresql" % "postgresql" % "9.3-1101-jdbc41",
     "org.jasypt" % "jasypt" % "1.9.2",
-    "commons-beanutils" % "commons-beanutils" % "1.9.2"
-
+    "commons-beanutils" % "commons-beanutils" % "1.9.2",
+    "org.hibernate.javax.persistence" % "hibernate-jpa-2.1-api" % "1.0.0.Final"
   )
 
   val main = play.Project(name, version, appDependencies)

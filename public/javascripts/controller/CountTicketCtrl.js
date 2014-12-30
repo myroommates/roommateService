@@ -1,8 +1,12 @@
-myApp.controller('CountTicketCtrl', function ($scope, $http, $flash, $modal,translationService) {
+myApp.controller('CountTicketCtrl', function ($scope, $http, $flash, $modal,translationService,$locale) {
 
-    translationService.set(translations);
+    console.log($locale.id);
+    $locale.id=data.langId;
+    console.log($locale.id);
 
-    $scope.myself = mySelf;
+    translationService.set(data.translations);
+
+    $scope.myself = data.mySelf;
 
     $scope.ticketList = ticketList.list;
 

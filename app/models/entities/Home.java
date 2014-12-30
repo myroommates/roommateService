@@ -2,6 +2,7 @@ package models.entities;
 
 import models.entities.technical.AuditedAbstractEntity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import java.util.Set;
@@ -12,6 +13,9 @@ import java.util.Set;
 @Entity
 public class Home extends AuditedAbstractEntity{
 
+
+    @Column
+    private String moneySymbol;
 
     @OneToMany(mappedBy = "home")
     private Set<Roommate> roommateList;
@@ -25,6 +29,14 @@ public class Home extends AuditedAbstractEntity{
 
     @OneToMany(mappedBy = "home")
     private Set<ShoppingItem> shoppingItems;
+
+    public String getMoneySymbol() {
+        return moneySymbol;
+    }
+
+    public void setMoneySymbol(String moneySymbol) {
+        this.moneySymbol = moneySymbol;
+    }
 
     public Set<ShoppingItem> getShoppingItems() {
         return shoppingItems;

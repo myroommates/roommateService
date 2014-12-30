@@ -74,7 +74,7 @@ public class RegistrationController extends AbstractController {
         roommate.setEmail(registrationForm.field("email").value());
         roommate.setPassword(registrationForm.field("password").value());
         roommate.setKeepSessionOpen(Boolean.parseBoolean(registrationForm.field("keepSessionOpen").value()));
-        roommate.setLanguage(securityController.getCurrentLanguage(ctx()));
+        roommate.setLanguage(lang());
         roommate.setHome(home);
         roommate.setIsAdmin(true);
         roommate.setIconColor(ColorGenerator.getColorWeb(0));
@@ -89,6 +89,6 @@ public class RegistrationController extends AbstractController {
         securityController.storeAccount(roommate);
 
         //return
-        return redirect("/");
+        return redirect("/admin/roommate_list");
     }
 }

@@ -1,27 +1,19 @@
 package controllers.rest.technical;
 
-import dto.RoommateDTO;
 import dto.technical.DTO;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
-import models.entities.Language;
-import net.sf.ehcache.hibernate.management.impl.BeanUtils;
 import play.Logger;
-import play.api.i18n.Messages;
-import play.data.Form;
-import play.data.validation.ValidationError;
 import play.mvc.Controller;
 import services.TranslationService;
 import services.impl.TranslationServiceImpl;
 import util.ErrorMessage;
 import util.exception.MyRuntimeException;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by florian on 10/11/14.
@@ -45,7 +37,7 @@ public class AbstractRestController extends Controller {
 
         //control dto
         try {
-            validation(DTOclass, dto, securityRestController.getCurrentLanguage(ctx()));
+            validation(DTOclass, dto);
         } catch (Exception e) {
             e.printStackTrace();
             throw new MyRuntimeException(e.getMessage());
@@ -54,7 +46,7 @@ public class AbstractRestController extends Controller {
         return dto;
     }
 
-    private <T extends DTO> void validation(Class<T> DTOclass, T dto, Language language) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    private <T extends DTO> void validation(Class<T> DTOclass, T dto) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
 
         String errorMessage = "";
 
@@ -67,7 +59,7 @@ public class AbstractRestController extends Controller {
 
                     if (v == null) {
                         //build error message
-                        errorMessage += translationService.getTranslation(((NotNull) annotation).message(), securityRestController.getCurrentLanguage(ctx()), field.getName()) + "\n";
+                        errorMessage += translationService.getTranslation(((NotNull) annotation).message(), lang(), field.getName()) + "\n";
                     }
                 } else if (annotation instanceof Pattern) {
                     if (!field.getType().equals(String.class)) {
@@ -86,7 +78,7 @@ public class AbstractRestController extends Controller {
                     if (!pattern.matcher(string).find()) {
 
                         //build error message
-                        errorMessage += translationService.getTranslation(((Pattern) annotation).message(), securityRestController.getCurrentLanguage(ctx()), field.getName(), ((Pattern) annotation).regexp()) + "\n";
+                        errorMessage += translationService.getTranslation(((Pattern) annotation).message(), lang(), field.getName(), ((Pattern) annotation).regexp()) + "\n";
                     }
 
                 } else if (annotation instanceof Size) {
@@ -108,7 +100,7 @@ public class AbstractRestController extends Controller {
                     if (string.length() > max || string.length() < min) {
 
                         //build error message
-                        errorMessage += translationService.getTranslation(((Size) annotation).message(), securityRestController.getCurrentLanguage(ctx()), field.getName(), min, max) + "\n";
+                        errorMessage += translationService.getTranslation(((Size) annotation).message(), lang(), field.getName(), min, max) + "\n";
                     }
 
                 }

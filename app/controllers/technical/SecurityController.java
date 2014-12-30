@@ -1,7 +1,6 @@
 package controllers.technical;
 
 import controllers.AccountController;
-import models.entities.Language;
 import models.entities.Roommate;
 import play.mvc.Http;
 import play.mvc.Result;
@@ -76,14 +75,5 @@ public class SecurityController extends Security.Authenticator {
         //if the login and the password are ok, refresh the session
         Http.Context.current().session().clear();
         Http.Context.current().session().put(SESSION_IDENTIFIER_STORE, roommate.getEmail());
-    }
-
-    public Language getCurrentLanguage(Http.Context ctx) {
-        if (getCurrentUser() != null) {
-            return getCurrentUser().getLanguage();
-        } else if (ctx.request().getHeader(REQUEST_HEADER_LANGUAGE) != null && Language.getByAbrv(ctx.request().getHeader(REQUEST_HEADER_LANGUAGE)) != null) {
-            return Language.getByAbrv(ctx.request().getHeader(REQUEST_HEADER_LANGUAGE));
-        }
-        return Language.getDefaultLanguage();
     }
 }

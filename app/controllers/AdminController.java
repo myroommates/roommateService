@@ -3,6 +3,7 @@ package controllers;
 import com.avaje.ebean.annotation.Transactional;
 import controllers.technical.AbstractController;
 import controllers.technical.SecurityController;
+import converter.RoommateToInterfaceDataDTOConverter;
 import converter.RoommateToRoommateDTOConverter;
 import dto.ListDTO;
 import dto.RoommateDTO;
@@ -19,6 +20,7 @@ public class AdminController extends AbstractController{
 
     //converter
     private RoommateToRoommateDTOConverter roommateToRoommateDTOConverter = new RoommateToRoommateDTOConverter();
+    private RoommateToInterfaceDataDTOConverter roommateToInterfaceDataDTOConverter = new RoommateToInterfaceDataDTOConverter();
     //service
     private RoommateService roommateService = new RoommateServiceImpl();
 
@@ -35,7 +37,7 @@ public class AdminController extends AbstractController{
             roommateDTOListDTO.addElement(roommateToRoommateDTOConverter.convert(roommate));
         }
 
-        return ok(views.html.home.admin.roommate_list.render(translationService.getTranslations(lang()),roommateDTO,roommateDTOListDTO ));
+        return ok(views.html.home.admin.roommate_list.render(roommateToInterfaceDataDTOConverter.convert(securityController.getCurrentUser()),roommateDTOListDTO ));
     }
 
     @Security.Authenticated(SecurityController.class)
@@ -44,6 +46,6 @@ public class AdminController extends AbstractController{
 
         RoommateDTO roommateDTO = roommateToRoommateDTOConverter.convert(securityController.getCurrentUser());
 
-        return ok(views.html.home.admin.preferences.render(translationService.getTranslations(lang()),roommateDTO));
+        return ok(views.html.home.admin.preferences.render(roommateToInterfaceDataDTOConverter.convert(securityController.getCurrentUser())));
     }
 }
