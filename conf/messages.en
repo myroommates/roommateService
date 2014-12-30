@@ -84,6 +84,7 @@ count.ticket.sort.date=Date
 count.ticket.sort.category=Category
 count.ticket.sort.payer=Payer
 count.tickets.sortBy=Sort by
+count.ticket.create.button=Create a new ticket
 
 #
 # profile
@@ -138,7 +139,7 @@ JSON_CONVERSION_ERROR=The request content cannot be converted to a {0}.
 WRONG_AUTHORIZATION=You have not the authorization
 LOGIN_WRONG_PASSWORD_LOGIN=wrong password / login
 NOT_CONNECTED=You are not connected
-HOME_NAME_ALREADY_USED=This home name is already used. Please choose an other
+HOME_NAME_ALREADY_USED=
 EMAIL_ALREADY_USED=This email is already used. Please choose an other
 NOT_YOU_ROOMMATE=this is not your roommate : {O}
 ENTITY_NOT_FOUND=this entity {0} was not found : {1}

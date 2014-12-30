@@ -1,10 +1,7 @@
 myApp.controller('CountResumeCtrl', function ($scope, $http, $flash, $modal,translationService,$locale) {
-    console.log($locale.id);
-    $locale.id=data.langId;
-    console.log($locale.id);
-    translationService.set(data.translations);
 
     $scope.ticketList=ticketList.list;
+    $scope.moneySymbol= data.home.moneySymbol;
 
     //sort
     $scope.countResumeList = _.sortBy(countResumeList.list,function(element){

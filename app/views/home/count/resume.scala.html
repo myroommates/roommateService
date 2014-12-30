@@ -34,13 +34,13 @@
                     <span class="hidden-xs">{{countResume.roommate.name}}</span>
                 </div>
                 <div class="col-md-2 col-xs-3 value">
-                    {{countResume.spend | number:2}}€
+                    {{countResume.spend | number:2}}{{moneySymbol}}
                 </div>
                 <div class="col-md-2 col-xs-3 value">
-                    {{countResume.dept | number:2}}€
+                    {{countResume.dept | number:2}}{{moneySymbol}}
                 </div>
                 <div class="col-md-2 col-xs-3 value" ng-class="{'red':sub(countResume.spend,countResume.dept)<0,'green':sub(countResume.spend,countResume.dept)>0}">
-                    {{sub(countResume.spend,countResume.dept) | number:2}}€
+                    {{sub(countResume.spend,countResume.dept) | number:2}}{{moneySymbol}}
                 </div>
                 <div class="col-md-2 hidden-sm hidden-xs" style="height: 40px"></div>
 
@@ -49,8 +49,8 @@
             <div class="row table-footer">
                 <div class="col-md-2 hidden-sm hidden-xs" style="height: 40px"></div>
                 <div class="col-md-2 col-xs-3" style="padding-left: 30px">@Messages("generic.total")</div>
-                <div class="col-md-2 col-xs-3 value">{{totalSpend()  | number:2}}€</div>
-                <div class="col-md-2 col-xs-3 value">{{totalDept()  | number:2}}€</div>
+                <div class="col-md-2 col-xs-3 value">{{totalSpend()  | number:2}}{{moneySymbol}}</div>
+                <div class="col-md-2 col-xs-3 value">{{totalDept()  | number:2}}{{moneySymbol}}</div>
                 <div class="col-md-2 col-xs-3 value"></div>
                 <div class="col-md-2 hidden-sm hidden-xs" style="height: 40px"></div>
             </div>
@@ -76,7 +76,7 @@
             </div>
             <div  class="col-xs-2 col-lg-1  col-md-2 icon-box value" >
                 <span>
-                    {{balance.value | number:2}}€
+                    {{balance.value | number:2}}{{moneySymbol}}
                 </span>
             </div>
             <div class="col-xs-2 col-lg-1  col-md-1 icon-box">

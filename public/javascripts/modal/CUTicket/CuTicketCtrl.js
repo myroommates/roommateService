@@ -1,11 +1,11 @@
-myApp.controller('CuTicketCtrl', function ($scope, $http, $flash, $modalInstance, roommateList, ticket, addItem, categoryList) {
+myApp.controller('CuTicketCtrl', function ($scope, $http, $flash, $modalInstance, roommateList, ticket, addItem, categoryList,moneySymbol) {
 
     $scope.roommateList = roommateList;
     $scope.balanced = true;
     $scope.categoryList = categoryList;
     $scope.loading=false;
-    //TODO
-    $scope.money="€";
+    $scope.mySelf = data.mySelf;
+    $scope.money=moneySymbol;
 
     $scope.fields = {
         description: {
@@ -217,7 +217,7 @@ myApp.controller('CuTicketCtrl', function ($scope, $http, $flash, $modalInstance
                 date: $scope.fields.date.field,
                 description: $scope.fields.description.field,
                 debtorList: listTicketDebtor,
-                payerId: mySelf.id,
+                payerId: $scope.mySelf.id,
                 category: $scope.fields.category.field
             }
 

@@ -34,6 +34,7 @@ public class SecurityController extends Security.Authenticator {
     }
 
     public boolean isAuthenticated(Http.Context ctx) {
+
         if (ctx.session().get(SESSION_IDENTIFIER_STORE) != null) {
             return true;
         }
@@ -57,11 +58,14 @@ public class SecurityController extends Security.Authenticator {
     }
 
     public void logout(Http.Context ctx) {
-        if(getCurrentUser()!=null && getCurrentUser().isKeepSessionOpen()){
-            getCurrentUser().setKeepSessionOpen(false);
-            getCurrentUser().setCookieValue(null);
 
-            accountService.saveOrUpdate(getCurrentUser());
+        if(getCurrentUser()!=null && getCurrentUser().isKeepSessionOpen()){
+
+            Roommate currentUser = getCurrentUser();
+            currentUser.setKeepSessionOpen(false);
+            currentUser.setCookieValue(null);
+
+            accountService.saveOrUpdate(currentUser);
         }
         ctx.session().clear();
     }

@@ -1,14 +1,9 @@
-myApp.controller('CountTicketCtrl', function ($scope, $http, $flash, $modal,translationService,$locale) {
-
-    console.log($locale.id);
-    $locale.id=data.langId;
-    console.log($locale.id);
-
-    translationService.set(data.translations);
+myApp.controller('CountTicketCtrl', function ($scope, $http, $flash, $modal,translationService,$locale,tmhDynamicLocale) {
 
     $scope.myself = data.mySelf;
-
+    $scope.moneySymbol= data.home.moneySymbol;
     $scope.ticketList = ticketList.list;
+    console.log(data);
 
     $scope.sortSelection = [
         {ref: 'date', label: 'count.ticket.sort.date'},
@@ -127,6 +122,9 @@ myApp.controller('CountTicketCtrl', function ($scope, $http, $flash, $modal,tran
             },
             categoryList: function () {
                 return categoryList;
+            },
+            moneySymbol:function(){
+                return $scope.moneySymbol;
             }
         };
 

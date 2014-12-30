@@ -81,6 +81,7 @@ count.ticket.sort.date=Date
 count.ticket.sort.category=Catégorie
 count.ticket.sort.payer=Payeur
 count.tickets.sortBy=Trier par
+count.ticket.create.button=Créer un nouveau ticket
 
 #
 # profile

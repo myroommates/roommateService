@@ -187,14 +187,19 @@ public class Roommate extends AuditedAbstractEntity {
     @Override
     public String toString() {
         return "Roommate{" +
-                "id="+id+","+
                 "name='" + name + '\'' +
+                ", nameAbrv='" + nameAbrv + '\'' +
                 ", email='" + email + '\'' +
                 ", reactivationKey='" + reactivationKey + '\'' +
                 ", home=" + home +
                 ", authenticationKey='" + authenticationKey + '\'' +
+                ", language='" + language + '\'' +
                 ", iconColor=" + iconColor +
                 ", ticketList=" + ticketList +
+                ", keepSessionOpen=" + keepSessionOpen +
+                ", cookieValue='" + cookieValue + '\'' +
+                ", password='" + password + '\'' +
+                ", isAdmin=" + isAdmin +
                 '}';
     }
 }

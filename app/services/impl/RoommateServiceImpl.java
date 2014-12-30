@@ -68,7 +68,7 @@ public class RoommateServiceImpl extends CrudServiceImpl<Roommate> implements Ro
 
     @Override
     public boolean controlCookieKey(String cookieValue, Roommate account) {
-        return account.getCookieValue() != null && new StrongPasswordEncryptor().checkPassword(cookieValue, account.getCookieValue());
+        return !(!account.isKeepSessionOpen() || account.getCookieValue().length() < 40) && account.getCookieValue() != null && new StrongPasswordEncryptor().checkPassword(cookieValue, account.getCookieValue());
     }
 
     @Override
