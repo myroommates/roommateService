@@ -28,7 +28,7 @@ myApp.controller('CuTicketCtrl', function ($scope, $http, $flash, $modalInstance
             }
         },
         value: {
-            type:"number",
+            fieldType:"number",
             fieldTitle: "generic.total",
             validationRegex: ".+",
             validationMessage: "generic.validation.notNull",
