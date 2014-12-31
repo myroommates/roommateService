@@ -18,13 +18,13 @@ public class EmailRestController extends AbstractRestController {
     private EmailService emailService = new EmailServiceImpl();
     private TranslationService translationService = new TranslationServiceImpl();
 
-    public void sendRegistrationEmail(Roommate  roommate,Lang language){
+    public void sendRegistrationEmail(Roommate  roommate){
 
-        String title = translationService.getTranslation(EmailMessage.REGISTRATION_EMAIL_TITLE,language);
+        String title = translationService.getTranslation(EmailMessage.REGISTRATION_EMAIL_TITLE,roommate.getLanguage());
 
         // 0 => roommate.name
         // 1 => roommate.reactionKey
-        String body = translationService.getTranslation(EmailMessage.REGISTRATION_EMAIL_BODY,language,
+        String body = translationService.getTranslation(EmailMessage.REGISTRATION_EMAIL_BODY,roommate.getLanguage(),
                 roommate.getName(),
                 roommate.getReactivationKey());
 
@@ -38,10 +38,10 @@ public class EmailRestController extends AbstractRestController {
         // 0 => roommate.name
         // 1 => inviter.name
         // 2=> roommate.reactionKey
-        String body = translationService.getTranslation(EmailMessage.REGISTRATION_EMAIL_BODY,language,
+        String body = translationService.getTranslation(EmailMessage.INVITATION_EMAIL_BODY,language,
                 roommate.getName(),
                 inviter.getName(),
-                roommate.getReactivationKey());
+                roommate.getPassword());
 
         emailService.sendEmail(roommate,title,body);
     }

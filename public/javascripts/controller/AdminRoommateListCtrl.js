@@ -1,4 +1,4 @@
-myApp.controller('RoommateManagementCtrl',  function ($scope, $http, $flash,translationService,$locale) {
+myApp.controller('AdminRoommateListCtrl',  function ($scope, $http, $flash,translationService,$locale) {
 
     $scope.roommateList = initialData;
     $scope.moneySymbol= data.home.moneySymbol;

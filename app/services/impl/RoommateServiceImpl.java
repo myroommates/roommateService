@@ -86,17 +86,17 @@ public class RoommateServiceImpl extends CrudServiceImpl<Roommate> implements Ro
     private String computeAcronym(Roommate roommate, List<Roommate> roommateList) {
         //start by the first letter of the first name
         String acronym = "";
-        acronym += roommate.getName().toCharArray()[0];
-        //and test
-        if (roommateList.size() > 0) {
-            //continue to add letters
-            int counter = 1;
-            while (findByAcronym(acronym, roommate, roommateList) && counter < roommate.getName().length()) {
-                acronym += roommate.getName().toCharArray()[counter];
-                counter++;
+
+
+        if(roommate.getNameAbrv()==null) {
+            int acronymSize = 3;
+            if (roommate.getName().length() < 3) {
+                acronymSize = roommate.getName().length();
+
             }
+            acronym = roommate.getName().substring(0, acronymSize);
         }
-        acronym = acronym.toUpperCase();
+
         return acronym;
     }
 

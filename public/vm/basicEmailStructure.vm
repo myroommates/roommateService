@@ -11,7 +11,7 @@
 <!-- body -->
 <div style="min-height: 100px;padding:10px;">
 
-    $translationHelper.getMessage(${contentKey},${contentParams})
+    $content
 
 </div>
 

@@ -58,7 +58,7 @@ public class LoginRestRestController extends AbstractRestController {
         }
 
         //send email
-        emailController.sendRegistrationEmail(roommate, lang());
+        //emailController.sendRegistrationEmail(roommate, lang());
 
         //connection !! this operation save the roommate too
         securityRestController.storeIdentifier(roommate);
