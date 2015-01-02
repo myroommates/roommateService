@@ -25,7 +25,8 @@
         "moment":"*",
         "angucomplete": "*",
         "angular-bootstrap": "~0.12.0",
-        "angular-bootstrap-datetimepicker": "latest"
+        "angular-bootstrap-datetimepicker": "latest",
+        "mathjs":"*"
     },
     "overrides": {
         "bootstrap-sass": {

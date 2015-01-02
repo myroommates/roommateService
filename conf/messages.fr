@@ -145,6 +145,9 @@ changePasswordModal.title=Changer votre mot de passe
 changeEmailModal.title=Changer votre adresse email
 changeEmailModal.email=Votre nouvelle adresse email
 
+#calculator modal
+calculatorModal.title=Calculatrice
+
 
 #
 # Email

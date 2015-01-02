@@ -45,9 +45,10 @@ myApp.controller('HomeCtrl', function ($scope, $modal) {
     $scope.addItem = function (ticket) {
         $scope.ticketList.push(ticket);
 
-        for (var key in $scope.shoppingItemList) {
-            if (!!$scope.shoppingItemList[key].selected && $scope.shoppingItemList[key].selected == true) {
-                $scope.shoppingItemList.splice(key, 1);
+        for(var i=$scope.shoppingItemList.length-1;i>=0;i--){
+
+            if (!!$scope.shoppingItemList[i].selected && $scope.shoppingItemList[i].selected == true) {
+                $scope.shoppingItemList.splice(i, 1);
             }
         }
     };

@@ -146,6 +146,8 @@ changePasswordModal.title=Change your password
 changeEmailModal.title=Change your password
 changeEmailModal.email=Your new email
 
+#calculator modal
+calculatorModal.title=Calculator
 
 #
 # Email

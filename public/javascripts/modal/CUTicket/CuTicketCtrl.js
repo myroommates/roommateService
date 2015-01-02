@@ -1,4 +1,4 @@
-myApp.controller('CuTicketCtrl', function ($scope, $http, $flash, $modalInstance, roommateList, ticket, addItem, categoryList,moneySymbol,shoppingItemList,$filter) {
+myApp.controller('CuTicketCtrl', function ($scope, $http, $flash, $modalInstance, roommateList, ticket, addItem, categoryList,moneySymbol,shoppingItemList,$filter,$modal) {
 
     $scope.roommateList = roommateList;
     $scope.balanced = true;
@@ -33,6 +33,7 @@ myApp.controller('CuTicketCtrl', function ($scope, $http, $flash, $modalInstance
             validationRegex: ".+",
             validationMessage: "generic.validation.notNull",
             numbersOnly: "double",
+            hasCalculator:true,
             disabled:function(){
                 return $scope.loading || !$scope.balanced;
             },

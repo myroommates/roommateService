@@ -1,4 +1,4 @@
-myApp.directive("dirFieldText", function (directiveService, $timeout) {
+myApp.directive("dirFieldText", function (directiveService, $timeout,$modal) {
     return {
         restrict: "E",
         scope: directiveService.autoScope({
@@ -82,6 +82,25 @@ myApp.directive("dirFieldText", function (directiveService, $timeout) {
                         }
                         return false;
                     };
+
+
+                    scope.openCalculator= function(){
+                        var resolve = {
+                            setResult: function () {
+                                return function(result){
+                                    scope.getInfo().field=result;
+                                };
+                            }
+                        };
+
+                        $modal.open({
+                            templateUrl: "/assets/javascripts/modal/Calculator/view.html",
+                            controller: "CalculatorModalCtrl",
+                            size:"sm",
+                            resolve: resolve
+                        });
+                    };
+
                 }
             };
         }
