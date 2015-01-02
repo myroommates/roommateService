@@ -7,7 +7,7 @@
 @welcome_pattern {
 
     @helper.form(action = routes.RegistrationController.registration()) {
-        <div class="container content-block">
+        <div class="container content-block" ng-controller="RegistrationCtrl">
 
             <div class="actions">
                 <a class="btn btn-primary" href="/">
@@ -22,14 +22,14 @@
                 '_label -> Messages("generic.name"),
                 '_showConstraints -> false,
                 '_error -> registrationForm.globalError){ (id, name, value, args) =>
-                <input value="@value" type="text" name="@name" class="form-control" id="@id" @toHtmlArgs(args)>
+                <input ng-model="name" value="@value" type="text" name="@name" class="form-control" id="@id" @toHtmlArgs(args)>
             }
 
             @input(registrationForm("nameAbrv"),
                 '_label -> Messages("generic.nameAbrv"),
                 '_help -> Messages("registration.form.nameAbrv.help"),
                 '_error -> registrationForm.globalError){ (id, name, value, args) =>
-                <input value="@value" type="text" name="@name" class="form-control" id="@id" @toHtmlArgs(args)>
+                <input ng-model="nameAbrv" value="@value" type="text" name="@name" class="form-control" id="@id" @toHtmlArgs(args)>
             }
 
             @input(registrationForm("email"),

@@ -26,6 +26,7 @@ generic.validation.repeatPassword=The both password are not the same
 generic.validation.email=Please get a correct email
 generic.yourName=Your name
 generic.yourNameAbrv=Your acronym
+generic.creator=Creator
 
 #
 # welcome
@@ -56,6 +57,7 @@ error.minLength=Minimum %s characters
 error.maxLength=Maximum %s characters
 
 #menu
+menu.home=Home
 menu.admin=Admin
 menu.admin.roommate_list=Roommate list
 menu.admin.preferences=Preferenes
@@ -63,6 +65,7 @@ menu.count=Count
 menu.count.resume=Resume
 menu.count.tickets=Tickets
 menu.count.details=Details
+menu.shopping.list=Shopping list
 menu.events=Events
 menu.shopping=Shopping
 menu.preferences=Preferences
@@ -70,6 +73,14 @@ menu.logout=Log out
 menu.informations=Informations
 menu.about=About
 menu.myProfile=My profile
+
+# home
+home.title=Welcome
+home.count.title=Count
+home.count.balance.desc=Your balance is currently
+home.shopping.title=Shopping list
+home.shopping.addNewItem=Add a new shopping item
+home.shopping.bought=I bought this articles !
 
 # count resume
 count.resume.title=Count > Resume
@@ -86,6 +97,10 @@ count.ticket.sort.payer=Payer
 count.tickets.sortBy=Sort by
 count.ticket.create.button=Create a new ticket
 
+#shopping
+shopping.list.title=Shopping list
+shopping.list.create.button=Create a new shopping item
+
 #
 # profile
 #
@@ -99,6 +114,7 @@ profile.myProfile.title=My profile
 
 #roommate list
 admin.roommateList.title=Admin > Roommate list
+admin.roommateList.inviteRoommate=Invite new roommate
 
 #preferences
 admin.preferences.title=Admin > Preferences
@@ -114,6 +130,13 @@ about.title=About
 cuTicket.title.edit=Edit a ticket
 cuTicket.title.create=Create a ticket
 cuTicket.balancedRepartition=Balanced repartition
+cuTicket.shopping.description=Shopping : {0}
+cuTicket.shopping=Shopping
+
+# cu shopping item modal
+cuShoppingItem.onlyForMe=Only for me
+cuShoppingItem.title.create=Create a shopping item
+cuShoppingItem.title.edit=Edit a shopping item
 
 # changePasswordModal
 changePasswordModal.newPassword=New password

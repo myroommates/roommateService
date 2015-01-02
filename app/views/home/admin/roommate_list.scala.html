@@ -12,10 +12,6 @@
             var initialData = @Html(new ObjectMapper().writeValueAsString(roommatesList.getList));
         </script>
 
-        <div class="row">
-            <div class="col-lg-4 col-md-2 hidden-xs"></div>
-            <a class="btn btn-primary col-lg-4 col-md-8 col-xs-12" href="#" ng-click="add()">Invite new roommate</a>
-        </div>
 
         <ul class="element_list">
             <li class="row" ng-repeat="roommate in roommateList" ng-click="display(roommate)">
@@ -42,13 +38,11 @@
                             <input class="form-control" type="email" ng-disabled="roommate.edit != true" ng-model="roommate.email"/>
 
                         </div>
-                    </div>
+
+                        </div>
                 </div>
                 <div class="col-md-2  col-xs-2">
                     <button class="btn btn-primary glyphicon glyphicon-save"   ng-click='save(roommate)'  ng-show="roommate.edit == true"></button>
-                    <!--
-                    <button class="btn btn-primary glyphicon glyphicon-pencil" ng-click='edit(roommate)' ng-show="roommate.edit != true"></button>
-                    -->
                     <button class="btn btn-primary glyphicon glyphicon-remove" ng-click='remove(roommate)'></button>
                 </div>
                 <div class="loading-mask" ng-show="roommate.isLoading === true">
@@ -57,6 +51,10 @@
                 </div>
             </li>
         </ul>
+        <div class="row">
+            <div class="col-lg-4 col-md-2 hidden-xs"></div>
+            <a class="btn btn-primary col-lg-4 col-md-8 col-xs-12" href="#" ng-click="add()">@Messages("admin.roommateList.inviteRoommate")</a>
+        </div>
 
     </div>
 </div>

@@ -1,0 +1,58 @@
+@(data:dto.InterfaceDataDTO,shoppingItemList:dto.ListDTO[dto.ShoppingItemDTO],ticketList:dto.ListDTO[dto.TicketDTO],roommateList:dto.ListDTO[dto.RoommateDTO])
+
+@import com.fasterxml.jackson.databind.ObjectMapper
+
+@home_pattern("home.title", data.getMySelf()) {
+<div ng-controller="HomeCtrl" class="home-interface">
+
+    <!-- load data -->
+    <script>
+    var data = @Html(new ObjectMapper().writeValueAsString(data));
+    var shoppingItemList = @Html(new ObjectMapper().writeValueAsString(shoppingItemList.getList));
+    var ticketList = @Html(new ObjectMapper().writeValueAsString(ticketList.getList));
+    var roommateList = @Html(new ObjectMapper().writeValueAsString(roommateList.getList));
+    </script>
+
+        <!-- count -->
+    <div class="content-block" >
+        <h3>@Messages("home.count.title")</h3>
+
+        <div>
+            <p>@Messages("home.count.balance.desc")
+                <span class="value" ng-class="{'red':computeCountBalance()<0,'green':computeCountBalance()>0}">
+                    {{computeCountBalance() | number:2}}{{moneySymbol}}
+                </span>
+            </p>
+            <div class="row">
+                <div class="col-lg-4 col-md-2 hidden-xs"></div>
+                <button class="btn btn-primary col-lg-4 col-md-8 col-xs-12"  ng-click="createTicket()" href="#" >@Messages("count.ticket.create.button")</button>
+            </div>
+        </div>
+    </div>
+
+        <!-- shopping -->
+    <div class="content-block" >
+        <h3>@Messages("home.shopping.title")</h3>
+
+        <div class="row">
+            <div class="col-lg-4 col-md-2 hidden-xs"></div>
+            <button class="btn btn-primary col-lg-4 col-md-8 col-xs-12"  ng-click="createShoppingItem()" href="#" >@Messages("home.shopping.addNewItem")</button>
+        </div>
+
+        <ul class="shopping-list">
+            <li class="row" ng-repeat="item in shoppingItemList">
+                <div class="col-xs-1">
+                    <input type="checkbox" ng-model="item.selected" class="middle_ck" />
+                </div>
+                <div class="col-xs-7">
+                    {{item.description}}
+                </div>
+                <div class="col-xs-4">
+                    {{item.creationDate | date:'mediumDate'}}
+                </div>
+            </li>
+        </ul>
+        <button type="button" class="btn btn-primary" ng-disabled="getTotalItemSelected()==0" ng-click="resolveSelectedItem()">@Messages("home.shopping.bought")</button>
+    </div>
+</div>
+}

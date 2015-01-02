@@ -20,7 +20,7 @@ public class ShoppingItem extends AuditedAbstractEntity {
     public static final String FIND_BY_ID = "ShoppingItem_FIND_BY_ID";
 
     //column
-    public final static String COL_HOME = "home";
+    public final static String COL_HOME = "home_id";
 
     //params
     public final static String PARAM_HOME = COL_HOME;
@@ -28,6 +28,9 @@ public class ShoppingItem extends AuditedAbstractEntity {
 
     @Column(nullable = false, columnDefinition = "Text")
     private String description;
+
+    @Column(nullable = false,columnDefinition = "boolean default false")
+    private Boolean onlyForMe = false;
 
     @Column(nullable = false)
     private Date creationDate;
@@ -39,18 +42,26 @@ public class ShoppingItem extends AuditedAbstractEntity {
     private Roommate creator;
 
     @Column(columnDefinition = " boolean default false", nullable = false)
-    private boolean wasBought = false;
+    private Boolean wasBought = false;
 
     public ShoppingItem() {
         creationDate = new Date();
     }
 
 
-    public boolean isWasBought() {
+    public Boolean getOnlyForMe() {
+        return onlyForMe;
+    }
+
+    public void setOnlyForMe(Boolean onlyForMe) {
+        this.onlyForMe = onlyForMe;
+    }
+
+    public Boolean isWasBought() {
         return wasBought;
     }
 
-    public void setWasBought(boolean wasBought) {
+    public void setWasBought(Boolean wasBought) {
         this.wasBought = wasBought;
     }
 

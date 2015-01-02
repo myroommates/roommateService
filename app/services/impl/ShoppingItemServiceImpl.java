@@ -15,7 +15,7 @@ public class ShoppingItemServiceImpl extends CrudServiceImpl<ShoppingItem> imple
     @Override
     public List<ShoppingItem> findByHome(Home home) {
         return Ebean.createNamedQuery(ShoppingItem.class, ShoppingItem.FIND_BY_HOME)
-                .setParameter(ShoppingItem.PARAM_HOME, home)
+                .setParameter(ShoppingItem.PARAM_HOME, home.getId())
                 .findList();
     }
 

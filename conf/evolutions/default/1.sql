@@ -48,6 +48,7 @@ create table roommate (
 create table shopping_item (
   id                        bigint not null,
   description               Text not null,
+  only_for_me               boolean default false not null,
   home_id                   bigint not null,
   creator_id                bigint not null,
   was_bought                 boolean default false not null,

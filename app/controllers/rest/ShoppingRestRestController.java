@@ -28,6 +28,25 @@ public class ShoppingRestRestController extends AbstractRestController {
     //converter
     private ShoppingItemToShoppingItemDTOConverter shoppingItemToShoppingItemDTOConverter = new ShoppingItemToShoppingItemDTOConverter();
 
+    public Result setWasBought(String ids) {
+
+        //control
+        for (String s : ids.split(",")) {
+            Long id = Long.parseLong(s);
+
+            ShoppingItem shoppingItem = shoppingItemService.findById(id);
+
+            if(shoppingItem==null || !shoppingItem.getHome().equals(securityRestController.getCurrentUser().getHome())){
+                throw new  MyRuntimeException(ErrorMessage.NOT_YOU_SHOPPING_ITEM);
+            }
+
+            shoppingItem.setWasBought(true);
+
+            shoppingItemService.saveOrUpdate(shoppingItem);
+        }
+        return ok();
+    }
+
     @Security.Authenticated(SecurityRestController.class)
     @Transactional
     public Result getAll() {
@@ -89,11 +108,11 @@ public class ShoppingRestRestController extends AbstractRestController {
         }
 
         shoppingItem.setDescription(dto.getDescription());
-        shoppingItem.setWasBought(dto.isWasBought());
+        shoppingItem.setWasBought(dto.getWasBought());
 
         shoppingItemService.saveOrUpdate(shoppingItem);
 
-        return ok(new ResultDTO());
+        return ok(shoppingItemToShoppingItemDTOConverter.convert(shoppingItem));
     }
 
     @Security.Authenticated(SecurityRestController.class)

@@ -4,6 +4,7 @@ import com.avaje.ebean.Ebean;
 import models.entities.Home;
 import models.entities.Roommate;
 import org.jasypt.util.password.StrongPasswordEncryptor;
+import play.Logger;
 import services.RoommateService;
 
 import java.util.ArrayList;
@@ -41,13 +42,8 @@ public class RoommateServiceImpl extends CrudServiceImpl<Roommate> implements Ro
         }
 
         //compute abrv
-        if (roommate.getId() == null) {
-            List<Roommate> roommateList = new ArrayList<>();
-            if (roommate.getHome().getId() != null) {
-                roommateList = findByHome(roommate.getHome());
-            }
-
-            roommate.setNameAbrv(computeAcronym(roommate, roommateList));
+        if (roommate.getNameAbrv() == null) {
+            roommate.setNameAbrv(computeAcronym(roommate));
         }
         super.saveOrUpdate(roommate);
     }
@@ -83,10 +79,9 @@ public class RoommateServiceImpl extends CrudServiceImpl<Roommate> implements Ro
         return new StrongPasswordEncryptor().encryptPassword(password);
     }
 
-    private String computeAcronym(Roommate roommate, List<Roommate> roommateList) {
+    private String computeAcronym(Roommate roommate) {
         //start by the first letter of the first name
         String acronym = "";
-
 
         if(roommate.getNameAbrv()==null) {
             int acronymSize = 3;
@@ -94,6 +89,7 @@ public class RoommateServiceImpl extends CrudServiceImpl<Roommate> implements Ro
                 acronymSize = roommate.getName().length();
 
             }
+            Logger.warn("create acronym : "+acronymSize+"/"+roommate.getName().substring(0, acronymSize));
             acronym = roommate.getName().substring(0, acronymSize);
         }
 

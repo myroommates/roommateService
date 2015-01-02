@@ -11,7 +11,9 @@ public class ShoppingItemToShoppingItemDTOConverter implements ConverterInterfac
     public ShoppingItemDTO convert(ShoppingItem entity) {
         ShoppingItemDTO dto = new ShoppingItemDTO();
 
+        dto.setId(entity.getId());
         dto.setCreationDate(entity.getCreationDate());
+        dto.setOnylForMe(entity.getOnlyForMe());
         dto.setCreatorId(entity.getCreator().getId());
         dto.setDescription(entity.getDescription());
         dto.setHomeId(entity.getHome().getId());

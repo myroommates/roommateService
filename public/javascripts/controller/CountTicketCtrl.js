@@ -125,6 +125,9 @@ myApp.controller('CountTicketCtrl', function ($scope, $http, $flash, $modal,tran
             },
             moneySymbol:function(){
                 return $scope.moneySymbol;
+            },
+            shoppingItemList: function(){
+                return null;
             }
         };
 

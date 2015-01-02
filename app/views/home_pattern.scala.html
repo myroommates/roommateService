@@ -16,7 +16,7 @@
             <ul ng-controller="LateralMenuCtrl">
 
                 <!-- access link -->
-                <li><span>@Messages("generic.navigation")</span></li>
+                <li><a href="/home">@Messages("menu.home")</a></li>
                 @if(account.isAdmin()) {
                     <li class="menu-item-lv-1" ng-class="{'menu-item-close':menuItemOpen(3)==false}">
                         <a href="#" ng-click="switchVisibility(3)">@Messages("menu.admin")
@@ -42,6 +42,11 @@
                 </li>
                 <li class="menu-item-lv-2" ng-class="{'menu-item-close':menuItemOpen(1)==false}">
                     <a href="/count/tickets">@Messages("menu.count.tickets")</a>
+                </li>
+
+                <!-- shopping -->
+                <li>
+                    <a href="/shopping/list">@Messages("menu.shopping.list")</a>
                 </li>
 
                 <!-- profile -->
@@ -108,6 +113,8 @@
                             <div class="collapse navbar-collapse">
                                 <ul class="nav navbar-nav navbar-lev-1">
 
+                                    <li><a href="/home">@Messages("menu.home")</a></li>
+
                                     <!-- admin -->
                                     @if(account.isAdmin()) {
                                         <li class="dropdown">
@@ -127,6 +134,12 @@
                                             <li><a href="/count/tickets">@Messages("menu.count.tickets")</a></li>
                                         </ul>
                                     </li>
+
+                                    <!-- shopping -->
+                                    <li>
+                                        <a href="/shopping/list">@Messages("menu.shopping.list")</a>
+                                    </li>
+
 
 
                                         <!-- about -->

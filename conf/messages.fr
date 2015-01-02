@@ -26,6 +26,7 @@ generic.validation.repeatPassword=Les deux mots de passe ne correspondent pas
 generic.validation.email=Merci de donner une adresse e-mail correcte
 generic.yourName=Votre nom
 generic.yourNameAbrv=Votre acronyme
+generic.creator=Créateur
 
 #
 # welcome
@@ -53,6 +54,7 @@ error.minLength=Minimum %s caractères
 error.maxLength=Maximum %s caractères
 
 #menu
+menu.home=Accueil
 menu.admin=Administration
 menu.admin.roommate_list=Liste des collocataires
 menu.admin.preferences=Préférences
@@ -60,6 +62,7 @@ menu.count=Compte
 menu.count.resume=Résumé
 menu.count.tickets=Tickets
 menu.count.details=Détails
+menu.shopping.list=Liste de course
 menu.events=Evènements
 menu.shopping=Courses
 menu.preferences=Préférénces
@@ -67,6 +70,14 @@ menu.logout=Déconnection
 menu.informations=Informations
 menu.about=A propos
 menu.myProfile=Mon profile
+
+# home
+home.title=Accueil
+home.count.title=Comptes
+home.count.balance.desc=Votre solde est actuellement de
+home.shopping.title=Liste des courses
+home.shopping.addNewItem=Ajouter un nouvel article
+home.shopping.bought=J''ai acheté ces articles !
 
 # count resume
 count.resume.title=Compte > Résumé
@@ -76,12 +87,17 @@ count.resume.balance=Balance
 count.resume.howToResolve=Comment résoudre ?
 
 # count ticket
-count.tickets.title=Compte > Liste des tickets
+count.tickets.title=Liste des tickets
 count.ticket.sort.date=Date
 count.ticket.sort.category=Catégorie
 count.ticket.sort.payer=Payeur
 count.tickets.sortBy=Trier par
 count.ticket.create.button=Créer un nouveau ticket
+
+
+#shopping
+shopping.list.title=Liste de course
+shopping.list.create.button=Créer un nouveau course machin
 
 #
 # profile
@@ -97,6 +113,8 @@ profile.myProfile.title=Mon profile
 #roommate list
 admin.roommateList.title=Administration > Liste des collocataires
 
+admin.roommateList.inviteRoommate=Inviter un nouveau collocataire
+
 #preferences
 admin.preferences.title=Administration > Préférences
 
@@ -111,6 +129,13 @@ about.title=A propos
 cuTicket.title.edit=Editer un ticket
 cuTicket.title.create=Créer a ticket
 cuTicket.balancedRepartition=Répartition équilibrée
+cuTicket.shopping.description=Course : {0}
+cuTicket.shopping=Course
+
+# cu shopping item modal
+cuShoppingItem.onlyForMe=Seulement pour moi
+cuShoppingItem.title.create=Créer un élément de course
+cuShoppingItem.title.edit=diter un élément de course
 
 # changePasswordModal
 changePasswordModal.newPassword=Nouveau mot de passe
@@ -125,7 +150,7 @@ changeEmailModal.email=Votre nouvelle adresse email
 # Email
 # TODO
 REGISTRATION_EMAIL_TITLE=Welcome to RoommateApp !
-REGISTRATION_EMAIL_BODY=Welcome {0}!<br/><br/>Your smartphone is now logged to your roommateApp ! If your smartphone is logout, you can login you to your account with the follow code : {1}<br/><br/>Follow 'Reactivation' instruction to login you<br/><br/>
+REGISTRATION_EMAIL_BODY=Welcome {0}!<br/><br/>Your smartphone is now logged to your roommateApp ! If your smartphone is logout, you can login you to your account with the follow code : {1}<br/><br/>Follow ''Reactivation'' instruction to login you<br/><br/>
 INVITATION_EMAIL_TITLE=Your are invited to RoommateApp !
 INVITATION_EMAIL_BODY=Bienvenue {0}!<br/><br/>Vous avez été invité à rejoindre RoommateApp par {1}<br/><br/>Vous pouvez vous connectez avec votre adresse e-mail et le mot de passe suivant : {2}
 
@@ -133,20 +158,20 @@ INVITATION_EMAIL_BODY=Bienvenue {0}!<br/><br/>Vous avez été invité à rejoind
 # ERROR
 #
 JSON_CONVERSION_ERROR=La requête ne peut être convertie en {0}.
-WRONG_AUTHORIZATION=Vous n'avez pas l'autorisation
+WRONG_AUTHORIZATION=Vous n''avez pas l''autorisation
 LOGIN_WRONG_PASSWORD_LOGIN=Mauvais mot de passe / email
-NOT_CONNECTED=Vous n'êtes pas connecté
+NOT_CONNECTED=Vous n''êtes pas connecté
 EMAIL_ALREADY_USED=Cette adresse email est déjà utilisée.
-NOT_YOU_ROOMMATE=Ce n'est pas votre collocataire: {O}
-ENTITY_NOT_FOUND=Cette entité {0} n'a pas été trouvée : {1}
-NOT_YOU_TICKET=Ce n'est pas votre ticket : {O}
-NOT_TICKET_CREATOR=Vous n'êtes pas le créateur du ticket {0} et ne pouvez l'éditer
+NOT_YOU_ROOMMATE=Ce n''est pas votre collocataire: {O}
+ENTITY_NOT_FOUND=Cette entité {0} n''a pas été trouvée : {1}
+NOT_YOU_TICKET=Ce n''est pas votre ticket : {O}
+NOT_TICKET_CREATOR=Vous n''êtes pas le créateur du ticket {0} et ne pouvez l''éditer
 CANNOT_REMOVE_YOURSELF=Vous ne pouvez vous supprimer vous-même
 NOT_YOU_HOME=this is not your home : {0}
 WRONG_PASSWORD=Le mot de passe doit être composé entre 6 et 18 lettres ou nombre ou _-%
 UNIQUE_CONSTRAIN_VIOLATION=a unique constraint was not respected on the table {0}, constraint {1}, ids {2}
 ROOMMATE_USED={0} is used by a ticket and cannot removed
-NOT_YOU_EVENT=Ce n'est pas votre évènement : {0}
+NOT_YOU_EVENT=Ce n''est pas votre évènement : {0}
 NOT_EVENT_CREATOR=You are not the payer of the event {0} and you cannot edit it
 NOT_YOU_SHOPPING_ITEM=this is not your shopping item : {0}
 NOT_ITEM_CREATOR=You are not the payer of the shopping item {0} and you cannot edit it

@@ -8,6 +8,7 @@
 @import 'widget/_field_text';
 @import 'widget/_count';
 @import 'widget/_ticket';
+@import 'widget/_home-interface';
 
 //
 // color
@@ -127,6 +128,15 @@ input[type=checkbox].big_ck {
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
 }
 
+input[type=checkbox].middle_ck {
+    border: 1px solid #ccc;
+    height: 22px;
+    width: 22px;
+    border-radius: 4px;
+    color: #555;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+}
+
 .container{
     margin-bottom: 50px;
 }
@@ -155,6 +165,19 @@ input[type=checkbox].big_ck {
 button{
     &.btn{
         margin-bottom: 5px;
+    }
+}
+
+
+.value{
+    font-weight: 600;
+    text-align: right;
+
+    &.red{
+        color:#cc0000;
+    }
+    &.green{
+        color:#00cc00;
     }
 }
 

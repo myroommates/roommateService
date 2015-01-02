@@ -1,0 +1,19 @@
+<div class="modal-header" >
+    <button class="btn glyphicon glyphicon-remove" style="float:right" ng-click="close()"></button>
+    <h4 class="modal-title" ng-show="edit">{{'cuShoppingItem.title.edit' | translateText}}</h4>
+    <h4 class="modal-title" ng-hide="edit">{{'cuShoppingItem.title.create' | translateText}}</h4>
+</div>
+<div class="modal-body" dir-enter="save()">
+
+    <dir-field-text ng-info="fields.description"></dir-field-text>
+
+    <div class="row form-group">
+        <label class="col-md-3">{{'cuShoppingItem.onlyForMe'  | translateText}}</label>
+        <input ng-disabled="loading" class="col-md-6" type="checkbox" ng-model="onlyForMe" value="true"/>
+    </div>
+</div>
+<div class="modal-footer">
+    <button ng-disabled="loading" type="button" class="btn btn-default" ng-click="close()">{{'generic.close' | translateText}}</button>
+    <button ng-disabled="loading" type="button" class="btn btn-primary" ng-click="save()">{{'generic.save' | translateText}}</button>
+    <img src="/assets/images/modal-loading.gif" ng-show="loading" />
+</div>

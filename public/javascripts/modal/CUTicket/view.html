@@ -3,7 +3,7 @@
     <h4 class="modal-title" ng-show="edit">{{'cuTicket.title.edit' | translateText}}</h4>
     <h4 class="modal-title" ng-hide="edit">{{'cuTicket.title.create' | translateText}}</h4>
 </div>
-<div class="modal-body" dir-enter="submit()">
+<div class="modal-body" dir-enter="save()">
 
 
     <dir-field-date ng-info="fields.date"></dir-field-date>
@@ -21,17 +21,17 @@
 
 
     <div class="row">
-        <div class="col-md-2 col-xs-6 payer-list" ng-repeat="roommate in roommateList">
+        <div class="col-md-2 col-sm-4 col-xs-6 payer-list" ng-repeat="roommate in roommateList">
             <input ng-disabled="loading" type="checkbox" ng-model="fields[roommate.id].isDebtor"/>
             <dir-user-icon ng-user="roommate"></dir-user-icon>
 
-            <div class="form-group">
+            <div class="form-group" ng-show="fields[roommate.id].isDebtor">
                 <div class="input-group">
 
                     <input
                             ng-disabled="loading || !fields[roommate.id].isDebtor || balanced"
                             type="text"
-                            ng-show="fields[roommate.id].isDebtor"
+
                             class="form-control ng-pristine ng-valid money"
                             ng-disabled="balanced"
                             ng-model="fields[roommate.id].field"

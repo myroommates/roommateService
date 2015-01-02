@@ -10,6 +10,8 @@ import java.util.Date;
  */
 public class ShoppingItemDTO extends DTO {
 
+    private Long id;
+
     @Size(min = 1, max = 1000)
     private String description;
 
@@ -19,9 +21,18 @@ public class ShoppingItemDTO extends DTO {
 
     private Long creatorId;
 
-    private boolean wasBought;
+    private Boolean wasBought;
+    private Boolean onylForMe;
 
     public ShoppingItemDTO() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getDescription() {
@@ -56,11 +67,11 @@ public class ShoppingItemDTO extends DTO {
         this.creatorId = creatorId;
     }
 
-    public boolean isWasBought() {
+    public Boolean getWasBought() {
         return wasBought;
     }
 
-    public void setWasBought(boolean wasBought) {
+    public void setWasBought(Boolean wasBought) {
         this.wasBought = wasBought;
     }
 
@@ -73,5 +84,13 @@ public class ShoppingItemDTO extends DTO {
                 ", creatorId=" + creatorId +
                 ", wasBought=" + wasBought +
                 '}';
+    }
+
+    public void setOnylForMe(Boolean onylForMe) {
+        this.onylForMe = onylForMe;
+    }
+
+    public Boolean getOnylForMe() {
+        return onylForMe;
     }
 }

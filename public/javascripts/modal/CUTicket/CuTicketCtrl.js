@@ -1,4 +1,4 @@
-myApp.controller('CuTicketCtrl', function ($scope, $http, $flash, $modalInstance, roommateList, ticket, addItem, categoryList,moneySymbol) {
+myApp.controller('CuTicketCtrl', function ($scope, $http, $flash, $modalInstance, roommateList, ticket, addItem, categoryList,moneySymbol,shoppingItemList,$filter) {
 
     $scope.roommateList = roommateList;
     $scope.balanced = true;
@@ -6,6 +6,7 @@ myApp.controller('CuTicketCtrl', function ($scope, $http, $flash, $modalInstance
     $scope.loading=false;
     $scope.mySelf = data.mySelf;
     $scope.money=moneySymbol;
+    $scope.shoppingItemList=shoppingItemList;
 
     $scope.fields = {
         description: {
@@ -118,7 +119,37 @@ myApp.controller('CuTicketCtrl', function ($scope, $http, $flash, $modalInstance
             }
 
             $scope.fields.value.field = totalValue;
+        }
 
+        if(!!$scope.shoppingItemList){
+
+            //compute name
+            var content="",first=true;
+            for(key in $scope.shoppingItemList){
+                if(first==true){
+                    first=false;
+                }
+                else{
+                    content+=", ";
+                }
+                content+=$scope.shoppingItemList[key].description;
+            }
+
+            //compute name
+            var description = $filter('translateText')('cuTicket.shopping.description',content);
+            if(description.length>1000){
+                description=description.splice(0,996) + "...";
+            }
+            $scope.fields.description.field = description;
+
+            //compute category
+            var category = $filter('translateText')('cuTicket.shopping');
+            $scope.fields.category.field = category;
+
+            $scope.fields.description.focus=null;
+            $scope.fields.value.focus=function () {
+                return true;
+            };
         }
     };
 
@@ -243,6 +274,25 @@ myApp.controller('CuTicketCtrl', function ($scope, $http, $flash, $modalInstance
                 $scope.loading=false;
                 $flash.error(data.message);
             });
+
+            if(!!$scope.shoppingItemList){
+
+                var listId = "";
+
+                for(key in $scope.shoppingItemList){
+                    listId+=$scope.shoppingItemList[key].id+",";
+                }
+
+                $http({
+                    'method': "PUT",
+                    'url': "/rest/shoppingItem/wasBought/"+listId,
+                    'headers': "Content-Type:application/json"
+                }).success(function (data, status) {
+                })
+                .error(function (data, status) {
+                    $flash.error(data.message);
+                });
+            }
         }
     }
 });
