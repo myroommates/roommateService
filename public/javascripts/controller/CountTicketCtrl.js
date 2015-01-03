@@ -3,7 +3,6 @@ myApp.controller('CountTicketCtrl', function ($scope, $http, $flash, $modal,tran
     $scope.myself = data.mySelf;
     $scope.moneySymbol= data.home.moneySymbol;
     $scope.ticketList = ticketList.list;
-    console.log(data);
 
     $scope.sortSelection = [
         {ref: 'date', label: 'count.ticket.sort.date'},

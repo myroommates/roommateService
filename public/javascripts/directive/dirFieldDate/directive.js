@@ -47,6 +47,7 @@ myApp.directive("dirFieldDate", function (directiveService, $filter, generateId)
                         scope.getInfo().isValid = isValid;
                     };
                     scope.isValid();
+
                     scope.logField = function () {
                         return console.log(scope.getInfo());
                     };

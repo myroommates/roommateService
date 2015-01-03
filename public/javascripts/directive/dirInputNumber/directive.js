@@ -5,10 +5,6 @@ myApp.directive("numbersOnly", function($filter, translationService, $locale) {
         link: function(scope, element, attrs, modelCtrl) {
             return scope.$watch(attrs.numbersOnly, function() {
 
-                console.log($locale.id);
-                console.log($locale.NUMBER_FORMATS);
-
-
                 var convertToFloat, convertToString, displayError, errorMessage, filterFloat, nbDecimal, valueToDisplay;
                 if (attrs.numbersOnly === "integer" || attrs.numbersOnly === "double" || attrs.numbersOnly === "percent") {
                     scope.lastValidValue = 0;

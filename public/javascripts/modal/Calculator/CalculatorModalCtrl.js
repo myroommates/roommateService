@@ -7,7 +7,6 @@ myApp.controller('CalculatorModalCtrl', function ($scope, $modalInstance, setRes
     $scope.close = function () {
         $scope.result();
         var value = parseFloat($scope.memory);
-        console.log("value: : " + value);
         if (!!value) {
             setResult(value);
         }
