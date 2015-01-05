@@ -10,6 +10,7 @@
 @import 'widget/_ticket';
 @import 'widget/_home-interface';
 @import 'widget/_input-text';
+@import 'widget/_help';
 
 //
 // color
@@ -35,11 +36,12 @@
 @color-header-bg: @color-lat-menu-bg;
 @color-header-title: @color-lat-menu-text;
 
-.modal-header{
+.modal-header {
     background-color: @color-lat-menu-bg;
-    h4{
-    color: @color-lat-menu-text;
-}}
+    h4 {
+        color: @color-lat-menu-text;
+    }
+}
 
 html, body {
     height: 100%;
@@ -54,6 +56,7 @@ body {
 .main-container {
     overflow: auto;
     padding-bottom: 20px;
+    padding-bottom: 50px;
 }
 
 .my-page-header {
@@ -77,7 +80,7 @@ header {
         margin-left: 15px;
     }
 
-    & > *{
+    & > * {
         line-height: 50px;
     }
 
@@ -106,8 +109,8 @@ header {
     }
 }
 
-input{
-    &.money{
+input {
+    &.money {
         text-align: right;
     }
 }
@@ -138,47 +141,49 @@ input[type=checkbox].middle_ck {
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
 }
 
-.container{
-    margin-bottom: 50px;
-}
-
 @media (max-width: 480px) {
     .col-xs-1, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6,
-    .col-xs-7, .col-xs-8, .col-xs-9, .col-xs-10, .col-xs-11, .col-xs-12{
+    .col-xs-7, .col-xs-8, .col-xs-9, .col-xs-10, .col-xs-11, .col-xs-12 {
         padding-left: 5px;
         padding-right: 5px;
     }
-    .row{
+
+    .row {
         margin-left: -5px;
         margin-right: -5px;
     }
-    .content-block{
+
+    .content-block {
         margin-left: 5px;
         margin-right: 5px;
         padding-left: 5px;
         padding-right: 5px;
     }
-    .container{
+
+    .container {
         padding: 0;
     }
 }
 
-button{
-    &.btn{
+button {
+    &.btn {
         margin-bottom: 5px;
     }
 }
 
-
-.value{
+.value {
     font-weight: 600;
     text-align: right;
 
-    &.red{
-        color:#cc0000;
+    &.red {
+        color: #cc0000;
     }
-    &.green{
-        color:#00cc00;
+    &.green {
+        color: #00cc00;
     }
+}
+
+.biggest {
+    width: 100%;
 }
 

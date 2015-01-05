@@ -1,0 +1,49 @@
+module.exports = function(grunt) {
+
+  // Project configuration.
+  grunt.initConfig({
+    pkg: grunt.file.readJSON('package.json'),
+	concat: {
+		generated: {
+		  files: [
+		    {
+		    dest: '.tmp/concat/js/app.js',
+		      
+		    src: [	'public/javascripts/modal/CUTicket/CuTicketCtrl.js',
+					'public/javascripts/modal/CUShoppingItem/CuShoppingItemCtrl.js',
+					'public/javascripts/modal/ChangeEmail/ChangeEmailModal.js',
+					'public/javascripts/modal/ChangePassword/ChangePasswordModal.js',
+					'public/javascripts/modal/Calculator/CalculatorModalCtrl.js',
+					'public/javascripts/directive/dirFieldDate/directive.js',
+					'public/javascripts/directive/dirFieldText/directive.js',
+					'public/javascripts/directive/dirInputNumber/directive.js',
+					'public/javascripts/directive/dirUserIcon/directive.js',
+					'public/javascripts/directive/dirFocusMe/directive.js',
+					'public/javascripts/directive/dirEnter/directive.js',
+					'public/javascripts/service/FlashService.js',
+					'public/javascripts/service/DirectiveService.js',
+					'public/javascripts/service/GenerateIdService.js',
+					'public/javascripts/service/TranslationService.js',
+					'public/javascripts/filter/TranslateTextFilter.js']
+		    }
+		  ]
+		}
+	  },
+    uglify: {
+      options: {
+        banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
+      },
+      build: {
+		src: '.tmp/concat/js/app.js',
+        dest: 'public/javascripts/dist/<%= pkg.name %>.min.js'
+      }
+    }
+  });
+
+  // Load the plugin that provides the "uglify" task.
+  grunt.loadNpmTasks('grunt-contrib-uglify');
+
+  // Default task(s).
+  grunt.registerTask('default', ['concat','uglify']);
+
+};

@@ -5,11 +5,17 @@ angular.module("tmh.dynamicLocale").config(function (tmhDynamicLocaleProvider) {
 
 var myApp = angular.module('app', ['ui.bootstrap.datetimepicker', 'ui.bootstrap', "angucomplete", 'tmh.dynamicLocale']);
 
-myApp.controller('MainCtrl', function ($locale, tmhDynamicLocale,translationService) {
+myApp.controller('MainCtrl', function ($scope,$locale, tmhDynamicLocale,translationService) {
 
     if ("data" in window && data!=undefined && data!=null) {
         tmhDynamicLocale.set(data.langId);
 
         translationService.set(data.translations);
+    }
+
+    $scope.helpDisplayed=false;
+
+    $scope.displayHelp = function(){
+        $scope.helpDisplayed = true;
     }
 });

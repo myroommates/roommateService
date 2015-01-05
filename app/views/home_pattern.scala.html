@@ -8,7 +8,8 @@
 
 <html>
     @pageElement.header()
-<body ng-app="app" ng-controller="MainCtrl">
+<body ng-app="app" ng-controller="MainCtrl"  ng-class="{'help-active':helpDisplayed === true}">
+
     <div class="global-container">
 
             <!-- menu for little screen : display only when the screen is smaller then 760px -->
@@ -85,88 +86,98 @@
                 </div>
 
                     <!-- title -->
-                <h1>@Messages(title)</h1>
+                <h1 class="container">Je suis le nom de ton application</h1>
+
             </header>
         </div>
 
             <!-- main content -->
         <div class="main-body">
-            <div id="main-header-container" class="hidden-sm hidden-xs">
+            <div class="global-content-container">
 
-                    <!-- header -->
-                <header>
-
-                        <!-- title -->
-                    <h1>@Messages(title)</h1>
-                </header>
-            </div>
-
-    <div class="container main-container">
-
-                    <!-- big menu -->
-                <div class="row hidden-sm hidden-xs">
+                <div class="help-mask">
+                </div>
 
 
-                    <nav class="navbar navbar-default large-menu">
-                        <div class="container-fluid">
+                <div id="main-header-container" class="hidden-sm hidden-xs">
 
-                            <div class="collapse navbar-collapse">
-                                <ul class="nav navbar-nav navbar-lev-1">
+                        <!-- header -->
+                    <header>
 
-                                    <li><a href="/home">@Messages("menu.home")</a></li>
+                            <!-- title -->
+                        <h1 class="container">Je suis le nom de ton application</h1>
+                            <!-- TODO temp -->
+                        <button class="btn btn-primary" ng-click="displayHelp()">Display help</button>
+                    </header>
+                </div>
 
-                                    <!-- admin -->
-                                    @if(account.isAdmin()) {
+                <div class="container main-container">
+
+                        <!-- big menu -->
+                    <div class="row hidden-sm hidden-xs">
+
+
+                        <nav class="navbar navbar-default large-menu">
+                            <div class="container-fluid">
+
+                                <div class="collapse navbar-collapse">
+                                    <ul class="nav navbar-nav navbar-lev-1">
+
+                                        <li><a href="/home">@Messages("menu.home")</a></li>
+
+                                        <!-- admin -->
+                                        @if(account.isAdmin()) {
+                                            <li class="dropdown">
+                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">@Messages("menu.admin") <span class="caret"></span></a>
+                                                <ul class="dropdown-menu" role="menu">
+                                                    <li><a href="/admin/roommate_list">@Messages("menu.admin.roommate_list")</a></li>
+                                                    <li><a href="/admin/preferences">@Messages("menu.admin.preferences")</a></li>
+                                                </ul>
+                                            </li>
+                                        }
+
+                                        <!-- count -->
                                         <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">@Messages("menu.admin") <span class="caret"></span></a>
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">@Messages("menu.count") <span class="caret"></span></a>
                                             <ul class="dropdown-menu" role="menu">
-                                                <li><a href="/admin/roommate_list">@Messages("menu.admin.roommate_list")</a></li>
-                                                <li><a href="/admin/preferences">@Messages("menu.admin.preferences")</a></li>
+                                                <li><a href="/count/resume">@Messages("menu.count.resume")</a></li>
+                                                <li><a href="/count/tickets">@Messages("menu.count.tickets")</a></li>
                                             </ul>
                                         </li>
-                                    }
 
-                                    <!-- count -->
-                                    <li class="dropdown">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">@Messages("menu.count") <span class="caret"></span></a>
-                                        <ul class="dropdown-menu" role="menu">
-                                            <li><a href="/count/resume">@Messages("menu.count.resume")</a></li>
-                                            <li><a href="/count/tickets">@Messages("menu.count.tickets")</a></li>
-                                        </ul>
-                                    </li>
-
-                                    <!-- shopping -->
-                                    <li>
-                                        <a href="/shopping/list">@Messages("menu.shopping.list")</a>
-                                    </li>
+                                        <!-- shopping -->
+                                        <li>
+                                            <a href="/shopping/list">@Messages("menu.shopping.list")</a>
+                                        </li>
 
 
 
-                                        <!-- about -->
-                                    <li class="menu-right-element">
-                                        <a href="/about">@Messages("menu.about")</a>
-                                    </li>
+                                            <!-- about -->
+                                        <li class="menu-right-element">
+                                            <a href="/about">@Messages("menu.about")</a>
+                                        </li>
 
-                                        <!-- profile icon -->
-                                    <li class="dropdown menu-right-element">
-                                        <a href="#" class="dropdown-toggle menu-profile-icon" data-toggle="dropdown" role="button" aria-expanded="false">
-                                            @widget.profile_icon(account)
-                                            <span class="caret"></span>
-                                        </a>
-                                        <ul class="dropdown-menu" role="menu">
-                                            <li><a href="/profile/myProfile">@Messages("menu.myProfile")</a></li>
-                                            <li><a href="/logout">@Messages("menu.logout")</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
+                                            <!-- profile icon -->
+                                        <li class="dropdown menu-right-element">
+                                            <a href="#" class="dropdown-toggle menu-profile-icon" data-toggle="dropdown" role="button" aria-expanded="false">
+                                                @widget.profile_icon(account)
+                                                <span class="caret"></span>
+                                            </a>
+                                            <ul class="dropdown-menu" role="menu">
+                                                <li><a href="/profile/myProfile">@Messages("menu.myProfile")</a></li>
+                                                <li><a href="/logout">@Messages("menu.logout")</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
-                        </div>
-                    </nav>
-                </div>
+                        </nav>
+                    </div>
 
                     <!-- content -->
 
-                @content
+                    @content
+                </div>
             </div>
         </div>
     </div>
