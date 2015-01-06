@@ -7,9 +7,6 @@
     "engines": {
         "node": "~0.10.29"
     },
-    "directories": {
-        "test": "test"
-    },
     "dependencies": {
         "grunt-cli": "0.1.13",
         "grunt": "^0.4.5",
