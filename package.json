@@ -3,9 +3,6 @@
     "version": "0.0.0",
     "description": "This is your new Play application =====================================",
     "main": "Gruntfile.js",
-    "engines": {
-        "node": "~0.10.29"
-    },
     "dependencies": {
         "grunt-cli": "0.1.13",
         "grunt": "^0.4.5",
