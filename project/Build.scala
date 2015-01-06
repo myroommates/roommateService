@@ -7,7 +7,7 @@ object ApplicationBuild extends Build {
   lazy val buildVersion = "2.2.4"
   lazy val playVersion = "2.2.4"
 
-  val name = "roommateService"
+  val name = "roommateservice"
   val version = "1.0-SNAPSHOT"
 
   val appDependencies = Seq(

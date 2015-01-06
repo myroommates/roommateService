@@ -3,6 +3,14 @@ module.exports = function (grunt) {
     // Project configuration.
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
+        cssmin: {
+            generated: {
+                files: [
+                    { dest: 'public/dist/dependencies.min.css',
+                        src: [ 'public/dist/dependencies.css' ] }
+                ]
+            }
+        },
         concat: {
             generated: {
                 files: [
@@ -10,32 +18,32 @@ module.exports = function (grunt) {
                         dest: 'public/dist/dependencies.js',
 
                         src: [
-                                'public/components/bootstrap/dist/js/bootstrap.min.js',
-                                'public/components/messenger/build/js/messenger.min.js',
-                                'public/components/moment/min/moment.min.js',
-                                'public/components/angular-bootstrap/ui-bootstrap.min.js',
-                                'public/components/angular-bootstrap/ui-bootstrap-tpls.min.js',
-                                'public/components/angucomplete/angucomplete.js',
-                                'public/components/underscore/underscore-min.js',
-                                'public/components/mathjs/dist/math.min.js',
-                                'public/components/angular-bootstrap-datetimepicker/src/js/datetimepicker.js',
-                                'public/components/angular-i18n/angular-locale_fr-fr.js',
-                                'public/components/angular-dynamic-locale/src/tmhDynamicLocale.js',
-                                'public/components/bootstrap/js/transition.js',
-                                'public/components/bootstrap/js/collapse.js',
-                                'public/javascripts/jquery-touchswipe.js',
-                                'public/javascripts/menu-animation.js']
+                            'public/components/bootstrap/dist/js/bootstrap.min.js',
+                            'public/components/messenger/build/js/messenger.min.js',
+                            'public/components/moment/min/moment.min.js',
+                            'public/components/angular-bootstrap/ui-bootstrap.min.js',
+                            'public/components/angular-bootstrap/ui-bootstrap-tpls.min.js',
+                            'public/components/angucomplete/angucomplete.js',
+                            'public/components/underscore/underscore-min.js',
+                            'public/components/mathjs/dist/math.min.js',
+                            'public/components/angular-bootstrap-datetimepicker/src/js/datetimepicker.js',
+                            'public/components/angular-i18n/angular-locale_fr-fr.js',
+                            'public/components/angular-dynamic-locale/src/tmhDynamicLocale.js',
+                            'public/components/bootstrap/js/transition.js',
+                            'public/components/bootstrap/js/collapse.js',
+                            'public/javascripts/jquery-touchswipe.js',
+                            'public/javascripts/menu-animation.js']
                     },
 
                     {
                         dest: 'public/dist/dependencies.css',
 
                         src: [  'public/components/angucomplete/angucomplete.css',
-                                'public/components/bootstrap/dist/css/bootstrap.min.css',
-                                'public/components/bootstrap/dist/css/bootstrap-theme.min.css',
-                                'public/components/messenger/build/css/messenger.css',
-                                'public/components/angular-bootstrap-datetimepicker/src/css/datetimepicker.css',
-                                'public/components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css']
+                            'public/components/bootstrap/dist/css/bootstrap.min.css',
+                            'public/components/bootstrap/dist/css/bootstrap-theme.min.css',
+                            'public/components/messenger/build/css/messenger.css',
+                            'public/components/angular-bootstrap-datetimepicker/src/css/datetimepicker.css',
+                            'public/components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css']
                     }
                 ]
             }
@@ -90,8 +98,11 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-ng-annotate');
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-usemin');
+
 
     // Default task(s).
-    grunt.registerTask('default', ['concat','ngAnnotate','uglify']);
+    grunt.registerTask('default', ['concat', 'ngAnnotate', 'uglify','cssmin']);
 
 };
