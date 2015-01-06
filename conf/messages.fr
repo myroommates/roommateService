@@ -148,6 +148,12 @@ changeEmailModal.email=Votre nouvelle adresse email
 #calculator modal
 calculatorModal.title=Calculatrice
 
+# help modal
+helpModal.title=Help
+
+# help
+home.shopping.help=This is a list of shopping. Check cases before shopping items and click on the 'I bougth this articles' to create a ticket for the selected shopping items.
+home.count.help=...
 
 #
 # Email

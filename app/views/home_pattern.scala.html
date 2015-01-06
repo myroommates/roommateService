@@ -8,7 +8,7 @@
 
 <html>
     @pageElement.header()
-<body ng-app="app" ng-controller="MainCtrl"  ng-class="{'help-active':helpDisplayed === true}">
+<body ng-app="app" ng-controller="MainCtrl">
 
     <div class="global-container">
 
@@ -95,10 +95,6 @@
         <div class="main-body">
             <div class="global-content-container">
 
-                <div class="help-mask">
-                </div>
-
-
                 <div id="main-header-container" class="hidden-sm hidden-xs">
 
                         <!-- header -->
@@ -106,8 +102,6 @@
 
                             <!-- title -->
                         <h1 class="container">Je suis le nom de ton application</h1>
-                            <!-- TODO temp -->
-                        <button class="btn btn-primary" ng-click="displayHelp()">Display help</button>
                     </header>
                 </div>
 

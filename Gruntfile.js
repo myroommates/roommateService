@@ -14,6 +14,7 @@ module.exports = function (grunt) {
         concat: {
             generated: {
                 files: [
+                    /*
                     {
                         dest: 'public/dist/dependencies.js',
 
@@ -33,7 +34,7 @@ module.exports = function (grunt) {
                             'public/components/bootstrap/js/collapse.js',
                             'public/javascripts/jquery-touchswipe.js',
                             'public/javascripts/menu-animation.js']
-                    },
+                    },*/
 
                     {
                         dest: 'public/dist/dependencies.css',
@@ -51,8 +52,8 @@ module.exports = function (grunt) {
         uglify: {
             my_target: {
                 files: {
-                    'public/dist/angular.min.js': ['public/javascripts/dist/angular.js'],
-                    'public/dist/dependencies.min.js': ['public/dist/dependencies.js']
+                    //'public/dist/dependencies.min.js': ['public/dist/dependencies.js'],
+                    'public/dist/angular.min.js': ['public/javascripts/dist/angular.js']
                 }
             }
         },
@@ -75,6 +76,7 @@ module.exports = function (grunt) {
                         'public/javascripts/controller/AboutCtrl.js',
                         'public/javascripts/modal/CUTicket/CuTicketCtrl.js',
                         'public/javascripts/modal/CUShoppingItem/CuShoppingItemCtrl.js',
+                        'public/javascripts/modal/HelpModal/HelpModalCtrl.js',
                         'public/javascripts/modal/ChangeEmail/ChangeEmailModal.js',
                         'public/javascripts/modal/ChangePassword/ChangePasswordModal.js',
                         'public/javascripts/modal/Calculator/CalculatorModalCtrl.js',
@@ -103,6 +105,9 @@ module.exports = function (grunt) {
 
 
     // Default task(s).
-    grunt.registerTask('default', ['concat', 'ngAnnotate', 'uglify','cssmin']);
+    grunt.registerTask('default', ['concat',
+        'ngAnnotate',
+        'uglify',
+        'cssmin']);
 
 };

@@ -5,7 +5,7 @@ angular.module("tmh.dynamicLocale").config(function (tmhDynamicLocaleProvider) {
 
 var myApp = angular.module('app', ['ui.bootstrap.datetimepicker', 'ui.bootstrap', "angucomplete", 'tmh.dynamicLocale']);
 
-myApp.controller('MainCtrl', function ($scope,$locale, tmhDynamicLocale,translationService) {
+myApp.controller('MainCtrl', function ($scope,$locale, tmhDynamicLocale,translationService,$modal) {
 
     if ("data" in window && data!=undefined && data!=null) {
         tmhDynamicLocale.set(data.langId);
@@ -17,5 +17,25 @@ myApp.controller('MainCtrl', function ($scope,$locale, tmhDynamicLocale,translat
 
     $scope.displayHelp = function(){
         $scope.helpDisplayed = true;
-    }
+    };
+
+    $scope.maskHelp = function(){
+        $scope.helpDisplayed = false;
+    };
+
+    $scope.openHelp = function(message){
+
+        var resolve = {
+            message: function () {
+                return message;
+            }
+        };
+
+        $modal.open({
+            templateUrl: "/assets/javascripts/modal/HelpModal/view.html",
+            controller: "HelpModalCtrl",
+            size: 'sm',
+            resolve: resolve
+        });
+    };
 });

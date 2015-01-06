@@ -5,7 +5,7 @@ angular.module("tmh.dynamicLocale").config(['tmhDynamicLocaleProvider', function
 
 var myApp = angular.module('app', ['ui.bootstrap.datetimepicker', 'ui.bootstrap', "angucomplete", 'tmh.dynamicLocale']);
 
-myApp.controller('MainCtrl', ['$scope', '$locale', 'tmhDynamicLocale', 'translationService', function ($scope,$locale, tmhDynamicLocale,translationService) {
+myApp.controller('MainCtrl', ['$scope', '$locale', 'tmhDynamicLocale', 'translationService', '$modal', function ($scope,$locale, tmhDynamicLocale,translationService,$modal) {
 
     if ("data" in window && data!=undefined && data!=null) {
         tmhDynamicLocale.set(data.langId);
@@ -17,7 +17,27 @@ myApp.controller('MainCtrl', ['$scope', '$locale', 'tmhDynamicLocale', 'translat
 
     $scope.displayHelp = function(){
         $scope.helpDisplayed = true;
-    }
+    };
+
+    $scope.maskHelp = function(){
+        $scope.helpDisplayed = false;
+    };
+
+    $scope.openHelp = function(message){
+
+        var resolve = {
+            message: function () {
+                return message;
+            }
+        };
+
+        $modal.open({
+            templateUrl: "/assets/javascripts/modal/HelpModal/view.html",
+            controller: "HelpModalCtrl",
+            size: 'sm',
+            resolve: resolve
+        });
+    };
 }]);
 myApp.controller('HomeCtrl', ['$scope', '$modal', function ($scope, $modal) {
 
@@ -1181,6 +1201,15 @@ myApp.controller('CuShoppingItemCtrl', ['$scope', '$http', '$flash', '$modalInst
                 });
         }
     }
+}]);
+myApp.controller('HelpModalCtrl', ['$scope', '$modalInstance', 'message', function ($scope, $modalInstance,message) {
+
+    $scope.message=message;
+
+    $scope.close = function () {
+        $modalInstance.close();
+    };
+
 }]);
 myApp.controller('ChangeEmailModalCtrl', ['$scope', '$http', '$flash', '$modalInstance', 'roommate', 'setEmail', function ($scope, $http, $flash, $modalInstance,roommate,setEmail) {
 

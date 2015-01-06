@@ -1,45 +1,7 @@
-.help-popup{
-    position: absolute;
-    width: 200px;
-    left: -190px;
-    top:-10px;
-    background-color: #b4d100;
-    padding: 10px;
-    z-index:1002;
-    display: none;
-    border-radius: 6px;
-    -webkit-box-shadow: 3px 3px 2px rgba(0, 0, 0, 0.5);
-    -moz-box-shadow: 3px 3px 2px rgba(0, 0, 0, 0.5);
-    box-shadow: 3px 3px 2px rgba(0, 0, 0, 0.5);
-}
-
-.help-mask{
-    background-color: #000000;
-    opacity: 0.3;
-    z-index:1000;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: none;
-}
-
-.help-container{
-    position: relative;
-}
-
-.help-active{
-
-    .help-mask{
-        display: block;
-    }
-
-    .help-display{
-        z-index:1001;
-    }
-
-    .help-popup{
-        display: block;
-    }
+.help-icon{
+  float:right;
+  color:@color-body-text;
+  &:hover{
+    text-decoration: none;
+  }
 }

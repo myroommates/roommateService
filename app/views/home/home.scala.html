@@ -15,7 +15,10 @@
 
         <!-- count -->
     <div class="content-block" >
-        <h3>@Messages("home.count.title")</h3>
+        <h3>
+            <a class="glyphicon glyphicon-question-sign help-icon" href="#" ng-click="openHelp('home.count.help')"></a>
+            @Messages("home.count.title")
+        </h3>
 
         <div>
             <p>@Messages("home.count.balance.desc")
@@ -25,43 +28,44 @@
             </p>
             <div class="row">
                 <div class="col-lg-4 col-md-2 hidden-xs"></div>
-                <div class="col-lg-4 col-md-8 col-xs-12 help-container help-display">
-
-                    <div class="help-popup ">
-                        <span class="glyphicon glyphicon-question-sign"></span>
-                        Je suis une aide très précieuse parce que je teexplique à suoi setr ce boutton pourri
-                    </div>
-                    <button class="btn btn-primary biggest"  ng-click="createTicket()" href="#" >
-                        @Messages("count.ticket.create.button")
-                    </button>
-                </div>
-
+                <button class="col-lg-4 col-md-8 col-xs-12 btn btn-primary biggest"  ng-click="createTicket()" href="#" >
+                    @Messages("count.ticket.create.button")
+                </button>
             </div>
         </div>
     </div>
 
         <!-- shopping -->
     <div class="content-block" >
-        <h3>@Messages("home.shopping.title")</h3>
+        <h3>
+            <a class="glyphicon glyphicon-question-sign help-icon" href="#" ng-click="openHelp('home.shopping.help')"></a>
+            @Messages("home.shopping.title")
+        </h3>
 
         <div class="row">
             <div class="col-lg-4 col-md-2 hidden-xs"></div>
-            <button class="btn btn-primary col-lg-4 col-md-8 col-xs-12"  ng-click="createShoppingItem()" href="#" >@Messages("home.shopping.addNewItem")</button>
+
+            <button class="col-lg-4 col-md-8 col-xs-12 btn btn-primary biggest"  ng-click="createShoppingItem()" href="#" >
+            @Messages("home.shopping.addNewItem")
+            </button>
+
         </div>
 
-        <ul class="shopping-list">
-            <li class="row" ng-repeat="item in shoppingItemList">
-                <div class="col-xs-1">
-                    <input type="checkbox" ng-model="item.selected" class="middle_ck" />
-                </div>
-                <div class="col-xs-7">
-                    {{item.description}}
-                </div>
-                <div class="col-xs-4">
-                    {{item.creationDate | date:'mediumDate'}}
-                </div>
-            </li>
-        </ul>
+            <ul class="shopping-list">
+                <li class="row" ng-repeat="item in shoppingItemList">
+                    <div class="col-xs-1">
+                        <input type="checkbox" ng-model="item.selected" class="middle_ck" />
+                    </div>
+                    <div class="col-xs-7">
+                        {{item.description}}
+                    </div>
+                    <div class="col-xs-4">
+                        {{item.creationDate | date:'mediumDate'}}
+                    </div>
+                </li>
+            </ul>
+
+
         <button type="button" class="btn btn-primary" ng-disabled="getTotalItemSelected()==0" ng-click="resolveSelectedItem()">@Messages("home.shopping.bought")</button>
     </div>
 </div>
