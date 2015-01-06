@@ -10,43 +10,37 @@
             <input type="text" class="form-control" ng-model="input" style="text-align: right" disabled>
         </div>
     </div>
-    <div class="row">
-        <div class="col-xs-1"></div>
-        <button type="button" class="btn btn-default col-xs-2" ng-click="press(7)" dir-press-key >7</button>
-        <button type="button" class="btn btn-default col-xs-2" ng-click="press(8)" col-xs-2>8</button>
-        <button type="button" class="btn btn-default col-xs-2" ng-click="press(9)" col-xs-2>9</button>
-        <button type="button" class="btn btn-default col-xs-2" ng-click="operation('+')" col-xs-2>+</button>
-        <button type="button" class="btn btn-default col-xs-2 glyphicon glyphicon-arrow-left" ng-click="clearLastOne()" col-xs-2></button>
-        <div class="col-xs-1"></div>
-    </div>
-    <div class="row">
-        <div class="col-xs-1"></div>
-        <button type="button" class="btn btn-default col-xs-2" ng-click="press(4)" col-xs-2>4</button>
-        <button type="button" class="btn btn-default col-xs-2" ng-click="press(5)" col-xs-2>5</button>
-        <button type="button" class="btn btn-default col-xs-2" ng-click="press(6)" col-xs-2>6</button>
-        <button type="button" class="btn btn-default col-xs-2" ng-click="operation('-')" col-xs-2>-</button>
-        <button type="button" class="btn btn-default col-xs-2" ng-click="clear()" col-xs-2>C</button>
-        <div class="col-xs-1"></div>
-    </div>
-    <div class="row">
-        <div class="col-xs-1"></div>
-        <button type="button" class="btn btn-default col-xs-2" ng-click="press(1)" col-xs-2>1</button>
-        <button type="button" class="btn btn-default col-xs-2" ng-click="press(2)" col-xs-2>2</button>
-        <button type="button" class="btn btn-default col-xs-2" ng-click="press(3)" col-xs-2>3</button>
-        <button type="button" class="btn btn-default col-xs-2" ng-click="operation('/')" col-xs-2>/</button>
-        <button type="button" class="btn btn-default col-xs-2" ng-click="clearAll()" col-xs-2>CE</button>
-        <div class="col-xs-2"></div>
-        <div class="col-xs-1"></div>
-    </div>
-    <div class="row">
-        <div class="col-xs-1"></div>
-        <button type="button" class="btn btn-default col-xs-2" ng-click="press(0)" col-xs-2>0</button>
-        <button type="button" class="btn btn-default col-xs-2" ng-click="press('.')" col-xs-2>,</button>
-        <button type="button" class="btn btn-default col-xs-2" ng-click="result()" col-xs-2>=</button>
-        <button type="button" class="btn btn-default col-xs-2" ng-click="operation('*')" col-xs-2>*</button>
-        <div class="col-xs-2"></div>
-        <div class="col-xs-1"></div>
-    </div>
+    
+    <table class="calculator-keybord">
+        <tr>
+            <td><button type="button" class="btn btn-default" ng-click="press(7)" dir-press-key >7</button></td>
+            <td><button type="button" class="btn btn-default" ng-click="press(8)">8</button></td>
+            <td><button type="button" class="btn btn-default" ng-click="press(9)">9</button></td>
+            <td><button type="button" class="btn btn-default" ng-click="operation('+')">+</button></td>
+            <td><button type="button" class="btn btn-default glyphicon glyphicon-arrow-left" ng-click="clearLastOne()"></button></td>
+        </tr>
+        <tr>
+            <td><button type="button" class="btn btn-default" ng-click="press(4)">4</button></td>
+            <td><button type="button" class="btn btn-default" ng-click="press(5)">5</button></td>
+            <td><button type="button" class="btn btn-default" ng-click="press(6)">6</button></td>
+            <td><button type="button" class="btn btn-default" ng-click="operation('-')">-</button></td>
+            <td><button type="button" class="btn btn-default" ng-click="clear()">C</button></td>
+        </tr>
+        <tr>
+            <td><button type="button" class="btn btn-default" ng-click="press(1)">1</button></td>
+            <td><button type="button" class="btn btn-default" ng-click="press(2)">2</button></td>
+            <td><button type="button" class="btn btn-default" ng-click="press(3)">3</button></td>
+            <td><button type="button" class="btn btn-default" ng-click="operation('/')">/</button></td>
+            <td><button type="button" class="btn btn-default" ng-click="clearAll()">CE</button></td>
+        </tr>
+        <tr>
+            <td><button type="button" class="btn btn-default" ng-click="press(0)">0</button></td>
+            <td><button type="button" class="btn btn-default" ng-click="press('.')">,</button></td>
+            <td><button type="button" class="btn btn-default" ng-click="result()">=</button></td>
+            <td><button type="button" class="btn btn-default" ng-click="operation('*')">*</button></td>
+            <td></td>
+        </tr>
+    </table>
 
 </div>
 <div class="modal-footer">
