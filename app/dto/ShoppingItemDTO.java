@@ -22,7 +22,7 @@ public class ShoppingItemDTO extends DTO {
     private Long creatorId;
 
     private Boolean wasBought;
-    private Boolean onylForMe;
+    private Boolean onlyForMe;
 
     public ShoppingItemDTO() {
     }
@@ -75,6 +75,14 @@ public class ShoppingItemDTO extends DTO {
         this.wasBought = wasBought;
     }
 
+    public Boolean getOnlyForMe() {
+        return onlyForMe;
+    }
+
+    public void setOnlyForMe(Boolean onlyForMe) {
+        this.onlyForMe = onlyForMe;
+    }
+
     @Override
     public String toString() {
         return "ShoppingItemDTO{" +
@@ -84,13 +92,5 @@ public class ShoppingItemDTO extends DTO {
                 ", creatorId=" + creatorId +
                 ", wasBought=" + wasBought +
                 '}';
-    }
-
-    public void setOnylForMe(Boolean onylForMe) {
-        this.onylForMe = onylForMe;
-    }
-
-    public Boolean getOnylForMe() {
-        return onylForMe;
     }
 }

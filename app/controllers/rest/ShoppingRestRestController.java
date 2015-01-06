@@ -86,6 +86,7 @@ public class ShoppingRestRestController extends AbstractRestController {
         shoppingItem.setCreator(securityRestController.getCurrentUser());
         shoppingItem.setHome(securityRestController.getCurrentUser().getHome());
         shoppingItem.setDescription(dto.getDescription());
+        shoppingItem.setOnlyForMe(dto.getOnlyForMe());
 
         shoppingItemService.saveOrUpdate(shoppingItem);
 
@@ -109,6 +110,7 @@ public class ShoppingRestRestController extends AbstractRestController {
 
         shoppingItem.setDescription(dto.getDescription());
         shoppingItem.setWasBought(dto.getWasBought());
+        shoppingItem.setOnlyForMe(dto.getOnlyForMe());
 
         shoppingItemService.saveOrUpdate(shoppingItem);
 

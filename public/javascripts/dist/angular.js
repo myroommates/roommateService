@@ -1105,7 +1105,7 @@ myApp.controller('CuTicketCtrl', ['$scope', '$http', '$flash', '$modalInstance',
 }]);
 myApp.controller('CuShoppingItemCtrl', ['$scope', '$http', '$flash', '$modalInstance', 'shoppingItem', 'addItem', 'data', function ($scope, $http, $flash, $modalInstance, shoppingItem, addItem, data) {
 
-    $scope.onlyForMe = true;
+    $scope.onlyForMe = false;
     $scope.loading = false;
     $scope.mySelf = data.mySelf;
 

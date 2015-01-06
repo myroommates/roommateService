@@ -36,14 +36,14 @@
                             <dir-user-icon ng-user="getRoommate(item.creatorId)"></dir-user-icon>
                         </p>
                     </div>
-                    <div class="col-md-10  col-xs-8">
+                    <div class="col-md-9  col-xs-8">
                         <div class="row info-box">
 
                             <div class="col-md-8 col-xs-7">{{item.description}}</div>
                             <div class="col-md-2 col-xs-5" style=";font-size: 12px">{{item.creationDate | date:'mediumDate'}}</div>
                         </div>
                     </div>
-                    <div class="col-md-1  col-xs-2">
+                    <div class="col-md-2  col-xs-2">
                         <div ng-show="myself.id == item.creatorId">
                             <button style="margin-bottom: 5px" class="btn-sm btn btn-primary glyphicon glyphicon-pencil" href="#" ng-click='createOrEditShoppingItem(item)'></button>
                             <button class="btn-sm btn btn-primary glyphicon glyphicon-remove" href="#" ng-click='remove(item)'></button>

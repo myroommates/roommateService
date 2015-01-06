@@ -1,6 +1,6 @@
 myApp.controller('CuShoppingItemCtrl', function ($scope, $http, $flash, $modalInstance, shoppingItem, addItem, data) {
 
-    $scope.onlyForMe = true;
+    $scope.onlyForMe = false;
     $scope.loading = false;
     $scope.mySelf = data.mySelf;
 
