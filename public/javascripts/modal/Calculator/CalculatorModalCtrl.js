@@ -4,12 +4,16 @@ myApp.controller('CalculatorModalCtrl', function ($scope, $modalInstance, setRes
     $scope.memory = "";
     $scope.acceptOperator = false;
 
-    $scope.close = function () {
+    $scope.valid = function(){
         $scope.result();
         var value = parseFloat($scope.memory);
         if (!!value) {
             setResult(value);
         }
+        $scope.close();
+    };
+
+    $scope.close = function () {
         $modalInstance.close();
     };
 

@@ -117,6 +117,7 @@ admin.roommateList.inviteRoommate=Inviter un nouveau collocataire
 
 #preferences
 admin.preferences.title=Administration > Préférences
+admin.preferences.currency=Devise
 
 #about
 about.title=A propos

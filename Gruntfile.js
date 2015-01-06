@@ -67,6 +67,7 @@ module.exports = function (grunt) {
                         'public/javascripts/controller/MainCtrl.js',
                         'public/javascripts/controller/HomeCtrl.js',
                         'public/javascripts/controller/AdminRoommateListCtrl.js',
+                        'public/javascripts/controller/AdminPreferenceCtrl.js',
                         'public/javascripts/controller/LateralMenuCtrl.js',
                         'public/javascripts/controller/CountResumeCtrl.js',
                         'public/javascripts/controller/CountTicketCtrl.js',

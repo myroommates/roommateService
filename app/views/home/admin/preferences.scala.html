@@ -3,6 +3,22 @@
 @import com.fasterxml.jackson.databind.ObjectMapper
 
 @home_pattern("admin.preferences.title", data.getMySelf) {
-    <div class="content-block">
+    <div class="content-block" ng-controller="AdminPreferenceCtrl" dir-enter="save()">
+
+            <!-- load data -->
+        <script>
+        var data = @Html(new ObjectMapper().writeValueAsString(data));
+        </script>
+
+        <dir-field-text ng-info="fields.currency"></dir-field-text>
+
+        <div class="col-md-3 hidden-sm hidden-xs"></div>
+        <div class="actions">
+            <button ng-disabled="loading" ng-click="save()" class="btn btn-primary" >@Messages("generic.save")</button>
+            <img src="/assets/images/modal-loading.gif" ng-show="loading" />
+        </div>
+
+
+
     </div>
 }

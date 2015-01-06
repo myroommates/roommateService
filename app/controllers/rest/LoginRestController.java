@@ -21,7 +21,7 @@ import util.tool.ColorGenerator;
 /**
  * Created by florian on 10/11/14.
  */
-public class LoginRestRestController extends AbstractRestController {
+public class LoginRestController extends AbstractRestController {
 
     //service
     private RoommateService roommateService = new RoommateServiceImpl();

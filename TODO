@@ -1,4 +1,8 @@
-- help => surimpression d'aide + button + table 'first use'
+- help => écrire l'aide
+- texte accueil + première connection
 - choix de la langue
 - logo + nom
-- choix de la devise
+ok- choix de la devise
+- bugs résolution course
+- valider course sans créer ticket
+- focus sur champs lorsque ouverture fenetre

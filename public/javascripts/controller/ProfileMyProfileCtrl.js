@@ -1,8 +1,12 @@
-myApp.controller('ProfileMyProfileCtrl', function ($scope, $http, $flash, $modal,translationService) {
+myApp.controller('ProfileMyProfileCtrl', function ($scope, $http, $flash, $modal,translationService,$locale) {
+
 
     $scope.roommate = data.mySelf;
+    $scope.languages = data.languages;
     $scope.moneySymbol= data.home.moneySymbol;
     $scope.loading=false;
+
+    console.log($scope.languages);
 
     $scope.fields = {
         name: {

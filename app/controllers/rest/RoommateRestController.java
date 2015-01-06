@@ -25,7 +25,7 @@ import java.util.Set;
 /**
  * Created by florian on 11/11/14.
  */
-public class RoommateRestRestController extends AbstractRestController {
+public class RoommateRestController extends AbstractRestController {
 
     //services
     private RoommateService roommateService = new RoommateServiceImpl();

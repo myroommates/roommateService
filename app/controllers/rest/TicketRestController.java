@@ -28,7 +28,7 @@ import java.util.Set;
 /**
  * Created by florian on 11/11/14.
  */
-public class TicketRestRestController extends AbstractRestController {
+public class TicketRestController extends AbstractRestController {
 
     //service
     private TicketService ticketService = new TicketServiceImpl();

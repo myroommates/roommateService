@@ -1,7 +1,7 @@
 package controllers;
 
 import controllers.rest.EmailRestController;
-import controllers.rest.RoommateRestRestController;
+import controllers.rest.RoommateRestController;
 import controllers.technical.AbstractController;
 import controllers.technical.SecurityController;
 import converter.RoommateToInterfaceDataDTOConverter;
@@ -31,7 +31,7 @@ public class ProfileController extends AbstractController{
 
     //controller
     private HomeController homeController = new HomeController();
-    private RoommateRestRestController roommateRestRestController = new RoommateRestRestController();
+    private RoommateRestController roommateRestController = new RoommateRestController();
     private EmailRestController emailController = new EmailRestController();
 
     //converter

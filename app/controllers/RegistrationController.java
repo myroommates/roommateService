@@ -2,7 +2,7 @@ package controllers;
 
 import com.avaje.ebean.annotation.Transactional;
 import controllers.rest.EmailRestController;
-import controllers.rest.RoommateRestRestController;
+import controllers.rest.RoommateRestController;
 import controllers.technical.AbstractController;
 import models.RegistrationForm;
 import models.entities.Home;
@@ -29,7 +29,7 @@ public class RegistrationController extends AbstractController {
     private Form<RegistrationForm> registrationForm = Form.form(RegistrationForm.class);
     //controller
     private HomeController homeController = new HomeController();
-    private RoommateRestRestController roommateRestRestController = new RoommateRestRestController();
+    private RoommateRestController roommateRestController = new RoommateRestController();
     private EmailRestController emailController = new EmailRestController();
 
     /**

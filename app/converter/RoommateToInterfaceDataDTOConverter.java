@@ -2,6 +2,8 @@ package converter;
 
 import dto.InterfaceDataDTO;
 import models.entities.Roommate;
+import play.Logger;
+import play.i18n.Lang;
 import services.TranslationService;
 import services.impl.TranslationServiceImpl;
 
@@ -16,12 +18,18 @@ public class RoommateToInterfaceDataDTOConverter implements ConverterInterface<R
     //converter
     private RoommateToRoommateDTOConverter roommateToRoommateDTOConverter = new RoommateToRoommateDTOConverter();
     private HomeToHomeConverter homeToHomeConverter = new HomeToHomeConverter();
+    private LanguageToLanguageDTOConverter languageToLanguageDTOConverter = new LanguageToLanguageDTOConverter();
 
 
     @Override
     public InterfaceDataDTO convert(Roommate entity) {
 
         InterfaceDataDTO dto = new InterfaceDataDTO();
+
+        for (Lang lang : Lang.availables()) {
+            dto.addLanguage(languageToLanguageDTOConverter.convert(lang));
+        }
+
 
         dto.setTranslations(translationService.getTranslations(entity.getLanguage()));
 

@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * Created by florian on 4/12/14.
  */
-public class ShoppingRestRestController extends AbstractRestController {
+public class ShoppingRestController extends AbstractRestController {
 
     //service
     private ShoppingItemService shoppingItemService = new ShoppingItemServiceImpl();

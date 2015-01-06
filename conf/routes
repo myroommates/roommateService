@@ -3,80 +3,80 @@
 # ~~~~
 
 # Map static resources from the /public folder to the /assets URL path
-GET           /assets/*file                           controllers.Assets.at(path="/public", file)
+GET           /assets/*file                            controllers.Assets.at(path="/public", file)
 
 #
 # REST routes
 #
 
 # account
-POST          /rest/reactivation                      @controllers.rest.LoginRestRestController.reactivation()
-POST          /rest/registration                      @controllers.rest.LoginRestRestController.registration()
-POST          /rest/load_data                         @controllers.rest.LoginRestRestController.loadData()
+POST          /rest/reactivation                       @controllers.rest.LoginRestController.reactivation()
+POST          /rest/registration                       @controllers.rest.LoginRestController.registration()
+POST          /rest/load_data                          @controllers.rest.LoginRestController.loadData()
 
 #home
-GET           /rest/home                              @controllers.rest.HomeRestRestController.getAll()
+PUT           /rest/home/:id                           @controllers.rest.HomeRestController.update(id:Long)
 
 #ticket
-GET           /rest/ticket                            @controllers.rest.TicketRestRestController.getAll()
-GET           /rest/ticket/:id                        @controllers.rest.TicketRestRestController.getById(id:Long)
-POST          /rest/ticket                            @controllers.rest.TicketRestRestController.create()
-PUT           /rest/ticket/:id                        @controllers.rest.TicketRestRestController.update(id:Long)
-DELETE        /rest/ticket/:id                        @controllers.rest.TicketRestRestController.remove(id:Long)
+GET           /rest/ticket                             @controllers.rest.TicketRestController.getAll()
+GET           /rest/ticket/:id                         @controllers.rest.TicketRestController.getById(id:Long)
+POST          /rest/ticket                             @controllers.rest.TicketRestController.create()
+PUT           /rest/ticket/:id                         @controllers.rest.TicketRestController.update(id:Long)
+DELETE        /rest/ticket/:id                         @controllers.rest.TicketRestController.remove(id:Long)
 
 #roommate
-GET           /rest/roommate                          @controllers.rest.RoommateRestRestController.getAll()
-GET           /rest/roommate/:id                      @controllers.rest.RoommateRestRestController.getById(id:Long)
-POST          /rest/roommate                          @controllers.rest.RoommateRestRestController.create()
-PUT           /rest/roommate/:id                      @controllers.rest.RoommateRestRestController.update(id:Long)
-DELETE        /rest/roommate/:id                      @controllers.rest.RoommateRestRestController.delete(id:Long)
-PUT           /rest/roommate/email/:id                @controllers.rest.RoommateRestRestController.changeEmail(id:Long)
-PUT           /rest/roommate/password/:id             @controllers.rest.RoommateRestRestController.changePassword(id:Long)
+GET           /rest/roommate                           @controllers.rest.RoommateRestController.getAll()
+GET           /rest/roommate/:id                       @controllers.rest.RoommateRestController.getById(id:Long)
+POST          /rest/roommate                           @controllers.rest.RoommateRestController.create()
+PUT           /rest/roommate/:id                       @controllers.rest.RoommateRestController.update(id:Long)
+DELETE        /rest/roommate/:id                       @controllers.rest.RoommateRestController.delete(id:Long)
+PUT           /rest/roommate/email/:id                 @controllers.rest.RoommateRestController.changeEmail(id:Long)
+PUT           /rest/roommate/password/:id              @controllers.rest.RoommateRestController.changePassword(id:Long)
 
 #event
-GET           /rest/event                             @controllers.rest.EventRestController.getAll()
-GET           /rest/event/:id                         @controllers.rest.EventRestController.getById(id:Long)
-POST          /rest/event                             @controllers.rest.EventRestController.create()
-PUT           /rest/event/:id                         @controllers.rest.EventRestController.update(id:Long)
-DELETE        /rest/event/:id                         @controllers.rest.EventRestController.remove(id:Long)
+GET           /rest/event                              @controllers.rest.EventRestController.getAll()
+GET           /rest/event/:id                          @controllers.rest.EventRestController.getById(id:Long)
+POST          /rest/event                              @controllers.rest.EventRestController.create()
+PUT           /rest/event/:id                          @controllers.rest.EventRestController.update(id:Long)
+DELETE        /rest/event/:id                          @controllers.rest.EventRestController.remove(id:Long)
 
 #shopping item
-GET           /rest/shoppingItem                      @controllers.rest.ShoppingRestRestController.getAll()
-GET           /rest/shoppingItem/:id                  @controllers.rest.ShoppingRestRestController.getById(id:Long)
-POST          /rest/shoppingItem                      @controllers.rest.ShoppingRestRestController.create()
-PUT           /rest/shoppingItem/:id                  @controllers.rest.ShoppingRestRestController.update(id:Long)
-PUT           /rest/shoppingItem/wasBought/:ids        @controllers.rest.ShoppingRestRestController.setWasBought(ids:String)
-DELETE        /rest/shoppingItem/:id                  @controllers.rest.ShoppingRestRestController.remove(id:Long)
+GET           /rest/shoppingItem                       @controllers.rest.ShoppingRestController.getAll()
+GET           /rest/shoppingItem/:id                   @controllers.rest.ShoppingRestController.getById(id:Long)
+POST          /rest/shoppingItem                       @controllers.rest.ShoppingRestController.create()
+PUT           /rest/shoppingItem/:id                   @controllers.rest.ShoppingRestController.update(id:Long)
+PUT           /rest/shoppingItem/wasBought/:ids        @controllers.rest.ShoppingRestController.setWasBought(ids:String)
+DELETE        /rest/shoppingItem/:id                   @controllers.rest.ShoppingRestController.remove(id:Long)
 
 #
 # LOCAL routes
 #
 
 #welcome
-GET           /                                       @controllers.AccountController.loginPage()
-POST          /                                       @controllers.AccountController.login()
-GET           /logout                                 @controllers.AccountController.logout()
+GET           /                                        @controllers.AccountController.loginPage()
+POST          /                                        @controllers.AccountController.login()
+GET           /logout                                  @controllers.AccountController.logout()
 
 #home
-GET           /home                                   @controllers.HomeController.index()
+GET           /home                                    @controllers.HomeController.index()
 
 #admin
-GET           /admin/roommate_list                    @controllers.AdminController.roommateList()
-GET           /admin/preferences                      @controllers.AdminController.preferences()
+GET           /admin/roommate_list                     @controllers.AdminController.roommateList()
+GET           /admin/preferences                       @controllers.AdminController.preferences()
 
 #registration
-GET           /registration                           @controllers.RegistrationController.registrationPage()
-POST          /registration                           @controllers.RegistrationController.registration()
+GET           /registration                            @controllers.RegistrationController.registrationPage()
+POST          /registration                            @controllers.RegistrationController.registration()
 
 #count
-GET           /count/resume                           @controllers.CountController.resume()
-GET           /count/tickets                          @controllers.CountController.tickets()
+GET           /count/resume                            @controllers.CountController.resume()
+GET           /count/tickets                           @controllers.CountController.tickets()
 
 #shopping
-GET           /shopping/list                          @controllers.ShoppingController.list()
+GET           /shopping/list                           @controllers.ShoppingController.list()
 
 #profile
-GET           /profile/myProfile                      @controllers.ProfileController.myProfile()
+GET           /profile/myProfile                       @controllers.ProfileController.myProfile()
 
 #about
-GET           /about                                  @controllers.AboutController.index()
+GET           /about                                   @controllers.AboutController.index()

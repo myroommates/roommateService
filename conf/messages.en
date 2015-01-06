@@ -118,6 +118,7 @@ admin.roommateList.inviteRoommate=Invite new roommate
 
 #preferences
 admin.preferences.title=Admin > Preferences
+admin.preferences.currency=Currency
 
 #about
 about.title=About
