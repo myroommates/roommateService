@@ -3,10 +3,15 @@ package controllers;
 import com.avaje.ebean.annotation.Transactional;
 import controllers.technical.AbstractController;
 import controllers.technical.SecurityController;
+import converter.LanguageToLanguageDTOConverter;
+import dto.LangDTO;
+import dto.ListDTO;
 import models.LoginForm;
 import models.entities.Roommate;
+import play.Logger;
 import play.data.Form;
 import play.data.validation.ValidationError;
+import play.i18n.Lang;
 import play.i18n.Messages;
 import play.mvc.Result;
 import services.RoommateService;
@@ -24,6 +29,13 @@ public class AccountController extends AbstractController {
     public final static Form<LoginForm> formLogin = Form.form(LoginForm.class);
     //controller
     private HomeController homeController = new HomeController();
+    private LanguageToLanguageDTOConverter languageToLanguageDTOConverter = new LanguageToLanguageDTOConverter();
+
+    public Result changeLanguage(String lang) {
+        Logger.info("lang:"+lang);
+        ctx().changeLang(lang);
+        return ok();
+    }
 
     public Result logout() {
         securityController.logout(ctx());
@@ -55,7 +67,9 @@ public class AccountController extends AbstractController {
 
             return homeController.index();
         }
-        return ok(views.html.welcome.render(formLogin));
+
+
+        return ok(views.html.welcome.render(formLogin,getAvaiableLanguage()));
     }
     @Transactional
     public Result login() {
@@ -63,7 +77,7 @@ public class AccountController extends AbstractController {
         Form<LoginForm> loginFormForm = formLogin.bindFromRequest();
 
         if (loginFormForm.hasErrors()) {
-            return badRequest(views.html.welcome.render(loginFormForm));
+            return badRequest(views.html.welcome.render(loginFormForm,getAvaiableLanguage()));
         }
 
         String email = loginFormForm.field("email").value();
@@ -74,7 +88,7 @@ public class AccountController extends AbstractController {
         Roommate roommate= accountService.findByEmail(email);
         if (roommate == null || !accountService.controlPassword(password, roommate)) {
             loginFormForm.reject(new ValidationError("email", Messages.get("login.form.wrongCredential")));
-            return badRequest(views.html.welcome.render(loginFormForm));
+            return badRequest(views.html.welcome.render(loginFormForm,getAvaiableLanguage()));
         }
 
         //edit
@@ -84,9 +98,19 @@ public class AccountController extends AbstractController {
         }
 
         //store session
-        securityController.storeAccount(roommate);
+        securityController.storeAccount(ctx(),roommate);
 
         //return
         return redirect("/");
+    }
+
+    private ListDTO<LangDTO> getAvaiableLanguage(){
+
+        //compute list lang
+        ListDTO<LangDTO> langDTOListDTO = new ListDTO<>();
+        for (Lang lang : Lang.availables()) {
+            langDTOListDTO.addElement(languageToLanguageDTOConverter.convert(lang));
+        }
+        return langDTOListDTO;
     }
 }

@@ -2,6 +2,8 @@ package controllers.technical;
 
 import controllers.AccountController;
 import models.entities.Roommate;
+import play.Logger;
+import play.i18n.Lang;
 import play.mvc.Http;
 import play.mvc.Result;
 import play.mvc.Security;
@@ -49,7 +51,7 @@ public class SecurityController extends Security.Authenticator {
 
             if (account!=null && accountService.controlCookieKey(keyElements[1], account)) {
                 //connection
-                storeAccount(account);
+                storeAccount(ctx,account);
                 return true;
             }
         }
@@ -74,10 +76,12 @@ public class SecurityController extends Security.Authenticator {
         return accountService.findByEmail(Http.Context.current().session().get(SESSION_IDENTIFIER_STORE));
     }
 
-    public void storeAccount(Roommate roommate) {
+    public void storeAccount(Http.Context context ,Roommate roommate) {
 
         //if the login and the password are ok, refresh the session
         Http.Context.current().session().clear();
         Http.Context.current().session().put(SESSION_IDENTIFIER_STORE, roommate.getEmail());
+
+        context.changeLang(roommate.getLanguage().code());
     }
 }

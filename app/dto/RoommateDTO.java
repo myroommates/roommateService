@@ -27,9 +27,19 @@ public class RoommateDTO extends DTO {
 
     private boolean isAdmin;
 
+    private String languageCode;
+
     private boolean keepSessionOpen;
 
     public RoommateDTO() {
+    }
+
+    public String getLanguageCode() {
+        return languageCode;
+    }
+
+    public void setLanguageCode(String languageCode) {
+        this.languageCode = languageCode;
     }
 
     public String getNameAbrv() {

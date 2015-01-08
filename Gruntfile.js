@@ -14,7 +14,6 @@ module.exports = function (grunt) {
         concat: {
             generated: {
                 files: [
-                    /*
                     {
                         dest: 'public/dist/dependencies.js',
 
@@ -31,11 +30,8 @@ module.exports = function (grunt) {
                             'public/components/angular-i18n/angular-locale_fr-fr.js',
                             'public/components/angular-dynamic-locale/src/tmhDynamicLocale.js',
                             'public/components/bootstrap/js/transition.js',
-                            'public/components/bootstrap/js/collapse.js',
-                            'public/javascripts/jquery-touchswipe.js',
-                            'public/javascripts/menu-animation.js']
-                    },*/
-
+                            'public/components/bootstrap/js/collapse.js']
+                    },
                     {
                         dest: 'public/dist/dependencies.css',
 
@@ -75,6 +71,7 @@ module.exports = function (grunt) {
                         'public/javascripts/controller/ShoppingListCtrl.js',
                         'public/javascripts/controller/RegistrationCtrl.js',
                         'public/javascripts/controller/AboutCtrl.js',
+                        'public/javascripts/controller/WelcomeCtrl.js',
                         'public/javascripts/modal/CUTicket/CuTicketCtrl.js',
                         'public/javascripts/modal/CUShoppingItem/CuShoppingItemCtrl.js',
                         'public/javascripts/modal/HelpModal/HelpModalCtrl.js',
@@ -83,6 +80,7 @@ module.exports = function (grunt) {
                         'public/javascripts/modal/Calculator/CalculatorModalCtrl.js',
                         'public/javascripts/directive/dirFieldDate/directive.js',
                         'public/javascripts/directive/dirFieldText/directive.js',
+                        'public/javascripts/directive/dirFieldSelect/directive.js',
                         'public/javascripts/directive/dirInputNumber/directive.js',
                         'public/javascripts/directive/dirUserIcon/directive.js',
                         'public/javascripts/directive/dirFocusMe/directive.js',
@@ -91,7 +89,9 @@ module.exports = function (grunt) {
                         'public/javascripts/service/DirectiveService.js',
                         'public/javascripts/service/GenerateIdService.js',
                         'public/javascripts/service/TranslationService.js',
-                        'public/javascripts/filter/TranslateTextFilter.js']
+                        'public/javascripts/filter/TranslateTextFilter.js',
+                        'public/javascripts/jquery-touchswipe.js',
+                        'public/javascripts/menu-animation.js']
                 }
             }
         }

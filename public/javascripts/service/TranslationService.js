@@ -9,9 +9,10 @@ myApp.service("translationService", function ($rootScope, $filter, $http,$locale
 
     svc.get = function (code) {
 
-        var v = svc.elements[code];
-
-        return v;
+        if(!!svc.elements[code]){
+            return svc.elements[code];
+        }
+        return code;
     };
 
     svc.translateExceptionsDTO = function (exception) {

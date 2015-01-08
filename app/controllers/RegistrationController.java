@@ -87,7 +87,7 @@ public class RegistrationController extends AbstractController {
         accountService.saveOrUpdate(roommate);
 
         //Store
-        securityController.storeAccount(roommate);
+        securityController.storeAccount(ctx(),roommate);
 
         //return
         return redirect("/admin/roommate_list");

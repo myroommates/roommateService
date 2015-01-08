@@ -1,8 +1,25 @@
-@(loginForm: Form[LoginForm])
+@(loginForm: Form[LoginForm],languages:dto.ListDTO[dto.LangDTO])
+
+@import com.fasterxml.jackson.databind.ObjectMapper
 
 @welcome_pattern {
 
-    <div class="container content-block">
+    <div class="container content-block" ng-controller="WelcomeCtrl">
+
+
+            <!-- load data -->
+        <script>
+        var languages = @Html(new ObjectMapper().writeValueAsString(languages.getList));
+        var lang = "@ctx().lang().code";
+        </script>
+
+        <!-- language -->
+            <div class="row">
+                <select
+                    ng-model="lang"
+                    ng-options="option.key as option.value for option in languagesList">
+                </select>
+            </div>
 
             <!-- registration -->
         <div class="row separation">

@@ -56,6 +56,7 @@ DELETE        /rest/shoppingItem/:id                   @controllers.rest.Shoppin
 GET           /                                        @controllers.AccountController.loginPage()
 POST          /                                        @controllers.AccountController.login()
 GET           /logout                                  @controllers.AccountController.logout()
+GET           /changeLanguage/:lang                    @controllers.AccountController.changeLanguage(lang:String)
 
 #home
 GET           /home                                    @controllers.HomeController.index()

@@ -34,6 +34,7 @@ public enum ErrorMessage {
     VALIDATION_NOT_NULL,
     DTO_VERIFICATION_PATTERN_STRING_EXPECTED, //a strign flied is expected for the pattern annotation, but th field {0} is a {1}
     VALIDATION_PATTERN,
-    NOT_YOURSELF, NOT_YOUR_OLD_PASSWORD;
+    NOT_YOURSELF, NOT_YOUR_OLD_PASSWORD,
+    LANGUAGE_NOT_ACCEPTED;
 
 }

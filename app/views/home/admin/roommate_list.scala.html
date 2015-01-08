@@ -17,25 +17,25 @@
             <li class="row" ng-repeat="roommate in roommateList" ng-click="display(roommate)">
 
                 <div class="col-md-1 col-xs-2">
-                    <div class="user_icon" ng-show="!!roommate.nameAbrv" style="
-                        background: hsl({{roommate.iconColor}},80%, 60%); /* Old browsers */
-                        background: -moz-linear-gradient(top,  hsl({{roommate.iconColor}},80%, 60%) 0%, hsl({{roommate.iconColor}},80%, 30%) 100%); /* FF3.6+ */
-                        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,hsl({{roommate.iconColor}},80%, 60%)), color-stop(100%,hsl({{roommate.iconColor}},80%, 30%))); /* Chrome,Safari4+ */
-                        background: -webkit-linear-gradient(top,  hsl({{roommate.iconColor}},80%, 60%) 0%,hsl({{roommate.iconColor}},80%, 30%) 100%); /* Chrome10+,Safari5.1+ */
-                        background: -o-linear-gradient(top,  hsl({{roommate.iconColor}},80%, 60%) 0%,hsl({{roommate.iconColor}},80%, 30%) 100%); /* Opera 11.10+ */
-                        background: -ms-linear-gradient(top,  hsl({{roommate.iconColor}},80%, 60%) 0%,hsl({{roommate.iconColor}},80%, 30%) 100%); /* IE10+ */
-                        background: linear-gradient(to bottom,  hsl({{roommate.iconColor}},80%, 60%) 0%,hsl({{roommate.iconColor}},80%, 30%) 100%); /* W3C */
-                        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='hsl({{roommate.iconColor}},80%, 60%)', endColorstr='hsl({{roommate.iconColor}},80%, 30%)',GradientType=0 ); /* IE6-9 */">
-                        {{roommate.nameAbrv}}
-                    </div>
+                    <dir-user-icon ng-user="roommate"></dir-user-icon>
                 </div>
                 <div class="col-md-9  col-xs-8">
                     <div class="row">
                         <div class="col-md-6 col-sm-12">
-                            <input class="form-control" type="text" ng-disabled="roommate.edit != true" ng-model="roommate.name"/>
+                            <input
+                            class="form-control"
+                            placeholder="{{'generic.name' | translateText}}"
+                            type="text"
+                            ng-disabled="roommate.edit != true"
+                            ng-model="roommate.name"/>
                         </div>
                         <div class="col-md-6 col-sm-12">
-                            <input class="form-control" type="email" ng-disabled="roommate.edit != true" ng-model="roommate.email"/>
+                            <input
+                            class="form-control"
+                            placeholder="{{'generic.email' | translateText}}"
+                            type="email"
+                            ng-disabled="roommate.edit != true"
+                            ng-model="roommate.email"/>
 
                         </div>
 

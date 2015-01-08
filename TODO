@@ -1,8 +1,10 @@
 - help => écrire l'aide
 - texte accueil + première connection
-- choix de la langue
+ok - choix de la langue
 - logo + nom
-ok- choix de la devise
+ok - choix de la devise
 - bugs résolution course
 - valider course sans créer ticket
 - focus sur champs lorsque ouverture fenetre
+ok- adminRoommateList => add a placeholder
+- bug validation (creation roomate par exemple)

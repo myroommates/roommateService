@@ -1,4 +1,4 @@
-myApp.controller('ProfileMyProfileCtrl', function ($scope, $http, $flash, $modal,translationService,$locale) {
+myApp.controller('ProfileMyProfileCtrl', function ($scope, $http, $flash, $modal,translationService,$window) {
 
 
     $scope.roommate = data.mySelf;
@@ -6,9 +6,27 @@ myApp.controller('ProfileMyProfileCtrl', function ($scope, $http, $flash, $modal
     $scope.moneySymbol= data.home.moneySymbol;
     $scope.loading=false;
 
-    console.log($scope.languages);
+    $scope.languagesList = [];
+
+    for(var key in $scope.languages){
+        if($scope.languages.hasOwnProperty(key)){
+            $scope.languagesList.push({
+                key:$scope.languages[key].code,
+                value:$scope.languages[key].language
+            });
+        }
+    }
 
     $scope.fields = {
+
+        languages: {
+            fieldTitle: "generic.yourLanguage",
+            options:$scope.languagesList,
+            field:data.langId,
+            disabled:function(){
+                return $scope.loading;
+            }
+        },
         name: {
             fieldTitle: "generic.yourName",
             validationRegex: "^[a-zA-Z0-9-_%]{1,50}$",
@@ -85,7 +103,8 @@ myApp.controller('ProfileMyProfileCtrl', function ($scope, $http, $flash, $modal
             //save
             var dto = {
                 name: $scope.fields.name.field,
-                nameAbrv: $scope.fields.nameAbrv.field
+                nameAbrv: $scope.fields.nameAbrv.field,
+                languageCode:$scope.fields.languages.field
             };
 
             $scope.loading=true;
@@ -97,7 +116,9 @@ myApp.controller('ProfileMyProfileCtrl', function ($scope, $http, $flash, $modal
                 'data': dto
             }).success(function (data, status) {
                 $scope.loading=false;
-                $scope.close();
+                if($scope.fields.languages.field != data.langId){
+                    $window.location.reload();
+                }
             })
             .error(function (data, status) {
                     $scope.loading=false;

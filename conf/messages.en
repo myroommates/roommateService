@@ -27,6 +27,8 @@ generic.validation.email=Please get a correct email
 generic.yourName=Your name
 generic.yourNameAbrv=Your acronym
 generic.creator=Creator
+generic.yourLanguage=Your language
+generic.email=Email
 
 #
 # welcome
@@ -200,3 +202,4 @@ DTO_VERIFICATION_PATTERN_STRING_EXPECTED=A type string is expected for the patte
 VALIDATION_PATTERN=The field {0} expects the pattern {1}
 NOT_YOURSELF=The id {0} is not your
 NOT_YOUR_OLD_PASSWORD=This is not your old password
+LANGUAGE_NOT_ACCEPTED=This language cannot be used : {0}

@@ -1,4 +1,7 @@
 $(document).ready(function() {
+
+
+    var header_height = 50;
     $("#sidebar-toggle").click(function() {
         $(".global-container").toggleClass("open-sidebar");
     });
@@ -30,7 +33,7 @@ $(document).ready(function() {
     });
 
     $(".main-body").scroll(function () {
-        if ($(".main-body").scrollTop() > 100) {
+        if ($(".main-body").scrollTop() > header_height) {
             $(".large-menu").css("position", "fixed");
             $(".large-menu").css("top", "0");
         }

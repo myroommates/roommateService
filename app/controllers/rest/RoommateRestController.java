@@ -11,6 +11,7 @@ import dto.ListDTO;
 import dto.RoommateDTO;
 import dto.technical.ResultDTO;
 import models.entities.Roommate;
+import play.i18n.Lang;
 import play.mvc.Result;
 import play.mvc.Security;
 import services.RoommateService;
@@ -59,7 +60,7 @@ public class RoommateRestController extends AbstractRestController {
         roommateService.saveOrUpdate(currentUser);
 
         //store
-        securityController.storeAccount(currentUser);
+        securityController.storeAccount(ctx(),currentUser);
 
 
         return ok(roommateToRoommateDTOConverter.convert(currentUser));
@@ -144,6 +145,9 @@ public class RoommateRestController extends AbstractRestController {
         roommate.setIconColor(ColorGenerator.getColorWeb(securityRestController.getCurrentUser().getHome().getRoommateList().size()));
         roommate.setLanguage(lang());
 
+        //save language change
+        ctx().changeLang(roommate.getLanguage().code());
+
         //create password
         roommate.setPassword(KeyGenerator.generateRandomPassword(12));
 
@@ -187,6 +191,21 @@ public class RoommateRestController extends AbstractRestController {
         roommate.setName(dto.getName());
         roommate.setNameAbrv(dto.getNameAbrv());
         roommate.setKeepSessionOpen(dto.getKeepSessionOpen());
+        if(!roommate.getLanguage().code().equals(dto.getLanguageCode())){
+            //control language
+            boolean founded=false;
+            for (Lang lang : Lang.availables()) {
+                if(lang.code().equals(dto.getLanguageCode())){
+                    founded=true;
+                    roommate.setLanguage(lang);
+                    break;
+                }
+            }
+
+            if(!founded){
+                throw new MyRuntimeException(ErrorMessage.LANGUAGE_NOT_ACCEPTED,dto.getLanguageCode());
+            }
+        }
 
         //operation
         roommateService.saveOrUpdate(roommate);
