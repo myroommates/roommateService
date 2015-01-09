@@ -40,6 +40,7 @@ module.exports = function (grunt) {
                             'public/components/bootstrap/dist/css/bootstrap-theme.min.css',
                             'public/components/messenger/build/css/messenger.css',
                             'public/components/angular-bootstrap-datetimepicker/src/css/datetimepicker.css',
+                            'public/components/font-awesome/css/font-awesome.min.css',
                             'public/components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css']
                     }
                 ]

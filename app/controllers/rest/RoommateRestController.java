@@ -149,7 +149,7 @@ public class RoommateRestController extends AbstractRestController {
         ctx().changeLang(roommate.getLanguage().code());
 
         //create password
-        roommate.setPassword(KeyGenerator.generateRandomPassword(12));
+        roommate.setPassword(KeyGenerator.generateRandomPassword(8));
 
         //send email
         emailController.sendInvitationEmail(roommate, securityRestController.getCurrentUser(), lang());

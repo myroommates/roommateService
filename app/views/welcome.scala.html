@@ -4,7 +4,7 @@
 
 @welcome_pattern {
 
-    <div class="container content-block" ng-controller="WelcomeCtrl">
+    <div class="container content-block page-welcome" ng-controller="WelcomeCtrl">
 
 
             <!-- load data -->
@@ -16,6 +16,7 @@
         <!-- language -->
             <div class="row">
                 <select
+                    class="select-lang"
                     ng-model="lang"
                     ng-options="option.key as option.value for option in languagesList">
                 </select>

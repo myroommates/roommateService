@@ -45,7 +45,6 @@ public class AccountController extends AbstractController {
     public Result loginPage() {
 
         // authenticated
-
         if (securityController.isAuthenticated(ctx())) {
 
             if (request().cookie(SecurityController.COOKIE_KEEP_SESSION_OPEN) == null) {

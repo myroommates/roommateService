@@ -3,7 +3,7 @@
         <label class="control-label col-md-3" ng-show="getInfo().fieldTitle">{{getInfo().fieldTitle | translateText}}</label>
         <div class="col-md-6">
             <div ng-class="{'input-group':!!getInfo().money}">
-                <button class="calculator btn btn-sm btn-default glyphicon glyphicon-th-list" ng-click="openCalculator()"></button>
+                <button class="calculator btn btn-sm btn-default fa fa-calculator" ng-click="openCalculator()"></button>
 
                 <input type="{{fieldType}}"
                        name="{{getInfo().name}}"
