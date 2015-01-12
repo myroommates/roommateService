@@ -13,8 +13,13 @@ import javax.persistence.*;
 })
 public class TicketDebtor extends AuditedAbstractEntity{
 
+    //request
     public static final String FIND_BY_ROOMMATE = "TicketDebtor_FIND_BY_ROOMMATE";
-    public static final String COL_ROOMMATE = "roommate_id";
+
+    //column
+    public static final String COL_ROOMMATE = "roommate.id";
+
+    //roommate
     public static final String PARAM_ROOMMATE = "roommate";
 
     @ManyToOne

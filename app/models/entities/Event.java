@@ -20,10 +20,10 @@ public class Event extends AuditedAbstractEntity {
     public static final String FIND_BY_ID = "Event_FIND_BY_ID";
 
     //col
-    public static final String COL_HOME = "home";
+    public static final String COL_HOME = "home.id";
 
     //param
-    public static final String PARAM_HOME = "home";
+    public static final String PARAM_HOME = "home_id";
 
 
     @Column(nullable = false, columnDefinition = "Text")

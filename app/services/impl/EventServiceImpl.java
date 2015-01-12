@@ -15,7 +15,7 @@ public class EventServiceImpl extends CrudServiceImpl<Event> implements EventSer
     @Override
     public List<Event> findByHome(Home home) {
         return Ebean.createNamedQuery(Event.class, Event.FIND_BY_HOME)
-                .setParameter(Event.PARAM_HOME, home)
+                .setParameter(Event.PARAM_HOME, home.getId())
                 .findList();
     }
 }

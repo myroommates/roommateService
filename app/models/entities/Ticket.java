@@ -24,8 +24,8 @@ public class Ticket extends AuditedAbstractEntity {
     public static final String FIND_BY_PAYER = "Ticket_FIND_BY_PAYER";
 
     //column
-    public static final String COL_HOME = "home";
-    public static final String COL_PAYER = "payer";
+    public static final String COL_HOME = "home.id";
+    public static final String COL_PAYER = "payer.id";
     //params
     public static final String PARAM_HOME = "home_id";
     public static final String PARAM_PAYER = "payer_id";

@@ -32,7 +32,7 @@ public class Roommate extends AuditedAbstractEntity {
     public static final String PARAM_EMAIL = COL_EMAIL;
     public static final String COL_REACTIVATION_KEY = "reactivation_key";
     public static final String PARAM_REACTIVATION_KEY = COL_REACTIVATION_KEY;
-    public static final String COL_HOME = "home";
+    public static final String COL_HOME = "home.id";
     public static final String PARAM_HOME = "home_id";
     public static final String COL_AUTHENTICATION_KEY = "authenticationKey";
     public static final String PARAM_AUTHENTICATION_KEY = COL_AUTHENTICATION_KEY;

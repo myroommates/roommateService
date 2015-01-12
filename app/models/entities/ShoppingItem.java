@@ -20,10 +20,10 @@ public class ShoppingItem extends AuditedAbstractEntity {
     public static final String FIND_BY_ID = "ShoppingItem_FIND_BY_ID";
 
     //column
-    public final static String COL_HOME = "home_id";
+    public final static String COL_HOME = "home.id";
 
     //params
-    public final static String PARAM_HOME = COL_HOME;
+    public final static String PARAM_HOME = "home_id";
 
 
     @Column(nullable = false, columnDefinition = "Text")
