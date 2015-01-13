@@ -1,6 +1,8 @@
 package dto;
 
 import dto.technical.DTO;
+import play.data.format.Formats;
+import play.data.validation.Constraints;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -18,14 +20,13 @@ public class TicketDTO extends DTO {
     @Pattern(regexp = ".{1,1000}", message = "homeName must respect this pattern : .{1,1000}")
     private String description;
 
-    @NotNull
     private Date date;
 
     private List<TicketDebtorDTO> debtorList;
 
     private String category;
 
-    @NotNull
+    @Constraints.Required
     private Long payerId;
 
     public TicketDTO() {

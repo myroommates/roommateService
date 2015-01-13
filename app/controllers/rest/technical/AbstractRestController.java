@@ -2,6 +2,7 @@ package controllers.rest.technical;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import dto.technical.DTO;
+import play.Logger;
 import play.data.Form;
 import play.data.validation.ValidationError;
 import play.i18n.Messages;
@@ -34,7 +35,7 @@ public class AbstractRestController extends Controller {
 
         //extract the json node
         JsonNode node = request().body().asJson();
-
+/*
         //control dto
         try {
             //build form from dot
@@ -68,7 +69,7 @@ public class AbstractRestController extends Controller {
             e.printStackTrace();
             throw new MyRuntimeException(e.getMessage());
         }
-
+*/
         //extract dto
         T dto = DTO.getDTO(node, DTOclass);
         if (dto == null) {

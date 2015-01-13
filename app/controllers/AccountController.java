@@ -75,6 +75,7 @@ public class AccountController extends AbstractController {
 
         Form<LoginForm> loginFormForm = Form.form(LoginForm.class).bindFromRequest();
 
+
         if (loginFormForm.hasErrors()) {
             return badRequest(views.html.welcome.render(loginFormForm,getAvaiableLanguage()));
         }
