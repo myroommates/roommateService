@@ -17,6 +17,7 @@
 
 <!-- footer -->
 <div>
+    <a href="$project.url">$project.name</a>
 </div>
 
 </body>

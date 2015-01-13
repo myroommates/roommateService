@@ -2,12 +2,14 @@ package controllers.rest;
 
 import controllers.rest.technical.AbstractRestController;
 import models.entities.Roommate;
+import play.Configuration;
 import play.i18n.Lang;
 import services.EmailService;
 import services.TranslationService;
 import services.impl.EmailServiceImpl;
 import services.impl.TranslationServiceImpl;
 import util.EmailMessage;
+import util.email.ProjectData;
 
 /**
  * Created by florian on 6/12/14.

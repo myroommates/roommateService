@@ -14,8 +14,7 @@ public class RoommateDTO extends DTO {
     @Constraints.MinLength(2)
     @Constraints.MaxLength(50)
     private String name;
-
-    @Constraints.Required
+    
     @Constraints.MaxLength(3)
     private String nameAbrv;
 

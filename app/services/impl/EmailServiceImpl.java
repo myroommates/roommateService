@@ -6,10 +6,12 @@ import akka.actor.Props;
 import akka.routing.SmallestMailboxRouter;
 import models.entities.Roommate;
 import org.apache.velocity.app.Velocity;
+import play.Configuration;
 import play.Logger;
 import play.i18n.Messages;
 import services.EmailService;
 import services.VelocityGeneratorService;
+import util.email.ProjectData;
 import util.email.actors.EmailServiceActor;
 import util.email.messages.EmailMessage;
 
@@ -25,6 +27,8 @@ public class EmailServiceImpl implements EmailService{
     //services
     private final VelocityGeneratorService velocityGeneratorService = new VelocityGeneratorServiceImpl();
 
+    private String projectUrl = Configuration.root().getString("project.url");
+    private String projectName = Configuration.root().getString("project.name");
 
     private final static String VELOCITY_BASIC_EMAIL = "basicEmailStructure.vm";
     public ActorSystem system;
@@ -41,17 +45,28 @@ public class EmailServiceImpl implements EmailService{
     @Override
     public void sendEmail(Roommate roommate, String title, String body) {
 
-
-
         //load velocity content
         Map<String, Object> values = new HashMap<>();
 
         values.put("content",body);
+        values.put("project",getProjectData());
 
         String velocityContent = velocityGeneratorService.generate(VELOCITY_BASIC_EMAIL, values);
 
         EmailMessage emailMessage = new EmailMessage(roommate.getEmail(), title, velocityContent);
 
         emailActorRef.tell(emailMessage, emailActorRef);
+    }
+
+
+
+    private ProjectData getProjectData(){
+
+        ProjectData projectData = new ProjectData();
+
+        projectData.setName(projectName);
+        projectData.setUrl(projectUrl);
+
+        return projectData;
     }
 }

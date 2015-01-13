@@ -34,9 +34,13 @@ public class RoommateServiceImpl extends CrudServiceImpl<Roommate> implements Ro
     @Override
     public void saveOrUpdate(Roommate roommate) {
 
+        roommate.setEmail(roommate.getEmail().toLowerCase());
+
+        //generate the password
         if (roommate.getPassword().length() < 50) {
             roommate.setPassword(generateEncryptingPassword(roommate.getPassword()));
         }
+        //generate the cookie value
         if (roommate.getCookieValue() != null && roommate.getCookieValue().length() < 50) {
             roommate.setCookieValue(generateEncryptingPassword(roommate.getCookieValue()));
         }

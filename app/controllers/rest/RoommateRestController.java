@@ -11,6 +11,8 @@ import dto.ListDTO;
 import dto.RoommateDTO;
 import dto.technical.ResultDTO;
 import models.entities.Roommate;
+import play.Logger;
+import play.data.Form;
 import play.i18n.Lang;
 import play.mvc.Result;
 import play.mvc.Security;
@@ -129,6 +131,9 @@ public class RoommateRestController extends AbstractRestController {
 
         RoommateDTO dto = extractDTOFromRequest(RoommateDTO.class);
 
+
+
+
         Roommate currentUser = securityRestController.getCurrentUser();
 
         //control email
@@ -161,9 +166,16 @@ public class RoommateRestController extends AbstractRestController {
         return ok(roommateToRoommateDTOConverter.convert(roommate));
     }
 
+
+
     @Security.Authenticated(SecurityRestController.class)
     @Transactional
     public Result update(long id) {
+
+/*
+        RoommateDTO roommateDTO = postForm.get();
+        Logger.warn("test:"+roommateDTO);
+*/
 
         RoommateDTO dto = extractDTOFromRequest(RoommateDTO.class);
 

@@ -26,7 +26,7 @@ public class AccountController extends AbstractController {
     //service
     private RoommateService accountService = new RoommateServiceImpl();
     //form
-    public final static Form<LoginForm> formLogin = Form.form(LoginForm.class);
+    //public final static Form<LoginForm> formLogin = Form.form(LoginForm.class);
     //controller
     private HomeController homeController = new HomeController();
     private LanguageToLanguageDTOConverter languageToLanguageDTOConverter = new LanguageToLanguageDTOConverter();
@@ -68,12 +68,12 @@ public class AccountController extends AbstractController {
         }
 
 
-        return ok(views.html.welcome.render(formLogin,getAvaiableLanguage()));
+        return ok(views.html.welcome.render(Form.form(LoginForm.class),getAvaiableLanguage()));
     }
     @Transactional
     public Result login() {
 
-        Form<LoginForm> loginFormForm = formLogin.bindFromRequest();
+        Form<LoginForm> loginFormForm = Form.form(LoginForm.class).bindFromRequest();
 
         if (loginFormForm.hasErrors()) {
             return badRequest(views.html.welcome.render(loginFormForm,getAvaiableLanguage()));
