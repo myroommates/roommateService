@@ -10,7 +10,7 @@ GET           /assets/*file                            controllers.Assets.at(pat
 #
 
 # account
-POST          /rest/reactivation                       @controllers.rest.LoginRestController.reactivation()
+POST          /rest/login                              @controllers.rest.LoginRestController.login()
 POST          /rest/registration                       @controllers.rest.LoginRestController.registration()
 POST          /rest/load_data                          @controllers.rest.LoginRestController.loadData()
 
@@ -53,10 +53,10 @@ DELETE        /rest/shoppingItem/:id                   @controllers.rest.Shoppin
 #
 
 #welcome
-GET           /                                        @controllers.AccountController.loginPage()
-POST          /                                        @controllers.AccountController.login()
-GET           /logout                                  @controllers.AccountController.logout()
-GET           /changeLanguage/:lang                    @controllers.AccountController.changeLanguage(lang:String)
+GET           /                                        @controllers.LoginController.loginPage()
+POST          /                                        @controllers.LoginController.login()
+GET           /logout                                  @controllers.LoginController.logout()
+GET           /changeLanguage/:lang                    @controllers.LoginController.changeLanguage(lang:String)
 
 #home
 GET           /home                                    @controllers.HomeController.index()

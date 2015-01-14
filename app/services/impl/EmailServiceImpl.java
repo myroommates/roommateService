@@ -5,17 +5,13 @@ import akka.actor.ActorSystem;
 import akka.actor.Props;
 import akka.routing.SmallestMailboxRouter;
 import models.entities.Roommate;
-import org.apache.velocity.app.Velocity;
 import play.Configuration;
-import play.Logger;
-import play.i18n.Messages;
 import services.EmailService;
 import services.VelocityGeneratorService;
 import util.email.ProjectData;
 import util.email.actors.EmailServiceActor;
 import util.email.messages.EmailMessage;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 

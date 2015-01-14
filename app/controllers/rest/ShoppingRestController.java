@@ -1,8 +1,8 @@
 package controllers.rest;
 
 import com.avaje.ebean.annotation.Transactional;
-import controllers.rest.technical.AbstractRestController;
-import controllers.rest.technical.SecurityRestController;
+import controllers.technical.AbstractController;
+import controllers.technical.SecurityRestController;
 import converter.ShoppingItemToShoppingItemDTOConverter;
 import dto.ListDTO;
 import dto.ShoppingItemDTO;
@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * Created by florian on 4/12/14.
  */
-public class ShoppingRestController extends AbstractRestController {
+public class ShoppingRestController extends AbstractController {
 
     //service
     private ShoppingItemService shoppingItemService = new ShoppingItemServiceImpl();
@@ -36,7 +36,7 @@ public class ShoppingRestController extends AbstractRestController {
 
             ShoppingItem shoppingItem = shoppingItemService.findById(id);
 
-            if(shoppingItem==null || !shoppingItem.getHome().equals(securityRestController.getCurrentUser().getHome())){
+            if(shoppingItem==null || !shoppingItem.getHome().equals(securityController.getCurrentUser().getHome())){
                 throw new  MyRuntimeException(ErrorMessage.NOT_YOU_SHOPPING_ITEM);
             }
 
@@ -44,13 +44,13 @@ public class ShoppingRestController extends AbstractRestController {
 
             shoppingItemService.saveOrUpdate(shoppingItem);
         }
-        return ok();
+        return ok(new ResultDTO());
     }
 
     @Security.Authenticated(SecurityRestController.class)
     @Transactional
     public Result getAll() {
-        List<ShoppingItem> shoppingItemList = shoppingItemService.findByHome(securityRestController.getCurrentUser().getHome());
+        List<ShoppingItem> shoppingItemList = shoppingItemService.findByHome(securityController.getCurrentUser().getHome());
 
         ListDTO<ShoppingItemDTO> result = new ListDTO<>();
 
@@ -67,7 +67,7 @@ public class ShoppingRestController extends AbstractRestController {
         //load
         ShoppingItem shoppingItem = shoppingItemService.findById(id);
 
-        if (shoppingItem == null || !shoppingItem.getHome().equals(securityRestController.getCurrentUser().getHome())) {
+        if (shoppingItem == null || !shoppingItem.getHome().equals(securityController.getCurrentUser().getHome())) {
             throw new MyRuntimeException(ErrorMessage.NOT_YOU_SHOPPING_ITEM, id);
         }
 
@@ -83,8 +83,8 @@ public class ShoppingRestController extends AbstractRestController {
 
         //create
         ShoppingItem shoppingItem = new ShoppingItem();
-        shoppingItem.setCreator(securityRestController.getCurrentUser());
-        shoppingItem.setHome(securityRestController.getCurrentUser().getHome());
+        shoppingItem.setCreator(securityController.getCurrentUser());
+        shoppingItem.setHome(securityController.getCurrentUser().getHome());
         shoppingItem.setDescription(dto.getDescription());
         shoppingItem.setOnlyForMe(dto.getOnlyForMe());
 
@@ -104,7 +104,7 @@ public class ShoppingRestController extends AbstractRestController {
         ShoppingItem shoppingItem = shoppingItemService.findById(id);
 
         //control
-        if (shoppingItem == null || !shoppingItem.getHome().equals(securityRestController.getCurrentUser().getHome())) {
+        if (shoppingItem == null || !shoppingItem.getHome().equals(securityController.getCurrentUser().getHome())) {
             throw new MyRuntimeException(ErrorMessage.NOT_YOU_SHOPPING_ITEM, id);
         }
 
@@ -123,7 +123,7 @@ public class ShoppingRestController extends AbstractRestController {
 
         ShoppingItem shoppingItem = shoppingItemService.findById(id);
 
-        if (shoppingItem != null && !shoppingItem.getHome().equals(securityRestController.getCurrentUser().getHome())) {
+        if (shoppingItem != null && !shoppingItem.getHome().equals(securityController.getCurrentUser().getHome())) {
             throw new MyRuntimeException(ErrorMessage.NOT_YOU_SHOPPING_ITEM, id);
         }
 

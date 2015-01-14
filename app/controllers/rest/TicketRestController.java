@@ -1,8 +1,8 @@
 package controllers.rest;
 
 import com.avaje.ebean.annotation.Transactional;
-import controllers.rest.technical.AbstractRestController;
-import controllers.rest.technical.SecurityRestController;
+import controllers.technical.AbstractController;
+import controllers.technical.SecurityRestController;
 import converter.TicketToTicketConverter;
 import dto.ListDTO;
 import dto.TicketDTO;
@@ -28,7 +28,7 @@ import java.util.Set;
 /**
  * Created by florian on 11/11/14.
  */
-public class TicketRestController extends AbstractRestController {
+public class TicketRestController extends AbstractController {
 
     //service
     private TicketService ticketService = new TicketServiceImpl();
@@ -45,7 +45,7 @@ public class TicketRestController extends AbstractRestController {
 
         ListDTO<TicketDTO> result = new ListDTO<>();
 
-        for (Ticket ticket : securityRestController.getCurrentUser().getHome().getTickets()) {
+        for (Ticket ticket : securityController.getCurrentUser().getHome().getTickets()) {
             result.addElement(ticketToTicketConverter.convert(ticket));
         }
 
@@ -61,7 +61,7 @@ public class TicketRestController extends AbstractRestController {
         Ticket ticket = ticketService.findById(id);
 
         //control
-        if (ticket == null || !ticket.getHome().equals(securityRestController.getCurrentUser().getHome())) {
+        if (ticket == null || !ticket.getHome().equals(securityController.getCurrentUser().getHome())) {
             throw new MyRuntimeException(ErrorMessage.NOT_YOU_TICKET, id);
         }
 
@@ -75,7 +75,7 @@ public class TicketRestController extends AbstractRestController {
 
         TicketDTO dto = extractDTOFromRequest(TicketDTO.class);
 
-        Roommate currentUser = securityRestController.getCurrentUser();
+        Roommate currentUser = securityController.getCurrentUser();
 
         //control
         //prayers
@@ -112,7 +112,7 @@ public class TicketRestController extends AbstractRestController {
 
         TicketDTO dto = extractDTOFromRequest(TicketDTO.class);
 
-        Roommate currentUser = securityRestController.getCurrentUser();
+        Roommate currentUser = securityController.getCurrentUser();
 
         //control
         //load ticket
@@ -161,7 +161,7 @@ public class TicketRestController extends AbstractRestController {
     @Transactional
     public Result remove(Long id) {
 
-        Roommate currentUser = securityRestController.getCurrentUser();
+        Roommate currentUser = securityController.getCurrentUser();
 
         //load entity
         Ticket ticket = ticketService.findById(id);

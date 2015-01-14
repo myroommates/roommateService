@@ -4,7 +4,7 @@
 
 @implicitField = @{ FieldConstructor(widget.fieldCustom.f) }
 
-@helper.form(action = routes.AccountController.login()) {
+@helper.form(action = routes.LoginController.login()) {
     <h3>@Messages("login.form.title")</h3>
 
     @input(loginForm("email"),

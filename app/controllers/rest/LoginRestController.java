@@ -1,11 +1,11 @@
 package controllers.rest;
 
 import com.avaje.ebean.annotation.Transactional;
-import controllers.rest.technical.AbstractRestController;
-import controllers.rest.technical.SecurityRestController;
+import controllers.technical.AbstractController;
+import controllers.technical.SecurityRestController;
 import converter.RoommateToLoginSuccessConverter;
 import dto.LoginSuccessDTO;
-import dto.post.ReactivationDTO;
+import dto.post.LoginDTO;
 import dto.post.RegistrationDTO;
 import models.entities.Home;
 import models.entities.Roommate;
@@ -14,20 +14,20 @@ import play.mvc.Security;
 import services.RoommateService;
 import services.impl.RoommateServiceImpl;
 import util.ErrorMessage;
-import util.KeyGenerator;
 import util.exception.MyRuntimeException;
 import util.tool.ColorGenerator;
 
 /**
  * Created by florian on 10/11/14.
  */
-public class LoginRestController extends AbstractRestController {
+public class LoginRestController extends AbstractController {
 
     //service
     private RoommateService roommateService = new RoommateServiceImpl();
 
     //controller
     private EmailRestController emailController = new EmailRestController();
+
 
     @Transactional
     public Result registration() {
@@ -49,19 +49,11 @@ public class LoginRestController extends AbstractRestController {
         roommate.setHome(home);
         roommate.setIconColor(ColorGenerator.getColorWeb(0));
 
-        //generate reactivationKey
-        while (roommate.getReactivationKey() == null) {
-            String generateRandomPassword = KeyGenerator.generateRandomPassword(12);
-            if (roommateService.findByReactivationKey(generateRandomPassword) == null) {
-                roommate.setReactivationKey(generateRandomPassword);
-            }
-        }
 
         //send email
-        //emailController.sendRegistrationEmail(roommate, lang());
+        emailController.sendApplicationRegistrationEmail(roommate);
 
-        //connection !! this operation save the roommate too
-        securityRestController.storeIdentifier(roommate);
+        roommateService.saveOrUpdate(roommate);
 
         //result
         RoommateToLoginSuccessConverter converter = new RoommateToLoginSuccessConverter();
@@ -72,16 +64,14 @@ public class LoginRestController extends AbstractRestController {
     }
 
     @Transactional
-    public Result reactivation() {
+    public Result login() {
 
-        ReactivationDTO dto = extractDTOFromRequest(ReactivationDTO.class);
+        LoginDTO dto = extractDTOFromRequest(LoginDTO.class);
 
-        Roommate roommate = roommateService.findByReactivationKey(dto.getReactivationKey());
+        Roommate roommate = roommateService.findByEmail(dto.getEmail());
 
-        if (roommate != null) {
-            securityRestController.storeIdentifier(roommate);
-        } else {
-            throw new MyRuntimeException(ErrorMessage.ACTIVATION_KEY_NOT_FOUND, dto.getReactivationKey());
+        if (roommate == null || !roommateService.controlPassword(dto.getPassword(),roommate)) {
+            throw new MyRuntimeException(ErrorMessage.LOGIN_WRONG_PASSWORD_LOGIN);
         }
 
         //result
@@ -100,7 +90,7 @@ public class LoginRestController extends AbstractRestController {
         //result
         RoommateToLoginSuccessConverter converter = new RoommateToLoginSuccessConverter();
 
-        LoginSuccessDTO result = converter.convert(securityRestController.getCurrentUser());
+        LoginSuccessDTO result = converter.convert(securityController.getCurrentUser());
 
         return ok(result);
     }

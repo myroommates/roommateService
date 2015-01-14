@@ -6,6 +6,7 @@ import models.entities.Roommate;
 import org.jasypt.util.password.StrongPasswordEncryptor;
 import play.Logger;
 import services.RoommateService;
+import util.KeyGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,14 +25,6 @@ public class RoommateServiceImpl extends CrudServiceImpl<Roommate> implements Ro
     }
 
     @Override
-    public Roommate findByReactivationKey(String reactivationKey) {
-
-        return Ebean.createNamedQuery(Roommate.class, Roommate.FIND_BY_REACTIVATION_KEY)
-                .setParameter(Roommate.PARAM_REACTIVATION_KEY, reactivationKey)
-                .findUnique();
-    }
-
-    @Override
     public void saveOrUpdate(Roommate roommate) {
 
         roommate.setEmail(roommate.getEmail().toLowerCase());
@@ -40,9 +33,14 @@ public class RoommateServiceImpl extends CrudServiceImpl<Roommate> implements Ro
         if (roommate.getPassword().length() < 50) {
             roommate.setPassword(generateEncryptingPassword(roommate.getPassword()));
         }
-        //generate the cookie value
-        if (roommate.getCookieValue() != null && roommate.getCookieValue().length() < 50) {
-            roommate.setCookieValue(generateEncryptingPassword(roommate.getCookieValue()));
+
+        //crypte the authentication value
+        if (roommate.getAuthenticationKey() != null && roommate.getAuthenticationKey().length() < 50) {
+            roommate.setAuthenticationKey(generateEncryptingPassword(roommate.getAuthenticationKey()));
+        }
+        //or generate it
+        else if(roommate.getAuthenticationKey()==null){
+            roommate.setAuthenticationKey(generateEncryptingPassword(KeyGenerator.generateRandomKey(40)));
         }
 
         //compute abrv
@@ -67,8 +65,8 @@ public class RoommateServiceImpl extends CrudServiceImpl<Roommate> implements Ro
     }
 
     @Override
-    public boolean controlCookieKey(String cookieValue, Roommate account) {
-        return !(!account.isKeepSessionOpen() || account.getCookieValue().length() < 40) && account.getCookieValue() != null && new StrongPasswordEncryptor().checkPassword(cookieValue, account.getCookieValue());
+    public boolean controlAuthenticationKey(String authenticationKey, Roommate account) {
+        return !(!account.isKeepSessionOpen() || account.getAuthenticationKey().length() < 40) && account.getAuthenticationKey() != null && new StrongPasswordEncryptor().checkPassword(authenticationKey, account.getAuthenticationKey());
     }
 
     @Override
@@ -76,7 +74,6 @@ public class RoommateServiceImpl extends CrudServiceImpl<Roommate> implements Ro
         return new StrongPasswordEncryptor().checkPassword(password,
                 account.getPassword());
     }
-
 
     private String generateEncryptingPassword(final String password) {
 

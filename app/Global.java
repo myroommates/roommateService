@@ -1,4 +1,4 @@
-import controllers.rest.technical.SecurityRestController;
+import controllers.technical.SecurityRestController;
 import dto.technical.ExceptionDTO;
 import play.Application;
 import play.GlobalSettings;

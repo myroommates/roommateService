@@ -162,8 +162,8 @@ home.count.help=...
 #
 # Email
 # TODO
-REGISTRATION_EMAIL_TITLE=Welcome to RoommateApp !
-REGISTRATION_EMAIL_BODY=Welcome {0}!<br/><br/>Your smartphone is now logged to your roommateApp ! If your smartphone is logout, you can login you to your account with the follow code : {1}<br/><br/>Follow ''Reactivation'' instruction to login you<br/><br/>
+REGISTRATION_APP_EMAIL_TITLE=Bienvenu dans roommate !
+REGISTRATION_APP_EMAIL_BODY=Bienvenue!{0}!<br/><br/>Votre smartphone est maintenant connecté à l'application roommate! Si votre smartphone se déconnecte, vous pouvez utiliser votre adresse email et le mot de passe suivant pour vous reconnectez :  {1}<br/><br/>Cliquez sur ''réactivation'' et suivez les instructions<br/><br/>Vous pouvez également utiliser ces identifiants pour vous connectez au site web : www.?.com
 INVITATION_EMAIL_TITLE=Your are invited to RoommateApp !
 INVITATION_EMAIL_BODY=Bienvenue {0}!<br/><br/>Vous avez été invité à rejoindre RoommateApp par {1}<br/><br/>Vous pouvez vous connectez avec votre adresse e-mail et le mot de passe suivant : {2}
 

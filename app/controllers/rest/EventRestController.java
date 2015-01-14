@@ -1,8 +1,8 @@
 package controllers.rest;
 
 import com.avaje.ebean.annotation.Transactional;
-import controllers.rest.technical.AbstractRestController;
-import controllers.rest.technical.SecurityRestController;
+import controllers.technical.AbstractController;
+import controllers.technical.SecurityRestController;
 import converter.EventToEventDTOConverter;
 import dto.EventDTO;
 import dto.ListDTO;
@@ -21,7 +21,7 @@ import java.util.List;
 /**
  * Created by florian on 4/12/14.
  */
-public class EventRestController extends AbstractRestController {
+public class EventRestController extends AbstractController{
 
     //service
     private EventService eventService = new EventServiceImpl();
@@ -36,7 +36,7 @@ public class EventRestController extends AbstractRestController {
         ListDTO<EventDTO> result = new ListDTO<>();
 
         //load
-        List<Event> events = eventService.findByHome(securityRestController.getCurrentUser().getHome());
+        List<Event> events = eventService.findByHome(securityController.getCurrentUser().getHome());
 
         for (Event event : events) {
             result.addElement(eventToEventDTOConverter.convert(event));
@@ -53,7 +53,7 @@ public class EventRestController extends AbstractRestController {
         Event event = eventService.findById(id);
 
         //control
-        if (event == null || !event.getHome().equals(securityRestController.getCurrentUser().getHome())) {
+        if (event == null || !event.getHome().equals(securityController.getCurrentUser().getHome())) {
             throw new MyRuntimeException(ErrorMessage.NOT_YOU_EVENT, id);
         }
 
@@ -71,12 +71,12 @@ public class EventRestController extends AbstractRestController {
         Event event = eventService.findById(id);
 
         //control
-        if (event == null || !event.getHome().equals(securityRestController.getCurrentUser().getHome())) {
+        if (event == null || !event.getHome().equals(securityController.getCurrentUser().getHome())) {
             throw new MyRuntimeException(ErrorMessage.NOT_YOU_EVENT, id);
         }
 
         //control creator
-        if (!event.getCreator().equals(securityRestController.getCurrentUser())) {
+        if (!event.getCreator().equals(securityController.getCurrentUser())) {
             throw new MyRuntimeException(ErrorMessage.NOT_EVENT_CREATOR, id);
         }
 
@@ -102,10 +102,10 @@ public class EventRestController extends AbstractRestController {
 
         Event event = new Event();
 
-        event.setCreator(securityRestController.getCurrentUser());
+        event.setCreator(securityController.getCurrentUser());
         event.setDescription(dto.getDescription());
         event.setEndDate(dto.getEndDate());
-        event.setHome(securityRestController.getCurrentUser().getHome());
+        event.setHome(securityController.getCurrentUser().getHome());
         event.setStartDate(dto.getStartDate());
         if (dto.getRepeatableFrequency() != null) {
             event.setRepeatableFrequency(EventRepeatableFrequencyEnum.getByName(dto.getRepeatableFrequency()));
@@ -124,7 +124,7 @@ public class EventRestController extends AbstractRestController {
         //load
         Event event = eventService.findById(id);
 
-        if (event != null && event.getHome().equals(securityRestController.getCurrentUser().getHome())) {
+        if (event != null && event.getHome().equals(securityController.getCurrentUser().getHome())) {
             throw new MyRuntimeException(ErrorMessage.NOT_YOU_EVENT, id);
         }
 

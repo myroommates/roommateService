@@ -16,12 +16,11 @@ import play.i18n.Messages;
 import play.mvc.Result;
 import services.RoommateService;
 import services.impl.RoommateServiceImpl;
-import util.KeyGenerator;
 
 /**
  * Created by florian on 17/12/14.
  */
-public class AccountController extends AbstractController {
+public class LoginController extends AbstractController {
 
     //service
     private RoommateService accountService = new RoommateServiceImpl();
@@ -48,7 +47,7 @@ public class AccountController extends AbstractController {
         if (securityController.isAuthenticated(ctx())) {
 
             if (request().cookie(SecurityController.COOKIE_KEEP_SESSION_OPEN) == null) {
-
+/*
                 //generate key
                 String key = KeyGenerator.generateRandomKey(40);
 
@@ -60,8 +59,8 @@ public class AccountController extends AbstractController {
                 roommate.setCookieValue(key);
 
                 accountService.saveOrUpdate(roommate);
-
-                response().setCookie(SecurityController.COOKIE_KEEP_SESSION_OPEN, cookieValue);
+*/
+                response().setCookie(SecurityController.COOKIE_KEEP_SESSION_OPEN, securityController.getCurrentUser().getAuthenticationKey());
             }
 
             return homeController.index();

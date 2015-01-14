@@ -11,13 +11,11 @@ import java.util.List;
 public interface RoommateService extends CrudService<Roommate>{
     Roommate findByEmail(String email);
 
-    Roommate findByReactivationKey(String reactivationKey);
-
     List<Roommate> findByHome(Home home);
 
     Roommate findByAuthenticationKey(String authenticationKey);
 
-    boolean controlCookieKey(String keyElement, Roommate account);
+    boolean controlAuthenticationKey(String authenticationKey, Roommate account);
 
     public boolean controlPassword(String password, Roommate account);
 
