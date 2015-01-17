@@ -3,6 +3,7 @@ package dto;
 import dto.technical.DTO;
 import util.EqualList;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,6 +14,8 @@ public class LoginSuccessDTO extends DTO {
     private RoommateDTO currentRoommate;
     private HomeDTO home;
     private List<RoommateDTO> roommates;
+    private List<TicketDTO> tickets;
+    private List<ShoppingItemDTO> shoppingItems;
     private String authenticationKey;
 
     public LoginSuccessDTO() {
@@ -46,6 +49,22 @@ public class LoginSuccessDTO extends DTO {
         return roommates;
     }
 
+    public List<TicketDTO> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(List<TicketDTO> tickets) {
+        this.tickets = tickets;
+    }
+
+    public List<ShoppingItemDTO> getShoppingItems() {
+        return shoppingItems;
+    }
+
+    public void setShoppingItems(List<ShoppingItemDTO> shoppingItems) {
+        this.shoppingItems = shoppingItems;
+    }
+
     public void setRoommates(List<RoommateDTO> roommates) {
         this.roommates = roommates;
     }
@@ -57,12 +76,29 @@ public class LoginSuccessDTO extends DTO {
         roommates.add(roommate);
     }
 
+    public void addShoppingItem(ShoppingItemDTO shoppingItemDTO) {
+        if(shoppingItems==null){
+            shoppingItems = new ArrayList<>();
+        }
+        shoppingItems.add(shoppingItemDTO);
+    }
+
+    public void addTicket(TicketDTO ticketDTO) {
+        if (tickets == null) {
+            tickets = new ArrayList<>();
+        }
+        tickets.add(ticketDTO);
+    }
+
     @Override
     public String toString() {
         return "LoginSuccessDTO{" +
                 "currentRoommate=" + currentRoommate +
                 ", home=" + home +
                 ", roommates=" + roommates +
+                ", tickets=" + tickets +
+                ", shoppingItems=" + shoppingItems +
+                ", authenticationKey='" + authenticationKey + '\'' +
                 '}';
     }
 }
