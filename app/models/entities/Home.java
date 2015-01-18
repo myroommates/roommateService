@@ -14,6 +14,7 @@ import java.util.Set;
 public class Home extends AuditedAbstractEntity{
 
 
+    public static final String DEFAULT_MONEY_SYMBOL = "€";
     @Column
     private String moneySymbol;
 

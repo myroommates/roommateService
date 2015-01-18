@@ -20,11 +20,11 @@ public class EmailRestController extends AbstractController {
 
     public void sendApplicationRegistrationEmail(Roommate  roommate){
 
-        String title = translationService.getTranslation(EmailMessage.REGISTRATION_APP_EMAIL_TITLE,roommate.getLanguage());
+        String title = translationService.getTranslation(EmailMessage.REGISTRATION_APP_EMAIL_TITLE,lang());
 
         // 0 => roommate.name
         // 1 => roommate.reactionKey
-        String body = translationService.getTranslation(EmailMessage.REGISTRATION_APP_EMAIL_BODY,roommate.getLanguage(),
+        String body = translationService.getTranslation(EmailMessage.REGISTRATION_APP_EMAIL_BODY,lang(),
                 roommate.getName(),
                 roommate.getPassword());
 

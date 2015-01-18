@@ -66,7 +66,7 @@ public class RegistrationController extends AbstractController {
         //Create roommate
 
         Home home = new Home();
-        home.setMoneySymbol("€");
+        home.setMoneySymbol(Home.DEFAULT_MONEY_SYMBOL);
 
         //roommate
         roommate = new Roommate();
