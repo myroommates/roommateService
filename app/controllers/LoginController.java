@@ -47,20 +47,8 @@ public class LoginController extends AbstractController {
         if (securityController.isAuthenticated(ctx())) {
 
             if (request().cookie(SecurityController.COOKIE_KEEP_SESSION_OPEN) == null) {
-/*
-                //generate key
-                String key = KeyGenerator.generateRandomKey(40);
 
-                Roommate roommate = securityController.getCurrentUser();
-
-                //add id
-                String cookieValue = roommate.getId() + ":" + key;
-
-                roommate.setCookieValue(key);
-
-                accountService.saveOrUpdate(roommate);
-*/
-                response().setCookie(SecurityController.COOKIE_KEEP_SESSION_OPEN, securityController.getCurrentUser().getAuthenticationKey());
+                response().setCookie(SecurityController.COOKIE_KEEP_SESSION_OPEN, securityController.getCookieKey());
             }
 
             return homeController.index();

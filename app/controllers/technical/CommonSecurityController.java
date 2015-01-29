@@ -80,12 +80,17 @@ public class CommonSecurityController extends Security.Authenticator {
 
             String keyElements[] = key.split(":");
 
-            Roommate account = roommateService.findById(Long.parseLong(keyElements[0]));
+            try {
+                Roommate account = roommateService.findById(Long.parseLong(keyElements[0]));
 
-            if (account != null && roommateService.controlAuthenticationKey(keyElements[1], account)) {
-                //connection
-                storeAccount(ctx, account);
-                return true;
+                if (account != null && roommateService.controlAuthenticationKey(keyElements[1], account)) {
+                    //connection
+                    storeAccount(ctx, account);
+                    return true;
+                }
+            }
+            catch(NumberFormatException e){
+
             }
         }
 
@@ -111,5 +116,12 @@ public class CommonSecurityController extends Security.Authenticator {
         Http.Context.current().session().put(SESSION_IDENTIFIER_STORE, roommate.getEmail());
 
         context.changeLang(roommate.getLanguage().code());
+    }
+
+    public String getCookieKey() {
+        if(getCurrentUser()!=null){
+            return getCurrentUser().getId()+":"+getCurrentUser().getAuthenticationKey();
+        }
+        return null;
     }
 }
