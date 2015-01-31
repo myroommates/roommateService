@@ -44,4 +44,14 @@ public class LoginDTO extends DTO {
     public void setKeepSessionOpen(boolean keepSessionOpen) {
         this.keepSessionOpen = keepSessionOpen;
     }
+
+
+    @Override
+    public String toString() {
+        return "LoginDTO{" +
+                "email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", keepSessionOpen=" + keepSessionOpen +
+                '}';
+    }
 }

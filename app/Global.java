@@ -2,7 +2,6 @@ import controllers.technical.SecurityRestController;
 import dto.technical.ExceptionDTO;
 import play.Application;
 import play.GlobalSettings;
-import play.Logger;
 import play.i18n.Lang;
 import play.libs.F;
 import play.mvc.Http;
@@ -33,7 +32,7 @@ public class Global extends GlobalSettings {
             language = Lang.forCode(request.getHeader(SecurityRestController.REQUEST_HEADER_LANGUAGE));
         }
         else {
-            language = request.acceptLanguages().get(0);
+            language = Lang.availables().get(0);
         }
 
         final ExceptionDTO exceptionsDTO;
@@ -47,12 +46,10 @@ public class Global extends GlobalSettings {
             } else {
                 message = translationService.getTranslation(exception.getErrorMessage(), language, exception.getParams());
             }
-            Logger.error("exceptionMessage:"+message);
             exceptionsDTO = new ExceptionDTO(message);
         } else {
             exceptionsDTO = new ExceptionDTO(t.getCause().getMessage());
         }
-
         return F.Promise.<SimpleResult>pure(Results.internalServerError(exceptionsDTO));
     }
 }

@@ -9,6 +9,7 @@ import dto.post.LoginDTO;
 import dto.post.RegistrationDTO;
 import models.entities.Home;
 import models.entities.Roommate;
+import play.Logger;
 import play.mvc.Result;
 import play.mvc.Security;
 import services.RoommateService;
@@ -75,6 +76,8 @@ public class LoginRestController extends AbstractController {
         LoginDTO dto = extractDTOFromRequest(LoginDTO.class);
 
         Roommate roommate = roommateService.findByEmail(dto.getEmail());
+
+        Logger.info("dto:"+dto+"/"+ErrorMessage.LOGIN_WRONG_PASSWORD_LOGIN);
 
         if (roommate == null || !roommateService.controlPassword(dto.getPassword(),roommate)) {
             throw new MyRuntimeException(ErrorMessage.LOGIN_WRONG_PASSWORD_LOGIN);
