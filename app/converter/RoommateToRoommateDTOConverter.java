@@ -18,6 +18,7 @@ public class RoommateToRoommateDTOConverter implements ConverterInterface<Roomma
         dto.setNameAbrv(roommate.getNameAbrv());
         dto.setAdmin(roommate.getIsAdmin());
         dto.setKeepSessionOpen(roommate.isKeepSessionOpen());
+        dto.setLanguageCode(roommate.getLanguage().code());
 
         return dto;
     }
