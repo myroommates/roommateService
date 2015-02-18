@@ -1,14 +1,17 @@
 package dto;
 
 import dto.technical.DTO;
+import dto.technical.verification.Pattern;
 
 /**
  * Created by florian on 27/12/14.
  */
 public class ChangePasswordDTO extends DTO {
 
+    @Pattern(regexp = Pattern.PASSWORD)
     private String oldPassword;
 
+    @Pattern(regexp = Pattern.PASSWORD)
     private String newPassword;
 
     public ChangePasswordDTO() {

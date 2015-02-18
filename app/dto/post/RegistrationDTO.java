@@ -1,19 +1,19 @@
 package dto.post;
 
 import dto.technical.DTO;
+import dto.technical.verification.Pattern;
 import org.hibernate.validator.constraints.Email;
 
-import javax.validation.constraints.Pattern;
 
 /**
  * Created by florian on 11/11/14.
  */
 public class RegistrationDTO extends DTO {
 
-    @Pattern(regexp = ".{2,50}", message = "firstName must respect this pattern : .{2,50}")
+    @Pattern(regexp = ".{2,50}")
     private String name;
 
-    @Email
+    @Pattern(regexp = Pattern.EMAIL)
     private String email;
 
     public RegistrationDTO() {}

@@ -1,14 +1,17 @@
 package dto;
 
 import dto.technical.DTO;
+import dto.technical.verification.NotNull;
 
 /**
  * Created by florian on 6/12/14.
  */
 public class TicketDebtorDTO extends DTO {
 
+    @NotNull
     private Long roommateId;
 
+    @NotNull
     private Double value;
 
     public TicketDebtorDTO() {

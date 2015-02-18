@@ -1,8 +1,8 @@
 package dto;
 
 import dto.technical.DTO;
+import dto.technical.verification.Size;
 
-import javax.validation.constraints.Size;
 import java.util.Date;
 
 /**

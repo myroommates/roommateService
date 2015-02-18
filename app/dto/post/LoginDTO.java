@@ -1,22 +1,20 @@
 package dto.post;
 
 import dto.technical.DTO;
+import dto.technical.verification.Pattern;
+import dto.technical.verification.Size;
 import play.data.validation.Constraints;
 
-import javax.validation.constraints.Pattern;
 
 /**
  * Created by florian on 10/11/14.
  */
 public class LoginDTO extends DTO {
 
-    @Constraints.Required
-    @Constraints.Email
+    @Pattern(regexp = Pattern.EMAIL)
     private String email;
 
-    @Constraints.Required
-    @Constraints.MinLength(value = 6)
-    @Constraints.MaxLength(value = 18)
+    @Pattern(regexp = Pattern.PASSWORD)
     private String password;
 
     private boolean keepSessionOpen;

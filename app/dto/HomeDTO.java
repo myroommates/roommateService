@@ -1,7 +1,8 @@
 package dto;
 
 import dto.technical.DTO;
-import play.data.validation.Constraints;
+import dto.technical.verification.NotNull;
+import dto.technical.verification.Size;
 
 /**
  * Created by florian on 11/11/14.
@@ -10,9 +11,8 @@ public class HomeDTO extends DTO {
 
     private Long id;
 
-    @Constraints.Required
-    @Constraints.MinLength(1)
-    @Constraints.MaxLength(3)
+    @NotNull
+    @Size(min = 1,max = 3)
     private String moneySymbol;
 
     public HomeDTO() {

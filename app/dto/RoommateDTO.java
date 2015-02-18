@@ -1,6 +1,9 @@
 package dto;
 
 import dto.technical.DTO;
+import dto.technical.verification.NotNull;
+import dto.technical.verification.Pattern;
+import dto.technical.verification.Size;
 import play.data.validation.Constraints;
 
 /**
@@ -10,16 +13,16 @@ public class RoommateDTO extends DTO {
 
     private Long id;
 
-    @Constraints.Required
-    @Constraints.MinLength(2)
-    @Constraints.MaxLength(50)
+    @NotNull
+    @Size(min = 2,max =50)
     private String name;
-    
-    @Constraints.MaxLength(3)
+
+    @NotNull
+    @Size(min = 1,max =3)
     private String nameAbrv;
 
-    @Constraints.Required
-    @Constraints.Email
+    @NotNull
+    @Pattern(regexp = Pattern.EMAIL)
     private String email;
 
     private Float iconColor;
