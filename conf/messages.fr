@@ -187,6 +187,7 @@ NOT_TICKET_CREATOR=Vous n''êtes pas le créateur du ticket {0} et ne pouvez l''
 CANNOT_REMOVE_YOURSELF=Vous ne pouvez vous supprimer vous-même
 NOT_YOU_HOME=this is not your home : {0}
 WRONG_PASSWORD=Le mot de passe doit être composé entre 6 et 18 lettres ou nombre ou _-%
+NOT_YOUR_PASSWORD=Le mot de passe actuel ne correspond pas
 UNIQUE_CONSTRAIN_VIOLATION=a unique constraint was not respected on the table {0}, constraint {1}, ids {2}
 ROOMMATE_USED={0} is used by a ticket and cannot removed
 NOT_YOU_EVENT=Ce n''est pas votre évènement : {0}

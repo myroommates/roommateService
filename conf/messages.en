@@ -183,6 +183,7 @@ NOT_CONNECTED=You are not connected
 HOME_NAME_ALREADY_USED=
 EMAIL_ALREADY_USED=This email is already used. Please choose an other
 NOT_YOU_ROOMMATE=this is not your roommate : {O}
+NOT_YOUR_PASSWORD=The current password is not yours
 ENTITY_NOT_FOUND=this entity {0} was not found : {1}
 NOT_YOU_CATEGORY=this is not your category : {O}
 NOT_YOU_TICKET=this is not your ticket : {O}

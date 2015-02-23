@@ -77,7 +77,7 @@ public class RoommateRestController extends AbstractController {
 
         //control last password
         if(!roommateService.controlPassword(changePasswordDTO.getOldPassword(),currentUser)){
-            throw new MyRuntimeException(ErrorMessage.WRONG_PASSWORD);
+            throw new MyRuntimeException(ErrorMessage.NOT_YOUR_PASSWORD);
         }
 
         currentUser.setPassword(changePasswordDTO.getNewPassword());

@@ -47,6 +47,7 @@ public class CommonSecurityController extends Security.Authenticator {
             if (currentUser == null) {
                 return null;
             }
+            ctx.changeLang(currentUser.getLanguage().code());
             return currentUser.getEmail();
         } else {
             return ctx.session().get(CommonSecurityController.SESSION_IDENTIFIER_STORE);
