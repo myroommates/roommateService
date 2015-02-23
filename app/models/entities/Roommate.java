@@ -74,6 +74,9 @@ public class Roommate extends AuditedAbstractEntity {
     @Column(nullable = false,columnDefinition = "boolean default false")
     private Boolean isAdmin = false;
 
+    @Column(nullable = false,columnDefinition = "boolean default false")
+    private Boolean isSuperAdmin = false;
+
     public Roommate() {
     }
 
@@ -165,6 +168,9 @@ public class Roommate extends AuditedAbstractEntity {
         this.password = password;
     }
 
+    public Boolean getIsSuperAdmin() {
+        return isSuperAdmin;
+    }
 
     @Override
     public String toString() {

@@ -155,6 +155,11 @@ calculatorModal.title=Calculatrice
 # help modal
 helpModal.title=Help
 
+#create Faq
+createFaqModal.title=Créer une FAQ
+faq.question=Question
+faq.answer=Réponse
+
 # help
 home.shopping.help=This is a list of shopping. Check cases before shopping items and click on the 'I bougth this articles' to create a ticket for the selected shopping items.
 home.count.help=...

@@ -4,22 +4,25 @@ import com.fasterxml.jackson.databind.JsonNode;
 import dto.technical.DTO;
 import dto.technical.verification.Pattern;
 import dto.technical.verification.Size;
+import play.Logger;
 import play.i18n.Lang;
 import play.mvc.Controller;
 import services.TranslationService;
 import services.impl.TranslationServiceImpl;
 import util.ErrorMessage;
+import util.StringUtil;
 import util.exception.MyRuntimeException;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.Collection;
 
 import dto.technical.verification.NotNull;
 
 /**
  * Created by florian on 10/11/14.
- *
  */
 public class AbstractController extends Controller {
 
@@ -43,7 +46,23 @@ public class AbstractController extends Controller {
 
         //control dto
         try {
-            validation(DTOclass, dto, lang());
+            validation(dto, lang());
+
+            for (Field field : DTOclass.getDeclaredFields()) {
+                if (field.getDeclaringClass().isAssignableFrom(DTO.class)) {
+                    Method method = dto.getClass().getMethod("get" + StringUtil.toFirstLetterUpper(field.getDeclaringClass().getName()));
+                    Object o = method.invoke(dto);
+                    if (o != null) {
+                        validation((DTO) o, lang());
+                    }
+                }
+                else if(field.getDeclaringClass().isAssignableFrom(Collection.class)) {
+                    Collection<DTO> c;
+                    //c.
+
+                }
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
             throw new MyRuntimeException(ErrorMessage.FATAL_ERROR, e.getMessage());
@@ -52,16 +71,20 @@ public class AbstractController extends Controller {
         return dto;
     }
 
-    private <T extends DTO> void validation(Class<T> DTOclass, T dto, Lang language) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    private void validation(DTO dto, Lang language) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
 
         String errorMessage = "";
 
-        for (Field field : DTOclass.getDeclaredFields()) {
+        for (Field field : dto.getClass().getDeclaredFields()) {
+            Logger.warn("field:" + field.getName());
 
             Object v = dto.getClass().getMethod("get" + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1)).invoke(dto);
 
-            for (Annotation annotation : field.getAnnotations()) {
+            for (Annotation annotation : field.getDeclaredAnnotations()) {
+                Logger.warn("   annotation:" + annotation.toString());
                 if (annotation instanceof NotNull) {
+
+                    Logger.warn("       not null:" + v);
                     if (v == null) {
 
                         //build error message

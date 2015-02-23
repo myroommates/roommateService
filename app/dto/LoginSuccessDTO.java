@@ -1,6 +1,7 @@
 package dto;
 
 import dto.technical.DTO;
+import models.entities.Faq;
 import util.EqualList;
 
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ public class LoginSuccessDTO extends DTO {
     private List<RoommateDTO> roommates;
     private List<TicketDTO> tickets;
     private List<ShoppingItemDTO> shoppingItems;
+    private List<FaqDTO> faqs;
     private String authenticationKey;
 
     public LoginSuccessDTO() {
@@ -77,7 +79,7 @@ public class LoginSuccessDTO extends DTO {
     }
 
     public void addShoppingItem(ShoppingItemDTO shoppingItemDTO) {
-        if(shoppingItems==null){
+        if (shoppingItems == null) {
             shoppingItems = new ArrayList<>();
         }
         shoppingItems.add(shoppingItemDTO);
@@ -88,6 +90,21 @@ public class LoginSuccessDTO extends DTO {
             tickets = new ArrayList<>();
         }
         tickets.add(ticketDTO);
+    }
+
+    public List<FaqDTO> getFaqs() {
+        return faqs;
+    }
+
+    public void setFaqs(List<FaqDTO> faqs) {
+        this.faqs = faqs;
+    }
+
+    public void addFaq(FaqDTO faqDTO) {
+        if (faqs == null) {
+            faqs = new ArrayList<>();
+        }
+        faqs.add(faqDTO);
     }
 
     @Override

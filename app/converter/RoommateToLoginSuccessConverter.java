@@ -1,9 +1,12 @@
 package converter;
 
 import dto.LoginSuccessDTO;
+import models.entities.Faq;
 import models.entities.Roommate;
 import models.entities.ShoppingItem;
 import models.entities.Ticket;
+import services.FaqService;
+import services.impl.FaqServiceImpl;
 
 /**
  * Created by florian on 11/11/14.
@@ -15,6 +18,10 @@ public class RoommateToLoginSuccessConverter implements ConverterInterface<Roomm
     private HomeToHomeConverter homeToHomeConverter = new HomeToHomeConverter();
     private TicketToTicketConverter ticketToTicketConverter = new TicketToTicketConverter();
     private ShoppingItemToShoppingItemDTOConverter shoppingItemToShoppingItemDTOConverter = new ShoppingItemToShoppingItemDTOConverter();
+    private FaqToFaqDTOConverter faqToFaqDTOConverter = new FaqToFaqDTOConverter();
+
+    //service
+    private FaqService faqService = new FaqServiceImpl();
 
     public LoginSuccessDTO convert(Roommate roommate) {
 
@@ -37,6 +44,11 @@ public class RoommateToLoginSuccessConverter implements ConverterInterface<Roomm
         //convert shopping items
         for (ShoppingItem shoppingItem : roommate.getHome().getShoppingItems()) {
             dto.addShoppingItem(shoppingItemToShoppingItemDTOConverter.convert(shoppingItem));
+        }
+
+        //convert faq
+        for (Faq faq : faqService.getAll()) {
+            dto.addFaq(faqToFaqDTOConverter.convert(faq));
         }
 
 

@@ -8,4 +8,6 @@ import models.entities.Roommate;
 public interface EmailService {
 
     void sendEmail(Roommate roommate, String title, String body);
+
+    void sendEmail(String email, String title, String body);
 }

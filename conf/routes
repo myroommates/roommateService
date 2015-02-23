@@ -48,6 +48,12 @@ PUT           /rest/shoppingItem/:id                   @controllers.rest.Shoppin
 PUT           /rest/shoppingItem/wasBought/:ids        @controllers.rest.ShoppingRestController.setWasBought(ids:String)
 DELETE        /rest/shoppingItem/:id                   @controllers.rest.ShoppingRestController.remove(id:Long)
 
+#superadmin
+POST          /rest/superadmin/faq                     @controllers.SuperAdminController.createFaq()
+
+# contact us
+POST          /rest/contactus                          @controllers.rest.ContactUsRestController.contactUs()
+
 #
 # LOCAL routes
 #
@@ -81,3 +87,8 @@ GET           /profile/myProfile                       @controllers.ProfileContr
 
 #about
 GET           /about                                   @controllers.AboutController.index()
+
+#superadmin
+GET           /superadmin                               @controllers.SuperAdminController.index()
+
+

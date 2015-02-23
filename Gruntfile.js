@@ -70,6 +70,7 @@ module.exports = function (grunt) {
                         'public/javascripts/controller/CountTicketCtrl.js',
                         'public/javascripts/controller/ProfileMyProfileCtrl.js',
                         'public/javascripts/controller/ShoppingListCtrl.js',
+                        'public/javascripts/controller/SuperAdminFaqCtrl.js',
                         'public/javascripts/controller/RegistrationCtrl.js',
                         'public/javascripts/controller/AboutCtrl.js',
                         'public/javascripts/controller/WelcomeCtrl.js',
@@ -78,6 +79,7 @@ module.exports = function (grunt) {
                         'public/javascripts/modal/HelpModal/HelpModalCtrl.js',
                         'public/javascripts/modal/ChangeEmail/ChangeEmailModal.js',
                         'public/javascripts/modal/ChangePassword/ChangePasswordModal.js',
+                        'public/javascripts/modal/CreateFaq/CreateFaqModalCtrl.js',
                         'public/javascripts/modal/Calculator/CalculatorModalCtrl.js',
                         'public/javascripts/directive/dirFieldDate/directive.js',
                         'public/javascripts/directive/dirFieldText/directive.js',
@@ -109,7 +111,7 @@ module.exports = function (grunt) {
     // Default task(s).
     grunt.registerTask('default', ['concat',
         'ngAnnotate',
-        'uglify',
-        'cssmin']);
+        'uglify'/*,
+        'cssmin'*/]);
 
 };

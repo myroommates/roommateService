@@ -1,6 +1,7 @@
 package dto.post;
 
 import dto.technical.DTO;
+import dto.technical.verification.NotNull;
 import dto.technical.verification.Pattern;
 import dto.technical.verification.Size;
 import play.data.validation.Constraints;
@@ -11,9 +12,11 @@ import play.data.validation.Constraints;
  */
 public class LoginDTO extends DTO {
 
+    @NotNull
     @Pattern(regexp = Pattern.EMAIL)
     private String email;
 
+    @NotNull
     @Pattern(regexp = Pattern.PASSWORD)
     private String password;
 
@@ -36,6 +39,10 @@ public class LoginDTO extends DTO {
     }
 
     public boolean isKeepSessionOpen() {
+        return keepSessionOpen;
+    }
+
+    public boolean getKeepSessionOpen() {
         return keepSessionOpen;
     }
 

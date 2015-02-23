@@ -2,6 +2,7 @@ package models.entities.technical;
 
 import com.avaje.ebean.annotation.CreatedTimestamp;
 import com.avaje.ebean.annotation.UpdatedTimestamp;
+import models.entities.TranslationValue;
 import play.Logger;
 import play.db.ebean.Model;
 
@@ -77,5 +78,7 @@ public abstract class AuditedAbstractEntity extends Model {
 
         return true;
     }
+
+
 }
 

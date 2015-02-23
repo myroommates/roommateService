@@ -18,7 +18,7 @@ import java.util.Map;
 /**
  * Created by florian on 6/12/14.
  */
-public class EmailServiceImpl implements EmailService{
+public class EmailServiceImpl implements EmailService {
 
     //services
     private final VelocityGeneratorService velocityGeneratorService = new VelocityGeneratorServiceImpl();
@@ -30,7 +30,7 @@ public class EmailServiceImpl implements EmailService{
     public ActorSystem system;
     public ActorRef emailActorRef;
 
-    public EmailServiceImpl()  {
+    public EmailServiceImpl() {
 
         system = ActorSystem.create("awacsystem");
         emailActorRef = system.actorOf(new Props(EmailServiceActor.class).withRouter
@@ -40,23 +40,27 @@ public class EmailServiceImpl implements EmailService{
 
     @Override
     public void sendEmail(Roommate roommate, String title, String body) {
+        sendEmail(roommate.getEmail(), title, body);
+    }
+
+    @Override
+    public void sendEmail(String email, String title, String body) {
 
         //load velocity content
         Map<String, Object> values = new HashMap<>();
 
-        values.put("content",body);
-        values.put("project",getProjectData());
+        values.put("content", body);
+        values.put("project", getProjectData());
 
         String velocityContent = velocityGeneratorService.generate(VELOCITY_BASIC_EMAIL, values);
 
-        EmailMessage emailMessage = new EmailMessage(roommate.getEmail(), title, velocityContent);
+        EmailMessage emailMessage = new EmailMessage(email, title, velocityContent);
 
         emailActorRef.tell(emailMessage, emailActorRef);
     }
 
 
-
-    private ProjectData getProjectData(){
+    private ProjectData getProjectData() {
 
         ProjectData projectData = new ProjectData();
 
