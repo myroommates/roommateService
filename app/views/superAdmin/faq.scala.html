@@ -1,4 +1,4 @@
-@(data:dto.InterfaceDataDTO,faqs:List[dto.FaqDTO],langs:List[String])
+@(data:dto.InterfaceDataDTO,faqs:List[dto.FaqDTO],surveys:List[dto.SurveyDTO],langs:List[String])
 
 @import com.fasterxml.jackson.databind.ObjectMapper
 
@@ -8,20 +8,42 @@
     <script>
         var data = @Html(new ObjectMapper().writeValueAsString(data));
         var faqs = @Html(new ObjectMapper().writeValueAsString(faqs));
+        var surveys = @Html(new ObjectMapper().writeValueAsString(surveys));
         var langs = @Html(new ObjectMapper().writeValueAsString(langs));
     </script>
 
 
-    <div ng-repeat="faq in faqs">
-        <div>
-            @Messages("faq.question") : {{faq.question}}
-        </div>
-        <div>
-            @Messages("faq.answer") : {{faq.answer}}
-        </div>
-    </div>
+    <tabset>
+        <tab heading="FAQ">
+            <div ng-repeat="faq in faqs" class="bordered">
+                <div>
+                    @Messages("faq.question") : {{faq.question}}
+                </div>
+                <div>
+                    @Messages("faq.answer") : {{faq.answer}}
+                </div>
+            </div>
 
-    <input type="submit" class="btn btn-primary" value='@Messages("createFaqModal.title")' ng-click="createNewFaq()">
+            <input type="submit" class="btn btn-primary" value='@Messages("createFaqModal.title")' ng-click="createNewFaq()">
+        </tab>
+        <tab heading="Survey">
+            <div ng-repeat="survey in surveys" class="bordered">
+                <div>
+                    @Messages("faq.question") : {{survey.question}}
+                </div>
+                <div>
+                    @Messages("faq.answer") :
+                    <div ng-repreat="answer in survey.answers">
+                        {{answer.value}}
+                    </div>
+                </div>
+                <input type="submit" class="btn btn-primary" value='@Messages("createSurveyModal.title")' ng-click="createNewSurvey()">
+            </div>
+        </tab>
+    </tabset>
+
+
+
 
 </div>
 }

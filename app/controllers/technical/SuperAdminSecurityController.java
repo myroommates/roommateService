@@ -10,27 +10,11 @@ import services.impl.RoommateServiceImpl;
 /**
  * Created by florian on 20/02/15.
  */
-public class SuperAdminSecurityController extends CommonSecurityController {
-
-    //controller
-    private static LoginController loginController = new LoginController();
-    //service
-    private RoommateService roommateService = new RoommateServiceImpl();
+public class SuperAdminSecurityController extends SecurityRestController {
 
     @Override
-    public Result onUnauthorized(Http.Context ctx) {
-        return loginController.loginPage();
+    public boolean testRight(Roommate currentUser){
+        return currentUser.getIsSuperAdmin();
     }
 
-    @Override
-    public String getUsername(Http.Context ctx) {
-
-
-        //only by session
-        if (ctx.session().get(CommonSecurityController.SESSION_IDENTIFIER_STORE) != null &&
-                roommateService.findByEmail(ctx.session().get(CommonSecurityController.SESSION_IDENTIFIER_STORE)).getIsSuperAdmin()) {
-            return ctx.session().get(CommonSecurityController.SESSION_IDENTIFIER_STORE);
-        }
-        return null;
-    }
 }

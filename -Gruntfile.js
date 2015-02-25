@@ -80,6 +80,7 @@ module.exports = function (grunt) {
                         'public/javascripts/modal/ChangeEmail/ChangeEmailModal.js',
                         'public/javascripts/modal/ChangePassword/ChangePasswordModal.js',
                         'public/javascripts/modal/CreateFaq/CreateFaqModalCtrl.js',
+                        'public/javascripts/modal/CreateFaq/CreateSurveyModalCtrl.js',
                         'public/javascripts/modal/Calculator/CalculatorModalCtrl.js',
                         'public/javascripts/directive/dirFieldDate/directive.js',
                         'public/javascripts/directive/dirFieldText/directive.js',

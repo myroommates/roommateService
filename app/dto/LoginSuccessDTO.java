@@ -19,6 +19,7 @@ public class LoginSuccessDTO extends DTO {
     private List<ShoppingItemDTO> shoppingItems;
     private List<FaqDTO> faqs;
     private String authenticationKey;
+    private SurveyDTO surveyDTO;
 
     public LoginSuccessDTO() {
     }
@@ -69,6 +70,14 @@ public class LoginSuccessDTO extends DTO {
 
     public void setRoommates(List<RoommateDTO> roommates) {
         this.roommates = roommates;
+    }
+
+    public SurveyDTO getSurveyDTO() {
+        return surveyDTO;
+    }
+
+    public void setSurveyDTO(SurveyDTO surveyDTO) {
+        this.surveyDTO = surveyDTO;
     }
 
     public void addRoommate(RoommateDTO roommate) {

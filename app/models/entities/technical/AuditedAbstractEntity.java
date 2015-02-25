@@ -6,10 +6,7 @@ import models.entities.TranslationValue;
 import play.Logger;
 import play.db.ebean.Model;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.Version;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -23,6 +20,7 @@ public abstract class AuditedAbstractEntity extends Model {
     public static final String PARAM_ID = COL_ID;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = COL_ID)
     protected Long id;
 

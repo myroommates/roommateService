@@ -19,4 +19,20 @@ myApp.controller('SuperAdminFaqCtrl', function ($scope, $http, $flash, $modal, t
         });
     };
 
+    $scope.createNewSurvey = function () {
+
+        var resolve = {
+            langs: function () {
+                return $scope.langs;
+            }
+        };
+
+        $modal.open({
+            templateUrl: "/assets/javascripts/modal/CreateSurveyModal/view.html",
+            controller: "CreateSurveyModalCtrl",
+            size: 'lg',
+            resolve: resolve
+        });
+    };
+
 });

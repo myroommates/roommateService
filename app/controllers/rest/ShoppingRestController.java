@@ -36,8 +36,11 @@ public class ShoppingRestController extends AbstractController {
 
             ShoppingItem shoppingItem = shoppingItemService.findById(id);
 
-            if(shoppingItem==null || !shoppingItem.getHome().equals(securityController.getCurrentUser().getHome())){
-                throw new  MyRuntimeException(ErrorMessage.NOT_YOU_SHOPPING_ITEM);
+            //control => from my home and I'm concerned
+            if (shoppingItem == null ||
+                    !shoppingItem.getHome().equals(securityController.getCurrentUser().getHome()) ||
+                    (shoppingItem.getOnlyForMe() && !shoppingItem.getCreator().getId().equals(securityController.getCurrentUser().getId()))) {
+                throw new MyRuntimeException(ErrorMessage.NOT_YOU_SHOPPING_ITEM);
             }
 
             shoppingItem.setWasBought(true);
@@ -103,8 +106,10 @@ public class ShoppingRestController extends AbstractController {
         //load
         ShoppingItem shoppingItem = shoppingItemService.findById(id);
 
-        //control
-        if (shoppingItem == null || !shoppingItem.getHome().equals(securityController.getCurrentUser().getHome())) {
+        //control => from my home and I'm concerned
+        if (shoppingItem == null ||
+                !shoppingItem.getHome().equals(securityController.getCurrentUser().getHome()) ||
+                (shoppingItem.getOnlyForMe() && !shoppingItem.getCreator().getId().equals(securityController.getCurrentUser().getId()))) {
             throw new MyRuntimeException(ErrorMessage.NOT_YOU_SHOPPING_ITEM, id);
         }
 
@@ -123,7 +128,10 @@ public class ShoppingRestController extends AbstractController {
 
         ShoppingItem shoppingItem = shoppingItemService.findById(id);
 
-        if (shoppingItem != null && !shoppingItem.getHome().equals(securityController.getCurrentUser().getHome())) {
+        //control => from my home and I'm concerned
+        if (shoppingItem == null ||
+                !shoppingItem.getHome().equals(securityController.getCurrentUser().getHome()) ||
+                (shoppingItem.getOnlyForMe() && !shoppingItem.getCreator().getId().equals(securityController.getCurrentUser().getId()))) {
             throw new MyRuntimeException(ErrorMessage.NOT_YOU_SHOPPING_ITEM, id);
         }
 

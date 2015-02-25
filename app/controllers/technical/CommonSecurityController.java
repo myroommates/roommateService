@@ -12,12 +12,15 @@ import util.exception.MyRuntimeException;
 /**
  * Created by florian on 10/11/14.
  */
-public class CommonSecurityController extends Security.Authenticator {
+public abstract class CommonSecurityController extends Security.Authenticator {
 
     public static final String REQUEST_HEADER_LANGUAGE = "language";
     public static final String SESSION_IDENTIFIER_STORE = "email";
     public static final String COOKIE_KEEP_SESSION_OPEN = "session_key";
     public static final String REQUEST_HEADER_AUTHENTICATION_KEY = "authenticationKey";
+
+    public static final String FAILED_AUTHENTICATION_CAUSE = "FAILED_AUTHENTICATION_CAUSE";
+    public static final String FAILED_AUTHENTICATION_CAUSE_WRONG_RIGHTS = "WRONG_RIGHT";
 
     //service
     private static final RoommateService roommateService = new RoommateServiceImpl();
@@ -47,12 +50,21 @@ public class CommonSecurityController extends Security.Authenticator {
             if (currentUser == null) {
                 return null;
             }
+
+            //test right
+            if(!testRight(currentUser)){
+                ctx.args.put(FAILED_AUTHENTICATION_CAUSE,FAILED_AUTHENTICATION_CAUSE_WRONG_RIGHTS);
+                return null;
+            }
+
             ctx.changeLang(currentUser.getLanguage().code());
             return currentUser.getEmail();
         } else {
             return ctx.session().get(CommonSecurityController.SESSION_IDENTIFIER_STORE);
         }
     }
+
+    public abstract boolean testRight(Roommate roommate);
 
     public Roommate getCurrentUser() {
 

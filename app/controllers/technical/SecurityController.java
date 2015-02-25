@@ -20,4 +20,9 @@ public class SecurityController extends CommonSecurityController {
     public Result onUnauthorized(Http.Context ctx) {
         return loginController.loginPage();
     }
+
+    @Override
+    public boolean testRight(Roommate roommate) {
+        return true;
+    }
 }

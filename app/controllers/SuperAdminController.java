@@ -6,17 +6,22 @@ import controllers.technical.SecurityController;
 import controllers.technical.SuperAdminSecurityController;
 import converter.FaqToFaqDTOConverter;
 import converter.RoommateToInterfaceDataDTOConverter;
+import converter.SurveyToSurveyDTOConverter;
 import dto.FaqDTO;
 import dto.ListDTO;
+import dto.SurveyDTO;
 import dto.post.FaqCreatorDTO;
 import models.entities.Faq;
+import models.entities.Survey;
 import models.entities.Translation;
 import models.entities.TranslationValue;
 import play.i18n.Lang;
 import play.mvc.Result;
 import play.mvc.Security;
 import services.FaqService;
+import services.SurveyService;
 import services.impl.FaqServiceImpl;
+import services.impl.SurveyServiceImpl;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -30,9 +35,12 @@ public class SuperAdminController extends AbstractController {
 
     //converter
     private FaqToFaqDTOConverter faqToFaqDTOConverter = new FaqToFaqDTOConverter();
+    private SurveyToSurveyDTOConverter surveyToSurveyDTOConverter = new SurveyToSurveyDTOConverter();
     private RoommateToInterfaceDataDTOConverter roommateToInterfaceDataDTOConverter = new RoommateToInterfaceDataDTOConverter();
     //service
     private FaqService faqService = new FaqServiceImpl();
+    private SurveyService surveyService = new SurveyServiceImpl();
+    //controller
     private SecurityController securityController = new SecurityController();
 
     @Security.Authenticated(SuperAdminSecurityController.class)
@@ -46,6 +54,12 @@ public class SuperAdminController extends AbstractController {
             listF.add(faqToFaqDTOConverter.convert(faq));
         }
 
+        List<SurveyDTO> listSurvey = new ArrayList<>();
+
+        for (Survey survey : surveyService.getAll()) {
+            listSurvey.add(surveyToSurveyDTOConverter.convert(survey));
+        }
+
         List<String> langCode = new ArrayList<>();
 
         for (Lang lang : Lang.availables()) {
@@ -56,6 +70,7 @@ public class SuperAdminController extends AbstractController {
         return ok(views.html.superAdmin.faq.render(
                 roommateToInterfaceDataDTOConverter.convert(securityController.getCurrentUser()),
                 listF,
+                listSurvey,
                 langCode));
     }
 

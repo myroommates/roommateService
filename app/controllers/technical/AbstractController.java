@@ -24,10 +24,10 @@ import dto.technical.verification.NotNull;
 /**
  * Created by florian on 10/11/14.
  */
-public class AbstractController extends Controller {
+public abstract class AbstractController extends Controller {
 
     //controllers
-    protected final CommonSecurityController securityController = new CommonSecurityController();
+    protected final CommonSecurityController securityController = new SecurityController();
     //service
     protected final TranslationService translationService = new TranslationServiceImpl();
 

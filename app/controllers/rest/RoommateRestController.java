@@ -2,6 +2,7 @@ package controllers.rest;
 
 import com.avaje.ebean.annotation.Transactional;
 import controllers.technical.AbstractController;
+import controllers.technical.AdminSecurityRestController;
 import controllers.technical.SecurityRestController;
 import controllers.technical.SecurityController;
 import converter.RoommateToRoommateDTOConverter;
@@ -40,14 +41,15 @@ public class RoommateRestController extends AbstractController {
     @Transactional
     public Result changeEmail(long id) {
 
-        if(!securityController.getCurrentUser().getId().equals(id)){
+        //control it's myself
+        if (!securityController.getCurrentUser().getId().equals(id)) {
             throw new MyRuntimeException(ErrorMessage.NOT_YOURSELF, id);
         }
 
         ChangeEmailDTO changeEmailDTO = extractDTOFromRequest(ChangeEmailDTO.class);
 
         //control last password
-        if(!roommateService.controlPassword(changeEmailDTO.getOldPassword(),securityController.getCurrentUser())){
+        if (!roommateService.controlPassword(changeEmailDTO.getOldPassword(), securityController.getCurrentUser())) {
             throw new MyRuntimeException(ErrorMessage.NOT_YOUR_OLD_PASSWORD);
         }
 
@@ -59,15 +61,18 @@ public class RoommateRestController extends AbstractController {
         roommateService.saveOrUpdate(currentUser);
 
         //store
-        securityController.storeAccount(ctx(),currentUser);
+        securityController.storeAccount(ctx(), currentUser);
 
 
         return ok(roommateToRoommateDTOConverter.convert(currentUser));
     }
 
+    @Security.Authenticated(SecurityRestController.class)
+    @Transactional
     public Result changePassword(long id) {
 
-        if(!securityController.getCurrentUser().getId().equals(id)){
+        //contorl it's myself'
+        if (!securityController.getCurrentUser().getId().equals(id)) {
             throw new MyRuntimeException(ErrorMessage.NOT_YOURSELF, id);
         }
 
@@ -76,7 +81,7 @@ public class RoommateRestController extends AbstractController {
         Roommate currentUser = securityController.getCurrentUser();
 
         //control last password
-        if(!roommateService.controlPassword(changePasswordDTO.getOldPassword(),currentUser)){
+        if (!roommateService.controlPassword(changePasswordDTO.getOldPassword(), currentUser)) {
             throw new MyRuntimeException(ErrorMessage.NOT_YOUR_PASSWORD);
         }
 
@@ -86,6 +91,59 @@ public class RoommateRestController extends AbstractController {
         roommateService.saveOrUpdate(currentUser);
 
         return ok(roommateToRoommateDTOConverter.convert(currentUser));
+    }
+
+    @Security.Authenticated(SecurityRestController.class)
+    @Transactional
+    public Result update(long id) {
+
+        //contorl it's myself'
+        if (!securityController.getCurrentUser().getId().equals(id)) {
+            throw new MyRuntimeException(ErrorMessage.NOT_YOURSELF, id);
+        }
+
+        RoommateDTO dto = extractDTOFromRequest(RoommateDTO.class);
+
+        Roommate currentUser = securityController.getCurrentUser();
+
+        //load entity
+        Roommate roommate = roommateService.findById(id);
+
+        if (roommate == null) {
+            throw new MyRuntimeException(ErrorMessage.ENTITY_NOT_FOUND, Roommate.class.getName(), id);
+        }
+
+        //control email
+        Roommate roommateWithSameEmail = roommateService.findByEmail(dto.getEmail());
+        if (roommateWithSameEmail != null && !roommateWithSameEmail.equals(roommate)) {
+            throw new MyRuntimeException(ErrorMessage.EMAIL_ALREADY_USED);
+        }
+
+        //build entity
+        roommate.setName(dto.getName());
+        roommate.setNameAbrv(dto.getNameAbrv());
+        roommate.setKeepSessionOpen(dto.getKeepSessionOpen());
+        if (!roommate.getLanguage().code().equals(dto.getLanguageCode())) {
+            //control language
+            boolean founded = false;
+            for (Lang lang : Lang.availables()) {
+                if (lang.code().equals(dto.getLanguageCode())) {
+                    founded = true;
+                    roommate.setLanguage(lang);
+                    break;
+                }
+            }
+
+            if (!founded) {
+                throw new MyRuntimeException(ErrorMessage.LANGUAGE_NOT_ACCEPTED, dto.getLanguageCode());
+            }
+        }
+
+        //operation
+        roommateService.saveOrUpdate(roommate);
+
+        //return
+        return ok(roommateToRoommateDTOConverter.convert(roommate));
     }
 
     @Security.Authenticated(SecurityRestController.class)
@@ -122,13 +180,15 @@ public class RoommateRestController extends AbstractController {
         return ok(result);
     }
 
-    @Security.Authenticated(SecurityRestController.class)
+    /**
+     * ONLY ADMIN
+     * @return
+     */
+    @Security.Authenticated(AdminSecurityRestController.class)
     @Transactional
     public Result create() {
 
         RoommateDTO dto = extractDTOFromRequest(RoommateDTO.class);
-
-
 
 
         Roommate currentUser = securityController.getCurrentUser();
@@ -164,66 +224,12 @@ public class RoommateRestController extends AbstractController {
     }
 
 
-
-    @Security.Authenticated(SecurityRestController.class)
-    @Transactional
-    public Result update(long id) {
-
-/*
-        RoommateDTO roommateDTO = postForm.get();
-        Logger.warn("test:"+roommateDTO);
-*/
-
-        RoommateDTO dto = extractDTOFromRequest(RoommateDTO.class);
-
-        Roommate currentUser = securityController.getCurrentUser();
-
-        //load entity
-        Roommate roommate = roommateService.findById(id);
-
-        if (roommate == null) {
-            throw new MyRuntimeException(ErrorMessage.ENTITY_NOT_FOUND, Roommate.class.getName(), id);
-        }
-
-        //control home
-        if (!roommate.getHome().equals(currentUser.getHome())) {
-            throw new MyRuntimeException(ErrorMessage.NOT_YOU_ROOMMATE, id);
-        }
-
-        //control email
-        Roommate roommateWithSameEmail = roommateService.findByEmail(dto.getEmail());
-        if (roommateWithSameEmail != null && !roommateWithSameEmail.equals(roommate)) {
-            throw new MyRuntimeException(ErrorMessage.EMAIL_ALREADY_USED);
-        }
-
-        //build entity
-        roommate.setName(dto.getName());
-        roommate.setNameAbrv(dto.getNameAbrv());
-        roommate.setKeepSessionOpen(dto.getKeepSessionOpen());
-        if(!roommate.getLanguage().code().equals(dto.getLanguageCode())){
-            //control language
-            boolean founded=false;
-            for (Lang lang : Lang.availables()) {
-                if(lang.code().equals(dto.getLanguageCode())){
-                    founded=true;
-                    roommate.setLanguage(lang);
-                    break;
-                }
-            }
-
-            if(!founded){
-                throw new MyRuntimeException(ErrorMessage.LANGUAGE_NOT_ACCEPTED,dto.getLanguageCode());
-            }
-        }
-
-        //operation
-        roommateService.saveOrUpdate(roommate);
-
-        //return
-        return ok(roommateToRoommateDTOConverter.convert(roommate));
-    }
-
-    @Security.Authenticated(SecurityRestController.class)
+    /**
+     * ONLY ADMIN
+     * @param id
+     * @return
+     */
+    @Security.Authenticated(AdminSecurityRestController.class)
     @Transactional
     public Result delete(Long id) {
 

@@ -1,6 +1,7 @@
 package controllers.rest;
 
 import controllers.technical.AbstractController;
+import controllers.technical.AdminSecurityRestController;
 import controllers.technical.SecurityRestController;
 import converter.HomeToHomeConverter;
 import dto.HomeDTO;
@@ -23,7 +24,7 @@ public class HomeRestController extends AbstractController {
     //convert
     private HomeToHomeConverter homeToHomeConverter = new HomeToHomeConverter();
 
-    @Security.Authenticated(SecurityRestController.class)
+    @Security.Authenticated(AdminSecurityRestController.class)
     @com.avaje.ebean.annotation.Transactional
     public Result update(Long id){
 
