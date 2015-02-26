@@ -11,10 +11,9 @@ import dto.FaqDTO;
 import dto.ListDTO;
 import dto.SurveyDTO;
 import dto.post.FaqCreatorDTO;
-import models.entities.Faq;
-import models.entities.Survey;
-import models.entities.Translation;
-import models.entities.TranslationValue;
+import dto.post.SurveyCreatorDTO;
+import models.entities.*;
+import play.Logger;
 import play.i18n.Lang;
 import play.mvc.Result;
 import play.mvc.Security;
@@ -23,10 +22,7 @@ import services.SurveyService;
 import services.impl.FaqServiceImpl;
 import services.impl.SurveyServiceImpl;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by florian on 20/02/15.
@@ -76,7 +72,7 @@ public class SuperAdminController extends AbstractController {
 
     @Security.Authenticated(SuperAdminSecurityController.class)
     @Transactional
-    public Result createFaq(){
+    public Result createFaq() {
 
         FaqCreatorDTO faqDTO = extractDTOFromRequest(FaqCreatorDTO.class);
 
@@ -111,5 +107,61 @@ public class SuperAdminController extends AbstractController {
 
 
         return ok(faqToFaqDTOConverter.convert(faq));
+    }
+
+    @Security.Authenticated(SuperAdminSecurityController.class)
+    @Transactional
+    public Result createSurvey() {
+
+        SurveyCreatorDTO dto = extractDTOFromRequest(SurveyCreatorDTO.class);
+
+        Logger.warn("DTO:"+dto);
+
+        Survey survey = new Survey();
+
+        survey.setKey(dto.getSurveyKey());
+        survey.setIsMultipleAnswer(dto.isMultipleAnswers());
+
+        Translation question = new Translation();
+
+        for (Map.Entry<String, String> stringStringEntry : dto.getQuestions().entrySet()) {
+            TranslationValue translationValue = new TranslationValue();
+            translationValue.setLanguageCode(stringStringEntry.getKey());
+            translationValue.setContent(stringStringEntry.getValue());
+
+            question.addTranslationValue(translationValue);
+        }
+
+        survey.setQuestion(question);
+
+        List<SurveyAnswer> surveyAnswers = new ArrayList<>();
+
+        for (HashMap<String, String> choices : dto.getAnswers()) {
+
+            Translation translation = new Translation();
+            for (Map.Entry<String, String> answers : choices.entrySet()) {
+
+                TranslationValue translationValue = new TranslationValue();
+                translationValue.setLanguageCode(answers.getKey());
+                translationValue.setContent(answers.getValue());
+
+                translation.addTranslationValue(translationValue);
+            }
+            SurveyAnswer surveyAnswer = new SurveyAnswer();
+            surveyAnswer.setAnswer(translation);
+
+            surveyAnswers.add(surveyAnswer);
+        }
+
+        survey.setAnswers(surveyAnswers);
+
+        Logger.warn("survey:"+survey);
+
+        surveyService.saveOrUpdate(survey);
+
+
+        return ok(surveyToSurveyDTOConverter.convert(survey));
+
+
     }
 }

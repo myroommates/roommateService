@@ -33,12 +33,12 @@
                 </div>
                 <div>
                     @Messages("faq.answer") :
-                    <div ng-repreat="answer in survey.answers">
-                        {{answer.value}}
+                    <div ng-repeat="(id,answer) in survey.answers">
+                        {{answer}}
                     </div>
                 </div>
-                <input type="submit" class="btn btn-primary" value='@Messages("createSurveyModal.title")' ng-click="createNewSurvey()">
             </div>
+            <input type="submit" class="btn btn-primary" value='@Messages("createSurveyModal.title")' ng-click="createNewSurvey()">
         </tab>
     </tabset>
 

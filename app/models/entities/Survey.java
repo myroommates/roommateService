@@ -26,13 +26,13 @@ public class Survey extends AuditedAbstractEntity {
     @Column(nullable = false, name = COL_KEY, unique = true)
     private String key;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false,cascade = CascadeType.ALL)
     private Translation question;
 
     @Column(nullable = false)
     private Boolean isMultipleAnswer = false;
 
-    @OneToMany(mappedBy = "survey")
+    @OneToMany(mappedBy = "survey",cascade = CascadeType.ALL)
     private List<SurveyAnswer> answers;
 
     public Translation getQuestion() {

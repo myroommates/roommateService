@@ -11,10 +11,11 @@ import java.util.List;
 @Entity
 public class SurveyAnswer extends AuditedAbstractEntity {
 
-    @ManyToOne(optional = false)
+
+    @ManyToOne(optional = false,cascade = CascadeType.ALL)
     private Translation answer;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false,cascade = CascadeType.ALL)
     private Survey survey;
 
     public SurveyAnswer() {

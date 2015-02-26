@@ -4,14 +4,31 @@
 </div>
 <div class="modal-body"  dir-enter="save()">
 
-    <div ng-repeat="lang in langs">
 
-        <div>{{lang}}</div>
+    <dir-field-text ng-info="fields.key"></dir-field-text>
 
-        <dir-field-text ng-info="fields.question[lang]"></dir-field-text>
+    <table class="survey-create-table">
+        <tr>
+            <td></td>
+            <td ng-repeat="lang in langs">
+                {{lang}}
+            </td>
+        </tr>
+        <tr>
+            <td>Question</td>
+            <td ng-repeat="(lang,question) in fields.questions">
+                <dir-field-text ng-info="question"></dir-field-text>
+            </td>
+        </tr>
+        <tr ng-repeat="choice in choices">
+            <td>Answer</td>
+            <td ng-repeat="(lang,answer) in choice">
+                <dir-field-text ng-info="answer"></dir-field-text>
+            </td>
+        </tr>
+    </table>
 
-        <dir-field-text ng-info="fields.answer[lang]"></dir-field-text>
-    </div>
+    <button  type="button" class="btn btn-default" ng-click="addAnswer()">Add answer</button>
 </div>
 <div class="modal-footer">
     <button ng-disabled="loading" type="button" class="btn btn-default" ng-click="close()">{{'generic.close' | translateText}}</button>

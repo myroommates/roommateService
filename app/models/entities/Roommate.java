@@ -77,7 +77,19 @@ public class Roommate extends AuditedAbstractEntity {
     @Column(nullable = false,columnDefinition = "boolean default false")
     private Boolean isSuperAdmin = false;
 
+    @OneToMany(mappedBy = "roommate")
+    private List<SurveyValue> surveyValues;
+
+
     public Roommate() {
+    }
+
+    public List<SurveyValue> getSurveyValues() {
+        return surveyValues;
+    }
+
+    public void setSurveyValues(List<SurveyValue> surveyValues) {
+        this.surveyValues = surveyValues;
     }
 
     public Boolean getIsAdmin() {

@@ -28,6 +28,8 @@ public class ShoppingRestController extends AbstractController {
     //converter
     private ShoppingItemToShoppingItemDTOConverter shoppingItemToShoppingItemDTOConverter = new ShoppingItemToShoppingItemDTOConverter();
 
+    @Security.Authenticated(SecurityRestController.class)
+    @Transactional
     public Result setWasBought(String ids) {
 
         //control

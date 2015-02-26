@@ -50,9 +50,13 @@ DELETE        /rest/shoppingItem/:id                   @controllers.rest.Shoppin
 
 #superadmin
 POST          /rest/superadmin/faq                     @controllers.SuperAdminController.createFaq()
+POST          /rest/superadmin/survey                  @controllers.SuperAdminController.createSurvey()
 
 # contact us
 POST          /rest/contactus                          @controllers.rest.ContactUsRestController.contactUs()
+
+#survey
+POST         /rest/survey                              @controllers.rest.SurveyRestController.answer()
 
 #
 # LOCAL routes
@@ -89,6 +93,8 @@ GET           /profile/myProfile                       @controllers.ProfileContr
 GET           /about                                   @controllers.AboutController.index()
 
 #superadmin
-GET           /superadmin                               @controllers.SuperAdminController.index()
+GET           /superadmin                              @controllers.SuperAdminController.index()
+
+
 
 

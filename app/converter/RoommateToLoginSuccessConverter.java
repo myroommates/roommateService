@@ -1,10 +1,7 @@
 package converter;
 
 import dto.LoginSuccessDTO;
-import models.entities.Faq;
-import models.entities.Roommate;
-import models.entities.ShoppingItem;
-import models.entities.Ticket;
+import models.entities.*;
 import services.FaqService;
 import services.impl.FaqServiceImpl;
 
@@ -19,6 +16,7 @@ public class RoommateToLoginSuccessConverter implements ConverterInterface<Roomm
     private TicketToTicketConverter ticketToTicketConverter = new TicketToTicketConverter();
     private ShoppingItemToShoppingItemDTOConverter shoppingItemToShoppingItemDTOConverter = new ShoppingItemToShoppingItemDTOConverter();
     private FaqToFaqDTOConverter faqToFaqDTOConverter = new FaqToFaqDTOConverter();
+    private SurveyToSurveyDTOConverter surveyToSurveyDTOConverter = new SurveyToSurveyDTOConverter();
 
     //service
     private FaqService faqService = new FaqServiceImpl();
@@ -49,6 +47,14 @@ public class RoommateToLoginSuccessConverter implements ConverterInterface<Roomm
         //convert faq
         for (Faq faq : faqService.getAll()) {
             dto.addFaq(faqToFaqDTOConverter.convert(faq));
+        }
+
+        //survey
+        for (SurveyValue surveyValue : roommate.getSurveyValues()) {
+            if (!surveyValue.wasSubmit()) {
+                dto.setSurveyDTO(surveyToSurveyDTOConverter.convert(surveyValue.getSurvey()));
+                break;
+            }
         }
 
 

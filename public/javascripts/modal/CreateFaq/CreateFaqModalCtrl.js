@@ -28,7 +28,7 @@ myApp.controller('CreateFaqModalCtrl', function ($scope, $http, $flash, $modalIn
 
         $scope.fields.answer[lang] = {
             fieldTitle: "faq.answer",
-            validationRegex: "^[a-zA-Z0-9-_%]{6,18}$",
+            validationRegex: "^.{1,255}$",
             validationMessage: "generic.validation.size",
             disabled:function(){
                 return $scope.loading;

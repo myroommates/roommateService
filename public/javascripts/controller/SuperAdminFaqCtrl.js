@@ -2,6 +2,7 @@ myApp.controller('SuperAdminFaqCtrl', function ($scope, $http, $flash, $modal, t
 
     $scope.faqs = faqs;
     $scope.langs = langs;
+    $scope.surveys=surveys;
 
     $scope.createNewFaq = function () {
 
@@ -28,7 +29,7 @@ myApp.controller('SuperAdminFaqCtrl', function ($scope, $http, $flash, $modal, t
         };
 
         $modal.open({
-            templateUrl: "/assets/javascripts/modal/CreateSurveyModal/view.html",
+            templateUrl: "/assets/javascripts/modal/createSurveyModal/view.html",
             controller: "CreateSurveyModalCtrl",
             size: 'lg',
             resolve: resolve
