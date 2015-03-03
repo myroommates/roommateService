@@ -88,7 +88,7 @@ public abstract class AbstractController extends Controller {
                     if (v == null) {
 
                         //build error message
-                        errorMessage += translationService.getTranslation(((NotNull) annotation).message(), language) + "\n";
+                        errorMessage += translationService.getTranslation(((NotNull) annotation).message(), language,field.getName()) + "\n";
                     }
                 } else if (annotation instanceof Pattern) {
                     if (!(v instanceof String)) {
@@ -101,7 +101,7 @@ public abstract class AbstractController extends Controller {
                     if (!pattern.matcher(string).find()) {
 
                         //build error message
-                        errorMessage += translationService.getTranslation(((Pattern) annotation).message(), language, ((Pattern) annotation).regexp()) + "\n";
+                        errorMessage += translationService.getTranslation(((Pattern) annotation).message(), language, language,field.getName(),((Pattern) annotation).regexp()) + "\n";
                     }
 
                 } else if (annotation instanceof Size) {
@@ -117,7 +117,7 @@ public abstract class AbstractController extends Controller {
                     if (string.length() > max || string.length() < min) {
 
                         //build error message
-                        errorMessage += translationService.getTranslation(((Size) annotation).message(), language, min, max) + "\n";
+                        errorMessage += translationService.getTranslation(((Size) annotation).message(), language, language,field.getName(),min, max) + "\n";
                     }
 
                 }
