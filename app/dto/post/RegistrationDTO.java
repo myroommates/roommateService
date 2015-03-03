@@ -16,7 +16,17 @@ public class RegistrationDTO extends DTO {
     @Pattern(regexp = Pattern.EMAIL)
     private String email;
 
+    private String lang;
+
     public RegistrationDTO() {}
+
+    public String getLang() {
+        return lang;
+    }
+
+    public void setLang(String lang) {
+        this.lang = lang;
+    }
 
     public String getName() {
         return name;

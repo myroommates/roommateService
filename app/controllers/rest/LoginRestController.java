@@ -10,6 +10,7 @@ import dto.post.RegistrationDTO;
 import models.entities.Home;
 import models.entities.Roommate;
 import play.Logger;
+import play.i18n.Lang;
 import play.mvc.Result;
 import play.mvc.Security;
 import services.RoommateService;
@@ -51,7 +52,15 @@ public class LoginRestController extends AbstractController {
         roommate.setName(dto.getName());
         roommate.setHome(home);
         roommate.setIconColor(ColorGenerator.getColorWeb(0));
-        roommate.setLanguage(lang());
+        if(dto.getLang()!=null){
+            Lang lang = Lang.forCode(dto.getLang());
+            roommate.setLanguage(lang);
+            changeLang(lang.code());
+        }
+        else {
+            roommate.setLanguage(lang());
+        }
+        roommate.setIsAdmin(true);
 
         //generate password
         roommate.setPassword(KeyGenerator.generateRandomPassword(8));

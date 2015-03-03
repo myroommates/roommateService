@@ -169,12 +169,12 @@ home.count.help=....
 # Email
 #
 REGISTRATION_APP_EMAIL_TITLE=Welcome to RoommateApp !
-REGISTRATION_APP_EMAIL_BODY=Welcome {0}!<br/><br/>Your smartphone is now logged to your roommateApp ! If your smartphone is logout, you can login you to your account with the follow password : {1}<br/><br/>Follow ''Reactivation'' instruction to login you<br/><br/>You can also use these data to loggin you yo the website : www.?.com
+REGISTRATION_APP_EMAIL_BODY=Welcome {0}!<br/><br/>Your smartphone is now logged to your roommateApp ! If your smartphone is logout, you can login you to your account with the follow password : {1}<br/><br/>Follow ''Reactivation'' instruction to login you<br/><br/>You can also use these data to loggin you yo the website : $project.url
 INVITATION_EMAIL_TITLE=Your are invited to RoommateApp !
 INVITATION_EMAIL_BODY=Welcome {0}!<br/><br/>Your are invited to joint RoommateApp by {1}<br/><br/>You can use your email address and the following password for loggin you : {2}
 
 #
-# ERROR
+# ERRORF
 #
 JSON_CONVERSION_ERROR=The request content cannot be converted to a {0}.
 WRONG_AUTHORIZATION=You have not the authorization

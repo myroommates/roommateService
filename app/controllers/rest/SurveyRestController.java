@@ -6,6 +6,7 @@ import controllers.technical.SecurityRestController;
 import dto.post.SurveyResultDTO;
 import dto.technical.ResultDTO;
 import models.entities.SurveyValue;
+import play.Logger;
 import play.mvc.Result;
 import play.mvc.Security;
 import services.SurveyAnswerService;
@@ -26,7 +27,6 @@ public class SurveyRestController extends AbstractController {
     @Transactional
     public Result answer() {
         SurveyResultDTO dto = extractDTOFromRequest(SurveyResultDTO.class);
-
 
         //load surveyValue
         for (SurveyValue surveyValue : securityController.getCurrentUser().getSurveyValues()) {
