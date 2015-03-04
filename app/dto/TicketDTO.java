@@ -26,7 +26,6 @@ public class TicketDTO extends DTO {
 
     private String category;
 
-    @NotNull
     private Long payerId;
 
     public TicketDTO() {
