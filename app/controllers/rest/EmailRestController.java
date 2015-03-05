@@ -48,12 +48,16 @@ public class EmailRestController extends AbstractController {
 
     public void sendNewPasswordEmail(Roommate roommate) {
 
-        String title = translationService.getTranslation(EmailMessage.NEW_PASSWORD_EMAIL_TITLE,roommate.getLanguage());
+        String title = translationService.getTranslation(
+                EmailMessage.NEW_PASSWORD_EMAIL_TITLE,
+                roommate.getLanguage());
 
         // 0 => roommate.name
         // 1 => inviter.name
         // 2=> roommate.reactionKey
-        String body = translationService.getTranslation(EmailMessage.NEW_PASSWORD_EMAIL_BODY,roommate.getLanguage(),
+        String body = translationService.getTranslation(
+                EmailMessage.NEW_PASSWORD_EMAIL_BODY,
+                roommate.getLanguage(),
                 roommate.getName(),
                 roommate.getPassword());
 
