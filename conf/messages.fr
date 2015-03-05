@@ -169,8 +169,10 @@ home.count.help=...
 # TODO
 REGISTRATION_APP_EMAIL_TITLE=Bienvenu dans roommate !
 REGISTRATION_APP_EMAIL_BODY=Bienvenue!{0}!<br/><br/>Votre smartphone est maintenant connecté à l'application roommate! Si votre smartphone se déconnecte, vous pouvez utiliser votre adresse email et le mot de passe suivant pour vous reconnectez :  {1}<br/><br/>Cliquez sur ''réactivation'' et suivez les instructions<br/><br/>Vous pouvez également utiliser ces identifiants pour vous connectez au site web : $project.url
-INVITATION_EMAIL_TITLE=Your are invited to RoommateApp !
+INVITATION_EMAIL_TITLE=Your are invited to Roommate !
 INVITATION_EMAIL_BODY=Bienvenue {0}!<br/><br/>Vous avez été invité à rejoindre RoommateApp par {1}<br/><br/>Vous pouvez vous connectez avec votre adresse e-mail et le mot de passe suivant : {2}
+NEW_PASSWORD_EMAIL_TITLE=Roommate! Nouveau mot de passe
+NEW_PASSWORD_EMAIL_BODY=Bonjour {0}!<br/><br/>Un nouveau mot de passe a été généré à votre demande. Si vous n'êtes pas à l'origine de cette demande, merci de le signaler à l'équipe Roommate!<br/><br/>Voici votre nouveau mot de passe : {1}
 
 #
 # ERROR
@@ -205,3 +207,5 @@ VALIDATION_PATTERN=The field {0} expects the pattern {1}
 NOT_YOURSELF=The id {0} is not your
 NOT_YOUR_OLD_PASSWORD=This is not your old password
 LANGUAGE_NOT_ACCEPTED=Cette langue n''est pas connue  : {0}
+UNKNOWN_EMAIL=Email non trouvé
+VALIDATION_DEBTOR=Au moins un colocataire doit être sélectionné

@@ -13,6 +13,8 @@ GET           /assets/*file                            controllers.Assets.at(pat
 POST          /rest/login                              @controllers.rest.LoginRestController.login()
 POST          /rest/registration                       @controllers.rest.LoginRestController.registration()
 POST          /rest/load_data                          @controllers.rest.LoginRestController.loadData()
+PUT           /rest/password                           @controllers.rest.LoginRestController.forgotPassword()
+
 
 #home
 PUT           /rest/home/:id                           @controllers.rest.HomeRestController.update(id:Long)
@@ -56,7 +58,7 @@ POST          /rest/superadmin/survey                  @controllers.SuperAdminCo
 POST          /rest/contactus                          @controllers.rest.ContactUsRestController.contactUs()
 
 #survey
-POST         /rest/survey                              @controllers.rest.SurveyRestController.answer()
+POST          /rest/survey                             @controllers.rest.SurveyRestController.answer()
 
 #
 # LOCAL routes

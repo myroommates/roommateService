@@ -168,10 +168,12 @@ home.count.help=....
 #
 # Email
 #
-REGISTRATION_APP_EMAIL_TITLE=Welcome to RoommateApp !
+REGISTRATION_APP_EMAIL_TITLE=Welcome to Roommate !
 REGISTRATION_APP_EMAIL_BODY=Welcome {0}!<br/><br/>Your smartphone is now logged to your roommateApp ! If your smartphone is logout, you can login you to your account with the follow password : {1}<br/><br/>Follow ''Reactivation'' instruction to login you<br/><br/>You can also use these data to loggin you yo the website : $project.url
-INVITATION_EMAIL_TITLE=Your are invited to RoommateApp !
+INVITATION_EMAIL_TITLE=Your are invited to Roommate !
 INVITATION_EMAIL_BODY=Welcome {0}!<br/><br/>Your are invited to joint RoommateApp by {1}<br/><br/>You can use your email address and the following password for loggin you : {2}
+NEW_PASSWORD_EMAIL_TITLE=Roommate! New password
+NEW_PASSWORD_EMAIL_BODY=Hello {0}!<br/><br/>A new password was generated following a request. If you never ask a new password, please contact the Roommate! Team. <br/><br/>The new password is : {1}
 
 #
 # ERRORF
@@ -210,3 +212,5 @@ VALIDATION_PATTERN=The field {0} expects the pattern {1}
 NOT_YOURSELF=The id {0} is not your
 NOT_YOUR_OLD_PASSWORD=This is not your old password
 LANGUAGE_NOT_ACCEPTED=This language cannot be used : {0}
+UNKNOWN_EMAIL=Email not found
+VALIDATION_DEBTOR=At least one roommate must be selected

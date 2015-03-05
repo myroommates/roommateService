@@ -2,9 +2,13 @@ package dto.technical.verification;
 
 import util.ErrorMessage;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
 /**
  * Created by florian on 7/12/14.
  */
+@Retention(RetentionPolicy.RUNTIME)
 public @interface Pattern {
     /**
      * RFC 5322 EMAIL VALIDATION

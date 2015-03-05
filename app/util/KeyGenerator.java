@@ -4,6 +4,8 @@ import java.util.Random;
 
 public class KeyGenerator {
 
+    private static final int PASSWORD_NB_LETTERS =8;
+
     private static final String LETTERS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
 
     private static final String LETTERS_LITTLE = "abcdefghijklmnopqrstuvwxyz";
@@ -21,7 +23,7 @@ public class KeyGenerator {
     }
 
 
-    public static String generateRandomPassword(final int nbLetter) {
+    public static String generateRandomPassword() {
 
         String result = "";
 
@@ -31,7 +33,7 @@ public class KeyGenerator {
         int cycleNbExpected = 2;
         boolean letterCycle = true;
 
-        while (result.length() < nbLetter) {
+        while (result.length() < PASSWORD_NB_LETTERS) {
             if (cycleNb >= cycleNbExpected) {
                 letterCycle = !letterCycle;
                 cycleNb=0;

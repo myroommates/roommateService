@@ -3,7 +3,8 @@ package dto;
 import dto.technical.DTO;
 import dto.technical.verification.NotNull;
 import dto.technical.verification.Pattern;
-import play.data.validation.Constraints;
+import dto.technical.verification.Size;
+import util.ErrorMessage;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,12 +17,15 @@ public class TicketDTO extends DTO {
 
     private Long id;
 
+    @NotNull
     @Pattern(regexp = ".{1,1000}")
     private String description;
+
     @NotNull
     private Date date;
 
     @NotNull
+    @Size(min=1,message = ErrorMessage.VALIDATION_DEBTOR)
     private List<TicketDebtorDTO> debtorList;
 
     private String category;

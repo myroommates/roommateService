@@ -18,6 +18,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Collection;
+import java.util.List;
 
 import dto.technical.verification.NotNull;
 
@@ -46,49 +47,44 @@ public abstract class AbstractController extends Controller {
 
         //control dto
         try {
-            validation(dto, lang());
-
-            for (Field field : DTOclass.getDeclaredFields()) {
-                if (field.getDeclaringClass().isAssignableFrom(DTO.class)) {
-                    Method method = dto.getClass().getMethod("get" + StringUtil.toFirstLetterUpper(field.getDeclaringClass().getName()));
-                    Object o = method.invoke(dto);
-                    if (o != null) {
-                        validation((DTO) o, lang());
-                    }
-                }
-                else if(field.getDeclaringClass().isAssignableFrom(Collection.class)) {
-                    Collection<DTO> c;
-                    //c.
-
-                }
-            }
-
+            validDTO(dto);
         } catch (Exception e) {
             e.printStackTrace();
-            throw new MyRuntimeException(ErrorMessage.FATAL_ERROR, e.getMessage());
+            throw new MyRuntimeException(e.getMessage());
         }
 
         return dto;
     }
 
-    private void validation(DTO dto, Lang language) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
 
-        String errorMessage = "";
+    private void validDTO(DTO dto) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
 
+        Lang language = lang();
+
+        Logger.warn("validDTO : " + dto);
+
+        //control this object
+       // validation(dto, lang());
+
+        //looking for other DTO object
         for (Field field : dto.getClass().getDeclaredFields()) {
-            Logger.warn("field:" + field.getName());
 
+            Logger.warn("   test field " + field.getName() + "...=>" + field.getClass());
+
+            //extract
             Object v = dto.getClass().getMethod("get" + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1)).invoke(dto);
 
+            //test annotation
+            String errorMessage = "";
             for (Annotation annotation : field.getDeclaredAnnotations()) {
-                Logger.warn("   annotation:" + annotation.toString());
+                Logger.warn("          annotation:" + annotation.toString()+"(totla:"+field.getDeclaredAnnotations().length+")");
                 if (annotation instanceof NotNull) {
 
-                    Logger.warn("       not null:" + v);
+                    Logger.warn("             not null:" + v);
                     if (v == null) {
 
                         //build error message
-                        errorMessage += translationService.getTranslation(((NotNull) annotation).message(), language,field.getName()) + "\n";
+                        errorMessage += translationService.getTranslation(((NotNull) annotation).message(), language, field.getName()) + "\n";
                     }
                 } else if (annotation instanceof Pattern) {
                     if (!(v instanceof String)) {
@@ -101,7 +97,7 @@ public abstract class AbstractController extends Controller {
                     if (!pattern.matcher(string).find()) {
 
                         //build error message
-                        errorMessage += translationService.getTranslation(((Pattern) annotation).message(), language, language,field.getName(),((Pattern) annotation).regexp()) + "\n";
+                        errorMessage += translationService.getTranslation(((Pattern) annotation).message(), language, field.getName(), ((Pattern) annotation).regexp()) + "\n";
                     }
 
                 } else if (annotation instanceof Size) {
@@ -109,25 +105,63 @@ public abstract class AbstractController extends Controller {
                     int min = ((Size) annotation).min();
                     int max = ((Size) annotation).max();
 
-                    if (!(v instanceof String)) {
+                    if(v instanceof Collection){
+
+                        Collection string = ((Collection) v);
+
+                        Logger.warn("               size (collection):" + min+"/"+max+"=<"+string.size());
+
+                        if (string.size() > max || string.size() < min) {
+
+                            //build error message
+                            errorMessage += translationService.getTranslation(((Size) annotation).message(), language,  field.getName(), min, max) + "\n";
+                        }
+                    }
+                    else if(v instanceof String){
+                        String string = ((String) v);
+
+                        if (string.length() > max || string.length() < min) {
+
+                            //build error message
+                            errorMessage += translationService.getTranslation(((Size) annotation).message(), language,  field.getName(), min, max) + "\n";
+                        }
+                    }
+                    else {
                         throw new MyRuntimeException(ErrorMessage.DTO_VERIFICATION_PATTERN_STRING_EXPECTED, field.getName(), field.getType());
                     }
-                    String string = ((String) v);
 
-                    if (string.length() > max || string.length() < min) {
-
-                        //build error message
-                        errorMessage += translationService.getTranslation(((Size) annotation).message(), language, language,field.getName(),min, max) + "\n";
-                    }
 
                 }
             }
 
-        }
-        if (errorMessage.length() > 0) {
-            throw new MyRuntimeException(errorMessage);
-        }
+            if (errorMessage.length() > 0) {
+                throw new MyRuntimeException(errorMessage);
+            }
 
+            //test subElements
+            if (v != null) {
 
+                if (v instanceof DTO) {
+
+                    Logger.warn("       is a DTO ! => validDTO...");
+
+                    validDTO((DTO) v);
+                } else if (v instanceof Collection) {
+
+                    Logger.warn("       is a collection !");
+
+                    for (Object obj : ((Collection<?>) v)) {
+
+                        Logger.warn("           collection obj : " + obj);
+
+                        if (obj instanceof DTO) {
+                            Logger.warn("               is a dto !! call validDTO...");
+
+                            validDTO((DTO) obj);
+                        }
+                    }
+                }
+            }
+        }
     }
 }

@@ -4,9 +4,11 @@ import com.avaje.ebean.annotation.Transactional;
 import controllers.technical.AbstractController;
 import controllers.technical.SecurityRestController;
 import converter.RoommateToLoginSuccessConverter;
+import dto.post.ForgotPasswordDTO;
 import dto.LoginSuccessDTO;
 import dto.post.LoginDTO;
 import dto.post.RegistrationDTO;
+import dto.technical.ResultDTO;
 import models.entities.Home;
 import models.entities.Roommate;
 import play.Logger;
@@ -52,18 +54,17 @@ public class LoginRestController extends AbstractController {
         roommate.setName(dto.getName());
         roommate.setHome(home);
         roommate.setIconColor(ColorGenerator.getColorWeb(0));
-        if(dto.getLang()!=null){
+        if (dto.getLang() != null) {
             Lang lang = Lang.forCode(dto.getLang());
             roommate.setLanguage(lang);
             changeLang(lang.code());
-        }
-        else {
+        } else {
             roommate.setLanguage(lang());
         }
         roommate.setIsAdmin(true);
 
         //generate password
-        roommate.setPassword(KeyGenerator.generateRandomPassword(8));
+        roommate.setPassword(KeyGenerator.generateRandomPassword());
 
 
         //send email
@@ -86,9 +87,9 @@ public class LoginRestController extends AbstractController {
 
         Roommate roommate = roommateService.findByEmail(dto.getEmail());
 
-        Logger.info("dto:"+dto+"/"+ErrorMessage.LOGIN_WRONG_PASSWORD_LOGIN);
+        Logger.info("dto:" + dto + "/" + ErrorMessage.LOGIN_WRONG_PASSWORD_LOGIN);
 
-        if (roommate == null || !roommateService.controlPassword(dto.getPassword(),roommate)) {
+        if (roommate == null || !roommateService.controlPassword(dto.getPassword(), roommate)) {
             throw new MyRuntimeException(ErrorMessage.LOGIN_WRONG_PASSWORD_LOGIN);
         }
 
@@ -111,6 +112,33 @@ public class LoginRestController extends AbstractController {
         LoginSuccessDTO result = converter.convert(securityController.getCurrentUser());
 
         return ok(result);
+    }
+
+    @Transactional
+    public Result forgotPassword() {
+
+        ForgotPasswordDTO dto = extractDTOFromRequest(ForgotPasswordDTO.class);
+
+        //test email
+        Roommate roommate = roommateService.findByEmail(dto.getEmail());
+
+        if (roommate == null) {
+            throw new MyRuntimeException(ErrorMessage.UNKNOWN_EMAIL);
+        }
+
+        //generate the new password
+        roommate.setPassword(KeyGenerator.generateRandomPassword());
+
+        //send the email
+        emailController.sendNewPasswordEmail(roommate);
+
+        //save roommate
+        roommateService.saveOrUpdate(roommate);
+
+        //return success
+        return ok(new ResultDTO());
+
+
     }
 
 
