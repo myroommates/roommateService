@@ -5,6 +5,7 @@ import dto.technical.verification.NotNull;
 import dto.technical.verification.Pattern;
 import dto.technical.verification.Size;
 import play.data.validation.Constraints;
+import util.ErrorMessage;
 
 
 /**
@@ -13,11 +14,11 @@ import play.data.validation.Constraints;
 public class LoginDTO extends DTO {
 
     @NotNull
-    @Pattern(regexp = Pattern.EMAIL)
+    @Pattern(regexp = Pattern.EMAIL,message = ErrorMessage.VALIDATION_EMAIL)
     private String email;
 
     @NotNull
-    @Pattern(regexp = Pattern.PASSWORD)
+    @Pattern(regexp = Pattern.PASSWORD,message = ErrorMessage.VALIDATION_PASSWORD)
     private String password;
 
     private boolean keepSessionOpen;

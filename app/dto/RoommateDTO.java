@@ -5,6 +5,7 @@ import dto.technical.verification.NotNull;
 import dto.technical.verification.Pattern;
 import dto.technical.verification.Size;
 import play.data.validation.Constraints;
+import util.ErrorMessage;
 
 /**
  * Created by florian on 11/11/14.
@@ -22,7 +23,7 @@ public class RoommateDTO extends DTO {
     private String nameAbrv;
 
     @NotNull
-    @Pattern(regexp = Pattern.EMAIL)
+    @Pattern(regexp = Pattern.EMAIL,message = ErrorMessage.VALIDATION_EMAIL)
     private String email;
 
     private Float iconColor;

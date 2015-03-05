@@ -3,6 +3,7 @@ package dto.post;
 import dto.technical.DTO;
 import dto.technical.verification.Pattern;
 import org.hibernate.validator.constraints.Email;
+import util.ErrorMessage;
 
 
 /**
@@ -13,7 +14,7 @@ public class RegistrationDTO extends DTO {
     @Pattern(regexp = ".{2,50}")
     private String name;
 
-    @Pattern(regexp = Pattern.EMAIL)
+    @Pattern(regexp = Pattern.EMAIL,message = ErrorMessage.VALIDATION_EMAIL)
     private String email;
 
     private String lang;

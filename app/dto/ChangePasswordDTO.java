@@ -2,16 +2,17 @@ package dto;
 
 import dto.technical.DTO;
 import dto.technical.verification.Pattern;
+import util.ErrorMessage;
 
 /**
  * Created by florian on 27/12/14.
  */
 public class ChangePasswordDTO extends DTO {
 
-    @Pattern(regexp = Pattern.PASSWORD)
+    @Pattern(regexp = Pattern.PASSWORD,message = ErrorMessage.VALIDATION_PASSWORD)
     private String oldPassword;
 
-    @Pattern(regexp = Pattern.PASSWORD)
+    @Pattern(regexp = Pattern.PASSWORD,message = ErrorMessage.VALIDATION_PASSWORD)
     private String newPassword;
 
     public ChangePasswordDTO() {

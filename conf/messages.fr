@@ -209,3 +209,5 @@ NOT_YOUR_OLD_PASSWORD=This is not your old password
 LANGUAGE_NOT_ACCEPTED=Cette langue n''est pas connue  : {0}
 UNKNOWN_EMAIL=Email non trouvé
 VALIDATION_DEBTOR=Au moins un colocataire doit être sélectionné
+VALIDATION_PASSWORD=Utilisez entre 6 et 18 letters, chiffres ou _-
+VALIDATION_EMAIL=Adresse email attendue

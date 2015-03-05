@@ -3,6 +3,7 @@ package dto.post;
 import dto.technical.DTO;
 import dto.technical.verification.NotNull;
 import dto.technical.verification.Pattern;
+import util.ErrorMessage;
 
 /**
  * Created by florian on 4/03/15.
@@ -10,7 +11,7 @@ import dto.technical.verification.Pattern;
 public class ForgotPasswordDTO extends DTO{
 
     @NotNull
-    @Pattern(regexp = Pattern.EMAIL)
+    @Pattern(regexp = Pattern.EMAIL,message = ErrorMessage.VALIDATION_EMAIL)
     private String email;
 
     public String getEmail() {

@@ -214,3 +214,5 @@ NOT_YOUR_OLD_PASSWORD=This is not your old password
 LANGUAGE_NOT_ACCEPTED=This language cannot be used : {0}
 UNKNOWN_EMAIL=Email not found
 VALIDATION_DEBTOR=At least one roommate must be selected
+VALIDATION_PASSWORD=Please use between 6 and 18 letters, numbers or -_
+VALIDATION_EMAIL=Email expected
