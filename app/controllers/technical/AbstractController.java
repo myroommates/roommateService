@@ -48,7 +48,7 @@ public abstract class AbstractController extends Controller {
         //control dto
         try {
             validDTO(dto);
-        } catch (Exception e) {
+        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
             throw new MyRuntimeException(e.getMessage());
         }
@@ -87,17 +87,23 @@ public abstract class AbstractController extends Controller {
                         errorMessage += translationService.getTranslation(((NotNull) annotation).message(), language, field.getName()) + "\n";
                     }
                 } else if (annotation instanceof Pattern) {
-                    if (!(v instanceof String)) {
-                        throw new MyRuntimeException(ErrorMessage.DTO_VERIFICATION_PATTERN_STRING_EXPECTED, field.getName(), field.getType());
-                    }
-                    String string = ((String) v);
-
-                    java.util.regex.Pattern pattern = java.util.regex.Pattern.compile(((Pattern) annotation).regexp());
-
-                    if (!pattern.matcher(string).find()) {
-
+                    if (v == null) {
                         //build error message
                         errorMessage += translationService.getTranslation(((Pattern) annotation).message(), language, field.getName(), ((Pattern) annotation).regexp()) + "\n";
+                    }
+                    else {
+                        if (!(v instanceof String)) {
+                            throw new MyRuntimeException(ErrorMessage.DTO_VERIFICATION_PATTERN_STRING_EXPECTED, field.getName(), field.getType());
+                        }
+                        String string = ((String) v);
+
+                        java.util.regex.Pattern pattern = java.util.regex.Pattern.compile(((Pattern) annotation).regexp());
+
+                        if (!pattern.matcher(string).find()) {
+
+                            //build error message
+                            errorMessage += translationService.getTranslation(((Pattern) annotation).message(), language, field.getName(), ((Pattern) annotation).regexp()) + "\n";
+                        }
                     }
 
                 } else if (annotation instanceof Size) {
@@ -108,8 +114,6 @@ public abstract class AbstractController extends Controller {
                     if(v instanceof Collection){
 
                         Collection string = ((Collection) v);
-
-                        Logger.warn("               size (collection):" + min+"/"+max+"=<"+string.size());
 
                         if (string.size() > max || string.size() < min) {
 

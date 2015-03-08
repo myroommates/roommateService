@@ -47,6 +47,17 @@ myApp.controller('ProfileMyProfileCtrl', function ($scope, $http, $flash, $modal
             disabled:function(){
                 return $scope.loading;
             }
+        },
+        email: {
+            fieldType:"email",
+            name:'email',
+            fieldTitle: "changeEmailModal.email",
+            validationRegex: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+            validationMessage: "generic.validation.email",
+            field:$scope.roommate.email,
+            disabled:function(){
+                return $scope.loading;
+            }
         }
     };
 
@@ -104,7 +115,8 @@ myApp.controller('ProfileMyProfileCtrl', function ($scope, $http, $flash, $modal
             var dto = {
                 name: $scope.fields.name.field,
                 nameAbrv: $scope.fields.nameAbrv.field,
-                languageCode:$scope.fields.languages.field
+                languageCode:$scope.fields.languages.field,
+                email:$scope.fields.email.field
             };
 
             $scope.loading=true;

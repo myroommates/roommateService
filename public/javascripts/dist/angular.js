@@ -682,6 +682,17 @@ myApp.controller('ProfileMyProfileCtrl', ['$scope', '$http', '$flash', '$modal',
             disabled:function(){
                 return $scope.loading;
             }
+        },
+        email: {
+            fieldType:"email",
+            name:'email',
+            fieldTitle: "changeEmailModal.email",
+            validationRegex: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+            validationMessage: "generic.validation.email",
+            field:$scope.roommate.email,
+            disabled:function(){
+                return $scope.loading;
+            }
         }
     };
 
@@ -739,7 +750,8 @@ myApp.controller('ProfileMyProfileCtrl', ['$scope', '$http', '$flash', '$modal',
             var dto = {
                 name: $scope.fields.name.field,
                 nameAbrv: $scope.fields.nameAbrv.field,
-                languageCode:$scope.fields.languages.field
+                languageCode:$scope.fields.languages.field,
+                email:$scope.fields.email.field
             };
 
             $scope.loading=true;
@@ -2372,33 +2384,56 @@ myApp.service("$flash", ['$filter', function($filter) {
         theme: 'block'
     }
 
-    this.success = function(key) {
-        return Messenger().post({
-            message: key,
-            type: 'success',
-            showCloseButton: true
-        });
+    this.success = function(messages) {
+        for(var key in messages.split("\n")){
+            var message = messages.split("\n")[key];
+
+            Messenger().post({
+                message: message,
+                type: 'success',
+                showCloseButton: true
+            });
+        }
+
+        return;
     };
-    this.info = function(key) {
-        return Messenger().post({
-            message: key,
-            type: 'info',
-            showCloseButton: true
-        });
+    this.info = function(messages) {
+        for(var key in messages.split("\n")){
+            var message = messages.split("\n")[key];
+
+            Messenger().post({
+                message: message,
+                type: 'info',
+                showCloseButton: true
+            });
+        }
     };
-    this.error = function(key) {
-        return Messenger().post({
-            message: key,
-            type: 'error',
-            showCloseButton: true
-        });
+    this.error = function(messages) {
+        for(var key in messages.split("\n")){
+            var message = messages.split("\n")[key];
+
+            Messenger().post({
+                message: message,
+                type: 'error',
+                showCloseButton: true
+            });
+        }
+
+        return;
+
     };
-    this.warning = function(key) {
-        return Messenger().post({
-            message: key,
-            type: 'warning',
-            showCloseButton: true
-        });
+    this.warning = function(messages) {
+        for(var key in messages.split("\n")){
+            var message = messages.split("\n")[key];
+
+            Messenger().post({
+                message: message,
+                type: 'warning',
+                showCloseButton: true
+            });
+        }
+
+        return;
     };
 }]);
 

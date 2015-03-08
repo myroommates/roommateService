@@ -104,14 +104,7 @@ public class RoommateRestController extends AbstractController {
 
         RoommateDTO dto = extractDTOFromRequest(RoommateDTO.class);
 
-        Roommate currentUser = securityController.getCurrentUser();
-
-        //load entity
-        Roommate roommate = roommateService.findById(id);
-
-        if (roommate == null) {
-            throw new MyRuntimeException(ErrorMessage.ENTITY_NOT_FOUND, Roommate.class.getName(), id);
-        }
+        Roommate roommate = securityController.getCurrentUser();
 
         //control email
         Roommate roommateWithSameEmail = roommateService.findByEmail(dto.getEmail());
