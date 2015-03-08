@@ -1,4 +1,4 @@
-site.name=My roommate
+site.name=MyRoommates
 
 #generic
 generic.back=Back
@@ -62,9 +62,9 @@ error.maxLength=Maximum %s characters
 #menu
 menu.home=Home
 menu.admin=Admin
-menu.admin.roommate_list=Roommate list
+menu.admin.roommate_list=Roommates list
 menu.admin.preferences=Preferenes
-menu.count=Count
+menu.count=Accounts
 menu.count.resume=Resume
 menu.count.tickets=Tickets
 menu.count.details=Details
@@ -79,21 +79,21 @@ menu.myProfile=My profile
 
 # home
 home.title=Welcome
-home.count.title=Count
+home.count.title=Accounts
 home.count.balance.desc=Your balance is currently
 home.shopping.title=Shopping list
 home.shopping.addNewItem=Add a new shopping item
 home.shopping.bought=I bought this articles !
 
 # count resume
-count.resume.title=Count > Resume
+count.resume.title=Accounts > Resume
 count.resume.spend=Spend
 count.resume.due=Due
 count.resume.balance=Balance
 count.resume.howToResolve=How to resolve ?
 
 # count ticket
-count.tickets.title=Count > Tickets list
+count.tickets.title=Accounts > Tickets list
 count.ticket.sort.date=Date
 count.ticket.sort.category=Category
 count.ticket.sort.payer=Payer
@@ -116,7 +116,7 @@ profile.myProfile.title=My profile
 #
 
 #roommate list
-admin.roommateList.title=Admin > Roommate list
+admin.roommateList.title=Admin > Roommates list
 admin.roommateList.inviteRoommate=Invite new roommate
 
 #preferences
@@ -168,12 +168,12 @@ home.count.help=....
 #
 # Email
 #
-REGISTRATION_APP_EMAIL_TITLE=Welcome to Roommate !
-REGISTRATION_APP_EMAIL_BODY=Welcome {0}!<br/><br/>Your smartphone is now logged to your roommateApp ! If your smartphone is logout, you can login you to your account with the follow password : {1}<br/><br/>Follow ''Reactivation'' instruction to login you<br/><br/>You can also use these data to loggin you yo the website : $project.url
-INVITATION_EMAIL_TITLE=Your are invited to Roommate !
-INVITATION_EMAIL_BODY=Welcome {0}!<br/><br/>Your are invited to joint RoommateApp by {1}<br/><br/>You can use your email address and the following password for loggin you : {2}
-NEW_PASSWORD_EMAIL_TITLE=Roommate! New password
-NEW_PASSWORD_EMAIL_BODY=Hello {0}!<br/><br/>A new password was generated following a request. If you never ask a new password, please contact the Roommate! Team. <br/><br/>The new password is : {1}
+REGISTRATION_APP_EMAIL_TITLE=Welcome to $project.name
+REGISTRATION_APP_EMAIL_BODY=Welcome {0}!<br/><br/>Your smartphone is now logged to your roommateApp ! If your smartphone is logout, you can login you to your account with the follow password : {1}<br/><br/>Follow ''Reactivation'' instruction to login you<br/><br/>You can also use these data to loggin you yo the website.
+INVITATION_EMAIL_TITLE=Your are invited to $project.name
+INVITATION_EMAIL_BODY=Welcome {0}!<br/><br/>Your are invited to joint $project.name by {1}<br/><br/>You can use your email address and the following password for loggin you : {2}
+NEW_PASSWORD_EMAIL_TITLE=$project.name New password
+NEW_PASSWORD_EMAIL_BODY=Hello {0}!<br/><br/>A new password was generated following a request. If you never ask a new password, please contact the $project.name Team. <br/><br/>The new password is : {1}
 
 #
 # ERRORF

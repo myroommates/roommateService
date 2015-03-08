@@ -73,6 +73,8 @@ public class EmailSender implements ApplicationContextAware {
                     }
                 });
 
+        Logger.info("Sending email ...1 : "+password+"/"+MailConfig.fromAddress);
+
         try {
 
             Message mimeMessage = new MimeMessage(session);
@@ -87,12 +89,16 @@ public class EmailSender implements ApplicationContextAware {
             }
             mimeMessage.setSubject(MimeUtility.encodeText(email.getSubject(), "utf-8", "B"));
 
+            Logger.info("Sending email ...2");
+
             // main body part -> email content
             BodyPart messageBodyPart = new MimeBodyPart();
             messageBodyPart.setContent(email.getContent(), "text/html; charset=utf-8");
 
             // multipart
             Multipart multipart = new MimeMultipart();
+
+            Logger.info("Sending email ...3");
 
             // add mainbodypart to multipart
             multipart.addBodyPart(messageBodyPart);
@@ -109,6 +115,8 @@ public class EmailSender implements ApplicationContextAware {
                 // end for
             } // end if
 
+            Logger.info("Sending email ...4");
+
             // check if attachments
             if (email.getByteArrayinputStreamList() != null) {
                 // for each attachment
@@ -122,6 +130,8 @@ public class EmailSender implements ApplicationContextAware {
             } // end if
 
 
+            Logger.info("Sending email ...5");
+
             // add multipart to message
             mimeMessage.setContent(multipart);
 
@@ -131,6 +141,8 @@ public class EmailSender implements ApplicationContextAware {
             Logger.info("Email Successfully sent to " + email.getToAddress());
 
         } catch (MessagingException e) {
+            Logger.info("Sending email fail : "+e.getMessage());
+            e.printStackTrace();
             throw e;
         }
 

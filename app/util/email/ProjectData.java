@@ -24,4 +24,12 @@ public class ProjectData {
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public String toString() {
+        return "ProjectData{" +
+                "url='" + url + '\'' +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

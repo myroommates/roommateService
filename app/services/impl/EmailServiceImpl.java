@@ -6,6 +6,7 @@ import akka.actor.Props;
 import akka.routing.SmallestMailboxRouter;
 import models.entities.Roommate;
 import play.Configuration;
+import play.Logger;
 import services.EmailService;
 import services.VelocityGeneratorService;
 import util.email.ProjectData;
@@ -49,8 +50,16 @@ public class EmailServiceImpl implements EmailService {
         //load velocity content
         Map<String, Object> values = new HashMap<>();
 
+        ProjectData projectData = getProjectData();
+
+        body = body.replace("$project.url",projectData.getUrl());
+        body = body.replace("$project.name",projectData.getName());
+
+        title = title.replace("$project.url",projectData.getUrl());
+        title = title.replace("$project.name",projectData.getName());
+
         values.put("content", body);
-        values.put("project", getProjectData());
+        values.put("project", projectData);
 
         String velocityContent = velocityGeneratorService.generate(VELOCITY_BASIC_EMAIL, values);
 

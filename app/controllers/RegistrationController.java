@@ -81,7 +81,7 @@ public class RegistrationController extends AbstractController {
         roommate.setIconColor(ColorGenerator.getColorWeb(0));
 
         //send email
-        //emailController.sendRegistrationEmail(roommate);
+        emailController.sendApplicationRegistrationEmail(roommate);
 
         //save
         accountService.saveOrUpdate(roommate);
