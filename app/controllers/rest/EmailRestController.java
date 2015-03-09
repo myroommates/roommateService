@@ -31,9 +31,16 @@ public class EmailRestController extends AbstractController {
         emailService.sendEmail(roommate,title,body);
     }
 
-    public void sendInvitationEmail(Roommate  roommate,Roommate  inviter,Lang language){
+    public void sendInvitationEmail(Roommate  roommate,Roommate  inviter,Lang language,String password){
 
         String title = translationService.getTranslation(EmailMessage.INVITATION_EMAIL_TITLE,language);
+
+        //be.roommate.app://www.myroommatesapp.com/app/start?
+
+        String authenticationKey = roommate.getAuthenticationKey();
+
+        String applicationKey = "be.roommate.app://www.myroommatesapp.com/app/start?"+authenticationKey;
+        String siteKey = "http://www.myroommatesapp.com?authentication="+applicationKey;
 
         // 0 => roommate.name
         // 1 => inviter.name
@@ -41,7 +48,10 @@ public class EmailRestController extends AbstractController {
         String body = translationService.getTranslation(EmailMessage.INVITATION_EMAIL_BODY,language,
                 roommate.getName(),
                 inviter.getName(),
-                roommate.getPassword());
+                applicationKey,
+                siteKey,
+                password
+                );
 
         emailService.sendEmail(roommate,title,body);
     }

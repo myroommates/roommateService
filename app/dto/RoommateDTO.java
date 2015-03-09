@@ -18,8 +18,6 @@ public class RoommateDTO extends DTO {
     @Size(min = 2,max =50)
     private String name;
 
-    @NotNull
-    @Size(min = 1,max =3)
     private String nameAbrv;
 
     @NotNull

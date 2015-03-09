@@ -204,13 +204,14 @@ public class RoommateRestController extends AbstractController {
         ctx().changeLang(roommate.getLanguage().code());
 
         //create password
-        roommate.setPassword(KeyGenerator.generateRandomPassword());
-
-        //send email
-        emailController.sendInvitationEmail(roommate, securityController.getCurrentUser(), lang());
+        String password = KeyGenerator.generateRandomPassword();
+        roommate.setPassword(password);
 
         //operation
         roommateService.saveOrUpdate(roommate);
+
+        //send email
+        emailController.sendInvitationEmail(roommate, securityController.getCurrentUser(), lang(),password);
 
         //return
         return ok(roommateToRoommateDTOConverter.convert(roommate));

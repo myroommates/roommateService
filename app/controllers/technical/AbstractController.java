@@ -64,7 +64,7 @@ public abstract class AbstractController extends Controller {
         Logger.warn("validDTO : " + dto);
 
         //control this object
-       // validation(dto, lang());
+        // validation(dto, lang());
 
         //looking for other DTO object
         for (Field field : dto.getClass().getDeclaredFields()) {
@@ -77,7 +77,7 @@ public abstract class AbstractController extends Controller {
             //test annotation
             String errorMessage = "";
             for (Annotation annotation : field.getDeclaredAnnotations()) {
-                Logger.warn("          annotation:" + annotation.toString()+"(totla:"+field.getDeclaredAnnotations().length+")");
+                Logger.warn("          annotation:" + annotation.toString() + "(totla:" + field.getDeclaredAnnotations().length + ")");
                 if (annotation instanceof NotNull) {
 
                     Logger.warn("             not null:" + v);
@@ -90,8 +90,7 @@ public abstract class AbstractController extends Controller {
                     if (v == null) {
                         //build error message
                         errorMessage += translationService.getTranslation(((Pattern) annotation).message(), language, field.getName(), ((Pattern) annotation).regexp()) + "\n";
-                    }
-                    else {
+                    } else {
                         if (!(v instanceof String)) {
                             throw new MyRuntimeException(ErrorMessage.DTO_VERIFICATION_PATTERN_STRING_EXPECTED, field.getName(), field.getType());
                         }
@@ -111,29 +110,32 @@ public abstract class AbstractController extends Controller {
                     int min = ((Size) annotation).min();
                     int max = ((Size) annotation).max();
 
-                    if(v instanceof Collection){
+                    Logger.warn("vvv=>>"+v);
 
-                        Collection string = ((Collection) v);
+                    if (v != null) {
 
-                        if (string.size() > max || string.size() < min) {
+                        if (v instanceof Collection) {
 
-                            //build error message
-                            errorMessage += translationService.getTranslation(((Size) annotation).message(), language,  field.getName(), min, max) + "\n";
+                            Collection string = ((Collection) v);
+
+                            if (string.size() > max || string.size() < min) {
+
+                                //build error message
+                                errorMessage += translationService.getTranslation(((Size) annotation).message(), language, field.getName(), min, max) + "\n";
+                            }
+                        } else if (v instanceof String) {
+                            String string = ((String) v);
+
+                            if (string.length() > max || string.length() < min) {
+
+                                //build error message
+                                errorMessage += translationService.getTranslation(((Size) annotation).message(), language, field.getName(), min, max) + "\n";
+                            }
+                        } else {
+                            throw new MyRuntimeException(ErrorMessage.DTO_VERIFICATION_PATTERN_STRING_EXPECTED, field.getName(), field.getType());
                         }
-                    }
-                    else if(v instanceof String){
-                        String string = ((String) v);
 
-                        if (string.length() > max || string.length() < min) {
-
-                            //build error message
-                            errorMessage += translationService.getTranslation(((Size) annotation).message(), language,  field.getName(), min, max) + "\n";
-                        }
                     }
-                    else {
-                        throw new MyRuntimeException(ErrorMessage.DTO_VERIFICATION_PATTERN_STRING_EXPECTED, field.getName(), field.getType());
-                    }
-
 
                 }
             }
