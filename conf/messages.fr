@@ -34,7 +34,7 @@ generic.email=E-mail
 #
 # welcome
 #
-welcome.title.registration=Pas encre enregisté ?
+welcome.title.registration=Pas encore enregisté ?
 welcome.button.registration=Enregistrez-vous maintenant!
 
 #registration
@@ -59,7 +59,7 @@ error.maxLength=Maximum %s caractères
 #menu
 menu.home=Accueil
 menu.admin=Administration
-menu.admin.roommate_list=Liste des collocataires
+menu.admin.roommate_list=Liste des colocataires
 menu.admin.preferences=Préférences
 menu.count=Compte
 menu.count.resume=Résumé
@@ -114,9 +114,9 @@ profile.myProfile.title=Mon profile
 #
 
 #roommate list
-admin.roommateList.title=Administration > Liste des collocataires
+admin.roommateList.title=Administration > Liste des colocataires
 
-admin.roommateList.inviteRoommate=Inviter un nouveau collocataire
+admin.roommateList.inviteRoommate=Inviter un nouveau colocataire
 
 #preferences
 admin.preferences.title=Administration > Préférences
@@ -182,7 +182,7 @@ WRONG_AUTHORIZATION=Vous n''avez pas l''autorisation
 LOGIN_WRONG_PASSWORD_LOGIN=Mauvais mot de passe / email
 NOT_CONNECTED=Vous n''êtes pas connecté
 EMAIL_ALREADY_USED=Cette adresse email est déjà utilisée.
-NOT_YOU_ROOMMATE=Ce n''est pas votre collocataire: {O}
+NOT_YOU_ROOMMATE=Ce n''est pas votre colocataire: {O}
 ENTITY_NOT_FOUND=Cette entité {0} n''a pas été trouvée : {1}
 NOT_YOU_TICKET=Ce n''est pas votre ticket : {O}
 NOT_TICKET_CREATOR=Vous n''êtes pas le créateur du ticket {0} et ne pouvez l''éditer
