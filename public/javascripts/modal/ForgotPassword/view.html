@@ -1,0 +1,16 @@
+<div class="modal-header">
+    <button class="btn glyphicon glyphicon-remove" style="float:right" ng-click="close()"></button>
+    <h4 class="modal-title">{{'forgotPassword.title' | translateText}}</h4>
+</div>
+<div class="modal-body" dir-enter="save()">
+
+    <p>{{'forgotPassword.desc' | translateText}}</p>
+
+    <dir-field-text ng-info="fields.email"></dir-field-text>
+
+</div>
+<div class="modal-footer">
+    <button ng-disabled="loading" type="button" class="btn btn-default" ng-click="close()">{{'generic.close' | translateText}}</button>
+    <button ng-disabled="loading" type="button" class="btn btn-primary" ng-click="save()">{{'generic.submit' | translateText}}</button>
+    <img src="/assets/images/modal-loading.gif" ng-show="loading" />
+</div>

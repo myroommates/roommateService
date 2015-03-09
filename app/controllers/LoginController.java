@@ -4,6 +4,7 @@ import com.avaje.ebean.annotation.Transactional;
 import controllers.technical.AbstractController;
 import controllers.technical.SecurityController;
 import converter.LanguageToLanguageDTOConverter;
+import dto.InterfaceDataDTO;
 import dto.LangDTO;
 import dto.ListDTO;
 import models.LoginForm;
@@ -54,17 +55,39 @@ public class LoginController extends AbstractController {
             return homeController.index();
         }
 
+        //try with param
 
-        return ok(views.html.welcome.render(Form.form(LoginForm.class),getAvaiableLanguage()));
+
+        InterfaceDataDTO interfaceDataDTO  = new InterfaceDataDTO();
+
+        interfaceDataDTO.setTranslations(translationService.getTranslations(lang()));
+
+
+        return ok(views.html.welcome.render(Form.form(LoginForm.class),getAvaiableLanguage(),interfaceDataDTO));
     }
+
+    @Transactional
+    public Result loginWithAuthentication(String key){
+
+        Roommate roommate = accountService.findByAuthenticationKey(key);
+
+        if(roommate!=null){
+            securityController.storeAccount(ctx(),roommate);
+        }
+        return redirect("/");
+    }
+
     @Transactional
     public Result login() {
 
         Form<LoginForm> loginFormForm = Form.form(LoginForm.class).bindFromRequest();
 
+        InterfaceDataDTO interfaceDataDTO  = new InterfaceDataDTO();
+
+        interfaceDataDTO.setTranslations(translationService.getTranslations(lang()));
 
         if (loginFormForm.hasErrors()) {
-            return badRequest(views.html.welcome.render(loginFormForm,getAvaiableLanguage()));
+            return badRequest(views.html.welcome.render(loginFormForm,getAvaiableLanguage(),interfaceDataDTO));
         }
 
         String email = loginFormForm.field("email").value();
@@ -75,7 +98,7 @@ public class LoginController extends AbstractController {
         Roommate roommate= accountService.findByEmail(email);
         if (roommate == null || !accountService.controlPassword(password, roommate)) {
             loginFormForm.reject(new ValidationError("email", Messages.get("login.form.wrongCredential")));
-            return badRequest(views.html.welcome.render(loginFormForm,getAvaiableLanguage()));
+            return badRequest(views.html.welcome.render(loginFormForm,getAvaiableLanguage(),interfaceDataDTO));
         }
 
         //edit

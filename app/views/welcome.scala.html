@@ -1,4 +1,4 @@
-@(loginForm: Form[LoginForm],languages:dto.ListDTO[dto.LangDTO])
+@(loginForm: Form[LoginForm],languages:dto.ListDTO[dto.LangDTO],data:dto.InterfaceDataDTO)
 
 @import com.fasterxml.jackson.databind.ObjectMapper
 
@@ -9,6 +9,7 @@
 
             <!-- load data -->
         <script>
+        var data = @Html(new ObjectMapper().writeValueAsString(data));
         var languages = @Html(new ObjectMapper().writeValueAsString(languages.getList));
         var lang = "@ctx().lang().code";
         </script>

@@ -40,7 +40,7 @@ public class EmailRestController extends AbstractController {
         String authenticationKey = roommate.getAuthenticationKey();
 
         String applicationKey = "be.roommate.app://www.myroommatesapp.com/app/start?"+authenticationKey;
-        String siteKey = "http://www.myroommatesapp.com?authentication="+applicationKey;
+        String siteKey = "http://www.myroommatesapp.com/loggin/"+applicationKey;
 
         // 0 => roommate.name
         // 1 => inviter.name

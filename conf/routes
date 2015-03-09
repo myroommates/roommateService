@@ -66,6 +66,7 @@ POST          /rest/survey                             @controllers.rest.SurveyR
 
 #welcome
 GET           /                                        @controllers.LoginController.loginPage()
+GET           /loggin/:key                             @controllers.LoginController.loginWithAuthentication(key:String)
 POST          /                                        @controllers.LoginController.login()
 GET           /logout                                  @controllers.LoginController.logout()
 GET           /changeLanguage/:lang                    @controllers.LoginController.changeLanguage(lang:String)

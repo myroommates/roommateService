@@ -102,6 +102,12 @@ count.ticket.create.button=Créer un nouveau ticket
 shopping.list.title=Liste de course
 shopping.list.create.button=Créer un nouveau course machin
 
+
+#forgot password
+forgotPassword.title=Mot de passe oublié?
+forgotPassword.desc=Introduisez votre adresse email et un email avec un nouveau mot de passe vous sera envoyé
+forgotPassword.success=Un email avec un nouveau mot de passe a été envoyé à votre adresse email!
+
 #
 # profile
 #

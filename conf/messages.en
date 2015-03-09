@@ -104,6 +104,11 @@ count.ticket.create.button=Create a new ticket
 shopping.list.title=Shopping list
 shopping.list.create.button=Create a new shopping item
 
+#forgot password
+forgotPassword.title=Forgot password ?
+forgotPassword.desc=Get your email address and an email will be send with a new password
+forgotPassword.success=An email was send with your new password
+
 #
 # profile
 #
