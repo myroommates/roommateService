@@ -25,6 +25,7 @@ public class LoginController extends AbstractController {
 
     //service
     private RoommateService accountService = new RoommateServiceImpl();
+
     //form
     //public final static Form<LoginForm> formLogin = Form.form(LoginForm.class);
     //controller
@@ -59,7 +60,7 @@ public class LoginController extends AbstractController {
 
 
         InterfaceDataDTO interfaceDataDTO  = new InterfaceDataDTO();
-
+        interfaceDataDTO.setLangId(lang().code());
         interfaceDataDTO.setTranslations(translationService.getTranslations(lang()));
 
 
