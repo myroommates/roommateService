@@ -16,25 +16,21 @@
         <div id="sidebar" class="visible-sm-block visible-xs-block">
             <ul ng-controller="LateralMenuCtrl">
 
-                <!-- access link -->
-                <li><a href="/home">@Messages("menu.home")</a></li>
-                @if(account.isAdmin()) {
-                    <li class="menu-item-lv-1" ng-class="{'menu-item-close':menuItemOpen(3)==false}">
-                        <a href="#" ng-click="switchVisibility(3)">@Messages("menu.admin")
-                            <span class="glyphicon glyphicon-chevron-down"></span>
-                        </a>
-                    </li>
-                    <li class="menu-item-lv-2" ng-class="{'menu-item-close':menuItemOpen(3)==false}">
-                        <a href="/admin/roommate_list">@Messages("menu.admin.roommate_list")</a>
-                    </li>
-                    <li class="menu-item-lv-2" ng-class="{'menu-item-close':menuItemOpen(3)==false}">
-                        <a href="/admin/preferences">@Messages("menu.admin.preferences")</a>
-                    </li>
-                }
+                <!-- home -->
+                <li>
+                    <a href="/home">
+                        <img src="/assets/images/menu/icon_home.png" class="icon"/>
+                    @Messages("menu.home")
+                    </a>
+                </li>
+
+
 
                 <!-- count -->
                 <li class="menu-item-lv-1" ng-class="{'menu-item-close':menuItemOpen(1)==false}">
-                    <a href="#" ng-click="switchVisibility(1)">@Messages("menu.count")
+                    <a href="#" ng-click="switchVisibility(1)">
+                        <img src="/assets/images/menu/icon_accounts.png" class="icon"/>
+                        @Messages("menu.count")
                         <span class="glyphicon glyphicon-chevron-down"></span>
                     </a>
                 </li>
@@ -47,14 +43,17 @@
 
                 <!-- shopping -->
                 <li>
-                    <a href="/shopping/list">@Messages("menu.shopping.list")</a>
+                    <a href="/shopping/list">
+                        <img src="/assets/images/menu/icon_shopping.png" class="icon"/>
+                        @Messages("menu.shopping.list")
+                    </a>
                 </li>
 
                 <!-- profile -->
                 <li class="menu-item-lv-1" ng-class="{'menu-item-close':menuItemOpen(2)==false}">
                     <a href="#" ng-click="switchVisibility(2)" class="li-profile">
                         @widget.profile_icon(account)
-                        @account.getName()
+                        @Messages("profile.myProfile.title")
                         <span class="glyphicon glyphicon-chevron-down"></span>
                     </a>
                 </li>
@@ -66,8 +65,30 @@
                     <a href="/logout">@Messages("menu.logout")</a>
                 </li>
 
+                    <!-- admin -->
+                @if(account.isAdmin()) {
+                    <li class="menu-item-lv-1" ng-class="{'menu-item-close':menuItemOpen(3)==false}">
+                        <a href="#" ng-click="switchVisibility(3)">
+                            <img src="/assets/images/menu/icon_admin.png" class="icon"/>
+                            @Messages("menu.admin")
+                            <span class="glyphicon glyphicon-chevron-down"></span>
+                        </a>
+                    </li>
+                    <li class="menu-item-lv-2" ng-class="{'menu-item-close':menuItemOpen(3)==false}">
+                        <a href="/admin/roommate_list">@Messages("menu.admin.roommate_list")</a>
+                    </li>
+                    <li class="menu-item-lv-2" ng-class="{'menu-item-close':menuItemOpen(3)==false}">
+                        <a href="/admin/preferences">@Messages("menu.admin.preferences")</a>
+                    </li>
+                }
+
                 <!-- about -->
-                <li><a href="/about">@Messages("menu.about")</a></li>
+                <li>
+                    <a href="/about">
+                    <img src="/assets/images/menu/icon_about.png" class="icon"/>
+                    @Messages("menu.about")
+                    </a>
+                </li>
             </ul>
         </div>
 
@@ -80,7 +101,7 @@
 
                     <!-- little screen menu button -->
                 <div class="sidebar-button">
-                    <button type="button" class="btn btn-default btn-s" data-toggle=".global-container" id="sidebar-toggle">
+                    <button type="button" data-toggle=".global-container" id="sidebar-toggle">
                         <span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>
                     </button>
                 </div>
