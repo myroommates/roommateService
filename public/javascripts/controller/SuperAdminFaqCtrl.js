@@ -3,6 +3,10 @@ myApp.controller('SuperAdminFaqCtrl', function ($scope, $http, $flash, $modal, t
     $scope.faqs = faqs;
     $scope.langs = langs;
     $scope.surveys=surveys;
+    $scope.infos=infos;
+
+    console.log(data);
+    console.log(infos);
 
     $scope.createNewFaq = function () {
 

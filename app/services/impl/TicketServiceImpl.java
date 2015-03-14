@@ -48,4 +48,9 @@ public class TicketServiceImpl extends CrudServiceImpl<Ticket> implements Ticket
                 .findList();
 
     }
+
+    @Override
+    public Integer getCount() {
+        return Ebean.createQuery(Ticket.class).findRowCount();
+    }
 }

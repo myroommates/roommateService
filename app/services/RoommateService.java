@@ -19,4 +19,5 @@ public interface RoommateService extends CrudService<Roommate>{
 
     public boolean controlPassword(String password, Roommate account);
 
+    Integer getCount();
 }

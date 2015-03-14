@@ -10,4 +10,6 @@ import java.util.List;
 public interface HomeService extends CrudService<Home>{
 
     List<Home> findAll();
+
+    Integer getCount();
 }

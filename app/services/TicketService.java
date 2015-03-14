@@ -16,4 +16,6 @@ public interface TicketService extends CrudService<Ticket> {
     List<Ticket> findByDebtor(Roommate roommate);
 
     List<Ticket> findByPayer(Roommate payer);
+
+    Integer getCount();
 }

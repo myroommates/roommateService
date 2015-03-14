@@ -11,12 +11,15 @@ import dto.post.RegistrationDTO;
 import dto.technical.ResultDTO;
 import models.entities.Home;
 import models.entities.Roommate;
+import models.entities.Session;
 import play.Logger;
 import play.i18n.Lang;
 import play.mvc.Result;
 import play.mvc.Security;
 import services.RoommateService;
+import services.SessionService;
 import services.impl.RoommateServiceImpl;
+import services.impl.SessionServiceImpl;
 import util.ErrorMessage;
 import util.KeyGenerator;
 import util.exception.MyRuntimeException;
@@ -29,6 +32,7 @@ public class LoginRestController extends AbstractController {
 
     //service
     private RoommateService roommateService = new RoommateServiceImpl();
+    private SessionService sessionService = new SessionServiceImpl();
 
     //controller
     private EmailRestController emailController = new EmailRestController();
@@ -72,6 +76,9 @@ public class LoginRestController extends AbstractController {
 
         roommateService.saveOrUpdate(roommate);
 
+        //session
+        sessionService.saveOrUpdate(new Session(roommate,true));
+
         //result
         RoommateToLoginSuccessConverter converter = new RoommateToLoginSuccessConverter();
 
@@ -97,6 +104,9 @@ public class LoginRestController extends AbstractController {
         RoommateToLoginSuccessConverter converter = new RoommateToLoginSuccessConverter();
 
         LoginSuccessDTO result = converter.convert(roommate);
+
+        //session
+        sessionService.saveOrUpdate(new Session(roommate,true));
 
         return ok(result);
     }

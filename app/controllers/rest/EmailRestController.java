@@ -42,7 +42,7 @@ public class EmailRestController extends AbstractController {
         //android-app://be.roommate.app/http/www.myroommatesapp.com/app/start?
         //old : be.roommate.app://www.myroommatesapp.com/app/start?
 
-        String applicationKey = "android-app://be.roommate.app/http/www.myroommatesapp.com/app/start?"+authenticationKey;
+        //String applicationKey = "android-app://be.roommate.app/http/www.myroommatesapp.com/app/start?"+authenticationKey;
         String siteKey = "http://www.myroommatesapp.com/loggin/"+authenticationKey;
 
         // 0 => roommate.name
@@ -51,7 +51,7 @@ public class EmailRestController extends AbstractController {
         String body = translationService.getTranslation(EmailMessage.INVITATION_EMAIL_BODY,language,
                 roommate.getName(),
                 inviter.getName(),
-                applicationKey,
+                //applicationKey,
                 siteKey,
                 password
                 );

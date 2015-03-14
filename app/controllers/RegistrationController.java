@@ -7,14 +7,17 @@ import controllers.technical.AbstractController;
 import models.RegistrationForm;
 import models.entities.Home;
 import models.entities.Roommate;
+import models.entities.Session;
 import play.data.Form;
 import play.data.validation.ValidationError;
 import play.i18n.Messages;
 import play.mvc.Result;
 import services.HomeService;
 import services.RoommateService;
+import services.SessionService;
 import services.impl.HomeServiceImpl;
 import services.impl.RoommateServiceImpl;
+import services.impl.SessionServiceImpl;
 import util.tool.ColorGenerator;
 
 /**
@@ -25,6 +28,7 @@ public class RegistrationController extends AbstractController {
     //service
     private RoommateService accountService = new RoommateServiceImpl();
     private HomeService homeService = new HomeServiceImpl();
+    private SessionService sessionService = new SessionServiceImpl();
     //form
     private Form<RegistrationForm> registrationForm = Form.form(RegistrationForm.class);
     //controller
@@ -88,6 +92,9 @@ public class RegistrationController extends AbstractController {
 
         //Store
         securityController.storeAccount(ctx(),roommate);
+
+        //session
+        sessionService.saveOrUpdate(new Session(roommate,true));
 
         //return
         return redirect("/admin/roommate_list");

@@ -176,7 +176,8 @@ home.count.help=....
 REGISTRATION_APP_EMAIL_TITLE=Welcome to $project.name
 REGISTRATION_APP_EMAIL_BODY=Welcome {0}!<br/><br/>Your smartphone is now logged to your roommateApp ! If your smartphone is logout, you can login you to your account with the follow password : {1}<br/><br/>Follow ''Reactivation'' instruction to login you<br/><br/>You can also use these data to loggin you yo the website.
 INVITATION_EMAIL_TITLE=Your are invited to $project.name
-INVITATION_EMAIL_BODY=Welcome {0}!<br/><br/>Your are invited to joint $project.name by {1}.<br/><br/>To connect your Android, use this link : <a href="{2}">Connect my application</a><br/><br/>or this one for the website : <a href="{3}">connect the website</a><br/><br/>You can also use your email address and the following password for loggin you : {4}
+INVITATION_EMAIL_BODY=Welcome {0}!<br/><br/>Your are invited to joint $project.name by {1}.<br/><br/>To connect the website use this like : <a href="{3}">connect the website</a><br/><br/>You can also use your email address and the following password for logging you to the application or the website: {4}
+#INVITATION_EMAIL_BODY=Welcome {0}!<br/><br/>Your are invited to joint $project.name by {1}.<br/><br/>To connect your Android, use this link : <a href="{2}">Connect my application</a><br/><br/>or this one for the website : <a href="{3}">connect the website</a><br/><br/>You can also use your email address and the following password for loggin you : {4}
 NEW_PASSWORD_EMAIL_TITLE=$project.name New password
 NEW_PASSWORD_EMAIL_BODY=Hello {0}!<br/><br/>A new password was generated following a request. If you never ask a new password, please contact the $project.name Team. <br/><br/>The new password is : {1}
 

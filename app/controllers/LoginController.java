@@ -9,6 +9,7 @@ import dto.LangDTO;
 import dto.ListDTO;
 import models.LoginForm;
 import models.entities.Roommate;
+import models.entities.Session;
 import play.Logger;
 import play.data.Form;
 import play.data.validation.ValidationError;
@@ -16,7 +17,9 @@ import play.i18n.Lang;
 import play.i18n.Messages;
 import play.mvc.Result;
 import services.RoommateService;
+import services.SessionService;
 import services.impl.RoommateServiceImpl;
+import services.impl.SessionServiceImpl;
 
 /**
  * Created by florian on 17/12/14.
@@ -25,6 +28,7 @@ public class LoginController extends AbstractController {
 
     //service
     private RoommateService accountService = new RoommateServiceImpl();
+    private SessionService sessionService = new SessionServiceImpl();
 
     //form
     //public final static Form<LoginForm> formLogin = Form.form(LoginForm.class);
@@ -110,6 +114,9 @@ public class LoginController extends AbstractController {
 
         //store session
         securityController.storeAccount(ctx(),roommate);
+
+        //session
+        sessionService.saveOrUpdate(new Session(roommate,false));
 
         //return
         return redirect("/");

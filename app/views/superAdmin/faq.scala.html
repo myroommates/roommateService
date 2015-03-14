@@ -1,4 +1,4 @@
-@(data:dto.InterfaceDataDTO,faqs:List[dto.FaqDTO],surveys:List[dto.SurveyDTO],langs:List[String])
+@(data:dto.InterfaceDataDTO,faqs:List[dto.FaqDTO],surveys:List[dto.SurveyDTO],langs:List[String],status:dto.SuperAdminStatusDTO)
 
 @import com.fasterxml.jackson.databind.ObjectMapper
 
@@ -7,6 +7,7 @@
 
     <script>
         var data = @Html(new ObjectMapper().writeValueAsString(data));
+        var infos = @Html(new ObjectMapper().writeValueAsString(status));
         var faqs = @Html(new ObjectMapper().writeValueAsString(faqs));
         var surveys = @Html(new ObjectMapper().writeValueAsString(surveys));
         var langs = @Html(new ObjectMapper().writeValueAsString(langs));
@@ -14,6 +15,28 @@
 
 
     <tabset>
+        <tab heading="Status">
+            <div class="bordered">
+                <table>
+                    <tr>
+                        <td>Nb of homes</td>
+                        <td>{{infos.homes}}</td>
+                    </tr>
+                    <tr>
+                        <td>Nb of roommates</td>
+                        <td>{{infos.roommates}}</td>
+                    </tr>
+                    <tr>
+                        <td>Nb of tickets</td>
+                        <td>{{infos.tickets}}</td>
+                    </tr>
+                    <tr>
+                        <td>Total sum</td>
+                        <td>{{infos.totalSum}}</td>
+                    </tr>
+                </table>
+            </div>
+        </tab>
         <tab heading="FAQ">
             <div ng-repeat="faq in faqs" class="bordered">
                 <div>

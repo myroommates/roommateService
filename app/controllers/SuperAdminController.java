@@ -8,19 +8,17 @@ import converter.FaqToFaqDTOConverter;
 import converter.RoommateToInterfaceDataDTOConverter;
 import converter.SurveyToSurveyDTOConverter;
 import dto.FaqDTO;
-import dto.ListDTO;
 import dto.SurveyDTO;
 import dto.post.FaqCreatorDTO;
+import dto.SuperAdminStatusDTO;
 import dto.post.SurveyCreatorDTO;
 import models.entities.*;
 import play.Logger;
 import play.i18n.Lang;
 import play.mvc.Result;
 import play.mvc.Security;
-import services.FaqService;
-import services.SurveyService;
-import services.impl.FaqServiceImpl;
-import services.impl.SurveyServiceImpl;
+import services.*;
+import services.impl.*;
 
 import java.util.*;
 
@@ -36,6 +34,10 @@ public class SuperAdminController extends AbstractController {
     //service
     private FaqService faqService = new FaqServiceImpl();
     private SurveyService surveyService = new SurveyServiceImpl();
+    private RoommateService roommateService = new RoommateServiceImpl();
+    private HomeService homeService= new HomeServiceImpl();
+    private TicketService ticketService = new TicketServiceImpl();
+
     //controller
     private SecurityController securityController = new SecurityController();
 
@@ -62,12 +64,21 @@ public class SuperAdminController extends AbstractController {
             langCode.add(lang.code());
         }
 
+        //build status data
+        SuperAdminStatusDTO superAdminStatusDTO  = new SuperAdminStatusDTO();
+        superAdminStatusDTO.setHomes(homeService.getCount());
+        superAdminStatusDTO.setRoommates(roommateService.getCount());
+        superAdminStatusDTO.setTickets(ticketService.getCount());
+
+        Logger.warn("superAdminStatusDTO:"+superAdminStatusDTO);
+
 
         return ok(views.html.superAdmin.faq.render(
                 roommateToInterfaceDataDTOConverter.convert(securityController.getCurrentUser()),
                 listF,
                 listSurvey,
-                langCode));
+                langCode,
+                superAdminStatusDTO));
     }
 
     @Security.Authenticated(SuperAdminSecurityController.class)

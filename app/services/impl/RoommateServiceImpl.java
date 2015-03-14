@@ -75,6 +75,11 @@ public class RoommateServiceImpl extends CrudServiceImpl<Roommate> implements Ro
                 account.getPassword());
     }
 
+    @Override
+    public Integer getCount() {
+        return Ebean.createQuery(Roommate.class).findRowCount();
+    }
+
     private String generateEncryptingPassword(final String password) {
 
         return new StrongPasswordEncryptor().encryptPassword(password);
