@@ -1,9 +1,10 @@
 package models.entities;
 
-import models.entities.technical.AuditedAbstractEntity;
+import models.entities.technical.AbstractEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import java.util.Set;
 
@@ -11,7 +12,7 @@ import java.util.Set;
  * Created by florian on 22/12/14.
  */
 @Entity
-public class Home extends AuditedAbstractEntity{
+public class Home extends AbstractEntity {
 
 
     public static final String DEFAULT_MONEY_SYMBOL = "€";
@@ -27,9 +28,19 @@ public class Home extends AuditedAbstractEntity{
     @OneToMany(mappedBy = "home")
     private Set<Event> events;
 
-
     @OneToMany(mappedBy = "home")
     private Set<ShoppingItem> shoppingItems;
+
+    @OneToMany(mappedBy = "home")
+    private Set<Comment> comments;
+
+    public Set<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(Set<Comment> comments) {
+        this.comments = comments;
+    }
 
     public String getMoneySymbol() {
         return moneySymbol;

@@ -32,7 +32,17 @@ public class TicketDTO extends DTO {
 
     private Long payerId;
 
+    private List<CommentDTO> comments;
+
     public TicketDTO() {
+    }
+
+    public List<CommentDTO> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<CommentDTO> comments) {
+        this.comments = comments;
     }
 
     public Long getId() {
@@ -100,5 +110,13 @@ public class TicketDTO extends DTO {
             debtorList = new ArrayList<>();
         }
         this.debtorList.add(ticketDebtorDTO);
+    }
+
+    public void addComment(CommentDTO comment) {
+        if(comments==null){
+            comments = new ArrayList<>();
+        }
+
+        comments.add(comment);
     }
 }

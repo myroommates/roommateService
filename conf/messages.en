@@ -222,3 +222,4 @@ UNKNOWN_EMAIL=Email not found
 VALIDATION_DEBTOR=At least one roommate must be selected
 VALIDATION_PASSWORD=Please use between 6 and 18 letters, numbers or -_
 VALIDATION_EMAIL=Email expected
+NOT_YOU_COMMENT=This is not your comment {0}

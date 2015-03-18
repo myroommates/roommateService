@@ -1,15 +1,14 @@
 package models.entities;
 
-import models.entities.technical.AuditedAbstractEntity;
+import models.entities.technical.AbstractEntity;
 
 import javax.persistence.*;
-import java.util.List;
 
 /**
  * Created by florian on 25/02/15.
  */
 @Entity
-public class SurveyAnswer extends AuditedAbstractEntity {
+public class SurveyAnswer extends AbstractEntity {
 
 
     @ManyToOne(optional = false,cascade = CascadeType.ALL)

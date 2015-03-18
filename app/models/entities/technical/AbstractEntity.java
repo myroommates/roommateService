@@ -2,8 +2,6 @@ package models.entities.technical;
 
 import com.avaje.ebean.annotation.CreatedTimestamp;
 import com.avaje.ebean.annotation.UpdatedTimestamp;
-import models.entities.TranslationValue;
-import play.Logger;
 import play.db.ebean.Model;
 
 import javax.persistence.*;
@@ -13,7 +11,7 @@ import java.util.Date;
  * Created by florian on 10/11/14.
  */
 @MappedSuperclass
-public abstract class AuditedAbstractEntity extends Model {
+public abstract class AbstractEntity extends Model {
 
 
     public static final String COL_ID = "id";
@@ -70,7 +68,7 @@ public abstract class AuditedAbstractEntity extends Model {
         if (!(o.getClass().equals(this.getClass()))) return false;
         if (!super.equals(o)) return false;
 
-        AuditedAbstractEntity that = (AuditedAbstractEntity) o;
+        AbstractEntity that = (AbstractEntity) o;
 
         if (!id.equals(that.id)) return false;
 

@@ -1,6 +1,6 @@
 package models.entities;
 
-import models.entities.technical.AuditedAbstractEntity;
+import models.entities.technical.AbstractEntity;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -9,7 +9,7 @@ import java.util.Date;
  * Created by florian on 4/12/14.
  */
 @Entity
-public class Session extends AuditedAbstractEntity {
+public class Session extends AbstractEntity {
 
     @ManyToOne(optional = false)
     private Roommate roommate;

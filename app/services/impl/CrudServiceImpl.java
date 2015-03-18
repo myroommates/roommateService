@@ -1,7 +1,7 @@
 package services.impl;
 
 import com.avaje.ebean.Ebean;
-import models.entities.technical.AuditedAbstractEntity;
+import models.entities.technical.AbstractEntity;
 import services.CrudService;
 
 import java.lang.reflect.ParameterizedType;
@@ -9,7 +9,7 @@ import java.lang.reflect.ParameterizedType;
 /**
  * Created by florian on 17/12/14.
  */
-public abstract class CrudServiceImpl<T extends AuditedAbstractEntity> implements CrudService<T> {
+public abstract class CrudServiceImpl<T extends AbstractEntity> implements CrudService<T> {
 
 
     protected Class<T> entityClass;

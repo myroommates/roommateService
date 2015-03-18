@@ -25,6 +25,7 @@ GET           /rest/ticket/:id                         @controllers.rest.TicketR
 POST          /rest/ticket                             @controllers.rest.TicketRestController.create()
 PUT           /rest/ticket/:id                         @controllers.rest.TicketRestController.update(id:Long)
 DELETE        /rest/ticket/:id                         @controllers.rest.TicketRestController.remove(id:Long)
+POST          /rest/ticket/comment/:id                 @controllers.rest.CommentRestController.addCommentForTicket(id:Long)
 
 #roommate
 GET           /rest/roommate                           @controllers.rest.RoommateRestController.getAll()
@@ -49,6 +50,7 @@ POST          /rest/shoppingItem                       @controllers.rest.Shoppin
 PUT           /rest/shoppingItem/:id                   @controllers.rest.ShoppingRestController.update(id:Long)
 PUT           /rest/shoppingItem/wasBought/:ids        @controllers.rest.ShoppingRestController.setWasBought(ids:String)
 DELETE        /rest/shoppingItem/:id                   @controllers.rest.ShoppingRestController.remove(id:Long)
+POST          /rest/shoppingItem/comment/:id           @controllers.rest.CommentRestController.addCommentForShoppingItem(id:Long)
 
 #superadmin
 POST          /rest/superadmin/faq                     @controllers.SuperAdminController.createFaq()
@@ -59,6 +61,11 @@ POST          /rest/contactus                          @controllers.rest.Contact
 
 #survey
 POST          /rest/survey                             @controllers.rest.SurveyRestController.answer()
+
+#comment
+POST          /rest/comment/                           @controllers.rest.CommentRestController.addCommentForHome()
+PUT           /rest/comment/:id                        @controllers.rest.CommentRestController.editComment(id:Long)
+DELETE        /rest/comment/:id                        @controllers.rest.CommentRestController.remove(id:Long)
 
 #
 # LOCAL routes

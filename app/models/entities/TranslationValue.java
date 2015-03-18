@@ -1,17 +1,16 @@
 package models.entities;
 
-import models.entities.technical.AuditedAbstractEntity;
+import models.entities.technical.AbstractEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 /**
  * Created by florian on 19/02/15.
  */
 @Entity
-public class TranslationValue extends AuditedAbstractEntity {
+public class TranslationValue extends AbstractEntity {
 
     @ManyToOne
     private Translation translation;

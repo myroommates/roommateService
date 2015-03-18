@@ -1,6 +1,6 @@
 package models.entities;
 
-import models.entities.technical.AuditedAbstractEntity;
+import models.entities.technical.AbstractEntity;
 
 import javax.persistence.*;
 import java.util.List;
@@ -12,7 +12,7 @@ import java.util.List;
 @NamedQueries({
         @NamedQuery(name = Survey.FIND_BY_KEY, query = "where " + Survey.COL_KEY + " = :" + Survey.PARAM_KEY)
 })
-public class Survey extends AuditedAbstractEntity {
+public class Survey extends AbstractEntity {
 
     //request
     public static final String FIND_BY_KEY = "Survey_FIND_BY_KEY";

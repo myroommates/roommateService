@@ -1,6 +1,6 @@
 package models.entities;
 
-import models.entities.technical.AuditedAbstractEntity;
+import models.entities.technical.AbstractEntity;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -12,11 +12,11 @@ import java.util.Set;
  */
 @Entity
 @NamedQueries({
-        @NamedQuery(name = Ticket.FIND_BY_ID, query = "where " + AuditedAbstractEntity.COL_ID + " = :" + AuditedAbstractEntity.PARAM_ID),
+        @NamedQuery(name = Ticket.FIND_BY_ID, query = "where " + AbstractEntity.COL_ID + " = :" + AbstractEntity.PARAM_ID),
         @NamedQuery(name = Ticket.FIND_BY_HOME, query = "where " + Ticket.COL_HOME + " = :" + Ticket.PARAM_HOME),
         @NamedQuery(name = Ticket.FIND_BY_PAYER, query = "where " + Ticket.COL_PAYER + " = :" + Ticket.PARAM_PAYER),
 })
-public class Ticket extends AuditedAbstractEntity {
+public class Ticket extends AbstractEntity {
 
     //requests
     public static final String FIND_BY_HOME = "Ticket_FIND_BY_HOME";
@@ -48,7 +48,18 @@ public class Ticket extends AuditedAbstractEntity {
     @OneToMany(cascade = CascadeType.ALL)
     private Set<TicketDebtor> debtorList = new HashSet<>();
 
+    @OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL)
+    private Set<Comment> comments;
+
     public Ticket() {
+    }
+
+    public Set<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(Set<Comment> comments) {
+        this.comments = comments;
     }
 
     public String getDescription() {

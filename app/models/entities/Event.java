@@ -1,6 +1,6 @@
 package models.entities;
 
-import models.entities.technical.AuditedAbstractEntity;
+import models.entities.technical.AbstractEntity;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -10,10 +10,10 @@ import java.util.Date;
  */
 @Entity
 @NamedQueries({
-        @NamedQuery(name = Event.FIND_BY_ID, query = "where " + AuditedAbstractEntity.COL_ID + " = :" + AuditedAbstractEntity.PARAM_ID),
+        @NamedQuery(name = Event.FIND_BY_ID, query = "where " + AbstractEntity.COL_ID + " = :" + AbstractEntity.PARAM_ID),
         @NamedQuery(name = Event.FIND_BY_HOME, query = "where " + Event.COL_HOME + "= :" + Event.PARAM_HOME),
 })
-public class Event extends AuditedAbstractEntity {
+public class Event extends AbstractEntity {
 
     //request
     public static final String FIND_BY_HOME = "Event_FIND_BY_HOME";

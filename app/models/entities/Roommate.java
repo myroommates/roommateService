@@ -1,6 +1,6 @@
 package models.entities;
 
-import models.entities.technical.AuditedAbstractEntity;
+import models.entities.technical.AbstractEntity;
 import play.i18n.Lang;
 
 import javax.persistence.*;
@@ -12,12 +12,12 @@ import java.util.List;
  */
 @Entity
 @NamedQueries({
-        @NamedQuery(name = Roommate.FIND_BY_ID, query = "where " + AuditedAbstractEntity.COL_ID + " = :" + AuditedAbstractEntity.PARAM_ID),
+        @NamedQuery(name = Roommate.FIND_BY_ID, query = "where " + AbstractEntity.COL_ID + " = :" + AbstractEntity.PARAM_ID),
         @NamedQuery(name = Roommate.FIND_BY_AUTHENTICATION_KEY, query = "where " + Roommate.COL_AUTHENTICATION_KEY + " = :" + Roommate.PARAM_AUTHENTICATION_KEY),
         @NamedQuery(name = Roommate.FIND_BY_HOME, query = "where " + Roommate.COL_HOME + " = :" + Roommate.PARAM_HOME),
         @NamedQuery(name = Roommate.FIND_BY_EMAIL, query = "where " + Roommate.COL_EMAIL + " = :" + Roommate.PARAM_EMAIL),
 })
-public class Roommate extends AuditedAbstractEntity {
+public class Roommate extends AbstractEntity {
 
     //request
     public static final String FIND_BY_EMAIL = "Roommate_FIND_BY_EMAIL";

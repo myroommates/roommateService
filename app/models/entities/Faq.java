@@ -1,9 +1,8 @@
 package models.entities;
 
-import models.entities.technical.AuditedAbstractEntity;
+import models.entities.technical.AbstractEntity;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
@@ -11,7 +10,7 @@ import javax.persistence.ManyToOne;
  * Created by florian on 19/02/15.
  */
 @Entity
-public class Faq extends AuditedAbstractEntity {
+public class Faq extends AbstractEntity {
 
     @ManyToOne(optional = false,cascade = CascadeType.ALL)
     private Translation question;

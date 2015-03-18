@@ -2,6 +2,7 @@ package converter;
 
 import dto.TicketDTO;
 import dto.TicketDebtorDTO;
+import models.entities.Comment;
 import models.entities.Ticket;
 import models.entities.TicketDebtor;
 
@@ -9,6 +10,8 @@ import models.entities.TicketDebtor;
  * Created by florian on 11/11/14.
  */
 public class TicketToTicketConverter implements ConverterInterface<Ticket, TicketDTO> {
+
+    private CommentToCommentDTOConverter commentToCommentDTOConverter = new CommentToCommentDTOConverter();
 
     public TicketDTO convert(Ticket ticket) {
 
@@ -24,6 +27,11 @@ public class TicketToTicketConverter implements ConverterInterface<Ticket, Ticke
 
         for (TicketDebtor ticketDebtor : ticket.getDebtorList()) {
             dto.addTicketDebtor(new TicketDebtorDTO(ticketDebtor.getRoommate().getId(),ticketDebtor.getValue()));
+        }
+
+        //comments
+        for (Comment comment : ticket.getComments()) {
+            dto.addComment(commentToCommentDTOConverter.convert(comment));
         }
 
         return dto;

@@ -3,7 +3,9 @@ package dto;
 import dto.technical.DTO;
 import dto.technical.verification.Size;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by florian on 4/12/14.
@@ -23,6 +25,8 @@ public class ShoppingItemDTO extends DTO {
 
     private Boolean wasBought;
     private Boolean onlyForMe;
+
+    private List<CommentDTO> comments;
 
     public ShoppingItemDTO() {
     }
@@ -83,6 +87,20 @@ public class ShoppingItemDTO extends DTO {
         this.onlyForMe = onlyForMe;
     }
 
+    public List<CommentDTO> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<CommentDTO> comments) {
+        this.comments = comments;
+    }
+    public void addComment(CommentDTO comment) {
+        if(comments==null){
+            comments = new ArrayList<>();
+        }
+        comments.add(comment);
+    }
+
     @Override
     public String toString() {
         return "ShoppingItemDTO{" +
@@ -93,4 +111,6 @@ public class ShoppingItemDTO extends DTO {
                 ", wasBought=" + wasBought +
                 '}';
     }
+
+
 }

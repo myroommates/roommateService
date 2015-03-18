@@ -1,6 +1,6 @@
 package models.entities;
 
-import models.entities.technical.AuditedAbstractEntity;
+import models.entities.technical.AbstractEntity;
 
 import javax.persistence.*;
 
@@ -11,7 +11,7 @@ import javax.persistence.*;
 @NamedQueries({
         @NamedQuery(name = TicketDebtor.FIND_BY_ROOMMATE, query = "where " + TicketDebtor.COL_ROOMMATE+ " = :" + TicketDebtor.PARAM_ROOMMATE),
 })
-public class TicketDebtor extends AuditedAbstractEntity{
+public class TicketDebtor extends AbstractEntity {
 
     //request
     public static final String FIND_BY_ROOMMATE = "TicketDebtor_FIND_BY_ROOMMATE";

@@ -218,3 +218,4 @@ UNKNOWN_EMAIL=Email non trouvé
 VALIDATION_DEBTOR=Au moins un colocataire doit être sélectionné
 VALIDATION_PASSWORD=Utilisez entre 6 et 18 letters, chiffres ou _-
 VALIDATION_EMAIL=Adresse email attendue
+NOT_YOU_COMMENT=Ce n''est pas votre commentaire

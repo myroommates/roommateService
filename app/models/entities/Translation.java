@@ -1,6 +1,6 @@
 package models.entities;
 
-import models.entities.technical.AuditedAbstractEntity;
+import models.entities.technical.AbstractEntity;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -12,7 +12,7 @@ import java.util.List;
  * Created by florian on 19/02/15.
  */
 @Entity
-public class Translation extends AuditedAbstractEntity{
+public class Translation extends AbstractEntity {
 
     @OneToMany(mappedBy = "translation",cascade = CascadeType.ALL)
     private List<TranslationValue> translationValues;
