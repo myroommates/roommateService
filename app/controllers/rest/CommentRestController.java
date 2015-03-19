@@ -2,6 +2,7 @@ package controllers.rest;
 
 import controllers.AboutController;
 import controllers.technical.SecurityRestController;
+import converter.CommentToCommentDTOConverter;
 import dto.CommentDTO;
 import dto.technical.ResultDTO;
 import models.entities.Comment;
@@ -32,6 +33,9 @@ public class CommentRestController extends AboutController{
     private TicketService ticketService = new TicketServiceImpl();
     private CommentService commentService = new CommentServiceImpl();
 
+    //converter
+    private CommentToCommentDTOConverter commentToCommentDTOConverter = new CommentToCommentDTOConverter();
+
     @Security.Authenticated(SecurityRestController.class)
     @com.avaje.ebean.annotation.Transactional
     public Result addCommentForShoppingItem(Long shoppingItemId){
@@ -51,7 +55,7 @@ public class CommentRestController extends AboutController{
 
 
         //result
-        return ok(new ResultDTO());
+        return ok(commentToCommentDTOConverter.convert(comment));
     }
 
     @Security.Authenticated(SecurityRestController.class)
@@ -67,7 +71,7 @@ public class CommentRestController extends AboutController{
 
 
         //result
-        return ok(new ResultDTO());
+        return ok(commentToCommentDTOConverter.convert(comment));
     }
 
     @Security.Authenticated(SecurityRestController.class)
@@ -89,7 +93,7 @@ public class CommentRestController extends AboutController{
 
 
         //result
-        return ok(new ResultDTO());
+        return ok(commentToCommentDTOConverter.convert(comment));
     }
 
     private Comment createComment(CommentDTO commentDTO){

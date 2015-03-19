@@ -63,7 +63,7 @@ POST          /rest/contactus                          @controllers.rest.Contact
 POST          /rest/survey                             @controllers.rest.SurveyRestController.answer()
 
 #comment
-POST          /rest/comment/                           @controllers.rest.CommentRestController.addCommentForHome()
+POST          /rest/comment                            @controllers.rest.CommentRestController.addCommentForHome()
 PUT           /rest/comment/:id                        @controllers.rest.CommentRestController.editComment(id:Long)
 DELETE        /rest/comment/:id                        @controllers.rest.CommentRestController.remove(id:Long)
 
