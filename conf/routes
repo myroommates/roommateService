@@ -26,6 +26,7 @@ POST          /rest/ticket                             @controllers.rest.TicketR
 PUT           /rest/ticket/:id                         @controllers.rest.TicketRestController.update(id:Long)
 DELETE        /rest/ticket/:id                         @controllers.rest.TicketRestController.remove(id:Long)
 POST          /rest/ticket/comment/:id                 @controllers.rest.CommentRestController.addCommentForTicket(id:Long)
+PUT           /rest/ticket/comment/read/:id            @controllers.rest.CommentRestController.hasReadCommentForTicket(id:Long)
 
 #roommate
 GET           /rest/roommate                           @controllers.rest.RoommateRestController.getAll()
@@ -51,6 +52,7 @@ PUT           /rest/shoppingItem/:id                   @controllers.rest.Shoppin
 PUT           /rest/shoppingItem/wasBought/:ids        @controllers.rest.ShoppingRestController.setWasBought(ids:String)
 DELETE        /rest/shoppingItem/:id                   @controllers.rest.ShoppingRestController.remove(id:Long)
 POST          /rest/shoppingItem/comment/:id           @controllers.rest.CommentRestController.addCommentForShoppingItem(id:Long)
+PUT           /rest/shoppingItem/comment/read/:id      @controllers.rest.CommentRestController.hasReadCommentForShoppingItem(id:Long)
 
 #superadmin
 POST          /rest/superadmin/faq                     @controllers.SuperAdminController.createFaq()
@@ -63,6 +65,7 @@ POST          /rest/contactus                          @controllers.rest.Contact
 POST          /rest/survey                             @controllers.rest.SurveyRestController.answer()
 
 #comment
+PUT           /rest/read/                              @controllers.rest.CommentRestController.hasReadCommentForHome()
 POST          /rest/comment                            @controllers.rest.CommentRestController.addCommentForHome()
 PUT           /rest/comment/:id                        @controllers.rest.CommentRestController.editComment(id:Long)
 DELETE        /rest/comment/:id                        @controllers.rest.CommentRestController.remove(id:Long)

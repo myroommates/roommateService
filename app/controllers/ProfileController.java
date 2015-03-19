@@ -27,7 +27,7 @@ public class ProfileController extends AbstractController{
     private HomeService homeService = new HomeServiceImpl();
 
     //converter
-    private RoommateToInterfaceDataDTOConverter roommateToInterfaceDataDTOConverter = new RoommateToInterfaceDataDTOConverter();
+    private RoommateToInterfaceDataDTOConverter roommateToInterfaceDataDTOConverter = new RoommateToInterfaceDataDTOConverter(securityController);
 
     //controller
     private HomeController homeController = new HomeController();

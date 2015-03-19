@@ -22,7 +22,7 @@ public class HomeRestController extends AbstractController {
     private HomeService homeService = new HomeServiceImpl();
 
     //convert
-    private HomeToHomeConverter homeToHomeConverter = new HomeToHomeConverter();
+    private HomeToHomeConverter homeToHomeConverter = new HomeToHomeConverter(securityController);
 
     @Security.Authenticated(AdminSecurityRestController.class)
     @com.avaje.ebean.annotation.Transactional

@@ -37,8 +37,8 @@ public class ShoppingController extends AbstractController {
 
     //convert
     private RoommateToRoommateDTOConverter roommateToRoommateDTOConverter = new RoommateToRoommateDTOConverter();
-    private ShoppingItemToShoppingItemDTOConverter shoppingItemToShoppingItemDTOConverter= new ShoppingItemToShoppingItemDTOConverter();
-    private RoommateToInterfaceDataDTOConverter roommateToInterfaceDataDTOConverter = new RoommateToInterfaceDataDTOConverter();
+    private ShoppingItemToShoppingItemDTOConverter shoppingItemToShoppingItemDTOConverter= new ShoppingItemToShoppingItemDTOConverter(securityController);
+    private RoommateToInterfaceDataDTOConverter roommateToInterfaceDataDTOConverter = new RoommateToInterfaceDataDTOConverter(securityController);
 
     //service
     private RoommateService roommateService = new RoommateServiceImpl();

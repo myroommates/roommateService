@@ -6,14 +6,17 @@ import converter.CommentToCommentDTOConverter;
 import dto.CommentDTO;
 import dto.technical.ResultDTO;
 import models.entities.Comment;
+import models.entities.CommentLastVisualization;
 import models.entities.ShoppingItem;
 import models.entities.Ticket;
 import play.mvc.Result;
 import play.mvc.Results;
 import play.mvc.Security;
+import services.CommentLastVisualizationService;
 import services.CommentService;
 import services.ShoppingItemService;
 import services.TicketService;
+import services.impl.CommentLastVisualizationServiceImpl;
 import services.impl.CommentServiceImpl;
 import services.impl.ShoppingItemServiceImpl;
 import services.impl.TicketServiceImpl;
@@ -25,24 +28,25 @@ import java.util.Date;
 /**
  * Created by florian on 18/03/15.
  */
-public class CommentRestController extends AboutController{
+public class CommentRestController extends AboutController {
 
 
     //service
     private ShoppingItemService shoppingItemService = new ShoppingItemServiceImpl();
     private TicketService ticketService = new TicketServiceImpl();
     private CommentService commentService = new CommentServiceImpl();
+    private CommentLastVisualizationService commentLastVisualizationService= new CommentLastVisualizationServiceImpl();
 
     //converter
     private CommentToCommentDTOConverter commentToCommentDTOConverter = new CommentToCommentDTOConverter();
 
     @Security.Authenticated(SecurityRestController.class)
     @com.avaje.ebean.annotation.Transactional
-    public Result addCommentForShoppingItem(Long shoppingItemId){
+    public Result addCommentForShoppingItem(Long shoppingItemId) {
 
         //control shopping item
         ShoppingItem shoppingItem = shoppingItemService.findById(shoppingItemId);
-        if(!shoppingItem.getHome().equals(securityController.getCurrentUser().getHome())){
+        if (!shoppingItem.getHome().equals(securityController.getCurrentUser().getHome())) {
             throw new MyRuntimeException(ErrorMessage.NOT_YOU_SHOPPING_ITEM, shoppingItemId);
         }
 
@@ -53,6 +57,9 @@ public class CommentRestController extends AboutController{
         //save
         commentService.saveOrUpdate(comment);
 
+        //read
+        hasReadCommentForShoppingItem(shoppingItemId);
+
 
         //result
         return ok(commentToCommentDTOConverter.convert(comment));
@@ -60,7 +67,7 @@ public class CommentRestController extends AboutController{
 
     @Security.Authenticated(SecurityRestController.class)
     @com.avaje.ebean.annotation.Transactional
-    public Result addCommentForHome(){
+    public Result addCommentForHome() {
 
         //add comment
         Comment comment = createComment(extractDTOFromRequest(CommentDTO.class));
@@ -69,6 +76,8 @@ public class CommentRestController extends AboutController{
         //save
         commentService.saveOrUpdate(comment);
 
+        //read
+        hasReadCommentForHome();
 
         //result
         return ok(commentToCommentDTOConverter.convert(comment));
@@ -76,11 +85,11 @@ public class CommentRestController extends AboutController{
 
     @Security.Authenticated(SecurityRestController.class)
     @com.avaje.ebean.annotation.Transactional
-    public Result addCommentForTicket(Long ticketId){
+    public Result addCommentForTicket(Long ticketId) {
 
         //control shopping item
-        Ticket ticket= ticketService.findById(ticketId);
-        if(!ticket.getHome().equals(securityController.getCurrentUser().getHome())){
+        Ticket ticket = ticketService.findById(ticketId);
+        if (!ticket.getHome().equals(securityController.getCurrentUser().getHome())) {
             throw new MyRuntimeException(ErrorMessage.NOT_YOU_TICKET, ticketId);
         }
 
@@ -91,12 +100,14 @@ public class CommentRestController extends AboutController{
         //save
         commentService.saveOrUpdate(comment);
 
+        //read
+        hasReadCommentForTicket(ticketId);
 
         //result
         return ok(commentToCommentDTOConverter.convert(comment));
     }
 
-    private Comment createComment(CommentDTO commentDTO){
+    private Comment createComment(CommentDTO commentDTO) {
 
         Comment comment = new Comment();
 
@@ -105,26 +116,25 @@ public class CommentRestController extends AboutController{
         comment.setDateCreation(new Date());
 
         //parent
-        Comment commentParent = commentService.findById(commentDTO.getParentId());
-        if(commentParent!=null && commentParent.getCreator().getHome().equals(securityController.getCurrentUser().getHome())) {
-            comment.setParent(commentParent);
+        if (commentDTO.getParentId() != null) {
+            Comment commentParent = commentService.findById(commentDTO.getParentId());
+            if (commentParent != null && commentParent.getCreator().getHome().equals(securityController.getCurrentUser().getHome())) {
+                comment.setParent(commentParent);
+            }
         }
 
         return comment;
     }
 
 
-
-
-
     @Security.Authenticated(SecurityRestController.class)
     @com.avaje.ebean.annotation.Transactional
-    public Result editComment(Long commentId){
+    public Result editComment(Long commentId) {
 
         Comment comment = commentService.findById(commentId);
 
         //control comment
-        if(comment==null || !comment.getCreator().equals(securityController.getCurrentUser())){
+        if (comment == null || !comment.getCreator().equals(securityController.getCurrentUser())) {
             throw new MyRuntimeException(ErrorMessage.NOT_YOU_COMMENT, commentId);
         }
 
@@ -156,4 +166,86 @@ public class CommentRestController extends AboutController{
         //result
         return ok(new ResultDTO());
     }
+
+    @Security.Authenticated(SecurityRestController.class)
+    @com.avaje.ebean.annotation.Transactional
+    public Result hasReadCommentForTicket(Long ticketId) {
+
+        //control shopping item
+        Ticket ticket = ticketService.findById(ticketId);
+        if (!ticket.getHome().equals(securityController.getCurrentUser().getHome())) {
+            throw new MyRuntimeException(ErrorMessage.NOT_YOU_TICKET, ticketId);
+        }
+
+        for (CommentLastVisualization commentLastVisualization : ticket.getCommentLastVisualizations()) {
+            if (commentLastVisualization.getRoommate().equals(securityController.getCurrentUser())) {
+                commentLastVisualization.setDate(new Date());
+
+                commentLastVisualizationService.saveOrUpdate(commentLastVisualization);
+                return ok(new ResultDTO());
+            }
+        }
+
+        CommentLastVisualization commentLastVisualization = new CommentLastVisualization();
+        commentLastVisualization.setTicket(ticket);
+        commentLastVisualization.setRoommate(securityController.getCurrentUser());
+        commentLastVisualization.setDate(new Date());
+
+        commentLastVisualizationService.saveOrUpdate(commentLastVisualization);
+
+        return ok(new ResultDTO());
+    }
+
+    @Security.Authenticated(SecurityRestController.class)
+    @com.avaje.ebean.annotation.Transactional
+    public Result hasReadCommentForShoppingItem(Long shoppingItemId) {
+
+        //control shopping item
+        ShoppingItem shoppingItem = shoppingItemService.findById(shoppingItemId);
+        if (!shoppingItem.getHome().equals(securityController.getCurrentUser().getHome())) {
+            throw new MyRuntimeException(ErrorMessage.NOT_YOU_TICKET, shoppingItemId);
+        }
+
+        for (CommentLastVisualization commentLastVisualization : shoppingItem.getCommentLastVisualizations()) {
+            if (commentLastVisualization.getRoommate().equals(securityController.getCurrentUser())) {
+                commentLastVisualization.setDate(new Date());
+
+                commentLastVisualizationService.saveOrUpdate(commentLastVisualization);
+                return ok(new ResultDTO());
+            }
+        }
+
+        CommentLastVisualization commentLastVisualization = new CommentLastVisualization();
+        commentLastVisualization.setShoppingItem(shoppingItem);
+        commentLastVisualization.setRoommate(securityController.getCurrentUser());
+        commentLastVisualization.setDate(new Date());
+
+        commentLastVisualizationService.saveOrUpdate(commentLastVisualization);
+
+        return ok(new ResultDTO());
+    }
+
+    @Security.Authenticated(SecurityRestController.class)
+    @com.avaje.ebean.annotation.Transactional
+    public Result hasReadCommentForHome() {
+
+        for (CommentLastVisualization commentLastVisualization : securityController.getCurrentUser().getHome().getCommentLastVisualizations()) {
+            if (commentLastVisualization.getRoommate().equals(securityController.getCurrentUser())) {
+                commentLastVisualization.setDate(new Date());
+
+                commentLastVisualizationService.saveOrUpdate(commentLastVisualization);
+                return ok(new ResultDTO());
+            }
+        }
+
+        CommentLastVisualization commentLastVisualization = new CommentLastVisualization();
+        commentLastVisualization.setHome(securityController.getCurrentUser().getHome());
+        commentLastVisualization.setRoommate(securityController.getCurrentUser());
+        commentLastVisualization.setDate(new Date());
+
+        commentLastVisualizationService.saveOrUpdate(commentLastVisualization);
+
+        return ok(new ResultDTO());
+    }
+
 }

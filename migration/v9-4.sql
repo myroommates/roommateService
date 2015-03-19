@@ -9,7 +9,7 @@ CREATE TABLE comment
   comment text NOT NULL,
   creator_id bigint NOT NULL,
   date_creation timestamp without time zone NOT NULL,
-  date_edit timestamp without time zone NOT NULL,
+  date_edit timestamp without time zone,
   parent_id bigint,
   home_id bigint,
   ticket_id bigint,

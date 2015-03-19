@@ -30,7 +30,6 @@ public class SuperAdminController extends AbstractController {
     //converter
     private FaqToFaqDTOConverter faqToFaqDTOConverter = new FaqToFaqDTOConverter();
     private SurveyToSurveyDTOConverter surveyToSurveyDTOConverter = new SurveyToSurveyDTOConverter();
-    private RoommateToInterfaceDataDTOConverter roommateToInterfaceDataDTOConverter = new RoommateToInterfaceDataDTOConverter();
     //service
     private FaqService faqService = new FaqServiceImpl();
     private SurveyService surveyService = new SurveyServiceImpl();
@@ -40,6 +39,7 @@ public class SuperAdminController extends AbstractController {
 
     //controller
     private SecurityController securityController = new SecurityController();
+    private RoommateToInterfaceDataDTOConverter roommateToInterfaceDataDTOConverter = new RoommateToInterfaceDataDTOConverter(securityController);
 
     @Security.Authenticated(SuperAdminSecurityController.class)
     @Transactional

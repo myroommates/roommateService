@@ -19,7 +19,9 @@ public class CommentToCommentDTOConverter implements ConverterInterface<Comment,
         dto.setDateCreation(entity.getDateCreation());
         dto.setDateEdit(entity.getDateEdit());
         dto.setCreatorId(entity.getCreator().getId());
-        dto.setParentId(entity.getParent().getId());
+        if(entity.getParent()!=null) {
+            dto.setParentId(entity.getParent().getId());
+        }
 
         return dto;
     }

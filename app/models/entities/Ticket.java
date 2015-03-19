@@ -51,7 +51,18 @@ public class Ticket extends AbstractEntity {
     @OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL)
     private Set<Comment> comments;
 
+    @OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL)
+    private Set<CommentLastVisualization> commentLastVisualizations;
+
     public Ticket() {
+    }
+
+    public Set<CommentLastVisualization> getCommentLastVisualizations() {
+        return commentLastVisualizations;
+    }
+
+    public void setCommentLastVisualizations(Set<CommentLastVisualization> commentLastVisualizations) {
+        this.commentLastVisualizations = commentLastVisualizations;
     }
 
     public Set<Comment> getComments() {

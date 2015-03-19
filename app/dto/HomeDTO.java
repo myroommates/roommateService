@@ -20,6 +20,9 @@ public class HomeDTO extends DTO {
 
     private List<CommentDTO> comments;
 
+    private Boolean hasNewComment;
+
+
     public HomeDTO() {
     }
 
@@ -53,5 +56,13 @@ public class HomeDTO extends DTO {
         }
 
         comments.add(comment);
+    }
+
+    public void setHasNewComment(Boolean hasNewComment) {
+        this.hasNewComment = hasNewComment;
+    }
+
+    public Boolean isHasNewComment() {
+        return hasNewComment;
     }
 }

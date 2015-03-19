@@ -1,8 +1,12 @@
 package converter;
 
+import controllers.technical.CommonSecurityController;
 import dto.HomeDTO;
 import models.entities.Comment;
+import models.entities.CommentLastVisualization;
 import models.entities.Home;
+
+import java.util.Date;
 
 /**
  * Created by florian on 11/11/14.
@@ -10,17 +14,55 @@ import models.entities.Home;
 public class HomeToHomeConverter implements ConverterInterface<Home,HomeDTO>{
 
     private CommentToCommentDTOConverter commentToCommentDTOConverter = new CommentToCommentDTOConverter();
+    private CommonSecurityController securityController;
 
-    public HomeDTO convert(Home home) {
+    public HomeToHomeConverter(CommonSecurityController securityController) {
+        this.securityController = securityController;
+    }
+
+    public HomeDTO convert(Home entity) {
         HomeDTO dto = new HomeDTO();
 
-        dto.setMoneySymbol(home.getMoneySymbol());
-        dto.setId(home.getId());
+        dto.setMoneySymbol(entity.getMoneySymbol());
+        dto.setId(entity.getId());
 
         //comments
-        for (Comment comment : home.getComments()) {
+        for (Comment comment : entity.getComments()) {
             dto.addComment(commentToCommentDTOConverter.convert(comment));
         }
+
+        //compute hasNewComment
+        boolean hasNewComment = false;
+        if (entity.getComments().size() > 0) {
+
+            Date lastVisualization = null;
+
+            for (CommentLastVisualization commentLastVisualization : entity.getCommentLastVisualizations()) {
+                if (commentLastVisualization.getRoommate().equals(securityController.getCurrentUser())) {
+                    lastVisualization = commentLastVisualization.getDate();
+                    break;
+                }
+            }
+
+            if (lastVisualization == null) {
+                hasNewComment=true;
+            } else {
+                for (Comment comment : entity.getComments()) {
+                    if(comment.getCreationDate().compareTo(lastVisualization)>0){
+                        hasNewComment=true;
+                        break;
+                    }
+                    for (Comment comment1 : comment.getChildren()) {
+                        if(comment1.getCreationDate().compareTo(lastVisualization)>0){
+                            hasNewComment=true;
+                            break;
+                        }
+                    }
+
+                }
+            }
+        }
+        dto.setHasNewComment(hasNewComment);
 
         return dto;
     }

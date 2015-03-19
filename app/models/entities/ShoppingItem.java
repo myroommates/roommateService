@@ -30,7 +30,7 @@ public class ShoppingItem extends AbstractEntity {
     @Column(nullable = false, columnDefinition = "Text")
     private String description;
 
-    @Column(nullable = false,columnDefinition = "boolean default false")
+    @Column(nullable = false, columnDefinition = "boolean default false")
     private Boolean onlyForMe = false;
 
     @Column(nullable = false)
@@ -45,13 +45,23 @@ public class ShoppingItem extends AbstractEntity {
     @Column(columnDefinition = " boolean default false", nullable = false)
     private Boolean wasBought = false;
 
-    @OneToMany(mappedBy = "shoppingItem",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "shoppingItem", cascade = CascadeType.ALL)
     private List<Comment> comments;
+
+    @OneToMany(mappedBy = "shoppingItem", cascade = CascadeType.ALL)
+    private List<CommentLastVisualization> commentLastVisualizations;
 
     public ShoppingItem() {
         creationDate = new Date();
     }
 
+    public List<CommentLastVisualization> getCommentLastVisualizations() {
+        return commentLastVisualizations;
+    }
+
+    public void setCommentLastVisualizations(List<CommentLastVisualization> commentLastVisualizations) {
+        this.commentLastVisualizations = commentLastVisualizations;
+    }
 
     public Boolean getOnlyForMe() {
         return onlyForMe;

@@ -36,7 +36,7 @@ public class TicketRestController extends AbstractController {
     private RoommateService roommateService = new RoommateServiceImpl();
 
     //converter
-    private TicketToTicketConverter ticketToTicketConverter = new TicketToTicketConverter();
+    private TicketToTicketConverter ticketToTicketConverter = new TicketToTicketConverter(securityController);
 
 
     @Security.Authenticated(SecurityRestController.class)

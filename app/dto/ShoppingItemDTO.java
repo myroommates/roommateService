@@ -26,9 +26,20 @@ public class ShoppingItemDTO extends DTO {
     private Boolean wasBought;
     private Boolean onlyForMe;
 
+
     private List<CommentDTO> comments;
 
+    private Boolean hasNewComment;
+
     public ShoppingItemDTO() {
+    }
+
+    public Boolean getHasNewComment() {
+        return hasNewComment;
+    }
+
+    public void setHasNewComment(Boolean hasNewComment) {
+        this.hasNewComment = hasNewComment;
     }
 
     public Long getId() {

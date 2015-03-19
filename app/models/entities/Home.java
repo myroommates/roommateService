@@ -34,6 +34,17 @@ public class Home extends AbstractEntity {
     @OneToMany(mappedBy = "home")
     private Set<Comment> comments;
 
+    @OneToMany(mappedBy = "home")
+    private Set<CommentLastVisualization> commentLastVisualizations;
+
+    public Set<CommentLastVisualization> getCommentLastVisualizations() {
+        return commentLastVisualizations;
+    }
+
+    public void setCommentLastVisualizations(Set<CommentLastVisualization> commentLastVisualizations) {
+        this.commentLastVisualizations = commentLastVisualizations;
+    }
+
     public Set<Comment> getComments() {
         return comments;
     }

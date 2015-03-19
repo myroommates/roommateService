@@ -32,8 +32,8 @@ public class CountController extends AbstractController {
 
     //convert
     private RoommateToRoommateDTOConverter roommateToRoommateDTOConverter = new RoommateToRoommateDTOConverter();
-    private TicketToTicketConverter ticketToTicketConverter = new TicketToTicketConverter();
-    private RoommateToInterfaceDataDTOConverter roommateToInterfaceDataDTOConverter = new RoommateToInterfaceDataDTOConverter();
+    private TicketToTicketConverter ticketToTicketConverter = new TicketToTicketConverter(securityController);
+    private RoommateToInterfaceDataDTOConverter roommateToInterfaceDataDTOConverter = new RoommateToInterfaceDataDTOConverter(securityController);
 
     //service
     private RoommateService roommateService = new RoommateServiceImpl();
@@ -93,7 +93,7 @@ public class CountController extends AbstractController {
         for (Ticket ticket : ticketService.findByHome(securityController.getCurrentUser().getHome())) {
             ticketDTOList.addElement(ticketToTicketConverter.convert(ticket));
         }
-        return ok(views.html.home.count.resume.render(roommateToInterfaceDataDTOConverter.convert(securityController.getCurrentUser()), listDTO,ticketDTOList));
+        return ok(views.html.home.count.resume.render(roommateToInterfaceDataDTOConverter.convert(securityController.getCurrentUser()), listDTO, ticketDTOList));
     }
 
     @Security.Authenticated(SecurityController.class)
@@ -101,7 +101,7 @@ public class CountController extends AbstractController {
     public Result tickets() {
 
         //load and convert roommate
-        ListDTO<RoommateDTO> roommateDTOListDTO  = new ListDTO<>();
+        ListDTO<RoommateDTO> roommateDTOListDTO = new ListDTO<>();
 
         for (Roommate roommate : roommateService.findByHome(securityController.getCurrentUser().getHome())) {
             roommateDTOListDTO.addElement(roommateToRoommateDTOConverter.convert(roommate));
@@ -110,12 +110,12 @@ public class CountController extends AbstractController {
         }
         ListDTO<TicketDTO> ticketDTOList = new ListDTO<>();
 
-       // load all ticket
+        // load all ticket
         for (Ticket ticket : ticketService.findByHome(securityController.getCurrentUser().getHome())) {
             ticketDTOList.addElement(ticketToTicketConverter.convert(ticket));
         }
 
 
-        return ok(views.html.home.count.tickets.render(roommateToInterfaceDataDTOConverter.convert(securityController.getCurrentUser()),roommateDTOListDTO,ticketDTOList));
+        return ok(views.html.home.count.tickets.render(roommateToInterfaceDataDTOConverter.convert(securityController.getCurrentUser()), roommateDTOListDTO, ticketDTOList));
     }
 }

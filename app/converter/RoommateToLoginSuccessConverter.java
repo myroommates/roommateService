@@ -1,5 +1,7 @@
 package converter;
 
+import controllers.technical.CommonSecurityController;
+import controllers.technical.SecurityRestController;
 import dto.LoginSuccessDTO;
 import models.entities.*;
 import services.FaqService;
@@ -12,14 +14,20 @@ public class RoommateToLoginSuccessConverter implements ConverterInterface<Roomm
 
     //converter
     private RoommateToRoommateDTOConverter roommateToRoommateDTOConverter = new RoommateToRoommateDTOConverter();
-    private HomeToHomeConverter homeToHomeConverter = new HomeToHomeConverter();
-    private TicketToTicketConverter ticketToTicketConverter = new TicketToTicketConverter();
-    private ShoppingItemToShoppingItemDTOConverter shoppingItemToShoppingItemDTOConverter = new ShoppingItemToShoppingItemDTOConverter();
+    private HomeToHomeConverter homeToHomeConverter;
+    private TicketToTicketConverter ticketToTicketConverter;
+    private ShoppingItemToShoppingItemDTOConverter shoppingItemToShoppingItemDTOConverter;
     private FaqToFaqDTOConverter faqToFaqDTOConverter = new FaqToFaqDTOConverter();
     private SurveyToSurveyDTOConverter surveyToSurveyDTOConverter = new SurveyToSurveyDTOConverter();
 
     //service
     private FaqService faqService = new FaqServiceImpl();
+
+    public RoommateToLoginSuccessConverter(CommonSecurityController securityRestController) {
+        homeToHomeConverter = new HomeToHomeConverter(securityRestController);
+        ticketToTicketConverter = new TicketToTicketConverter(securityRestController);
+        shoppingItemToShoppingItemDTOConverter = new ShoppingItemToShoppingItemDTOConverter(securityRestController);
+    }
 
     public LoginSuccessDTO convert(Roommate roommate) {
 

@@ -42,10 +42,10 @@ public class HomeController extends AbstractController {
     private RoommateService roommateService = new RoommateServiceImpl();
 
     //converter
-    private RoommateToInterfaceDataDTOConverter roommateToInterfaceDataDTOConverter = new RoommateToInterfaceDataDTOConverter();
+    private RoommateToInterfaceDataDTOConverter roommateToInterfaceDataDTOConverter = new RoommateToInterfaceDataDTOConverter(securityController);
     private RoommateToRoommateDTOConverter roommateToRoommateDTOConverter = new RoommateToRoommateDTOConverter();
-    private ShoppingItemToShoppingItemDTOConverter shoppingItemToShoppingItemDTOConverter = new ShoppingItemToShoppingItemDTOConverter();
-    private TicketToTicketConverter ticketToTicketConverter  = new TicketToTicketConverter();
+    private ShoppingItemToShoppingItemDTOConverter shoppingItemToShoppingItemDTOConverter = new ShoppingItemToShoppingItemDTOConverter(securityController);
+    private TicketToTicketConverter ticketToTicketConverter  = new TicketToTicketConverter(securityController);
 
     @Security.Authenticated(SecurityController.class)
     @Transactional

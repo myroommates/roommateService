@@ -26,7 +26,7 @@ public class ShoppingRestController extends AbstractController {
     private ShoppingItemService shoppingItemService = new ShoppingItemServiceImpl();
 
     //converter
-    private ShoppingItemToShoppingItemDTOConverter shoppingItemToShoppingItemDTOConverter = new ShoppingItemToShoppingItemDTOConverter();
+    private ShoppingItemToShoppingItemDTOConverter shoppingItemToShoppingItemDTOConverter = new ShoppingItemToShoppingItemDTOConverter(securityController);
 
     @Security.Authenticated(SecurityRestController.class)
     @Transactional
