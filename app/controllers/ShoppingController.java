@@ -37,8 +37,7 @@ public class ShoppingController extends AbstractController {
 
     //convert
     private RoommateToRoommateDTOConverter roommateToRoommateDTOConverter = new RoommateToRoommateDTOConverter();
-    private ShoppingItemToShoppingItemDTOConverter shoppingItemToShoppingItemDTOConverter= new ShoppingItemToShoppingItemDTOConverter(securityController);
-    private RoommateToInterfaceDataDTOConverter roommateToInterfaceDataDTOConverter = new RoommateToInterfaceDataDTOConverter(securityController);
+    private RoommateToInterfaceDataDTOConverter roommateToInterfaceDataDTOConverter = new RoommateToInterfaceDataDTOConverter();
 
     //service
     private RoommateService roommateService = new RoommateServiceImpl();
@@ -57,6 +56,8 @@ public class ShoppingController extends AbstractController {
 
         }
         ListDTO<ShoppingItemDTO> shoppingItemDTOList = new ListDTO<>();
+
+        ShoppingItemToShoppingItemDTOConverter shoppingItemToShoppingItemDTOConverter = new ShoppingItemToShoppingItemDTOConverter(securityController.getCurrentUser());
 
        // load all ticket
         for (ShoppingItem shoppingItem : shoppingItemService.findByHome(securityController.getCurrentUser().getHome())) {

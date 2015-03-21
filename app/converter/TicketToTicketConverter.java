@@ -3,10 +3,7 @@ package converter;
 import controllers.technical.CommonSecurityController;
 import dto.TicketDTO;
 import dto.TicketDebtorDTO;
-import models.entities.Comment;
-import models.entities.CommentLastVisualization;
-import models.entities.Ticket;
-import models.entities.TicketDebtor;
+import models.entities.*;
 
 import java.util.Date;
 
@@ -15,12 +12,12 @@ import java.util.Date;
  */
 public class TicketToTicketConverter implements ConverterInterface<Ticket, TicketDTO> {
 
-    private CommonSecurityController securityController;
+    private Roommate currentRoommate;
 
     private CommentToCommentDTOConverter commentToCommentDTOConverter = new CommentToCommentDTOConverter();
 
-    public TicketToTicketConverter(CommonSecurityController securityController) {
-        this.securityController = securityController;
+    public TicketToTicketConverter(Roommate currentRoommate) {
+        this.currentRoommate = currentRoommate;
     }
 
     public TicketDTO convert(Ticket entity) {
@@ -51,7 +48,7 @@ public class TicketToTicketConverter implements ConverterInterface<Ticket, Ticke
             Date lastVisualization = null;
 
             for (CommentLastVisualization commentLastVisualization : entity.getCommentLastVisualizations()) {
-                if (commentLastVisualization.getRoommate().equals(securityController.getCurrentUser())) {
+                if (commentLastVisualization.getRoommate().equals(currentRoommate)) {
                     lastVisualization = commentLastVisualization.getDate();
                     break;
                 }

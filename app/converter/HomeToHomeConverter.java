@@ -5,6 +5,7 @@ import dto.HomeDTO;
 import models.entities.Comment;
 import models.entities.CommentLastVisualization;
 import models.entities.Home;
+import models.entities.Roommate;
 
 import java.util.Date;
 
@@ -14,10 +15,10 @@ import java.util.Date;
 public class HomeToHomeConverter implements ConverterInterface<Home,HomeDTO>{
 
     private CommentToCommentDTOConverter commentToCommentDTOConverter = new CommentToCommentDTOConverter();
-    private CommonSecurityController securityController;
+    private Roommate currentRoommate;
 
-    public HomeToHomeConverter(CommonSecurityController securityController) {
-        this.securityController = securityController;
+    public HomeToHomeConverter(Roommate currentRoommate) {
+        this.currentRoommate = currentRoommate;
     }
 
     public HomeDTO convert(Home entity) {
@@ -38,7 +39,7 @@ public class HomeToHomeConverter implements ConverterInterface<Home,HomeDTO>{
             Date lastVisualization = null;
 
             for (CommentLastVisualization commentLastVisualization : entity.getCommentLastVisualizations()) {
-                if (commentLastVisualization.getRoommate().equals(securityController.getCurrentUser())) {
+                if (commentLastVisualization.getRoommate().equals(currentRoommate)) {
                     lastVisualization = commentLastVisualization.getDate();
                     break;
                 }

@@ -5,6 +5,7 @@ import controllers.technical.SecurityRestController;
 import dto.ShoppingItemDTO;
 import models.entities.Comment;
 import models.entities.CommentLastVisualization;
+import models.entities.Roommate;
 import models.entities.ShoppingItem;
 
 import java.util.Date;
@@ -16,10 +17,10 @@ import java.util.logging.Logger;
 public class ShoppingItemToShoppingItemDTOConverter implements ConverterInterface<ShoppingItem, ShoppingItemDTO> {
 
     private CommentToCommentDTOConverter commentToCommentDTOConverter = new CommentToCommentDTOConverter();
-    private CommonSecurityController securityRestController;
+    private Roommate currentUser;;
 
-    public ShoppingItemToShoppingItemDTOConverter(CommonSecurityController securityRestController) {
-        this.securityRestController = securityRestController;
+    public ShoppingItemToShoppingItemDTOConverter(Roommate currentUser) {
+        this.currentUser = currentUser;
     }
 
     @Override
@@ -46,9 +47,7 @@ public class ShoppingItemToShoppingItemDTOConverter implements ConverterInterfac
             Date lastVisualization = null;
 
             for (CommentLastVisualization commentLastVisualization : entity.getCommentLastVisualizations()) {
-                play.Logger.error(commentLastVisualization+"");
-                play.Logger.error(securityRestController+"");
-                if (commentLastVisualization.getRoommate().equals(securityRestController.getCurrentUser())) {
+                if (commentLastVisualization.getRoommate().equals(currentUser)) {
                     lastVisualization = commentLastVisualization.getDate();
                     break;
                 }

@@ -42,10 +42,8 @@ public class HomeController extends AbstractController {
     private RoommateService roommateService = new RoommateServiceImpl();
 
     //converter
-    private RoommateToInterfaceDataDTOConverter roommateToInterfaceDataDTOConverter = new RoommateToInterfaceDataDTOConverter(securityController);
+    private RoommateToInterfaceDataDTOConverter roommateToInterfaceDataDTOConverter = new RoommateToInterfaceDataDTOConverter();
     private RoommateToRoommateDTOConverter roommateToRoommateDTOConverter = new RoommateToRoommateDTOConverter();
-    private ShoppingItemToShoppingItemDTOConverter shoppingItemToShoppingItemDTOConverter = new ShoppingItemToShoppingItemDTOConverter(securityController);
-    private TicketToTicketConverter ticketToTicketConverter  = new TicketToTicketConverter(securityController);
 
     @Security.Authenticated(SecurityController.class)
     @Transactional
@@ -58,6 +56,7 @@ public class HomeController extends AbstractController {
     private ListDTO<TicketDTO> getListTicket(){
         ListDTO<TicketDTO> listDTO = new ListDTO<>();
 
+        TicketToTicketConverter ticketToTicketConverter  = new TicketToTicketConverter(securityController.getCurrentUser());
         //load
         for (Ticket ticket : ticketService.findByHome(securityController.getCurrentUser().getHome())) {
             listDTO.addElement(ticketToTicketConverter.convert(ticket));
@@ -80,6 +79,7 @@ public class HomeController extends AbstractController {
     private ListDTO<ShoppingItemDTO> computeShoppingList() {
         ListDTO<ShoppingItemDTO> listDTO = new ListDTO<>();
 
+        ShoppingItemToShoppingItemDTOConverter shoppingItemToShoppingItemDTOConverter = new ShoppingItemToShoppingItemDTOConverter(securityController.getCurrentUser());
 
         //load shopping list
         for (ShoppingItem shoppingItem : shoppingItemService.findByHome(securityController.getCurrentUser().getHome())) {

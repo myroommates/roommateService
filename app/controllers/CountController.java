@@ -32,8 +32,7 @@ public class CountController extends AbstractController {
 
     //convert
     private RoommateToRoommateDTOConverter roommateToRoommateDTOConverter = new RoommateToRoommateDTOConverter();
-    private TicketToTicketConverter ticketToTicketConverter = new TicketToTicketConverter(securityController);
-    private RoommateToInterfaceDataDTOConverter roommateToInterfaceDataDTOConverter = new RoommateToInterfaceDataDTOConverter(securityController);
+    private RoommateToInterfaceDataDTOConverter roommateToInterfaceDataDTOConverter = new RoommateToInterfaceDataDTOConverter();
 
     //service
     private RoommateService roommateService = new RoommateServiceImpl();
@@ -89,6 +88,8 @@ public class CountController extends AbstractController {
 
         ListDTO<TicketDTO> ticketDTOList = new ListDTO<>();
 
+        TicketToTicketConverter ticketToTicketConverter = new TicketToTicketConverter(securityController.getCurrentUser());
+
         // load all ticket
         for (Ticket ticket : ticketService.findByHome(securityController.getCurrentUser().getHome())) {
             ticketDTOList.addElement(ticketToTicketConverter.convert(ticket));
@@ -109,6 +110,8 @@ public class CountController extends AbstractController {
 
         }
         ListDTO<TicketDTO> ticketDTOList = new ListDTO<>();
+
+        TicketToTicketConverter ticketToTicketConverter = new TicketToTicketConverter(securityController.getCurrentUser());
 
         // load all ticket
         for (Ticket ticket : ticketService.findByHome(securityController.getCurrentUser().getHome())) {

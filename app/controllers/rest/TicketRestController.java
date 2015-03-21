@@ -35,8 +35,6 @@ public class TicketRestController extends AbstractController {
     private TicketDebtorService ticketDebtorService = new TicketDebtorServiceImpl();
     private RoommateService roommateService = new RoommateServiceImpl();
 
-    //converter
-    private TicketToTicketConverter ticketToTicketConverter = new TicketToTicketConverter(securityController);
 
 
     @Security.Authenticated(SecurityRestController.class)
@@ -44,6 +42,9 @@ public class TicketRestController extends AbstractController {
     public Result getAll() {
 
         ListDTO<TicketDTO> result = new ListDTO<>();
+
+        //converter
+        TicketToTicketConverter ticketToTicketConverter = new TicketToTicketConverter(securityController.getCurrentUser());
 
         for (Ticket ticket : securityController.getCurrentUser().getHome().getTickets()) {
             result.addElement(ticketToTicketConverter.convert(ticket));
@@ -64,6 +65,8 @@ public class TicketRestController extends AbstractController {
         if (ticket == null || !ticket.getHome().equals(securityController.getCurrentUser().getHome())) {
             throw new MyRuntimeException(ErrorMessage.NOT_YOU_TICKET, id);
         }
+        //converter
+        TicketToTicketConverter ticketToTicketConverter = new TicketToTicketConverter(securityController.getCurrentUser());
 
         //convert and return
         return ok(ticketToTicketConverter.convert(ticket));
@@ -101,6 +104,9 @@ public class TicketRestController extends AbstractController {
 
         //operation
         ticketService.saveOrUpdate(ticket);
+
+        //converter
+        TicketToTicketConverter ticketToTicketConverter = new TicketToTicketConverter(securityController.getCurrentUser());
 
         //result
         return ok(ticketToTicketConverter.convert(ticket));
@@ -152,6 +158,9 @@ public class TicketRestController extends AbstractController {
 
         //operation
         ticketService.saveOrUpdate(ticket);
+
+        //converter
+        TicketToTicketConverter ticketToTicketConverter = new TicketToTicketConverter(securityController.getCurrentUser());
 
         //result
         return ok(ticketToTicketConverter.convert(ticket));

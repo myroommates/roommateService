@@ -39,7 +39,7 @@ public class SuperAdminController extends AbstractController {
 
     //controller
     private SecurityController securityController = new SecurityController();
-    private RoommateToInterfaceDataDTOConverter roommateToInterfaceDataDTOConverter = new RoommateToInterfaceDataDTOConverter(securityController);
+    private RoommateToInterfaceDataDTOConverter roommateToInterfaceDataDTOConverter = new RoommateToInterfaceDataDTOConverter();
 
     @Security.Authenticated(SuperAdminSecurityController.class)
     @Transactional

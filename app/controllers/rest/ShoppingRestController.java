@@ -25,8 +25,6 @@ public class ShoppingRestController extends AbstractController {
     //service
     private ShoppingItemService shoppingItemService = new ShoppingItemServiceImpl();
 
-    //converter
-    private ShoppingItemToShoppingItemDTOConverter shoppingItemToShoppingItemDTOConverter = new ShoppingItemToShoppingItemDTOConverter(securityController);
 
     @Security.Authenticated(SecurityRestController.class)
     @Transactional
@@ -59,6 +57,9 @@ public class ShoppingRestController extends AbstractController {
 
         ListDTO<ShoppingItemDTO> result = new ListDTO<>();
 
+        //converter
+        ShoppingItemToShoppingItemDTOConverter shoppingItemToShoppingItemDTOConverter = new ShoppingItemToShoppingItemDTOConverter(securityController.getCurrentUser());
+
         for (ShoppingItem shoppingItem : shoppingItemList) {
             result.addElement(shoppingItemToShoppingItemDTOConverter.convert(shoppingItem));
         }
@@ -75,6 +76,8 @@ public class ShoppingRestController extends AbstractController {
         if (shoppingItem == null || !shoppingItem.getHome().equals(securityController.getCurrentUser().getHome())) {
             throw new MyRuntimeException(ErrorMessage.NOT_YOU_SHOPPING_ITEM, id);
         }
+        //converter
+        ShoppingItemToShoppingItemDTOConverter shoppingItemToShoppingItemDTOConverter = new ShoppingItemToShoppingItemDTOConverter(securityController.getCurrentUser());
 
         //convert
         return ok(shoppingItemToShoppingItemDTOConverter.convert(shoppingItem));
@@ -94,6 +97,8 @@ public class ShoppingRestController extends AbstractController {
         shoppingItem.setOnlyForMe(dto.getOnlyForMe());
 
         shoppingItemService.saveOrUpdate(shoppingItem);
+        //converter
+        ShoppingItemToShoppingItemDTOConverter shoppingItemToShoppingItemDTOConverter = new ShoppingItemToShoppingItemDTOConverter(securityController.getCurrentUser());
 
         return ok(shoppingItemToShoppingItemDTOConverter.convert(shoppingItem));
 
@@ -120,6 +125,8 @@ public class ShoppingRestController extends AbstractController {
         shoppingItem.setOnlyForMe(dto.getOnlyForMe());
 
         shoppingItemService.saveOrUpdate(shoppingItem);
+        //converter
+        ShoppingItemToShoppingItemDTOConverter shoppingItemToShoppingItemDTOConverter = new ShoppingItemToShoppingItemDTOConverter(securityController.getCurrentUser());
 
         return ok(shoppingItemToShoppingItemDTOConverter.convert(shoppingItem));
     }

@@ -14,24 +14,21 @@ public class RoommateToLoginSuccessConverter implements ConverterInterface<Roomm
 
     //converter
     private RoommateToRoommateDTOConverter roommateToRoommateDTOConverter = new RoommateToRoommateDTOConverter();
-    private HomeToHomeConverter homeToHomeConverter;
-    private TicketToTicketConverter ticketToTicketConverter;
-    private ShoppingItemToShoppingItemDTOConverter shoppingItemToShoppingItemDTOConverter;
     private FaqToFaqDTOConverter faqToFaqDTOConverter = new FaqToFaqDTOConverter();
     private SurveyToSurveyDTOConverter surveyToSurveyDTOConverter = new SurveyToSurveyDTOConverter();
 
     //service
     private FaqService faqService = new FaqServiceImpl();
 
-    public RoommateToLoginSuccessConverter(CommonSecurityController securityRestController) {
-        homeToHomeConverter = new HomeToHomeConverter(securityRestController);
-        ticketToTicketConverter = new TicketToTicketConverter(securityRestController);
-        shoppingItemToShoppingItemDTOConverter = new ShoppingItemToShoppingItemDTOConverter(securityRestController);
-    }
 
     public LoginSuccessDTO convert(Roommate roommate) {
 
         LoginSuccessDTO dto = new LoginSuccessDTO();
+
+
+        HomeToHomeConverter homeToHomeConverter = new HomeToHomeConverter(roommate);
+        TicketToTicketConverter ticketToTicketConverter = new TicketToTicketConverter(roommate);
+        ShoppingItemToShoppingItemDTOConverter shoppingItemToShoppingItemDTOConverter = new ShoppingItemToShoppingItemDTOConverter(roommate);
 
         dto.setCurrentRoommate(roommateToRoommateDTOConverter.convert(roommate));
         dto.setHome(homeToHomeConverter.convert(roommate.getHome()));

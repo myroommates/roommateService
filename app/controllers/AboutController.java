@@ -19,13 +19,14 @@ public class AboutController extends AbstractController {
 
     //converter
     private RoommateToRoommateDTOConverter roommateToRoommateDTOConverter = new RoommateToRoommateDTOConverter();
-    private RoommateToInterfaceDataDTOConverter roommateToInterfaceDataDTOConverter = new RoommateToInterfaceDataDTOConverter(securityController);
 
     @Security.Authenticated(SecurityController.class)
     @Transactional
     public Result index(){
 
         String currentYear = new SimpleDateFormat("yyyy").format(new Date());
+
+        RoommateToInterfaceDataDTOConverter roommateToInterfaceDataDTOConverter = new RoommateToInterfaceDataDTOConverter();
 
         return ok(views.html.home.about.render(roommateToInterfaceDataDTOConverter.convert(securityController.getCurrentUser()),currentYear));
     }

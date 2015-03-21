@@ -79,8 +79,9 @@ public class LoginRestController extends AbstractController {
         //session
         sessionService.saveOrUpdate(new Session(roommate,true));
 
+
         //result
-        RoommateToLoginSuccessConverter converter = new RoommateToLoginSuccessConverter(securityController);
+        RoommateToLoginSuccessConverter converter = new RoommateToLoginSuccessConverter();
 
         LoginSuccessDTO success = converter.convert(roommate);
 
@@ -101,7 +102,7 @@ public class LoginRestController extends AbstractController {
         }
 
         //result
-        RoommateToLoginSuccessConverter converter = new RoommateToLoginSuccessConverter(securityController);
+        RoommateToLoginSuccessConverter converter = new RoommateToLoginSuccessConverter();
 
         LoginSuccessDTO result = converter.convert(roommate);
 
@@ -117,7 +118,7 @@ public class LoginRestController extends AbstractController {
     public Result loadData() {
 
         //result
-        RoommateToLoginSuccessConverter converter = new RoommateToLoginSuccessConverter(securityController);
+        RoommateToLoginSuccessConverter converter = new RoommateToLoginSuccessConverter();
 
         LoginSuccessDTO result = converter.convert(securityController.getCurrentUser());
 

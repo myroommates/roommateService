@@ -21,8 +21,7 @@ public class HomeRestController extends AbstractController {
     //service
     private HomeService homeService = new HomeServiceImpl();
 
-    //convert
-    private HomeToHomeConverter homeToHomeConverter = new HomeToHomeConverter(securityController);
+
 
     @Security.Authenticated(AdminSecurityRestController.class)
     @com.avaje.ebean.annotation.Transactional
@@ -39,6 +38,9 @@ public class HomeRestController extends AbstractController {
         home.setMoneySymbol(dto.getMoneySymbol());
 
         homeService.saveOrUpdate(home);
+
+        //convert
+        HomeToHomeConverter homeToHomeConverter = new HomeToHomeConverter(securityController.getCurrentUser());
 
         return ok(homeToHomeConverter.convert(home));
     }
