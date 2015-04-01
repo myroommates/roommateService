@@ -4,6 +4,7 @@ import com.avaje.ebean.annotation.Transactional;
 import controllers.technical.AbstractController;
 import controllers.technical.SecurityRestController;
 import converter.RoommateToLoginSuccessConverter;
+import dto.GoogleConnectionDTO;
 import dto.post.ForgotPasswordDTO;
 import dto.LoginSuccessDTO;
 import dto.post.LoginDTO;
@@ -39,6 +40,33 @@ public class LoginRestController extends AbstractController {
 
 
     @Transactional
+    public Result googleConnection() {
+        GoogleConnectionDTO dto = extractDTOFromRequest(GoogleConnectionDTO.class);
+
+        //find by email
+        Roommate roommate = roommateService.findByEmail(dto.getEmail());
+        if (roommate != null) {
+            //connection
+            roommate = connection(dto.getEmail(), null, dto.getKey());
+
+
+
+        } else {
+            //registration
+            //TODO lang
+            Lang lang = lang();
+            roommate = createNewAccount(dto.getEmail(), dto.getName(), lang);
+        }
+
+        RoommateToLoginSuccessConverter converter = new RoommateToLoginSuccessConverter();
+
+        LoginSuccessDTO result = converter.convert(roommate);
+
+        return ok(result);
+    }
+
+
+    @Transactional
     public Result registration() {
 
         RegistrationDTO dto = extractDTOFromRequest(RegistrationDTO.class);
@@ -47,6 +75,22 @@ public class LoginRestController extends AbstractController {
         if (roommateService.findByEmail(dto.getEmail()) != null) {
             throw new MyRuntimeException(ErrorMessage.EMAIL_ALREADY_USED);
         }
+        Lang lang = null;
+        if (dto.getLang() != null) {
+            lang = Lang.forCode(dto.getLang());
+        }
+
+        Roommate roommate = createNewAccount(dto.getEmail(), dto.getName(), lang);
+
+        //result
+        RoommateToLoginSuccessConverter converter = new RoommateToLoginSuccessConverter();
+
+        LoginSuccessDTO success = converter.convert(roommate);
+
+        return ok(success);
+    }
+
+    private Roommate createNewAccount(String email, String name, Lang lang) {
 
         //home
         Home home = new Home();
@@ -54,12 +98,12 @@ public class LoginRestController extends AbstractController {
 
         //roommate
         Roommate roommate = new Roommate();
-        roommate.setEmail(dto.getEmail());
-        roommate.setName(dto.getName());
+        roommate.setEmail(email);
+        roommate.setName(name);
         roommate.setHome(home);
         roommate.setIconColor(ColorGenerator.getColorWeb(0));
-        if (dto.getLang() != null) {
-            Lang lang = Lang.forCode(dto.getLang());
+        if (lang != null) {
+            //Lang lang = Lang.forCode(dto.getLang());
             roommate.setLanguage(lang);
             changeLang(lang.code());
         } else {
@@ -77,15 +121,9 @@ public class LoginRestController extends AbstractController {
         roommateService.saveOrUpdate(roommate);
 
         //session
-        sessionService.saveOrUpdate(new Session(roommate,true));
+        sessionService.saveOrUpdate(new Session(roommate, true));
 
-
-        //result
-        RoommateToLoginSuccessConverter converter = new RoommateToLoginSuccessConverter();
-
-        LoginSuccessDTO success = converter.convert(roommate);
-
-        return ok(success);
+        return roommate;
     }
 
     @Transactional
@@ -93,23 +131,42 @@ public class LoginRestController extends AbstractController {
 
         LoginDTO dto = extractDTOFromRequest(LoginDTO.class);
 
-        Roommate roommate = roommateService.findByEmail(dto.getEmail());
-
         Logger.info("dto:" + dto + "/" + ErrorMessage.LOGIN_WRONG_PASSWORD_LOGIN);
 
-        if (roommate == null || !roommateService.controlPassword(dto.getPassword(), roommate)) {
-            throw new MyRuntimeException(ErrorMessage.LOGIN_WRONG_PASSWORD_LOGIN);
-        }
+
+        Roommate roommate = connection(dto.getEmail(), dto.getPassword(), null);
 
         //result
         RoommateToLoginSuccessConverter converter = new RoommateToLoginSuccessConverter();
 
         LoginSuccessDTO result = converter.convert(roommate);
 
-        //session
-        sessionService.saveOrUpdate(new Session(roommate,true));
-
         return ok(result);
+
+    }
+
+    private Roommate connection(String email, String password, String key) {
+
+        Roommate roommate = roommateService.findByEmail(email);
+
+        if (roommate == null) {
+            throw new MyRuntimeException(ErrorMessage.LOGIN_WRONG_PASSWORD_LOGIN);
+        }
+
+        //by password
+        if (password != null) {
+            if (!roommateService.controlPassword(password, roommate)) {
+                throw new MyRuntimeException(ErrorMessage.LOGIN_WRONG_PASSWORD_LOGIN);
+            }
+        } else if (key == null || !roommateService.controlAuthenticationKey(key, roommate)) {
+            throw new MyRuntimeException(ErrorMessage.LOGIN_WRONG_PASSWORD_LOGIN);
+        }
+
+        //session
+        sessionService.saveOrUpdate(new Session(roommate, true));
+
+
+        return roommate;
     }
 
 

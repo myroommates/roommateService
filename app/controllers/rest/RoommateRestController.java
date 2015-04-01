@@ -48,12 +48,20 @@ public class RoommateRestController extends AbstractController {
 
         ChangeEmailDTO changeEmailDTO = extractDTOFromRequest(ChangeEmailDTO.class);
 
+        Roommate currentUser = securityController.getCurrentUser();
+
+        //control email
+        Roommate sameEmailAccount = roommateService.findByEmail(changeEmailDTO.getNewEmail());
+        if(sameEmailAccount!=null && !sameEmailAccount.getId().equals(currentUser.getId())){
+            throw new MyRuntimeException(ErrorMessage.EMAIL_ALREADY_USED);
+        }
+
         //control last password
         if (!roommateService.controlPassword(changeEmailDTO.getOldPassword(), securityController.getCurrentUser())) {
             throw new MyRuntimeException(ErrorMessage.NOT_YOUR_OLD_PASSWORD);
         }
 
-        Roommate currentUser = securityController.getCurrentUser();
+
 
         currentUser.setEmail(changeEmailDTO.getNewEmail());
 
