@@ -1,0 +1,1 @@
+alter table roommate add column google_key text;

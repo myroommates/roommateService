@@ -70,6 +70,11 @@ public class RoommateServiceImpl extends CrudServiceImpl<Roommate> implements Ro
     }
 
     @Override
+    public boolean controlAuthenticationGoogle(String googleKey, Roommate account) {
+        return  account.getGoogleKey() != null && new StrongPasswordEncryptor().checkPassword(googleKey, account.getGoogleKey());
+    }
+
+    @Override
     public boolean controlPassword(String password, Roommate account) {
         return new StrongPasswordEncryptor().checkPassword(password,
                 account.getPassword());
@@ -80,7 +85,8 @@ public class RoommateServiceImpl extends CrudServiceImpl<Roommate> implements Ro
         return Ebean.createQuery(Roommate.class).findRowCount();
     }
 
-    private String generateEncryptingPassword(final String password) {
+    @Override
+    public String generateEncryptingPassword(final String password) {
 
         return new StrongPasswordEncryptor().encryptPassword(password);
     }

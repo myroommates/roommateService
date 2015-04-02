@@ -43,6 +43,9 @@ public class Roommate extends AbstractEntity {
     @Column(nullable = false, unique = true, name = COL_EMAIL)
     private String email;
 
+    @Column
+    private String googleKey;
+
     @ManyToOne(optional = false,cascade = {CascadeType.PERSIST,CascadeType.MERGE})
     private Home home;
 
@@ -82,6 +85,14 @@ public class Roommate extends AbstractEntity {
 
 
     public Roommate() {
+    }
+
+    public String getGoogleKey() {
+        return googleKey;
+    }
+
+    public void setGoogleKey(String googleKey) {
+        this.googleKey = googleKey;
     }
 
     public List<SurveyValue> getSurveyValues() {

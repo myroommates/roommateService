@@ -13,6 +13,7 @@ GET           /assets/*file                              controllers.Assets.at(p
 POST          /rest/login                                @controllers.rest.LoginRestController.login()
 POST          /rest/registration                         @controllers.rest.LoginRestController.registration()
 POST          /rest/google                               @controllers.rest.LoginRestController.googleConnection()
+PUT           /rest/google                               @controllers.rest.LoginRestController.registerGoogleAccount()
 POST          /rest/load_data                            @controllers.rest.LoginRestController.loadData()
 PUT           /rest/password                             @controllers.rest.LoginRestController.forgotPassword()
 

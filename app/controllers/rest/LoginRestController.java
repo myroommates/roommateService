@@ -5,6 +5,7 @@ import controllers.technical.AbstractController;
 import controllers.technical.SecurityRestController;
 import converter.RoommateToLoginSuccessConverter;
 import dto.GoogleConnectionDTO;
+import dto.GoogleRegistrationDTO;
 import dto.post.ForgotPasswordDTO;
 import dto.LoginSuccessDTO;
 import dto.post.LoginDTO;
@@ -43,26 +44,58 @@ public class LoginRestController extends AbstractController {
     public Result googleConnection() {
         GoogleConnectionDTO dto = extractDTOFromRequest(GoogleConnectionDTO.class);
 
+        Logger.info(dto+"");
+
         //find by email
         Roommate roommate = roommateService.findByEmail(dto.getEmail());
         if (roommate != null) {
+
+            //test
+            if(roommate.getGoogleKey()==null){
+                //need a confirmation
+                return unauthorized();
+            }
+
             //connection
             roommate = connection(dto.getEmail(), null, dto.getKey());
-
-
-
         } else {
             //registration
             //TODO lang
             Lang lang = lang();
-            roommate = createNewAccount(dto.getEmail(), dto.getName(), lang);
+            roommate = createNewAccount(dto.getEmail(), dto.getName(), lang,dto.getKey());
         }
 
         RoommateToLoginSuccessConverter converter = new RoommateToLoginSuccessConverter();
 
-        LoginSuccessDTO result = converter.convert(roommate);
+        LoginSuccessDTO success = converter.convert(roommate);
 
-        return ok(result);
+        Logger.error(success+"");
+
+        return ok(success);
+    }
+
+    @Transactional
+    public Result registerGoogleAccount(){
+
+        GoogleRegistrationDTO dto = extractDTOFromRequest(GoogleRegistrationDTO.class);
+
+        //find by email
+        Roommate roommate = roommateService.findByEmail(dto.getEmail());
+        if (roommate == null || roommateService.controlPassword(dto.getPassword(),roommate)) {
+            throw new MyRuntimeException(ErrorMessage.LOGIN_WRONG_PASSWORD_LOGIN);
+        }
+
+        //assign google key to account
+        roommate.setGoogleKey(roommateService.generateEncryptingPassword(dto.getGoogleKey()));
+
+        roommateService.saveOrUpdate(roommate);
+
+        RoommateToLoginSuccessConverter converter = new RoommateToLoginSuccessConverter();
+
+        LoginSuccessDTO success = converter.convert(roommate);
+
+        return ok(success);
+
     }
 
 
@@ -80,7 +113,7 @@ public class LoginRestController extends AbstractController {
             lang = Lang.forCode(dto.getLang());
         }
 
-        Roommate roommate = createNewAccount(dto.getEmail(), dto.getName(), lang);
+        Roommate roommate = createNewAccount(dto.getEmail(), dto.getName(), lang, null);
 
         //result
         RoommateToLoginSuccessConverter converter = new RoommateToLoginSuccessConverter();
@@ -90,7 +123,7 @@ public class LoginRestController extends AbstractController {
         return ok(success);
     }
 
-    private Roommate createNewAccount(String email, String name, Lang lang) {
+    private Roommate createNewAccount(String email, String name, Lang lang, String googleKey) {
 
         //home
         Home home = new Home();
@@ -111,12 +144,20 @@ public class LoginRestController extends AbstractController {
         }
         roommate.setIsAdmin(true);
 
+        //google key
+        if(googleKey!=null){
+            roommate.setGoogleKey(roommateService.generateEncryptingPassword(googleKey));
+        }
+
         //generate password
         roommate.setPassword(KeyGenerator.generateRandomPassword());
 
 
         //send email
-        emailController.sendApplicationRegistrationEmail(roommate);
+        try {
+            emailController.sendApplicationRegistrationEmail(roommate);
+        }
+        catch(Exception e){}
 
         roommateService.saveOrUpdate(roommate);
 
@@ -145,7 +186,7 @@ public class LoginRestController extends AbstractController {
 
     }
 
-    private Roommate connection(String email, String password, String key) {
+    private Roommate connection(String email, String password, String googleKey) {
 
         Roommate roommate = roommateService.findByEmail(email);
 
@@ -158,7 +199,7 @@ public class LoginRestController extends AbstractController {
             if (!roommateService.controlPassword(password, roommate)) {
                 throw new MyRuntimeException(ErrorMessage.LOGIN_WRONG_PASSWORD_LOGIN);
             }
-        } else if (key == null || !roommateService.controlAuthenticationKey(key, roommate)) {
+        } else if (googleKey == null || !roommateService.controlAuthenticationGoogle(googleKey, roommate)) {
             throw new MyRuntimeException(ErrorMessage.LOGIN_WRONG_PASSWORD_LOGIN);
         }
 

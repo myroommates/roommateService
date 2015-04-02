@@ -17,7 +17,11 @@ public interface RoommateService extends CrudService<Roommate>{
 
     boolean controlAuthenticationKey(String authenticationKey, Roommate account);
 
+    boolean controlAuthenticationGoogle(String googleKey, Roommate account);
+
     public boolean controlPassword(String password, Roommate account);
 
     Integer getCount();
+
+    String generateEncryptingPassword(String password);
 }
