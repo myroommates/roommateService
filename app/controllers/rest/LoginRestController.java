@@ -81,7 +81,7 @@ public class LoginRestController extends AbstractController {
 
         //find by email
         Roommate roommate = roommateService.findByEmail(dto.getEmail());
-        if (roommate == null || roommateService.controlPassword(dto.getPassword(),roommate)) {
+        if (roommate == null || !roommateService.controlPassword(dto.getPassword(),roommate)) {
             throw new MyRuntimeException(ErrorMessage.LOGIN_WRONG_PASSWORD_LOGIN);
         }
 
