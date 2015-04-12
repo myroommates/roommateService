@@ -58,11 +58,16 @@
                     <div class="col-xs-1">
                         <input type="checkbox" ng-model="item.selected" class="middle_ck" />
                     </div>
-                    <div class="col-xs-7">
+                    <div class="col-xs-6">
                         {{item.description}}
                     </div>
-                    <div class="col-xs-4">
+                    <div class="col-xs-3">
                         {{item.creationDate | date:'mediumDate'}}
+                    </div>
+                    <div class="col-xs-2">
+                        <img style="cursor: pointer" ng-click="addCommentToShoppingItem(item)" ng-show="item.comments.length == 0" src="/assets/images/comment/comment_empty.png" />
+                        <img style="cursor: pointer" ng-click="addCommentToShoppingItem(item)" ng-show="item.comments.length > 0 && item.hasNewComment == false" src="/assets/images/comment/comment_full.png" />
+                        <img style="cursor: pointer" ng-click="addCommentToShoppingItem(item)" ng-show="item.comments.length > 0 && item.hasNewComment == true" src="/assets/images/comment/comment_full_not_consulted.png" />
                     </div>
                 </li>
             </ul>

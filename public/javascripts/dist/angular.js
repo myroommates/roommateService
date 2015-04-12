@@ -46,7 +46,7 @@ myApp.controller('HomeCtrl', ['$scope', '$modal', function ($scope, $modal) {
     $scope.moneySymbol = data.home.moneySymbol;
     $scope.ticketList = ticketList;
     $scope.shoppingItemList = shoppingItemList;
-    $scope.roommateList = data.roommateList;
+    $scope.roommateList = data.home.roommateList;
     $scope.moneySymbol = data.home.moneySymbol;
 
     $scope.sortTicketList = function () {
@@ -205,6 +205,28 @@ myApp.controller('HomeCtrl', ['$scope', '$modal', function ($scope, $modal) {
             templateUrl: "/assets/javascripts/modal/CUShoppingItem/view.html",
             controller: "CuShoppingItemCtrl",
             size: 'lg',
+            resolve: resolve
+        });
+    };
+
+    $scope.addCommentToShoppingItem = function (shoppingItem) {
+
+        var resolve = {
+            comments: function () {
+                return shoppingItem.comments;
+            },
+            roommateList: function () {
+                return roommateList;
+            },
+            targetURL:function(){
+                return "/rest/shoppingItem/comment/"+shoppingItem.id
+            }
+        };
+
+        $modal.open({
+            templateUrl: "/assets/javascripts/modal/CommentModal/view.html",
+            controller: "CommentModalCtrl",
+            //size: 'lg',
             resolve: resolve
         });
     };
@@ -1991,6 +2013,58 @@ myApp.controller('ForgotPasswordModalCtrl', ['$scope', '$http', '$flash', '$moda
                 $flash.error(data.message);
             });
         }
+    }
+
+
+}]);
+myApp.controller('CommentModalCtrl', ['$scope', '$http', '$flash', '$modalInstance', 'roommateList', 'comments', 'targetURL', '$timeout', function ($scope, $http, $flash, $modalInstance, roommateList, comments, targetURL, $timeout) {
+
+    $scope.loading = false;
+    $scope.comments = comments;
+
+    $scope.getRoommate = function (id) {
+
+        for (var key in roommateList) {
+
+            if (roommateList[key].id == id) {
+                return roommateList[key];
+            }
+            ;
+        }
+        return null;
+    }
+
+
+    $scope.close = function () {
+        $modalInstance.close();
+    };
+
+    $timeout(function () {
+        $(".comment-container").scrollTop($('.comment-container').height());
+    }, 1);
+    $scope.sendComment = function () {
+
+        var dto = {
+            comment: $scope.newComment
+        };
+
+        $scope.loading = true;
+
+        $http({
+            'method': "POST",
+            'url': targetURL,
+            'headers': "Content-Type:application/json",
+            'data': dto
+        }).success(function (data, status) {
+            $scope.loading = false;
+            comments.push(data);
+            $scope.newComment = "";
+            $(".comment-container").animate({scrollTop: $(document).height()}, "slow");
+        })
+            .error(function (data, status) {
+                $scope.loading = false;
+                $flash.error(data.message);
+            });
     }
 
 

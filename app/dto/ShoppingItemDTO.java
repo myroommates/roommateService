@@ -27,7 +27,7 @@ public class ShoppingItemDTO extends DTO {
     private Boolean onlyForMe;
 
 
-    private List<CommentDTO> comments;
+    private List<CommentDTO> comments = new ArrayList<>();
 
     private Boolean hasNewComment;
 

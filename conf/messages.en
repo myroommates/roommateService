@@ -161,6 +161,9 @@ calculatorModal.title=Calculator
 # help modal
 helpModal.title=Help
 
+#comment modal
+commentModal.title=Comments
+
 #create Faq
 createFaqModal.title=Create FAQ
 faq.question=Question

@@ -5,7 +5,7 @@ myApp.controller('HomeCtrl', function ($scope, $modal) {
     $scope.moneySymbol = data.home.moneySymbol;
     $scope.ticketList = ticketList;
     $scope.shoppingItemList = shoppingItemList;
-    $scope.roommateList = data.roommateList;
+    $scope.roommateList = data.home.roommateList;
     $scope.moneySymbol = data.home.moneySymbol;
 
     $scope.sortTicketList = function () {
@@ -164,6 +164,28 @@ myApp.controller('HomeCtrl', function ($scope, $modal) {
             templateUrl: "/assets/javascripts/modal/CUShoppingItem/view.html",
             controller: "CuShoppingItemCtrl",
             size: 'lg',
+            resolve: resolve
+        });
+    };
+
+    $scope.addCommentToShoppingItem = function (shoppingItem) {
+
+        var resolve = {
+            comments: function () {
+                return shoppingItem.comments;
+            },
+            roommateList: function () {
+                return roommateList;
+            },
+            targetURL:function(){
+                return "/rest/shoppingItem/comment/"+shoppingItem.id
+            }
+        };
+
+        $modal.open({
+            templateUrl: "/assets/javascripts/modal/CommentModal/view.html",
+            controller: "CommentModalCtrl",
+            //size: 'lg',
             resolve: resolve
         });
     };

@@ -84,6 +84,7 @@ module.exports = function (grunt) {
                         'public/javascripts/modal/createSurveyModal/CreateSurveyModalCtrl.js',
                         'public/javascripts/modal/Calculator/CalculatorModalCtrl.js',
                         'public/javascripts/modal/ForgotPassword/ForgotPasswordModal.js',
+                        'public/javascripts/modal/CommentModal/CommentModal.js',
                         'public/javascripts/directive/dirFieldDate/directive.js',
                         'public/javascripts/directive/dirFieldText/directive.js',
                         'public/javascripts/directive/dirFieldSelect/directive.js',

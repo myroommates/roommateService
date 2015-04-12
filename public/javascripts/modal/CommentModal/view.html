@@ -1,0 +1,39 @@
+<div class="modal-header">
+    <button class="btn glyphicon glyphicon-remove" style="float:right" ng-click="close()"></button>
+    <h4 class="modal-title">{{'commentModal.title' | translateText}}</h4>
+</div>
+<div class="modal-body modal-comment" dir-enter="save()">
+
+    <div class="comment-container">
+        <div ng-repeat="comment in comments" class="comment">
+            <div>
+                <dir-user-icon ng-user="getRoommate(comment.creatorId)"></dir-user-icon>
+            </div>
+            <div>
+                <div>
+                    <div>{{comment.dateCreation | date}}</div>
+                </div>
+                <div>{{comment.comment}}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="button-area">
+        <div>
+            <textarea ng-model="newComment" ng-disabled="loading"></textarea>
+        </div>
+        <div>
+            <button ng-disabled="loading" type="button" class="btn btn-primary send-comment-btn" ng-click="sendComment()">
+                <img src="/assets/images/comment/ic_action_mail.png"/>
+            </button>
+        </div>
+    </div>
+
+
+</div>
+<div class="modal-footer">
+    <button ng-disabled="loading" type="button" class="btn btn-default" ng-click="close()">{{'generic.close' |
+        translateText}}
+    </button>
+    <img src="/assets/images/modal-loading.gif" ng-show="loading"/>
+</div>
