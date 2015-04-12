@@ -53,4 +53,15 @@ public class TicketServiceImpl extends CrudServiceImpl<Ticket> implements Ticket
     public Integer getCount() {
         return Ebean.createQuery(Ticket.class).findRowCount();
     }
+
+    @Override
+    public Double getTotalSum() {
+        double sum = 0;
+        for (Ticket ticket : Ebean.createQuery(Ticket.class).findList()) {
+            for (TicketDebtor ticketDebtor : ticket.getDebtorList()) {
+                sum += ticketDebtor.getValue();
+            }
+        }
+        return sum;
+    }
 }

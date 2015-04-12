@@ -16,6 +16,8 @@ public class SuperAdminStatusDTO extends DTO {
     private Integer tickets;
 
     private Double totalSum;
+    private int shoppings;
+    private int shoppingsTotal;
 
     public Integer getHomes() {
         return homes;
@@ -47,6 +49,23 @@ public class SuperAdminStatusDTO extends DTO {
 
     public void setTotalSum(Double totalSum) {
         this.totalSum = totalSum;
+    }
+
+
+    public void setShoppings(int shoppings) {
+        this.shoppings = shoppings;
+    }
+
+    public int getShoppings() {
+        return shoppings;
+    }
+
+    public void setShoppingsTotal(int shoppingsTotal) {
+        this.shoppingsTotal = shoppingsTotal;
+    }
+
+    public int getShoppingsTotal() {
+        return shoppingsTotal;
     }
 
     @Override

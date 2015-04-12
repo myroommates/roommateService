@@ -13,12 +13,14 @@ import java.util.List;
 @NamedQueries({
         @NamedQuery(name = ShoppingItem.FIND_BY_ID, query = "where " + AbstractEntity.COL_ID + " = :" + AbstractEntity.PARAM_ID),
         @NamedQuery(name = ShoppingItem.FIND_BY_HOME, query = "where " + ShoppingItem.COL_HOME + "= :" + ShoppingItem.PARAM_HOME),
+        @NamedQuery(name = ShoppingItem.FIND_NOT_BOUGHT_YET, query = "where wasBought = false"),
 })
 public class ShoppingItem extends AbstractEntity {
 
     //request
     public static final String FIND_BY_HOME = "ShoppingItem_FIND_BY_HOME";
     public static final String FIND_BY_ID = "ShoppingItem_FIND_BY_ID";
+    public static final String FIND_NOT_BOUGHT_YET = "ShoppingItem_FIND_NOT_BOUGTH_YET";
 
     //column
     public final static String COL_HOME = "home.id";

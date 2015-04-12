@@ -16,4 +16,8 @@ public interface ShoppingItemService extends CrudService<ShoppingItem>{
     List<ShoppingItem> findByHome(Home home);
 
     void remove(ShoppingItem shoppingItem);
+
+    int getCount();
+
+    int getCountTotal();
 }

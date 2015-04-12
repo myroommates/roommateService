@@ -203,8 +203,6 @@ public class LoginRestController extends AbstractController {
             throw new MyRuntimeException(ErrorMessage.LOGIN_WRONG_PASSWORD_LOGIN);
         }
 
-        //session
-        sessionService.saveOrUpdate(new Session(roommate, true));
 
 
         return roommate;
@@ -219,6 +217,9 @@ public class LoginRestController extends AbstractController {
         RoommateToLoginSuccessConverter converter = new RoommateToLoginSuccessConverter();
 
         LoginSuccessDTO result = converter.convert(securityController.getCurrentUser());
+
+        //session
+        sessionService.saveOrUpdate(new Session(securityController.getCurrentUser(), true));
 
         return ok(result);
     }

@@ -19,4 +19,15 @@ public class ShoppingItemServiceImpl extends CrudServiceImpl<ShoppingItem> imple
                 .findList();
     }
 
+    @Override
+    public int getCount() {
+        return Ebean.createNamedQuery(ShoppingItem.class,
+        ShoppingItem.FIND_NOT_BOUGHT_YET).findRowCount();
+    }
+
+    @Override
+    public int getCountTotal() {
+            return Ebean.createQuery(ShoppingItem.class).findRowCount();
+    }
+
 }

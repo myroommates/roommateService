@@ -36,6 +36,7 @@ public class SuperAdminController extends AbstractController {
     private RoommateService roommateService = new RoommateServiceImpl();
     private HomeService homeService= new HomeServiceImpl();
     private TicketService ticketService = new TicketServiceImpl();
+    private ShoppingItemService shoppingItemService = new ShoppingItemServiceImpl();
 
     //controller
     private SecurityController securityController = new SecurityController();
@@ -69,6 +70,9 @@ public class SuperAdminController extends AbstractController {
         superAdminStatusDTO.setHomes(homeService.getCount());
         superAdminStatusDTO.setRoommates(roommateService.getCount());
         superAdminStatusDTO.setTickets(ticketService.getCount());
+        superAdminStatusDTO.setShoppings(shoppingItemService.getCount());
+        superAdminStatusDTO.setShoppingsTotal(shoppingItemService.getCountTotal());
+        superAdminStatusDTO.setTotalSum(ticketService.getTotalSum());
 
         Logger.warn("superAdminStatusDTO:"+superAdminStatusDTO);
 

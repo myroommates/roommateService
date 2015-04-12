@@ -18,4 +18,6 @@ public interface TicketService extends CrudService<Ticket> {
     List<Ticket> findByPayer(Roommate payer);
 
     Integer getCount();
+
+    Double getTotalSum();
 }

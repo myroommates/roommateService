@@ -31,8 +31,12 @@
                         <td>{{infos.tickets}}</td>
                     </tr>
                     <tr>
+                        <td>Shopping sum</td>
+                        <td>{{infos.shoppings}} ({{infos.shoppingsTotal}})</td>
+                    </tr>
+                    <tr>
                         <td>Total sum</td>
-                        <td>{{infos.totalSum}}</td>
+                        <td>{{infos.totalSum | number:2}}</td>
                     </tr>
                 </table>
             </div>
