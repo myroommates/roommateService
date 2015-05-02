@@ -23,9 +23,13 @@ public class TestController  extends AbstractController {
 
     @Security.Authenticated(SecurityController.class)
     @Transactional
+    public Result index2() {
+        return ok(views.html.test2.render());
+    }
+
+    @Security.Authenticated(SecurityController.class)
+    @Transactional
     public Result index() {
-
-
         return ok(views.html.test.render());
     }
 }
