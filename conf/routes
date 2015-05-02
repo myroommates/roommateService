@@ -110,6 +110,8 @@ GET           /about                                     @controllers.AboutContr
 #superadmin
 GET           /superadmin                                @controllers.SuperAdminController.index()
 
+GET           /test                                       @controllers.TestController.index()
+
 
 
 
