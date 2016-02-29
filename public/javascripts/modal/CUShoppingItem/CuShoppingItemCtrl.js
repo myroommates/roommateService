@@ -59,7 +59,7 @@ myApp.controller('CuShoppingItemCtrl', function ($scope, $http, $flash, $modalIn
         if ($scope.allFieldValid()) {
 
 
-            //build dto
+            //build be.flo.roommateService.dto
 
 
             var request = "POST";

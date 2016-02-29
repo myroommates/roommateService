@@ -1,6 +1,6 @@
 'use strict';
 
-var util = require('../util/index'),
+var util = require('../be.flo.roommateService.util/index'),
     Unit = require('./Unit'),
     number = util.number,
 
@@ -371,7 +371,7 @@ Complex.prototype.equals = function (other) {
  * Get a string representation of the complex number,
  * with optional formatting options.
  * @param {Object | Number | Function} [options]  Formatting options. See
- *                                                lib/util/number:format for a
+ *                                                lib/be.flo.roommateService.util/number:format for a
  *                                                description of the available
  *                                                options.
  * @return {String} str

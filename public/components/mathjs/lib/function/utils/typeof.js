@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = function (math) {
-  var types = require('../../util/types'),
+  var types = require('../../be.flo.roommateService.util/types'),
 
       Complex = require('../../type/Complex'),
       Matrix = math.type.Matrix,

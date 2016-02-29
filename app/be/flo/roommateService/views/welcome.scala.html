@@ -1,0 +1,41 @@
+@import be.flo.roommateService.models.LoginForm
+@(loginForm: Form[LoginForm],languages:be.flo.roommateService.dto.ListDTO[be.flo.roommateService.dto.LangDTO],data:be.flo.roommateService.dto.InterfaceDataDTO)
+
+@import com.fasterxml.jackson.databind.ObjectMapper
+
+@welcome_pattern {
+
+    <div class="container content-block page-welcome" ng-controller="WelcomeCtrl">
+
+
+            <!-- load data -->
+        <script>
+        var data = @Html(new ObjectMapper().writeValueAsString(data));
+        var languages = @Html(new ObjectMapper().writeValueAsString(languages.getList));
+        var lang = "@ctx().lang().code";
+        </script>
+
+        <!-- language -->
+            <div class="row">
+                <select
+                    class="select-lang"
+                    ng-model="lang"
+                    ng-options="option.key as option.value for option in languagesList">
+                </select>
+            </div>
+
+            <!-- registration -->
+        <div class="row separation">
+            <div class="col-md-3 col-sm-3 hidden-xs action"></div>
+            <div class="col-md-6 col-sm-6 col-xs-12 action">
+                <a type="button" class="btn btn-success btn-block" href="/registration">@Messages("welcome.title.registration")</a>
+            </div>
+        </div>
+
+            <!-- login -->
+        @authentication.login(loginForm)
+
+    </div>
+
+
+}

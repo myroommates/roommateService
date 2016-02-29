@@ -1,7 +1,7 @@
 'use strict';
 
-var isBoolean = require('../../util/boolean').isBoolean;
-var argsToArray = require('../../util/array').argsToArray;
+var isBoolean = require('../../be.flo.roommateService.util/boolean').isBoolean;
+var argsToArray = require('../../be.flo.roommateService.util/array').argsToArray;
 
 /**
  * Attach a transform function to math.range

@@ -1,6 +1,6 @@
 'use strict';
 
-var string = require('../util/string'),
+var string = require('../be.flo.roommateService.util/string'),
 
     isString = string.isString;
 
@@ -204,7 +204,7 @@ module.exports = function (config) {
   /**
    * Get a string representation of the matrix, with optional formatting options.
    * @param {Object | Number | Function} [options]  Formatting options. See
-   *                                                lib/util/number:format for a
+   *                                                lib/be.flo.roommateService.util/number:format for a
    *                                                description of the available
    *                                                options.
    * @returns {String} str

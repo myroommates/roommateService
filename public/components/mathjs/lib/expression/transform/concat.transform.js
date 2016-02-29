@@ -2,8 +2,8 @@
 
 var BigNumber = require('../../type/BigNumber');
 var errorTransform = require('./error.transform').transform;
-var isNumber = require('../../util/number').isNumber;
-var argsToArray = require('../../util/array').argsToArray;
+var isNumber = require('../../be.flo.roommateService.util/number').isNumber;
+var argsToArray = require('../../be.flo.roommateService.util/array').argsToArray;
 
 /**
  * Attach a transform function to math.range

@@ -1,0 +1,60 @@
+@(data:be.flo.roommateService.dto.InterfaceDataDTO, roommateList: be.flo.roommateService.dto.ListDTO[be.flo.roommateService.dto.RoommateDTO], shoppingItemList: be.flo.roommateService.dto.ListDTO[be.flo.roommateService.dto.ShoppingItemDTO])
+
+@import com.fasterxml.jackson.databind.ObjectMapper
+
+@home_pattern("shopping.list.title", data.getMySelf) {
+
+    <div class="content-block">
+
+        <div ng-controller="ShoppingListCtrl" class="ticket-list">
+
+                <!-- load data -->
+            <script>
+            var data = @Html(new ObjectMapper().writeValueAsString(data));
+            var shoppingItemList = @Html(new ObjectMapper().writeValueAsString(shoppingItemList));
+            var roommateList = @Html(new ObjectMapper().writeValueAsString(roommateList.getList));
+            </script>
+
+            <div class="row">
+                <div class="col-lg-4 col-md-2 hidden-xs"></div>
+                <button class="btn btn-primary col-lg-4 col-md-8 col-xs-12"  ng-click="createOrEditShoppingItem()" href="#" >@Messages("shopping.list.create.button")</button>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <label>@Messages("count.tickets.sortBy")</label>
+                    <select ng-options="choice.ref as choice.label | translateText for choice in sortSelection" ng-model="sortOption"></select>
+                </div>
+            </div>
+
+
+            <ul class="element_list">
+                <li class="row" ng-repeat="item in shoppingItemList">
+
+                    <div class="col-md-1 col-xs-2 payer-box">
+                        <p>
+                            <dir-user-icon ng-user="getRoommate(item.creatorId)"></dir-user-icon>
+                        </p>
+                    </div>
+                    <div class="col-md-9  col-xs-8">
+                        <div class="row info-box">
+
+                            <div class="col-md-8 col-xs-7">{{item.description}}</div>
+                            <div class="col-md-2 col-xs-5" style=";font-size: 12px">{{item.creationDate | date:'mediumDate'}}</div>
+                        </div>
+                    </div>
+                    <div class="col-md-2  col-xs-2">
+                        <div ng-show="myself.id == item.creatorId">
+                            <button style="margin-bottom: 5px" class="btn-sm btn btn-primary glyphicon glyphicon-pencil" href="#" ng-click='createOrEditShoppingItem(item)'></button>
+                            <button class="btn-sm btn btn-primary glyphicon glyphicon-remove" href="#" ng-click='remove(item)'></button>
+                        </div>
+                    </div>
+                    <div class="loading-mask" ng-show="item.isLoading === true">
+                        <img src="@routes.Assets.at("images/loading.gif")"/>
+
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+}

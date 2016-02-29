@@ -1,7 +1,7 @@
 // utility methods for arrays and matrices
 'use strict';
 
-var util = require('../util/index'),
+var util = require('../be.flo.roommateService.util/index'),
 
     IndexError = require('../error/IndexError'),
     DimensionError = require('../error/DimensionError'),

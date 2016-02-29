@@ -2,9 +2,9 @@
 
 var Node = require('./Node');
 var keywords = require('../keywords');
-var latex = require('../../util/latex');
+var latex = require('../../be.flo.roommateService.util/latex');
 var operators = require('../operators');
-var isString = require('../../util/string').isString;
+var isString = require('../../be.flo.roommateService.util/string').isString;
 var isArray = Array.isArray;
 
 /**
@@ -54,7 +54,7 @@ FunctionAssignmentNode.prototype._compile = function (defs) {
       '  (function () {' +
       '    var fn = function ' + this.name + '(' + this.params.join(',') + ') {' +
       '      if (arguments.length != ' + this.params.length + ') {' +
-      // TODO: use util.error.ArgumentsError here?
+      // TODO: use be.flo.roommateService.util.error.ArgumentsError here?
       // TODO: test arguments error
       '        throw new SyntaxError("Wrong number of arguments in function ' + this.name + ' (" + arguments.length + " provided, ' + this.params.length + ' expected)");' +
       '      }' +

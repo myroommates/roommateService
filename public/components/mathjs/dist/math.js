@@ -1443,7 +1443,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * Get a string representation of the complex number,
 	 * with optional formatting options.
 	 * @param {Object | Number | Function} [options]  Formatting options. See
-	 *                                                lib/util/number:format for a
+	 *                                                lib/be.flo.roommateService.util/number:format for a
 	 *                                                description of the available
 	 *                                                options.
 	 * @return {String} str
@@ -1793,7 +1793,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * Get a string representation of the range, with optional formatting options.
 	 * Output is formatted as 'start:step:end', for example '2:6' or '0:0.2:11'
 	 * @param {Object | Number | Function} [options]  Formatting options. See
-	 *                                                lib/util/number:format for a
+	 *                                                lib/be.flo.roommateService.util/number:format for a
 	 *                                                description of the available
 	 *                                                options.
 	 * @returns {String} str
@@ -2351,7 +2351,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * Get a string representation of the matrix, with optional formatting options.
 	   * @param {Object | Number | Function} [options]  Formatting options. See
-	   *                                                lib/util/number:format for a
+	   *                                                lib/be.flo.roommateService.util/number:format for a
 	   *                                                description of the available
 	   *                                                options.
 	   * @returns {String} str
@@ -2847,7 +2847,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * Get a string representation of the Unit, with optional formatting options.
 	 * @param {Object | Number | Function} [options]  Formatting options. See
-	 *                                                lib/util/number:format for a
+	 *                                                lib/be.flo.roommateService.util/number:format for a
 	 *                                                description of the available
 	 *                                                options.
 	 * @return {String}
@@ -4536,7 +4536,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * Get a string representation of the matrix, with optional formatting options.
 	   * @param {Object | Number | Function} [options]  Formatting options. See
-	   *                                                lib/util/number:format for a
+	   *                                                lib/be.flo.roommateService.util/number:format for a
 	   *                                                description of the available
 	   *                                                options.
 	   * @returns {String} str
@@ -5745,7 +5745,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * Get a string representation of the matrix, with optional formatting options.
 	   * @param {Object | Number | Function} [options]  Formatting options. See
-	   *                                                lib/util/number:format for a
+	   *                                                lib/be.flo.roommateService.util/number:format for a
 	   *                                                description of the available
 	   *                                                options.
 	   * @returns {String} str
@@ -6703,7 +6703,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * Get a string representation of the matrix, with optional formatting options.
 	   * @param {Object | Number | Function} [options]  Formatting options. See
-	   *                                                lib/util/number:format for a
+	   *                                                lib/be.flo.roommateService.util/number:format for a
 	   *                                                description of the available
 	   *                                                options.
 	   * @returns {String} str
@@ -25553,7 +25553,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *
 	 * @param {*} value             Value to be stringified
 	 * @param {Object | Number | Function} [options]  Formatting options. See
-	 *                                                lib/util/number:format for a
+	 *                                                lib/be.flo.roommateService.util/number:format for a
 	 *                                                description of the available
 	 *                                                options.
 	 * @return {String} str
@@ -25596,7 +25596,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * Example output: "[[1, 2], [3, 4]]"
 	 * @param {Array} array
 	 * @param {Object | Number | Function} [options]  Formatting options. See
-	 *                                                lib/util/number:format for a
+	 *                                                lib/be.flo.roommateService.util/number:format for a
 	 *                                                description of the available
 	 *                                                options.
 	 * @returns {String} str
@@ -26418,7 +26418,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      '  (function () {' +
 	      '    var fn = function ' + this.name + '(' + this.params.join(',') + ') {' +
 	      '      if (arguments.length != ' + this.params.length + ') {' +
-	      // TODO: use util.error.ArgumentsError here?
+	      // TODO: use be.flo.roommateService.util.error.ArgumentsError here?
 	      // TODO: test arguments error
 	      '        throw new SyntaxError("Wrong number of arguments in function ' + this.name + ' (" + arguments.length + " provided, ' + this.params.length + ' expected)");' +
 	      '      }' +

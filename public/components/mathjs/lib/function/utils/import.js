@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = function (math) {
-  var util = require('../../util/index'),
+  var util = require('../../be.flo.roommateService.util/index'),
 
       Complex = require('../../type/Complex'),
       Unit = require('../../type/Unit'),

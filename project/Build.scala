@@ -17,7 +17,6 @@ object ApplicationBuild extends Build {
       .exclude("org.hibernate.javax.persistence", "hibernate-jpa-2.0-api")
       .exclude("javax.persistence.persistence-api", "persistence-api-1.0.2"),
     cache,
-    javaEbean,
     "org.hibernate" % "hibernate-entitymanager" % "4.3.5.Final",
     "org.hibernate" % "hibernate-ehcache" % "4.3.5.Final",
     "org.hibernate.javax.persistence" % "hibernate-jpa-2.1-api" % "1.0.0.Final",

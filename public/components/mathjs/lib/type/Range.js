@@ -1,6 +1,6 @@
 'use strict';
 
-var util = require('../util/index');
+var util = require('../be.flo.roommateService.util/index');
 
 var number = util.number;
 var string = util.string;
@@ -242,7 +242,7 @@ Range.prototype.valueOf = function () {
  * Get a string representation of the range, with optional formatting options.
  * Output is formatted as 'start:step:end', for example '2:6' or '0:0.2:11'
  * @param {Object | Number | Function} [options]  Formatting options. See
- *                                                lib/util/number:format for a
+ *                                                lib/be.flo.roommateService.util/number:format for a
  *                                                description of the available
  *                                                options.
  * @returns {String} str

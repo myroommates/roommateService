@@ -3,7 +3,7 @@
 var BigNumber = require('../../type/BigNumber');
 var Range = require('../../type/Range');
 var Index = require('../../type/Index');
-var isNumber = require('../../util/number').isNumber;
+var isNumber = require('../../be.flo.roommateService.util/number').isNumber;
 
 /**
  * Attach a transform function to math.index

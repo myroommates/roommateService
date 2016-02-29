@@ -42,7 +42,7 @@ exports.endsWith = function(text, search) {
  *
  * @param {*} value             Value to be stringified
  * @param {Object | Number | Function} [options]  Formatting options. See
- *                                                lib/util/number:format for a
+ *                                                lib/be.flo.roommateService.util/number:format for a
  *                                                description of the available
  *                                                options.
  * @return {String} str
@@ -85,7 +85,7 @@ exports.format = function(value, options) {
  * Example output: "[[1, 2], [3, 4]]"
  * @param {Array} array
  * @param {Object | Number | Function} [options]  Formatting options. See
- *                                                lib/util/number:format for a
+ *                                                lib/be.flo.roommateService.util/number:format for a
  *                                                description of the available
  *                                                options.
  * @returns {String} str

@@ -1,6 +1,6 @@
 'use strict';
 
-var util = require('../util/index');
+var util = require('../be.flo.roommateService.util/index');
 var object = util.object;
 var string = util.string;
 

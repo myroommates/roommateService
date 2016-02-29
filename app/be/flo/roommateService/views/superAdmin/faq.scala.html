@@ -1,0 +1,76 @@
+@(data:be.flo.roommateService.dto.InterfaceDataDTO,faqs:List[be.flo.roommateService.dto.FaqDTO],surveys:List[be.flo.roommateService.dto.SurveyDTO],langs:List[String],status:be.flo.roommateService.dto.SuperAdminStatusDTO)
+
+@import com.fasterxml.jackson.databind.ObjectMapper
+
+@home_pattern("about.title", data.getMySelf()) {
+<div class="content-block" ng-controller="SuperAdminFaqCtrl">
+
+    <script>
+        var data = @Html(new ObjectMapper().writeValueAsString(data));
+        var infos = @Html(new ObjectMapper().writeValueAsString(status));
+        var faqs = @Html(new ObjectMapper().writeValueAsString(faqs));
+        var surveys = @Html(new ObjectMapper().writeValueAsString(surveys));
+        var langs = @Html(new ObjectMapper().writeValueAsString(langs));
+    </script>
+
+
+    <tabset>
+        <tab heading="Status">
+            <div class="bordered">
+                <table>
+                    <tr>
+                        <td>Nb of homes</td>
+                        <td>{{infos.homes}}</td>
+                    </tr>
+                    <tr>
+                        <td>Nb of roommates</td>
+                        <td>{{infos.roommates}}</td>
+                    </tr>
+                    <tr>
+                        <td>Nb of tickets</td>
+                        <td>{{infos.tickets}}</td>
+                    </tr>
+                    <tr>
+                        <td>Shopping sum</td>
+                        <td>{{infos.shoppings}} ({{infos.shoppingsTotal}})</td>
+                    </tr>
+                    <tr>
+                        <td>Total sum</td>
+                        <td>{{infos.totalSum | number:2}}</td>
+                    </tr>
+                </table>
+            </div>
+        </tab>
+        <tab heading="FAQ">
+            <div ng-repeat="faq in faqs" class="bordered">
+                <div>
+                    @Messages("faq.question") : {{faq.question}}
+                </div>
+                <div>
+                    @Messages("faq.answer") : {{faq.answer}}
+                </div>
+            </div>
+
+            <input type="submit" class="btn btn-primary" value='@Messages("createFaqModal.title")' ng-click="createNewFaq()">
+        </tab>
+        <tab heading="Survey">
+            <div ng-repeat="survey in surveys" class="bordered">
+                <div>
+                    @Messages("faq.question") : {{survey.question}}
+                </div>
+                <div>
+                    @Messages("faq.answer") :
+                    <div ng-repeat="(id,answer) in survey.answers">
+                        {{answer}}
+                    </div>
+                </div>
+            </div>
+            <input type="submit" class="btn btn-primary" value='@Messages("createSurveyModal.title")' ng-click="createNewSurvey()">
+        </tab>
+    </tabset>
+
+
+
+
+</div>
+}

@@ -1,0 +1,61 @@
+@(data:be.flo.roommateService.dto.InterfaceDataDTO, roommatesList: be.flo.roommateService.dto.ListDTO[be.flo.roommateService.dto.RoommateDTO])
+
+@import com.fasterxml.jackson.databind.ObjectMapper
+
+@home_pattern("admin.roommateList.title", data.getMySelf) {
+<div class="content-block">
+    <div ng-controller="AdminRoommateListCtrl">
+
+            <!-- load data -->
+        <script>
+            var data = @Html(new ObjectMapper().writeValueAsString(data));
+            var initialData = @Html(new ObjectMapper().writeValueAsString(roommatesList.getList));
+        </script>
+
+
+        <ul class="element_list">
+            <li class="row" ng-repeat="roommate in roommateList" ng-click="display(roommate)">
+
+                <div class="col-md-1 col-xs-2">
+                    <dir-user-icon ng-user="roommate"></dir-user-icon>
+                </div>
+                <div class="col-md-9  col-xs-8">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <input
+                            class="form-control"
+                            placeholder="{{'generic.name' | translateText}}"
+                            type="text"
+                            ng-disabled="roommate.edit != true"
+                            ng-model="roommate.name"/>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <input
+                            class="form-control"
+                            placeholder="{{'generic.email' | translateText}}"
+                            type="email"
+                            ng-disabled="roommate.edit != true"
+                            ng-model="roommate.email"/>
+
+                        </div>
+
+                        </div>
+                </div>
+                <div class="col-md-2  col-xs-2">
+                    <button class="btn btn-primary glyphicon glyphicon-save"   ng-click='save(roommate)'  ng-show="roommate.edit == true"></button>
+                    <button class="btn btn-primary glyphicon glyphicon-remove" ng-click='remove(roommate)'></button>
+                </div>
+                <div class="loading-mask" ng-show="roommate.isLoading === true">
+                    <img src="@routes.Assets.at("/images/loading.gif")"/>
+
+                </div>
+            </li>
+        </ul>
+        <div class="row">
+            <div class="col-lg-4 col-md-2 hidden-xs"></div>
+            <a class="btn btn-primary col-lg-4 col-md-8 col-xs-12" href="#" ng-click="add()">@Messages("admin.roommateList.inviteRoommate")</a>
+        </div>
+
+    </div>
+</div>
+}

@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = function (math) {
-  var string = require('../util/string');
+  var string = require('../be.flo.roommateService.util/string');
 
   /**
    * @constructor Chain

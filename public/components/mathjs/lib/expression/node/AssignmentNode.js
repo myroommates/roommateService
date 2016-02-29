@@ -6,8 +6,8 @@ var Node = require('./Node'),
     keywords = require('../keywords'),
     operators = require('../operators'),
 
-    latex = require('../../util/latex'),
-    isString = require('../../util/string').isString;
+    latex = require('../../be.flo.roommateService.util/latex'),
+    isString = require('../../be.flo.roommateService.util/string').isString;
 
 /**
  * @constructor AssignmentNode

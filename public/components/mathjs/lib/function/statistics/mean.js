@@ -6,7 +6,7 @@ module.exports = function (math) {
 
       isCollection = collection.isCollection,
 
-      size = require('../../util/array').size,
+      size = require('../../be.flo.roommateService.util/array').size,
       isArray = Array.isArray;
 
   /**

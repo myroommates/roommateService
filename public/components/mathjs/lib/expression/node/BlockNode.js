@@ -2,7 +2,7 @@
 
 var Node = require('./Node');
 var ResultSet = require('../../type/ResultSet');
-var isBoolean = require('../../util/boolean').isBoolean;
+var isBoolean = require('../../be.flo.roommateService.util/boolean').isBoolean;
 
 /**
  * @constructor BlockNode

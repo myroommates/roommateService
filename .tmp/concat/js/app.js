@@ -244,7 +244,7 @@ myApp.controller('CuTicketCtrl', function ($scope, $http, $flash, $modalInstance
                 }
             }
 
-            //build dto
+            //build be.flo.roommateService.dto
             var dto = {
                 date: $scope.fields.date.field,
                 description: $scope.fields.description.field,
@@ -358,7 +358,7 @@ myApp.controller('CuShoppingItemCtrl', function ($scope, $http, $flash, $modalIn
         if ($scope.allFieldValid()) {
 
 
-            //build dto
+            //build be.flo.roommateService.dto
 
 
             var request = "POST";

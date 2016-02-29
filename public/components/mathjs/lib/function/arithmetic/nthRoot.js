@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = function (math) {
-  var util = require('../../util/index');
+  var util = require('../../be.flo.roommateService.util/index');
 
   var BigNumber = math.type.BigNumber;
   var collection = math.collection;

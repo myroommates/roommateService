@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = function (math, config) {
-  var util = require('../../util/index'),
+  var util = require('../../be.flo.roommateService.util/index'),
       _parse = math.expression.parse,
 
       collection = math.collection,

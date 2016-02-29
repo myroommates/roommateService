@@ -1,7 +1,7 @@
 'use strict';
 
-var object = require('./util/object');
-var digits = require('./util/number').digits;
+var object = require('./be.flo.roommateService.util/object');
+var digits = require('./be.flo.roommateService.util/number').digits;
 
 /**
  * math.js factory function.

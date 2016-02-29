@@ -1,6 +1,6 @@
 'use strict';
 
-var util = require('../../util/index');
+var util = require('../../be.flo.roommateService.util/index');
 var DimensionError = require('../../error/DimensionError');
 
 var array = util.array;
@@ -754,7 +754,7 @@ module.exports = function (math) {
   /**
    * Get a string representation of the matrix, with optional formatting options.
    * @param {Object | Number | Function} [options]  Formatting options. See
-   *                                                lib/util/number:format for a
+   *                                                lib/be.flo.roommateService.util/number:format for a
    *                                                description of the available
    *                                                options.
    * @returns {String} str

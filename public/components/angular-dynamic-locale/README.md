@@ -10,7 +10,7 @@
 
 ### Changing the locale
 
-This module defines two services, these are `tmhDynamicLocale` and
+This module defines two be.flo.roommateService.services, these are `tmhDynamicLocale` and
 `tmhDynamicLocaleCache`.
 
 The service `tmhDynamicLocale` provides has one method `set(newLocale)` to

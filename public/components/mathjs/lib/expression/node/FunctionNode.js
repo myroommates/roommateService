@@ -3,7 +3,7 @@
 var Node = require('./Node');
 var SymbolNode = require('./SymbolNode');
 
-var latex = require('../../util/latex');
+var latex = require('../../be.flo.roommateService.util/latex');
 var isNode = Node.isNode;
 var isArray = Array.isArray;
 

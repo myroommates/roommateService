@@ -1,6 +1,6 @@
 'use strict';
 
-var util = require('../util/index'),
+var util = require('../be.flo.roommateService.util/index'),
 
     number = util.number,
     string = util.string,
@@ -431,7 +431,7 @@ Unit.prototype.valueOf = Unit.prototype.toString;
 /**
  * Get a string representation of the Unit, with optional formatting options.
  * @param {Object | Number | Function} [options]  Formatting options. See
- *                                                lib/util/number:format for a
+ *                                                lib/be.flo.roommateService.util/number:format for a
  *                                                description of the available
  *                                                options.
  * @return {String}

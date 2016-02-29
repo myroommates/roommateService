@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = function(math) {
-  var array = require('../../util/array');
+  var array = require('../../be.flo.roommateService.util/array');
   var Matrix = math.type.Matrix;
 
   /**

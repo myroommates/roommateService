@@ -1,0 +1,71 @@
+@import be.flo.roommateService.controllers.RegistrationController
+@import be.flo.roommateService.models.RegistrationForm
+@(registrationForm: Form[RegistrationForm])
+
+@import helper._
+
+@implicitField = @{ FieldConstructor(widget.fieldCustom.f) }
+
+@welcome_pattern {
+
+    @helper.form(action = RegistrationController.registration()) {
+        <div class="container content-block" ng-controller="RegistrationCtrl">
+
+            <div class="actions">
+                <a class="btn btn-primary" href="/">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                    @Messages("generic.back")
+                </a>
+            </div>
+
+            <h3>@Messages("registration.form.title")</h3>
+
+            @input(registrationForm("name"),
+                '_label -> Messages("generic.name"),
+                '_showConstraints -> false,
+                '_error -> registrationForm.globalError){ (id, name, value, args) =>
+                <input ng-model="name" value="@value" type="text" name="@name" class="form-control" id="@id" @toHtmlArgs(args)>
+            }
+
+            @input(registrationForm("nameAbrv"),
+                '_label -> Messages("generic.nameAbrv"),
+                '_help -> Messages("registration.form.nameAbrv.help"),
+                '_error -> registrationForm.globalError){ (id, name, value, args) =>
+                <input ng-model="nameAbrv" value="@value" type="text" name="@name" class="form-control" id="@id" @toHtmlArgs(args)>
+            }
+
+            @input(registrationForm("email"),
+                '_label -> Messages("registration.form.yourEmail"),
+                '_showConstraints -> false,
+                '_error -> registrationForm.globalError){ (id, name, value, args) =>
+                <input value="@value" type="email" name="@name" class="form-control" id="@id" @toHtmlArgs(args)>
+            }
+
+            @input(registrationForm("password"),
+                '_label -> Messages("registration.form.password"),
+                '_help -> Messages("generic.validation.password"),
+                '_error -> registrationForm.globalError){ (id, name, value, args) =>
+                <input value="@value" type="password" name="@name" class="form-control" id="@id" @toHtmlArgs(args)>
+            }
+
+            @input(registrationForm("repeatPassword"),
+                '_label -> Messages("generic.repeatPassword"),
+                '_showConstraints -> false,
+                '_error -> registrationForm.globalError){ (id, name, value, args) =>
+                <input value="@value" type="password" name="@name" class="form-control" id="@id" @toHtmlArgs(args)>
+            }
+
+            @checkbox(registrationForm("keepSessionOpen"),
+                '_label ->  Messages("registration.form.keepSessionOpen"),
+                '_showConstraints -> false,
+                '_error -> registrationForm.globalError)
+
+            <div class="col-md-3 hidden-sm hidden-xs"></div>
+            <div class="actions">
+                <input type="submit" class="btn btn-primary" value="@Messages("generic.submit")">
+            </div>
+        </div>
+    }
+
+
+}

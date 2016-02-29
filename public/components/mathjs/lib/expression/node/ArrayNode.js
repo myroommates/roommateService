@@ -1,7 +1,7 @@
 'use strict';
 
 var Node = require('./Node'),
-    string = require('../../util/string'),
+    string = require('../../be.flo.roommateService.util/string'),
 
     isArray = Array.isArray,
     isNode = Node.isNode;

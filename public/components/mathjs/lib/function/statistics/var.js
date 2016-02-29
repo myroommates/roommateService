@@ -6,7 +6,7 @@ module.exports = function (math) {
       collection = math.collection,
 
       isCollection = collection.isCollection,
-      isString = require('../../util/string').isString,
+      isString = require('../../be.flo.roommateService.util/string').isString,
 
       DEFAULT_NORMALIZATION = 'unbiased';
 

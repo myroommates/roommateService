@@ -44,7 +44,7 @@ myApp.controller('AdminPreferenceCtrl', function ($scope, $flash, $http) {
         }
         if ($scope.allFieldValid()) {
 
-            //build dto
+            //build be.flo.roommateService.dto
             var dto = {
                 moneySymbol: $scope.fields.currency.field
             };

@@ -1,6 +1,6 @@
 'use strict';
 
-var string = require('../../util/string');
+var string = require('../../be.flo.roommateService.util/string');
 
 var isArray = Array.isArray;
 var isString = string.isString;

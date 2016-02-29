@@ -1,15 +1,15 @@
 'use strict';
 
 module.exports = function (math, config) {
-  var object = require('./util/object');
-  var bignumber = require('./util/bignumber');
+  var object = require('./be.flo.roommateService.util/object');
+  var bignumber = require('./be.flo.roommateService.util/bignumber');
   var Complex = require('./type/Complex');
   var BigNumber = math.type.BigNumber;
 
   math['true']     = true;
   math['false']    = false;
   math['null']     = null;
-  math['uninitialized'] = require('./util/array').UNINITIALIZED;
+  math['uninitialized'] = require('./be.flo.roommateService.util/array').UNINITIALIZED;
 
   if (config.number === 'bignumber') {
     math['Infinity'] = new BigNumber(Infinity);

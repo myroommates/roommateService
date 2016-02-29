@@ -1,8 +1,8 @@
 'use strict';
 
 var SymbolNode = require('../../expression/node/SymbolNode');
-var isBoolean = require('../../util/boolean').isBoolean;
-var argsToArray = require('../../util/array').argsToArray;
+var isBoolean = require('../../be.flo.roommateService.util/boolean').isBoolean;
+var argsToArray = require('../../be.flo.roommateService.util/array').argsToArray;
 var ArgumentsError = require('../../error/ArgumentsError');
 
 /**

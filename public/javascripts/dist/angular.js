@@ -372,7 +372,7 @@ myApp.controller('AdminPreferenceCtrl', ['$scope', '$flash', '$http', function (
         }
         if ($scope.allFieldValid()) {
 
-            //build dto
+            //build be.flo.roommateService.dto
             var dto = {
                 moneySymbol: $scope.fields.currency.field
             };
@@ -1273,7 +1273,7 @@ myApp.controller('CuTicketCtrl', ['$scope', '$http', '$flash', '$modalInstance',
                 }
             }
 
-            //build dto
+            //build be.flo.roommateService.dto
             var dto = {
                 date: $scope.fields.date.field,
                 description: $scope.fields.description.field,
@@ -1387,7 +1387,7 @@ myApp.controller('CuShoppingItemCtrl', ['$scope', '$http', '$flash', '$modalInst
         if ($scope.allFieldValid()) {
 
 
-            //build dto
+            //build be.flo.roommateService.dto
 
 
             var request = "POST";

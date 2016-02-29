@@ -3,8 +3,8 @@
 var Node = require('./Node'),
     Unit = require('../../type/Unit'),
 
-    latex = require('../../util/latex'),
-    isString = require('../../util/string').isString;
+    latex = require('../../be.flo.roommateService.util/latex'),
+    isString = require('../../be.flo.roommateService.util/string').isString;
 
 /**
  * @constructor SymbolNode

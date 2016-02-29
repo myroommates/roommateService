@@ -1,11 +1,11 @@
 'use strict';
 
 var Node = require('./Node');
-var latex = require('../../util/latex');
+var latex = require('../../be.flo.roommateService.util/latex');
 var BigNumber = require('../../type/BigNumber');
 var Complex = require('../../type/Complex');
 var Unit = require('../../type/Unit');
-var util = require('../../util');
+var util = require('../../be.flo.roommateService.util');
 var operators = require('../operators');
 var isString = util.string.isString;
 var isNumber = util.number.isNumber;

@@ -2,8 +2,8 @@
 
 var Node = require('./Node');
 var BigNumber = require('../../type/BigNumber');
-var type = require('../../util/types').type;
-var isString = require('../../util/string').isString;
+var type = require('../../be.flo.roommateService.util/types').type;
+var isString = require('../../be.flo.roommateService.util/string').isString;
 
 /**
  * A ConstantNode holds a constant value like a number or string. A ConstantNode

@@ -5,7 +5,7 @@
 
 module.exports = function (math) {
   var Matrix = math.type.Matrix;
-  var array = require('../../util/array');
+  var array = require('../../be.flo.roommateService.util/array');
   var collection = math.collection;
   var isCollection = collection.isCollection;
 

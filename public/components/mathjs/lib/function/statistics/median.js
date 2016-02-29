@@ -6,10 +6,10 @@ module.exports = function (math) {
       BigNumber = math.type.BigNumber,
       collection = math.collection,
 
-      isNumber = require('../../util/number').isNumber,
+      isNumber = require('../../be.flo.roommateService.util/number').isNumber,
       isCollection = collection.isCollection,
 
-      flatten = require('../../util/array').flatten;
+      flatten = require('../../be.flo.roommateService.util/array').flatten;
 
   /**
    * Compute the median of a matrix or a list with values. The values are
