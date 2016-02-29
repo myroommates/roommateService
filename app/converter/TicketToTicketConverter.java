@@ -5,6 +5,7 @@ import dto.TicketDTO;
 import dto.TicketDebtorDTO;
 import models.entities.*;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -45,7 +46,7 @@ public class TicketToTicketConverter implements ConverterInterface<Ticket, Ticke
         boolean hasNewComment = false;
         if (entity.getComments().size() > 0) {
 
-            Date lastVisualization = null;
+            LocalDateTime lastVisualization = null;
 
             for (CommentLastVisualization commentLastVisualization : entity.getCommentLastVisualizations()) {
                 if (commentLastVisualization.getRoommate().equals(currentRoommate)) {

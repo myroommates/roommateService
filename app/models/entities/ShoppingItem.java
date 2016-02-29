@@ -10,33 +10,13 @@ import java.util.List;
  * Created by florian on 2/12/14.
  */
 @Entity
-@NamedQueries({
-        @NamedQuery(name = ShoppingItem.FIND_BY_ID, query = "where " + AbstractEntity.COL_ID + " = :" + AbstractEntity.PARAM_ID),
-        @NamedQuery(name = ShoppingItem.FIND_BY_HOME, query = "where " + ShoppingItem.COL_HOME + "= :" + ShoppingItem.PARAM_HOME),
-        @NamedQuery(name = ShoppingItem.FIND_NOT_BOUGHT_YET, query = "where wasBought = false"),
-})
 public class ShoppingItem extends AbstractEntity {
-
-    //request
-    public static final String FIND_BY_HOME = "ShoppingItem_FIND_BY_HOME";
-    public static final String FIND_BY_ID = "ShoppingItem_FIND_BY_ID";
-    public static final String FIND_NOT_BOUGHT_YET = "ShoppingItem_FIND_NOT_BOUGTH_YET";
-
-    //column
-    public final static String COL_HOME = "home.id";
-
-    //params
-    public final static String PARAM_HOME = "home_id";
-
 
     @Column(nullable = false, columnDefinition = "Text")
     private String description;
 
     @Column(nullable = false, columnDefinition = "boolean default false")
     private Boolean onlyForMe = false;
-
-    @Column(nullable = false)
-    private Date creationDate;
 
     @ManyToOne(optional = false)
     private Home home;
@@ -54,7 +34,7 @@ public class ShoppingItem extends AbstractEntity {
     private List<CommentLastVisualization> commentLastVisualizations;
 
     public ShoppingItem() {
-        creationDate = new Date();
+
     }
 
     public List<CommentLastVisualization> getCommentLastVisualizations() {
@@ -87,14 +67,6 @@ public class ShoppingItem extends AbstractEntity {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Date getCreationDate() {
-        return creationDate;
-    }
-
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
     }
 
     public Home getHome() {

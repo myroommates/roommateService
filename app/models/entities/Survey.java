@@ -9,21 +9,9 @@ import java.util.List;
  * Created by florian on 25/02/15.
  */
 @Entity
-@NamedQueries({
-        @NamedQuery(name = Survey.FIND_BY_KEY, query = "where " + Survey.COL_KEY + " = :" + Survey.PARAM_KEY)
-})
 public class Survey extends AbstractEntity {
 
-    //request
-    public static final String FIND_BY_KEY = "Survey_FIND_BY_KEY";
-
-    //param
-    public static final String PARAM_KEY = "key";
-
-    //column
-    public static final String COL_KEY = "key";
-
-    @Column(nullable = false, name = COL_KEY, unique = true)
+    @Column(nullable = false, unique = true)
     private String key;
 
     @ManyToOne(optional = false,cascade = CascadeType.ALL)

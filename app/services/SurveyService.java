@@ -10,8 +10,6 @@ import java.util.List;
  */
 public interface SurveyService extends CrudService<Survey> {
 
-    public List<Survey> getAll();
-
     public Survey getByKey(String key);
 
 }

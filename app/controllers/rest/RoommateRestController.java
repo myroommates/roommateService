@@ -1,6 +1,6 @@
 package controllers.rest;
 
-import com.avaje.ebean.annotation.Transactional;
+import play.db.jpa.Transactional;
 import controllers.technical.AbstractController;
 import controllers.technical.AdminSecurityRestController;
 import controllers.technical.SecurityRestController;
@@ -123,7 +123,6 @@ public class RoommateRestController extends AbstractController {
         //build entity
         roommate.setName(dto.getName());
         roommate.setNameAbrv(dto.getNameAbrv());
-        roommate.setKeepSessionOpen(dto.getKeepSessionOpen());
         if (!roommate.getLanguage().code().equals(dto.getLanguageCode())) {
             //control language
             boolean founded = false;

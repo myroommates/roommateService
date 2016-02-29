@@ -1,10 +1,7 @@
 package services.impl;
 
-import com.avaje.ebean.Ebean;
-import models.entities.Faq;
-import models.entities.Roommate;
 import models.entities.Survey;
-import services.FaqService;
+import play.db.jpa.JPA;
 import services.SurveyService;
 
 import java.util.List;
@@ -15,20 +12,13 @@ import java.util.List;
 public class SurveyServiceImpl extends CrudServiceImpl<Survey> implements SurveyService {
 
     @Override
-    public List<Survey> getAll() {
-        return Ebean.find(Survey.class).findList();
-    }
-
-    @Override
     public Survey getByKey(String key) {
-        List<Survey> list = Ebean.createNamedQuery(Survey.class, Survey.FIND_BY_KEY)
-                .setParameter(Survey.PARAM_KEY, key)
-                .findList();
 
-        if (list.size() == 0) {
-            return null;
-        } else {
-            return list.get(0);
-        }
+
+        String r = "SELECT s FROM Survey s WHERE s.key =:key";
+
+        return JPA.em().createQuery(r,Survey.class)
+                .setParameter("key",key)
+                .getSingleResult();
     }
 }

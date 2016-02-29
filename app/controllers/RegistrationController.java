@@ -1,6 +1,6 @@
 package controllers;
 
-import com.avaje.ebean.annotation.Transactional;
+import play.db.jpa.Transactional;
 import controllers.rest.EmailRestController;
 import controllers.rest.RoommateRestController;
 import controllers.technical.AbstractController;

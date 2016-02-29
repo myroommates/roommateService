@@ -39,12 +39,6 @@ DELETE        /rest/roommate/:id                         @controllers.rest.Roomm
 PUT           /rest/roommate/email/:id                   @controllers.rest.RoommateRestController.changeEmail(id:Long)
 PUT           /rest/roommate/password/:id                @controllers.rest.RoommateRestController.changePassword(id:Long)
 
-#event
-GET           /rest/event                                @controllers.rest.EventRestController.getAll()
-GET           /rest/event/:id                            @controllers.rest.EventRestController.getById(id:Long)
-POST          /rest/event                                @controllers.rest.EventRestController.create()
-PUT           /rest/event/:id                            @controllers.rest.EventRestController.update(id:Long)
-DELETE        /rest/event/:id                            @controllers.rest.EventRestController.remove(id:Long)
 
 #shopping item
 GET           /rest/shoppingItem                         @controllers.rest.ShoppingRestController.getAll()

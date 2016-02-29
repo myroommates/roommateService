@@ -1,10 +1,10 @@
 package services.impl;
 
-import com.avaje.ebean.Ebean;
 import models.entities.Home;
 import models.entities.Roommate;
 import org.jasypt.util.password.StrongPasswordEncryptor;
 import play.Logger;
+import play.db.jpa.JPA;
 import services.RoommateService;
 import util.KeyGenerator;
 
@@ -16,12 +16,16 @@ import java.util.List;
  */
 public class RoommateServiceImpl extends CrudServiceImpl<Roommate> implements RoommateService {
 
+
     @Override
     public Roommate findByEmail(String email) {
 
-        return Ebean.createNamedQuery(Roommate.class, Roommate.FIND_BY_EMAIL)
-                .setParameter(Roommate.PARAM_EMAIL, email)
-                .findUnique();
+        String r = "SELECT r from Roommate r where r.email = :email";
+
+
+        return JPA.em().createQuery(r,Roommate.class)
+                .setParameter("email", email)
+                .getSingleResult();
     }
 
     @Override
@@ -52,16 +56,22 @@ public class RoommateServiceImpl extends CrudServiceImpl<Roommate> implements Ro
 
     @Override
     public List<Roommate> findByHome(Home home) {
-        return Ebean.createNamedQuery(Roommate.class, Roommate.FIND_BY_HOME)
-                .setParameter(Roommate.PARAM_HOME, home.getId())
-                .findList();
+
+        String r = "SELECT r from Roommate r where r.home = :home";
+
+        return JPA.em().createQuery(r,Roommate.class)
+                .setParameter("home", home)
+                .getResultList();
     }
 
     @Override
     public Roommate findByAuthenticationKey(String authenticationKey) {
-        return Ebean.createNamedQuery(Roommate.class, Roommate.FIND_BY_AUTHENTICATION_KEY)
-                .setParameter(Roommate.PARAM_AUTHENTICATION_KEY, authenticationKey)
-                .findUnique();
+
+        String r = "SELECT r from Roommate r where r.authenticationKey = :authenticationKey";
+
+        return JPA.em().createQuery(r,Roommate.class)
+                .setParameter("authenticationKey", authenticationKey)
+                .getSingleResult();
     }
 
     @Override
@@ -82,7 +92,12 @@ public class RoommateServiceImpl extends CrudServiceImpl<Roommate> implements Ro
 
     @Override
     public Integer getCount() {
-        return Ebean.createQuery(Roommate.class).findRowCount();
+
+        //TODO
+        String r = "SELECT r from Roommate r";
+
+        return JPA.em().createQuery(r,Roommate.class)
+                .getResultList().size();
     }
 
     @Override

@@ -1,10 +1,13 @@
 package models.entities;
 
+import models.entities.converter.LocalDateTimePersistenceConverter;
 import models.entities.technical.AbstractEntity;
 
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -13,8 +16,9 @@ import java.util.Date;
 @Entity
 public class CommentLastVisualization extends AbstractEntity {
 
-    @Column(nullable = false)
-    private Date date;
+    @Column(columnDefinition = "timestamp",nullable = false)
+    @Convert(converter = LocalDateTimePersistenceConverter.class)
+    private LocalDateTime date;
 
     @ManyToOne(optional = false)
     private Roommate roommate;
@@ -40,11 +44,11 @@ public class CommentLastVisualization extends AbstractEntity {
         this.home = home;
     }
 
-    public Date getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 

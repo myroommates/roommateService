@@ -1,47 +1,113 @@
 package models.entities.technical;
 
-import com.avaje.ebean.annotation.CreatedTimestamp;
-import com.avaje.ebean.annotation.UpdatedTimestamp;
+import controllers.technical.CommonSecurityController;
+import models.entities.converter.LocalDateTimePersistenceConverter;
+import org.apache.commons.lang3.StringUtils;
 import play.db.ebean.Model;
+import play.mvc.Http;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.text.Normalizer;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
  * Created by florian on 10/11/14.
  */
 @MappedSuperclass
-public abstract class AbstractEntity extends Model {
+public abstract class AbstractEntity implements Serializable {
 
-
-    public static final String COL_ID = "id";
-    public static final String PARAM_ID = COL_ID;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = COL_ID)
     protected Long id;
 
-    @CreatedTimestamp
-    protected Date creationDate;
-
-    @UpdatedTimestamp
     @Version
-    protected Date lastUpdate;
+    protected Long version;
 
-    public Date getCreationDate() {
+    @Column(columnDefinition = "timestamp")
+    @Convert(converter = LocalDateTimePersistenceConverter.class)
+    protected LocalDateTime creationDate;
+
+    @Basic
+    protected String creationUser;
+
+    @Column(columnDefinition = "timestamp")
+    @Convert(converter = LocalDateTimePersistenceConverter.class)
+    protected LocalDateTime lastUpdate;
+
+    @Basic
+    protected String lastUpdateUser;
+
+    @PrePersist
+    public void prePersist() {
+        creationDate = LocalDateTime.now();
+        creationUser = getCurrentUser();
+        lastUpdate = LocalDateTime.now();
+        lastUpdateUser = getCurrentUser();
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        if (id == null) {
+            prePersist();
+        } else {
+            lastUpdate = LocalDateTime.now();
+            lastUpdateUser = getCurrentUser();
+        }
+    }
+
+    private static String getCurrentUser() {
+
+        if (Http.Context.current.get() == null) {
+            return "TECHNICAL";
+        }
+
+        Http.Session session     = Http.Context.current().session();
+        String       currentUser = session.get(CommonSecurityController.ACCOUNT_IDENTIFIER);
+        if (currentUser == null) {
+            currentUser = session.get(CommonSecurityController.SESSION_IDENTIFIER_STORE);
+        }
+        if (currentUser == null) {
+            currentUser = session.get(CommonSecurityController.REQUEST_HEADER_AUTHENTICATION_KEY);
+        }
+
+        if (currentUser == null || StringUtils.isBlank(currentUser)) {
+            currentUser = "TECHNICAL";
+        }
+        return currentUser;
+    }
+
+    public Long getVersion() {
+        return version;
+    }
+
+    public void setVersion(Long version) {
+        this.version = version;
+    }
+
+    public String getCreationUser() {
+        return creationUser;
+    }
+
+    public String getLastUpdateUser() {
+        return lastUpdateUser;
+    }
+
+    public LocalDateTime getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(Date creationDate) {
+    public void setCreationDate(LocalDateTime creationDate) {
         this.creationDate = creationDate;
     }
 
-    public Date getLastUpdate() {
+    public LocalDateTime getLastUpdate() {
         return lastUpdate;
     }
 
-    public void setLastUpdate(Date lastUpdate) {
+    public void setLastUpdate(LocalDateTime lastUpdate) {
         this.lastUpdate = lastUpdate;
     }
 
@@ -62,17 +128,13 @@ public abstract class AbstractEntity extends Model {
                 '}';
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o.getClass().equals(this.getClass()))) return false;
-        if (!super.equals(o)) return false;
 
-        AbstractEntity that = (AbstractEntity) o;
-
-        if (!id.equals(that.id)) return false;
-
-        return true;
+    protected String normalize(String s) {
+        s = s.toLowerCase();
+        s = Normalizer.normalize(s, Normalizer.Form.NFD);
+        s = s.replaceAll("[^\\p{ASCII}]", "");
+        s = s.replaceAll("\\p{M}", "");
+        return s;
     }
 
 

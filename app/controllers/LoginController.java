@@ -1,6 +1,6 @@
 package controllers;
 
-import com.avaje.ebean.annotation.Transactional;
+import play.db.jpa.Transactional;
 import controllers.technical.AbstractController;
 import controllers.technical.SecurityController;
 import converter.LanguageToLanguageDTOConverter;
@@ -54,7 +54,7 @@ public class LoginController extends AbstractController {
 
             if (request().cookie(SecurityController.COOKIE_KEEP_SESSION_OPEN) == null) {
 
-                response().setCookie(SecurityController.COOKIE_KEEP_SESSION_OPEN, securityController.getCookieKey());
+                response().setCookie(SecurityController.COOKIE_KEEP_SESSION_OPEN, securityController.getCookieKey(), 2592000);
             }
 
             return homeController.index();

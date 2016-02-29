@@ -11,24 +11,7 @@ import java.util.Set;
  * Created by florian on 10/11/14.
  */
 @Entity
-@NamedQueries({
-        @NamedQuery(name = Ticket.FIND_BY_ID, query = "where " + AbstractEntity.COL_ID + " = :" + AbstractEntity.PARAM_ID),
-        @NamedQuery(name = Ticket.FIND_BY_HOME, query = "where " + Ticket.COL_HOME + " = :" + Ticket.PARAM_HOME),
-        @NamedQuery(name = Ticket.FIND_BY_PAYER, query = "where " + Ticket.COL_PAYER + " = :" + Ticket.PARAM_PAYER),
-})
 public class Ticket extends AbstractEntity {
-
-    //requests
-    public static final String FIND_BY_HOME = "Ticket_FIND_BY_HOME";
-    public static final String FIND_BY_ID = "Ticket_FIND_BY_ID";
-    public static final String FIND_BY_PAYER = "Ticket_FIND_BY_PAYER";
-
-    //column
-    public static final String COL_HOME = "home.id";
-    public static final String COL_PAYER = "payer.id";
-    //params
-    public static final String PARAM_HOME = "home_id";
-    public static final String PARAM_PAYER = "payer_id";
 
     @Column(nullable = false, columnDefinition = "Text")
     private String description;

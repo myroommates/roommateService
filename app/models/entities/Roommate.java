@@ -11,28 +11,7 @@ import java.util.List;
  * Created by florian on 10/11/14.
  */
 @Entity
-@NamedQueries({
-        @NamedQuery(name = Roommate.FIND_BY_ID, query = "where " + AbstractEntity.COL_ID + " = :" + AbstractEntity.PARAM_ID),
-        @NamedQuery(name = Roommate.FIND_BY_AUTHENTICATION_KEY, query = "where " + Roommate.COL_AUTHENTICATION_KEY + " = :" + Roommate.PARAM_AUTHENTICATION_KEY),
-        @NamedQuery(name = Roommate.FIND_BY_HOME, query = "where " + Roommate.COL_HOME + " = :" + Roommate.PARAM_HOME),
-        @NamedQuery(name = Roommate.FIND_BY_EMAIL, query = "where " + Roommate.COL_EMAIL + " = :" + Roommate.PARAM_EMAIL),
-})
 public class Roommate extends AbstractEntity {
-
-    //request
-    public static final String FIND_BY_EMAIL = "Roommate_FIND_BY_EMAIL";
-    public static final String FIND_BY_HOME = "Roommate_FIND_BY_HOME";
-    public static final String FIND_BY_ID = "Roommate_FIND_BY_ID";
-    public static final String FIND_BY_AUTHENTICATION_KEY = "Roommate_FIND_BY_AUTHENTICATION_KEY";
-
-    //columns
-    public static final String COL_EMAIL = "email";
-    public static final String PARAM_EMAIL = COL_EMAIL;
-    public static final String COL_HOME = "home.id";
-    public static final String PARAM_HOME = "home_id";
-    public static final String COL_AUTHENTICATION_KEY = "authenticationKey";
-    public static final String PARAM_AUTHENTICATION_KEY = COL_AUTHENTICATION_KEY;
-
 
     @Column(nullable = false)
     private String name;
@@ -40,7 +19,7 @@ public class Roommate extends AbstractEntity {
     @Column(nullable = false)
     private String nameAbrv;
 
-    @Column(nullable = false, unique = true, name = COL_EMAIL)
+    @Column(nullable = false, unique = true)
     private String email;
 
     @Column
@@ -53,7 +32,7 @@ public class Roommate extends AbstractEntity {
      * used to authentication
      * For the application and for the cookie into for the web site
      */
-    @Column(name = COL_AUTHENTICATION_KEY)
+    @Column
     private String authenticationKey;
 
     @Column(nullable = false)

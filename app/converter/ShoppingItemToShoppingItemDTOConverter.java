@@ -8,6 +8,8 @@ import models.entities.CommentLastVisualization;
 import models.entities.Roommate;
 import models.entities.ShoppingItem;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.logging.Logger;
 
@@ -17,7 +19,7 @@ import java.util.logging.Logger;
 public class ShoppingItemToShoppingItemDTOConverter implements ConverterInterface<ShoppingItem, ShoppingItemDTO> {
 
     private CommentToCommentDTOConverter commentToCommentDTOConverter = new CommentToCommentDTOConverter();
-    private Roommate currentUser;;
+    private Roommate currentUser;
 
     public ShoppingItemToShoppingItemDTOConverter(Roommate currentUser) {
         this.currentUser = currentUser;
@@ -27,8 +29,9 @@ public class ShoppingItemToShoppingItemDTOConverter implements ConverterInterfac
     public ShoppingItemDTO convert(ShoppingItem entity) {
         ShoppingItemDTO dto = new ShoppingItemDTO();
 
+
         dto.setId(entity.getId());
-        dto.setCreationDate(entity.getCreationDate());
+        dto.setCreationDate(Date.from(entity.getCreationDate().atZone(ZoneId.systemDefault()).toInstant()));
         dto.setOnlyForMe(entity.getOnlyForMe());
         dto.setCreatorId(entity.getCreator().getId());
         dto.setDescription(entity.getDescription());
@@ -44,7 +47,7 @@ public class ShoppingItemToShoppingItemDTOConverter implements ConverterInterfac
         boolean hasNewComment = false;
         if (entity.getComments().size() > 0) {
 
-            Date lastVisualization = null;
+            LocalDateTime lastVisualization = null;
 
             for (CommentLastVisualization commentLastVisualization : entity.getCommentLastVisualizations()) {
                 if (commentLastVisualization.getRoommate().equals(currentUser)) {

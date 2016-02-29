@@ -23,6 +23,7 @@ import services.impl.TicketServiceImpl;
 import util.ErrorMessage;
 import util.exception.MyRuntimeException;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -179,7 +180,7 @@ public class CommentRestController extends AboutController {
 
         for (CommentLastVisualization commentLastVisualization : ticket.getCommentLastVisualizations()) {
             if (commentLastVisualization.getRoommate().equals(securityController.getCurrentUser())) {
-                commentLastVisualization.setDate(new Date());
+                commentLastVisualization.setDate(LocalDateTime.now());
 
                 commentLastVisualizationService.saveOrUpdate(commentLastVisualization);
                 return ok(new ResultDTO());
@@ -189,7 +190,7 @@ public class CommentRestController extends AboutController {
         CommentLastVisualization commentLastVisualization = new CommentLastVisualization();
         commentLastVisualization.setTicket(ticket);
         commentLastVisualization.setRoommate(securityController.getCurrentUser());
-        commentLastVisualization.setDate(new Date());
+        commentLastVisualization.setDate(LocalDateTime.now());
 
         commentLastVisualizationService.saveOrUpdate(commentLastVisualization);
 
@@ -208,7 +209,7 @@ public class CommentRestController extends AboutController {
 
         for (CommentLastVisualization commentLastVisualization : shoppingItem.getCommentLastVisualizations()) {
             if (commentLastVisualization.getRoommate().equals(securityController.getCurrentUser())) {
-                commentLastVisualization.setDate(new Date());
+                commentLastVisualization.setDate(LocalDateTime.now());
 
                 commentLastVisualizationService.saveOrUpdate(commentLastVisualization);
                 return ok(new ResultDTO());
@@ -218,7 +219,7 @@ public class CommentRestController extends AboutController {
         CommentLastVisualization commentLastVisualization = new CommentLastVisualization();
         commentLastVisualization.setShoppingItem(shoppingItem);
         commentLastVisualization.setRoommate(securityController.getCurrentUser());
-        commentLastVisualization.setDate(new Date());
+        commentLastVisualization.setDate(LocalDateTime.now());
 
         commentLastVisualizationService.saveOrUpdate(commentLastVisualization);
 
@@ -231,7 +232,7 @@ public class CommentRestController extends AboutController {
 
         for (CommentLastVisualization commentLastVisualization : securityController.getCurrentUser().getHome().getCommentLastVisualizations()) {
             if (commentLastVisualization.getRoommate().equals(securityController.getCurrentUser())) {
-                commentLastVisualization.setDate(new Date());
+                commentLastVisualization.setDate(LocalDateTime.now());
 
                 commentLastVisualizationService.saveOrUpdate(commentLastVisualization);
                 return ok(new ResultDTO());
@@ -241,7 +242,7 @@ public class CommentRestController extends AboutController {
         CommentLastVisualization commentLastVisualization = new CommentLastVisualization();
         commentLastVisualization.setHome(securityController.getCurrentUser().getHome());
         commentLastVisualization.setRoommate(securityController.getCurrentUser());
-        commentLastVisualization.setDate(new Date());
+        commentLastVisualization.setDate(LocalDateTime.now());
 
         commentLastVisualizationService.saveOrUpdate(commentLastVisualization);
 

@@ -1,8 +1,8 @@
 package services.impl;
 
-import com.avaje.ebean.Ebean;
 import models.entities.Home;
 import models.entities.ShoppingItem;
+import play.db.jpa.JPA;
 import services.ShoppingItemService;
 
 import java.util.List;
@@ -14,20 +14,28 @@ public class ShoppingItemServiceImpl extends CrudServiceImpl<ShoppingItem> imple
 
     @Override
     public List<ShoppingItem> findByHome(Home home) {
-        return Ebean.createNamedQuery(ShoppingItem.class, ShoppingItem.FIND_BY_HOME)
-                .setParameter(ShoppingItem.PARAM_HOME, home.getId())
-                .findList();
+
+        String r ="SELECT s from ShoppingItem s WHERE s.home = :home";
+
+        return JPA.em().createQuery(r,ShoppingItem.class)
+                .setParameter("home",home)
+                .getResultList();
     }
 
     @Override
     public int getCount() {
-        return Ebean.createNamedQuery(ShoppingItem.class,
-        ShoppingItem.FIND_NOT_BOUGHT_YET).findRowCount();
+        String r ="SELECT s from ShoppingItem s";
+
+        return JPA.em().createQuery(r,ShoppingItem.class)
+                .getResultList().size();
     }
 
     @Override
     public int getCountTotal() {
-            return Ebean.createQuery(ShoppingItem.class).findRowCount();
+        String r ="SELECT s from ShoppingItem s";
+
+        return JPA.em().createQuery(r,ShoppingItem.class)
+                .getResultList().size();
     }
 
 }

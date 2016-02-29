@@ -7,6 +7,7 @@ import models.entities.CommentLastVisualization;
 import models.entities.Home;
 import models.entities.Roommate;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -36,7 +37,7 @@ public class HomeToHomeConverter implements ConverterInterface<Home,HomeDTO>{
         boolean hasNewComment = false;
         if (entity.getComments().size() > 0) {
 
-            Date lastVisualization = null;
+            LocalDateTime lastVisualization = null;
 
             for (CommentLastVisualization commentLastVisualization : entity.getCommentLastVisualizations()) {
                 if (commentLastVisualization.getRoommate().equals(currentRoommate)) {

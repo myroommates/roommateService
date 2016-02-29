@@ -1,10 +1,10 @@
 package services.impl;
 
-import com.avaje.ebean.Ebean;
 import models.entities.Home;
 import models.entities.Roommate;
 import models.entities.Ticket;
 import models.entities.TicketDebtor;
+import play.db.jpa.JPA;
 import services.TicketDebtorService;
 import services.TicketService;
 
@@ -21,9 +21,12 @@ public class TicketServiceImpl extends CrudServiceImpl<Ticket> implements Ticket
 
     @Override
     public List<Ticket> findByHome(Home home) {
-        return Ebean.createNamedQuery(Ticket.class, Ticket.FIND_BY_HOME)
-                .setParameter(Ticket.PARAM_HOME, home.getId())
-                .findList();
+
+        String r = "SELECT t FROM Ticket t WHERE t.home = :home";
+
+        return JPA.em().createQuery(r,Ticket.class)
+                .setParameter("home",home)
+                .getResultList();
     }
 
     @Override
@@ -43,19 +46,36 @@ public class TicketServiceImpl extends CrudServiceImpl<Ticket> implements Ticket
 
     @Override
     public List<Ticket> findByPayer(Roommate payer) {
-        return Ebean.createNamedQuery(Ticket.class, Ticket.FIND_BY_PAYER)
-                .setParameter(Ticket.PARAM_PAYER, payer.getId())
-                .findList();
 
+        String r = "SELECT t FROM Ticket t WHERE t.payer = :payer";
+
+        return JPA.em().createQuery(r,Ticket.class)
+                .setParameter("payer",payer)
+                .getResultList();
     }
 
     @Override
     public Integer getCount() {
-        return Ebean.createQuery(Ticket.class).findRowCount();
+        //TODO
+
+        String r = "SELECT t FROM Ticket t";
+
+        return JPA.em().createQuery(r,Ticket.class)
+                .getResultList().size();
     }
 
     @Override
     public Double getTotalSum() {
+
+        //TODO
+
+        String r = "SELECT t FROM Ticket t";
+
+        return new Double(JPA.em().createQuery(r,Ticket.class)
+                .getResultList().size());
+
+        /*
+
         double sum = 0;
         for (Ticket ticket : Ebean.createQuery(Ticket.class).findList()) {
             for (TicketDebtor ticketDebtor : ticket.getDebtorList()) {
@@ -63,5 +83,6 @@ public class TicketServiceImpl extends CrudServiceImpl<Ticket> implements Ticket
             }
         }
         return sum;
+        */
     }
 }

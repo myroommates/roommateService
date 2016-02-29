@@ -1,6 +1,6 @@
 package controllers.rest;
 
-import com.avaje.ebean.annotation.Transactional;
+import play.db.jpa.Transactional;
 import controllers.technical.AbstractController;
 import controllers.technical.SecurityRestController;
 import converter.ShoppingItemToShoppingItemDTOConverter;

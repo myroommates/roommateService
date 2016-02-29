@@ -1,6 +1,6 @@
 package controllers;
 
-import com.avaje.ebean.annotation.Transactional;
+import play.db.jpa.Transactional;
 import controllers.technical.AbstractController;
 import controllers.technical.SecurityController;
 import controllers.technical.SuperAdminSecurityController;
@@ -55,7 +55,7 @@ public class SuperAdminController extends AbstractController {
 
         List<SurveyDTO> listSurvey = new ArrayList<>();
 
-        for (Survey survey : surveyService.getAll()) {
+        for (Survey survey : surveyService.findAll()) {
             listSurvey.add(surveyToSurveyDTOConverter.convert(survey));
         }
 

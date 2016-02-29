@@ -1,6 +1,5 @@
 package controllers.rest;
 
-import com.avaje.ebean.annotation.Transactional;
 import controllers.technical.AbstractController;
 import controllers.technical.SecurityRestController;
 import converter.RoommateToLoginSuccessConverter;
@@ -15,6 +14,7 @@ import models.entities.Home;
 import models.entities.Roommate;
 import models.entities.Session;
 import play.Logger;
+import play.db.jpa.Transactional;
 import play.i18n.Lang;
 import play.mvc.Result;
 import play.mvc.Security;

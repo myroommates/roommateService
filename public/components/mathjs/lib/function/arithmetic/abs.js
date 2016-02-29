@@ -5,11 +5,10 @@ module.exports = function (math) {
 
       BigNumber = math.type.BigNumber,
       Complex = require('../../type/Complex'),
-      Matrix = require('../../type/Matrix'),
-      collection = require('../../type/collection'),
+      collection = math.collection,
 
       isNumber = util.number.isNumber,
-      isBoolean = util['boolean'].isBoolean,
+      isBoolean = util.boolean.isBoolean,
       isComplex = Complex.isComplex,
       isCollection = collection.isCollection;
 
@@ -47,7 +46,22 @@ module.exports = function (math) {
     }
 
     if (isComplex(x)) {
-      return Math.sqrt(x.re * x.re + x.im * x.im);
+      var re = Math.abs(x.re);
+      var im = Math.abs(x.im);
+      if (re < 1000 && im < 1000) {
+        return Math.sqrt(re * re + im * im);
+      }
+      else {
+        // prevent overflow for large numbers
+        if (re >= im) {
+          var i = im / re;
+          return re * Math.sqrt(1 + i * i);
+        }
+        else {
+          var j = re / im;
+          return im * Math.sqrt(1 + j * j);
+        }
+      }
     }
 
     if (x instanceof BigNumber) {
@@ -55,7 +69,8 @@ module.exports = function (math) {
     }
 
     if (isCollection(x)) {
-      return collection.deepMap(x, abs);
+      // deep map collection, skip zeros since abs(0) = 0
+      return collection.deepMap(x, abs, true);
     }
 
     if (isBoolean(x) || x === null) {

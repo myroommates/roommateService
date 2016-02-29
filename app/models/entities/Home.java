@@ -26,9 +26,6 @@ public class Home extends AbstractEntity {
     private Set<Ticket> tickets;
 
     @OneToMany(mappedBy = "home")
-    private Set<Event> events;
-
-    @OneToMany(mappedBy = "home")
     private Set<ShoppingItem> shoppingItems;
 
     @OneToMany(mappedBy = "home")
@@ -67,14 +64,6 @@ public class Home extends AbstractEntity {
 
     public void setShoppingItems(Set<ShoppingItem> shoppingItems) {
         this.shoppingItems = shoppingItems;
-    }
-
-    public Set<Event> getEvents() {
-        return events;
-    }
-
-    public void setEvents(Set<Event> events) {
-        this.events = events;
     }
 
     public Set<Roommate> getRoommateList() {

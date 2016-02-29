@@ -1400,7 +1400,7 @@ function angularInit(element, bootstrap) {
  * </table>
  * </div>
  * </file>
- * <file name="CountTicketCtrl.js">
+ * <file name="controller.js">
  * var app = angular.module('multi-bootstrap', [])
  *
  * .controller('BrokenTable', function($scope) {
@@ -21083,7 +21083,7 @@ var ngStyleDirective = ngDirective(function(scope, element, attr) {
         <div class="animate-switch-container"
           ng-switch on="selection">
             <div class="animate-switch" ng-switch-when="settings">Settings Div</div>
-            <div class="animate-switch" ng-switch-when="home_pattern">Home Span</div>
+            <div class="animate-switch" ng-switch-when="home">Home Span</div>
             <div class="animate-switch" ng-switch-default>default</div>
         </div>
       </div>
@@ -21091,7 +21091,7 @@ var ngStyleDirective = ngDirective(function(scope, element, attr) {
     <file name="script.js">
       angular.module('switchExample', ['ngAnimate'])
         .controller('ExampleController', ['$scope', function($scope) {
-          $scope.items = ['settings', 'home_pattern', 'other'];
+          $scope.items = ['settings', 'home', 'other'];
           $scope.selection = $scope.items[0];
         }]);
     </file>
@@ -21135,7 +21135,7 @@ var ngStyleDirective = ngDirective(function(scope, element, attr) {
       it('should start in settings', function() {
         expect(switchElem.getText()).toMatch(/Settings Div/);
       });
-      it('should change to home_pattern', function() {
+      it('should change to home', function() {
         select.all(by.css('option')).get(1).click();
         expect(switchElem.getText()).toMatch(/Home Span/);
       });
